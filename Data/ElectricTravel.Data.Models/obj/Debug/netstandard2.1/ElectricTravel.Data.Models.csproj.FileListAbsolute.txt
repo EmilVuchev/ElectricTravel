@@ -1,0 +1,12 @@
+C:\Users\Emo\Desktop\New folder\Data\ElectricTravel.Data.Models\bin\Debug\netstandard2.1\ElectricTravel.Data.Models.deps.json
+C:\Users\Emo\Desktop\New folder\Data\ElectricTravel.Data.Models\bin\Debug\netstandard2.1\ElectricTravel.Data.Models.dll
+C:\Users\Emo\Desktop\New folder\Data\ElectricTravel.Data.Models\bin\Debug\netstandard2.1\ElectricTravel.Data.Models.pdb
+C:\Users\Emo\Desktop\New folder\Data\ElectricTravel.Data.Models\bin\Debug\netstandard2.1\ElectricTravel.Data.Common.dll
+C:\Users\Emo\Desktop\New folder\Data\ElectricTravel.Data.Models\bin\Debug\netstandard2.1\ElectricTravel.Data.Common.pdb
+C:\Users\Emo\Desktop\New folder\Data\ElectricTravel.Data.Models\obj\Debug\netstandard2.1\ElectricTravel.Data.Models.csprojAssemblyReference.cache
+C:\Users\Emo\Desktop\New folder\Data\ElectricTravel.Data.Models\obj\Debug\netstandard2.1\ElectricTravel.Data.Models.AssemblyInfoInputs.cache
+C:\Users\Emo\Desktop\New folder\Data\ElectricTravel.Data.Models\obj\Debug\netstandard2.1\ElectricTravel.Data.Models.AssemblyInfo.cs
+C:\Users\Emo\Desktop\New folder\Data\ElectricTravel.Data.Models\obj\Debug\netstandard2.1\ElectricTravel.Data.Models.csproj.CoreCompileInputs.cache
+C:\Users\Emo\Desktop\New folder\Data\ElectricTravel.Data.Models\obj\Debug\netstandard2.1\ElectricTravel.Data.Models.csproj.CopyComplete
+C:\Users\Emo\Desktop\New folder\Data\ElectricTravel.Data.Models\obj\Debug\netstandard2.1\ElectricTravel.Data.Models.dll
+C:\Users\Emo\Desktop\New folder\Data\ElectricTravel.Data.Models\obj\Debug\netstandard2.1\ElectricTravel.Data.Models.pdb

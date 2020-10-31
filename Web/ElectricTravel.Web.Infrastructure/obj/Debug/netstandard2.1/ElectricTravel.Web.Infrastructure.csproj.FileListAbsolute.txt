@@ -1,0 +1,9 @@
+C:\Users\Emo\Desktop\New folder\Web\ElectricTravel.Web.Infrastructure\bin\Debug\netstandard2.1\ElectricTravel.Web.Infrastructure.deps.json
+C:\Users\Emo\Desktop\New folder\Web\ElectricTravel.Web.Infrastructure\bin\Debug\netstandard2.1\ElectricTravel.Web.Infrastructure.dll
+C:\Users\Emo\Desktop\New folder\Web\ElectricTravel.Web.Infrastructure\bin\Debug\netstandard2.1\ElectricTravel.Web.Infrastructure.pdb
+C:\Users\Emo\Desktop\New folder\Web\ElectricTravel.Web.Infrastructure\obj\Debug\netstandard2.1\ElectricTravel.Web.Infrastructure.csprojAssemblyReference.cache
+C:\Users\Emo\Desktop\New folder\Web\ElectricTravel.Web.Infrastructure\obj\Debug\netstandard2.1\ElectricTravel.Web.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\Emo\Desktop\New folder\Web\ElectricTravel.Web.Infrastructure\obj\Debug\netstandard2.1\ElectricTravel.Web.Infrastructure.AssemblyInfo.cs
+C:\Users\Emo\Desktop\New folder\Web\ElectricTravel.Web.Infrastructure\obj\Debug\netstandard2.1\ElectricTravel.Web.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\Emo\Desktop\New folder\Web\ElectricTravel.Web.Infrastructure\obj\Debug\netstandard2.1\ElectricTravel.Web.Infrastructure.dll
+C:\Users\Emo\Desktop\New folder\Web\ElectricTravel.Web.Infrastructure\obj\Debug\netstandard2.1\ElectricTravel.Web.Infrastructure.pdb

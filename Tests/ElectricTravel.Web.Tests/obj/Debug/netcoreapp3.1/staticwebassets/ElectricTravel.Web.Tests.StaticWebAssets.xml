@@ -1,0 +1,4 @@
+﻿<StaticWebAssets Version="1.0">
+  <ContentRoot BasePath="/Identity" Path="C:\Users\Emo\.nuget\packages\microsoft.aspnetcore.identity.ui\3.1.9\staticwebassets\V4\" />
+  <ContentRoot BasePath="_content/ElectricTravel.Web" Path="C:\Users\Emo\Desktop\New folder\Web\ElectricTravel.Web\wwwroot\" />
+</StaticWebAssets>
