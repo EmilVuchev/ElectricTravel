@@ -7,3 +7,12 @@ C:\Users\Emo\Desktop\New folder\ElectricTravel.Common\obj\Debug\netstandard2.1\E
 C:\Users\Emo\Desktop\New folder\ElectricTravel.Common\obj\Debug\netstandard2.1\ElectricTravel.Common.csproj.CoreCompileInputs.cache
 C:\Users\Emo\Desktop\New folder\ElectricTravel.Common\obj\Debug\netstandard2.1\ElectricTravel.Common.dll
 C:\Users\Emo\Desktop\New folder\ElectricTravel.Common\obj\Debug\netstandard2.1\ElectricTravel.Common.pdb
+C:\Users\Emo\Desktop\ElectricTravel\ElectricTravel.Common\bin\Debug\netstandard2.1\ElectricTravel.Common.deps.json
+C:\Users\Emo\Desktop\ElectricTravel\ElectricTravel.Common\bin\Debug\netstandard2.1\ElectricTravel.Common.dll
+C:\Users\Emo\Desktop\ElectricTravel\ElectricTravel.Common\bin\Debug\netstandard2.1\ElectricTravel.Common.pdb
+C:\Users\Emo\Desktop\ElectricTravel\ElectricTravel.Common\obj\Debug\netstandard2.1\ElectricTravel.Common.csprojAssemblyReference.cache
+C:\Users\Emo\Desktop\ElectricTravel\ElectricTravel.Common\obj\Debug\netstandard2.1\ElectricTravel.Common.AssemblyInfoInputs.cache
+C:\Users\Emo\Desktop\ElectricTravel\ElectricTravel.Common\obj\Debug\netstandard2.1\ElectricTravel.Common.AssemblyInfo.cs
+C:\Users\Emo\Desktop\ElectricTravel\ElectricTravel.Common\obj\Debug\netstandard2.1\ElectricTravel.Common.csproj.CoreCompileInputs.cache
+C:\Users\Emo\Desktop\ElectricTravel\ElectricTravel.Common\obj\Debug\netstandard2.1\ElectricTravel.Common.dll
+C:\Users\Emo\Desktop\ElectricTravel\ElectricTravel.Common\obj\Debug\netstandard2.1\ElectricTravel.Common.pdb

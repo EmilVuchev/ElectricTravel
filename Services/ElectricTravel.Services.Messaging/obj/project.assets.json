@@ -2760,11 +2760,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Emo\\Desktop\\New folder\\Services\\ElectricTravel.Services.Messaging\\ElectricTravel.Services.Messaging.csproj",
+      "projectUniqueName": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Services\\ElectricTravel.Services.Messaging\\ElectricTravel.Services.Messaging.csproj",
       "projectName": "ElectricTravel.Services.Messaging",
-      "projectPath": "C:\\Users\\Emo\\Desktop\\New folder\\Services\\ElectricTravel.Services.Messaging\\ElectricTravel.Services.Messaging.csproj",
+      "projectPath": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Services\\ElectricTravel.Services.Messaging\\ElectricTravel.Services.Messaging.csproj",
       "packagesPath": "C:\\Users\\Emo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Emo\\Desktop\\New folder\\Services\\ElectricTravel.Services.Messaging\\obj\\",
+      "outputPath": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Services\\ElectricTravel.Services.Messaging\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

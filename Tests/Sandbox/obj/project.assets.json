@@ -6161,11 +6161,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Emo\\Desktop\\New folder\\Tests\\Sandbox\\Sandbox.csproj",
+      "projectUniqueName": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Tests\\Sandbox\\Sandbox.csproj",
       "projectName": "Sandbox",
-      "projectPath": "C:\\Users\\Emo\\Desktop\\New folder\\Tests\\Sandbox\\Sandbox.csproj",
+      "projectPath": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Tests\\Sandbox\\Sandbox.csproj",
       "packagesPath": "C:\\Users\\Emo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Emo\\Desktop\\New folder\\Tests\\Sandbox\\obj\\",
+      "outputPath": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Tests\\Sandbox\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -6184,29 +6184,29 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\Emo\\Desktop\\New folder\\Data\\ElectricTravel.Data.Common\\ElectricTravel.Data.Common.csproj": {
-              "projectPath": "C:\\Users\\Emo\\Desktop\\New folder\\Data\\ElectricTravel.Data.Common\\ElectricTravel.Data.Common.csproj"
+            "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Data\\ElectricTravel.Data.Common\\ElectricTravel.Data.Common.csproj": {
+              "projectPath": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Data\\ElectricTravel.Data.Common\\ElectricTravel.Data.Common.csproj"
             },
-            "C:\\Users\\Emo\\Desktop\\New folder\\Data\\ElectricTravel.Data.Models\\ElectricTravel.Data.Models.csproj": {
-              "projectPath": "C:\\Users\\Emo\\Desktop\\New folder\\Data\\ElectricTravel.Data.Models\\ElectricTravel.Data.Models.csproj"
+            "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Data\\ElectricTravel.Data.Models\\ElectricTravel.Data.Models.csproj": {
+              "projectPath": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Data\\ElectricTravel.Data.Models\\ElectricTravel.Data.Models.csproj"
             },
-            "C:\\Users\\Emo\\Desktop\\New folder\\Data\\ElectricTravel.Data\\ElectricTravel.Data.csproj": {
-              "projectPath": "C:\\Users\\Emo\\Desktop\\New folder\\Data\\ElectricTravel.Data\\ElectricTravel.Data.csproj"
+            "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Data\\ElectricTravel.Data\\ElectricTravel.Data.csproj": {
+              "projectPath": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Data\\ElectricTravel.Data\\ElectricTravel.Data.csproj"
             },
-            "C:\\Users\\Emo\\Desktop\\New folder\\ElectricTravel.Common\\ElectricTravel.Common.csproj": {
-              "projectPath": "C:\\Users\\Emo\\Desktop\\New folder\\ElectricTravel.Common\\ElectricTravel.Common.csproj"
+            "C:\\Users\\Emo\\Desktop\\ElectricTravel\\ElectricTravel.Common\\ElectricTravel.Common.csproj": {
+              "projectPath": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\ElectricTravel.Common\\ElectricTravel.Common.csproj"
             },
-            "C:\\Users\\Emo\\Desktop\\New folder\\Services\\ElectricTravel.Services.Data\\ElectricTravel.Services.Data.csproj": {
-              "projectPath": "C:\\Users\\Emo\\Desktop\\New folder\\Services\\ElectricTravel.Services.Data\\ElectricTravel.Services.Data.csproj"
+            "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Services\\ElectricTravel.Services.Data\\ElectricTravel.Services.Data.csproj": {
+              "projectPath": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Services\\ElectricTravel.Services.Data\\ElectricTravel.Services.Data.csproj"
             },
-            "C:\\Users\\Emo\\Desktop\\New folder\\Services\\ElectricTravel.Services.Mapping\\ElectricTravel.Services.Mapping.csproj": {
-              "projectPath": "C:\\Users\\Emo\\Desktop\\New folder\\Services\\ElectricTravel.Services.Mapping\\ElectricTravel.Services.Mapping.csproj"
+            "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Services\\ElectricTravel.Services.Mapping\\ElectricTravel.Services.Mapping.csproj": {
+              "projectPath": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Services\\ElectricTravel.Services.Mapping\\ElectricTravel.Services.Mapping.csproj"
             },
-            "C:\\Users\\Emo\\Desktop\\New folder\\Services\\ElectricTravel.Services.Messaging\\ElectricTravel.Services.Messaging.csproj": {
-              "projectPath": "C:\\Users\\Emo\\Desktop\\New folder\\Services\\ElectricTravel.Services.Messaging\\ElectricTravel.Services.Messaging.csproj"
+            "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Services\\ElectricTravel.Services.Messaging\\ElectricTravel.Services.Messaging.csproj": {
+              "projectPath": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Services\\ElectricTravel.Services.Messaging\\ElectricTravel.Services.Messaging.csproj"
             },
-            "C:\\Users\\Emo\\Desktop\\New folder\\Services\\ElectricTravel.Services\\ElectricTravel.Services.csproj": {
-              "projectPath": "C:\\Users\\Emo\\Desktop\\New folder\\Services\\ElectricTravel.Services\\ElectricTravel.Services.csproj"
+            "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Services\\ElectricTravel.Services\\ElectricTravel.Services.csproj": {
+              "projectPath": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Services\\ElectricTravel.Services\\ElectricTravel.Services.csproj"
             }
           }
         }

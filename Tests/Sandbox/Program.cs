@@ -10,6 +10,7 @@
     using ElectricTravel.Data.Common;
     using ElectricTravel.Data.Common.Repositories;
     using ElectricTravel.Data.Models;
+    using ElectricTravel.Data.Models.User;
     using ElectricTravel.Data.Repositories;
     using ElectricTravel.Data.Seeding;
     using ElectricTravel.Services.Data;
@@ -70,7 +71,7 @@
                 options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
                     .UseLoggerFactory(new LoggerFactory()));
 
-            services.AddDefaultIdentity<User>(IdentityOptionsProvider.GetIdentityOptions)
+            services.AddDefaultIdentity<ElectricTravelUser>(IdentityOptionsProvider.GetIdentityOptions)
                 .AddRoles<Role>().AddEntityFrameworkStores<ElectricTravelDbContext>();
 
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));

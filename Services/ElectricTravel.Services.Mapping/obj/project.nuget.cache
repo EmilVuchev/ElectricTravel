@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "904WNfa1hOcjoBymxGYoTDUo3u3Jjo+OR4B0uqe1t9d4CUstJ1qMDv9ABnetAommiT+dGi5z2GvUI/jTwp6KGQ==",
+  "dgSpecHash": "YkxFqXj3QQZ1EGl2SkenZh84F0uYKmLgwLnyRHRHtELUsbKqsdIFFHossJd8LrmMsVVo2I8kTndEkMqsxB0Mzw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Emo\\Desktop\\New folder\\Services\\ElectricTravel.Services.Mapping\\ElectricTravel.Services.Mapping.csproj",
+  "projectFilePath": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Services\\ElectricTravel.Services.Mapping\\ElectricTravel.Services.Mapping.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Emo\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\Emo\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

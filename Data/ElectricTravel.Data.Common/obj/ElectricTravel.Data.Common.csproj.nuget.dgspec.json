@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Emo\\Desktop\\New folder\\Data\\ElectricTravel.Data.Common\\ElectricTravel.Data.Common.csproj": {}
+    "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Data\\ElectricTravel.Data.Common\\ElectricTravel.Data.Common.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Emo\\Desktop\\New folder\\Data\\ElectricTravel.Data.Common\\ElectricTravel.Data.Common.csproj": {
+    "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Data\\ElectricTravel.Data.Common\\ElectricTravel.Data.Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Emo\\Desktop\\New folder\\Data\\ElectricTravel.Data.Common\\ElectricTravel.Data.Common.csproj",
+        "projectUniqueName": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Data\\ElectricTravel.Data.Common\\ElectricTravel.Data.Common.csproj",
         "projectName": "ElectricTravel.Data.Common",
-        "projectPath": "C:\\Users\\Emo\\Desktop\\New folder\\Data\\ElectricTravel.Data.Common\\ElectricTravel.Data.Common.csproj",
+        "projectPath": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Data\\ElectricTravel.Data.Common\\ElectricTravel.Data.Common.csproj",
         "packagesPath": "C:\\Users\\Emo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Emo\\Desktop\\New folder\\Data\\ElectricTravel.Data.Common\\obj\\",
+        "outputPath": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Data\\ElectricTravel.Data.Common\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

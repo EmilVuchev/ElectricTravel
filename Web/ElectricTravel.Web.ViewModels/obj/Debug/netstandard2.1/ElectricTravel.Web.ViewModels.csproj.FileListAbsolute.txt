@@ -14,3 +14,9 @@ C:\Users\Emo\Desktop\New folder\Web\ElectricTravel.Web.ViewModels\obj\Debug\nets
 C:\Users\Emo\Desktop\New folder\Web\ElectricTravel.Web.ViewModels\obj\Debug\netstandard2.1\ElectricTravel.Web.ViewModels.csproj.CopyComplete
 C:\Users\Emo\Desktop\New folder\Web\ElectricTravel.Web.ViewModels\obj\Debug\netstandard2.1\ElectricTravel.Web.ViewModels.dll
 C:\Users\Emo\Desktop\New folder\Web\ElectricTravel.Web.ViewModels\obj\Debug\netstandard2.1\ElectricTravel.Web.ViewModels.pdb
+C:\Users\Emo\Desktop\ElectricTravel\Web\ElectricTravel.Web.ViewModels\obj\Debug\netstandard2.1\ElectricTravel.Web.ViewModels.csprojAssemblyReference.cache
+C:\Users\Emo\Desktop\ElectricTravel\Web\ElectricTravel.Web.ViewModels\obj\Debug\netstandard2.1\ElectricTravel.Web.ViewModels.AssemblyInfoInputs.cache
+C:\Users\Emo\Desktop\ElectricTravel\Web\ElectricTravel.Web.ViewModels\obj\Debug\netstandard2.1\ElectricTravel.Web.ViewModels.AssemblyInfo.cs
+C:\Users\Emo\Desktop\ElectricTravel\Web\ElectricTravel.Web.ViewModels\obj\Debug\netstandard2.1\ElectricTravel.Web.ViewModels.csproj.CoreCompileInputs.cache
+C:\Users\Emo\Desktop\ElectricTravel\Web\ElectricTravel.Web.ViewModels\obj\Debug\netstandard2.1\ElectricTravel.Web.ViewModels.dll
+C:\Users\Emo\Desktop\ElectricTravel\Web\ElectricTravel.Web.ViewModels\obj\Debug\netstandard2.1\ElectricTravel.Web.ViewModels.pdb

@@ -1,12 +1,12 @@
 ﻿namespace ElectricTravel.Data.Configurations
 {
-    using ElectricTravel.Data.Models;
+    using ElectricTravel.Data.Models.User;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-    public class ApplicationUserConfiguration : IEntityTypeConfiguration<User>
+    public class ApplicationUserConfiguration : IEntityTypeConfiguration<ElectricTravelUser>
     {
-        public void Configure(EntityTypeBuilder<User> appUser)
+        public void Configure(EntityTypeBuilder<ElectricTravelUser> appUser)
         {
             appUser
                 .HasMany(e => e.Claims)

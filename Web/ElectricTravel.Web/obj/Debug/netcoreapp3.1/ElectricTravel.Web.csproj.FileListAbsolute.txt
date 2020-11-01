@@ -456,3 +456,13 @@ C:\Users\Emo\Desktop\New folder\Web\ElectricTravel.Web\obj\Debug\netcoreapp3.1\s
 C:\Users\Emo\Desktop\New folder\Web\ElectricTravel.Web\obj\Debug\netcoreapp3.1\ElectricTravel.Web.dll
 C:\Users\Emo\Desktop\New folder\Web\ElectricTravel.Web\obj\Debug\netcoreapp3.1\ElectricTravel.Web.pdb
 C:\Users\Emo\Desktop\New folder\Web\ElectricTravel.Web\obj\Debug\netcoreapp3.1\ElectricTravel.Web.genruntimeconfig.cache
+C:\Users\Emo\Desktop\ElectricTravel\Web\ElectricTravel.Web\obj\Debug\netcoreapp3.1\ElectricTravel.Web.csprojAssemblyReference.cache
+C:\Users\Emo\Desktop\ElectricTravel\Web\ElectricTravel.Web\obj\Debug\netcoreapp3.1\ElectricTravel.Web.AssemblyInfoInputs.cache
+C:\Users\Emo\Desktop\ElectricTravel\Web\ElectricTravel.Web\obj\Debug\netcoreapp3.1\ElectricTravel.Web.AssemblyInfo.cs
+C:\Users\Emo\Desktop\ElectricTravel\Web\ElectricTravel.Web\obj\Debug\netcoreapp3.1\ElectricTravel.Web.csproj.CoreCompileInputs.cache
+C:\Users\Emo\Desktop\ElectricTravel\Web\ElectricTravel.Web\obj\Debug\netcoreapp3.1\ElectricTravel.Web.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Emo\Desktop\ElectricTravel\Web\ElectricTravel.Web\obj\Debug\netcoreapp3.1\ElectricTravel.Web.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Emo\Desktop\ElectricTravel\Web\ElectricTravel.Web\obj\Debug\netcoreapp3.1\ElectricTravel.Web.RazorAssemblyInfo.cache
+C:\Users\Emo\Desktop\ElectricTravel\Web\ElectricTravel.Web\obj\Debug\netcoreapp3.1\ElectricTravel.Web.RazorAssemblyInfo.cs
+C:\Users\Emo\Desktop\ElectricTravel\Web\ElectricTravel.Web\obj\Debug\netcoreapp3.1\ElectricTravel.Web.dll
+C:\Users\Emo\Desktop\ElectricTravel\Web\ElectricTravel.Web\obj\Debug\netcoreapp3.1\ElectricTravel.Web.pdb

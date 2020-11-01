@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "KncUlBNRvEef3OTitf8Om3eUKCIYI3zqeurgpG0ARY8F3Oz+LFjNRjW45CF/FpPLFm8w0LZCLsdv+HKAkRtlKg==",
+  "dgSpecHash": "qpzwkSIXcywnsp/lNxXVsPqXtJWoAUwqbGYZAQ9CP15oWYnirfnUxD85fQk/eomoOpMIhfbyRasor5MvlGJD6w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Emo\\Desktop\\New folder\\Tests\\ElectricTravel.Web.Tests\\ElectricTravel.Web.Tests.csproj",
+  "projectFilePath": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Tests\\ElectricTravel.Web.Tests\\ElectricTravel.Web.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Emo\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\Emo\\.nuget\\packages\\buildbundlerminifier\\3.2.449\\buildbundlerminifier.3.2.449.nupkg.sha512",

@@ -5,8 +5,7 @@
     using System.Threading.Tasks;
 
     using ElectricTravel.Common;
-    using ElectricTravel.Data.Models;
-
+    using ElectricTravel.Data.Models.User;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;
 

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "xe+P7wSGcpDaaSQKeHz8jAxgYuBhtU1KilCsLYMg2ZcOUPc0jZ7Im3hTDzL0/8kxpCH4II+xaNUK9bFajVKMRw==",
+  "dgSpecHash": "F8zHt/MoeLvMuhnoNG5bJQt2racr+40/jn/8QCErh+1pOvoJKT6R5IuW6U6CDsjIp+8yzY/CLx1B3wvmdYByPg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Emo\\Desktop\\New folder\\Services\\ElectricTravel.Services.Messaging\\ElectricTravel.Services.Messaging.csproj",
+  "projectFilePath": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Services\\ElectricTravel.Services.Messaging\\ElectricTravel.Services.Messaging.csproj",
   "expectedPackageFiles": [
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.csharp\\4.0.1\\microsoft.csharp.4.0.1.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\1.0.1\\microsoft.netcore.platforms.1.0.1.nupkg.sha512",

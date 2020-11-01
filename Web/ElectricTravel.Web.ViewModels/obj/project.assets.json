@@ -1324,11 +1324,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Emo\\Desktop\\New folder\\Web\\ElectricTravel.Web.ViewModels\\ElectricTravel.Web.ViewModels.csproj",
+      "projectUniqueName": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Web\\ElectricTravel.Web.ViewModels\\ElectricTravel.Web.ViewModels.csproj",
       "projectName": "ElectricTravel.Web.ViewModels",
-      "projectPath": "C:\\Users\\Emo\\Desktop\\New folder\\Web\\ElectricTravel.Web.ViewModels\\ElectricTravel.Web.ViewModels.csproj",
+      "projectPath": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Web\\ElectricTravel.Web.ViewModels\\ElectricTravel.Web.ViewModels.csproj",
       "packagesPath": "C:\\Users\\Emo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Emo\\Desktop\\New folder\\Web\\ElectricTravel.Web.ViewModels\\obj\\",
+      "outputPath": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Web\\ElectricTravel.Web.ViewModels\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -1347,11 +1347,11 @@
       "frameworks": {
         "netstandard2.1": {
           "projectReferences": {
-            "C:\\Users\\Emo\\Desktop\\New folder\\Data\\ElectricTravel.Data.Models\\ElectricTravel.Data.Models.csproj": {
-              "projectPath": "C:\\Users\\Emo\\Desktop\\New folder\\Data\\ElectricTravel.Data.Models\\ElectricTravel.Data.Models.csproj"
+            "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Data\\ElectricTravel.Data.Models\\ElectricTravel.Data.Models.csproj": {
+              "projectPath": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Data\\ElectricTravel.Data.Models\\ElectricTravel.Data.Models.csproj"
             },
-            "C:\\Users\\Emo\\Desktop\\New folder\\Services\\ElectricTravel.Services.Mapping\\ElectricTravel.Services.Mapping.csproj": {
-              "projectPath": "C:\\Users\\Emo\\Desktop\\New folder\\Services\\ElectricTravel.Services.Mapping\\ElectricTravel.Services.Mapping.csproj"
+            "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Services\\ElectricTravel.Services.Mapping\\ElectricTravel.Services.Mapping.csproj": {
+              "projectPath": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Services\\ElectricTravel.Services.Mapping\\ElectricTravel.Services.Mapping.csproj"
             }
           }
         }

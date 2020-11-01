@@ -162,3 +162,9 @@ C:\Users\Emo\Desktop\New folder\Tests\ElectricTravel.Services.Data.Tests\obj\Deb
 C:\Users\Emo\Desktop\New folder\Tests\ElectricTravel.Services.Data.Tests\obj\Debug\netcoreapp3.1\ElectricTravel.Services.Data.Tests.dll
 C:\Users\Emo\Desktop\New folder\Tests\ElectricTravel.Services.Data.Tests\obj\Debug\netcoreapp3.1\ElectricTravel.Services.Data.Tests.pdb
 C:\Users\Emo\Desktop\New folder\Tests\ElectricTravel.Services.Data.Tests\obj\Debug\netcoreapp3.1\ElectricTravel.Services.Data.Tests.genruntimeconfig.cache
+C:\Users\Emo\Desktop\ElectricTravel\Tests\ElectricTravel.Services.Data.Tests\obj\Debug\netcoreapp3.1\ElectricTravel.Services.Data.Tests.csprojAssemblyReference.cache
+C:\Users\Emo\Desktop\ElectricTravel\Tests\ElectricTravel.Services.Data.Tests\obj\Debug\netcoreapp3.1\ElectricTravel.Services.Data.Tests.AssemblyInfoInputs.cache
+C:\Users\Emo\Desktop\ElectricTravel\Tests\ElectricTravel.Services.Data.Tests\obj\Debug\netcoreapp3.1\ElectricTravel.Services.Data.Tests.AssemblyInfo.cs
+C:\Users\Emo\Desktop\ElectricTravel\Tests\ElectricTravel.Services.Data.Tests\obj\Debug\netcoreapp3.1\ElectricTravel.Services.Data.Tests.csproj.CoreCompileInputs.cache
+C:\Users\Emo\Desktop\ElectricTravel\Tests\ElectricTravel.Services.Data.Tests\obj\Debug\netcoreapp3.1\ElectricTravel.Services.Data.Tests.dll
+C:\Users\Emo\Desktop\ElectricTravel\Tests\ElectricTravel.Services.Data.Tests\obj\Debug\netcoreapp3.1\ElectricTravel.Services.Data.Tests.pdb

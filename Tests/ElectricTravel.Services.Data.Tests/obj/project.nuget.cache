@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "bUZmXGQz/h96BBCvKq0otN150CYDat24LOiAAgT2dL9ONGi7QJlMfS8HYCdBbm7RYfkkl4PrTb8PXEIUXsmxPA==",
+  "dgSpecHash": "/Bxl//YHmdCLTSMgxHDLvOm9gEIIJlMPAXGyrgdOeuRIDSYgoVk8IM/GpbYylji+qgeQNt923fgS0AWvQEr+Kg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Emo\\Desktop\\New folder\\Tests\\ElectricTravel.Services.Data.Tests\\ElectricTravel.Services.Data.Tests.csproj",
+  "projectFilePath": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Tests\\ElectricTravel.Services.Data.Tests\\ElectricTravel.Services.Data.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Emo\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\Emo\\.nuget\\packages\\castle.core\\4.4.0\\castle.core.4.4.0.nupkg.sha512",

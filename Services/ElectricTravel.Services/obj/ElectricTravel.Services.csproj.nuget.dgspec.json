@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Emo\\Desktop\\New folder\\Services\\ElectricTravel.Services\\ElectricTravel.Services.csproj": {}
+    "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Services\\ElectricTravel.Services\\ElectricTravel.Services.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Emo\\Desktop\\New folder\\Services\\ElectricTravel.Services\\ElectricTravel.Services.csproj": {
+    "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Services\\ElectricTravel.Services\\ElectricTravel.Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Emo\\Desktop\\New folder\\Services\\ElectricTravel.Services\\ElectricTravel.Services.csproj",
+        "projectUniqueName": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Services\\ElectricTravel.Services\\ElectricTravel.Services.csproj",
         "projectName": "ElectricTravel.Services",
-        "projectPath": "C:\\Users\\Emo\\Desktop\\New folder\\Services\\ElectricTravel.Services\\ElectricTravel.Services.csproj",
+        "projectPath": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Services\\ElectricTravel.Services\\ElectricTravel.Services.csproj",
         "packagesPath": "C:\\Users\\Emo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Emo\\Desktop\\New folder\\Services\\ElectricTravel.Services\\obj\\",
+        "outputPath": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Services\\ElectricTravel.Services\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

@@ -6109,11 +6109,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Emo\\Desktop\\New folder\\Data\\ElectricTravel.Data\\ElectricTravel.Data.csproj",
+      "projectUniqueName": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Data\\ElectricTravel.Data\\ElectricTravel.Data.csproj",
       "projectName": "ElectricTravel.Data",
-      "projectPath": "C:\\Users\\Emo\\Desktop\\New folder\\Data\\ElectricTravel.Data\\ElectricTravel.Data.csproj",
+      "projectPath": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Data\\ElectricTravel.Data\\ElectricTravel.Data.csproj",
       "packagesPath": "C:\\Users\\Emo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Emo\\Desktop\\New folder\\Data\\ElectricTravel.Data\\obj\\",
+      "outputPath": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Data\\ElectricTravel.Data\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -6132,14 +6132,14 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\Emo\\Desktop\\New folder\\Data\\ElectricTravel.Data.Common\\ElectricTravel.Data.Common.csproj": {
-              "projectPath": "C:\\Users\\Emo\\Desktop\\New folder\\Data\\ElectricTravel.Data.Common\\ElectricTravel.Data.Common.csproj"
+            "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Data\\ElectricTravel.Data.Common\\ElectricTravel.Data.Common.csproj": {
+              "projectPath": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Data\\ElectricTravel.Data.Common\\ElectricTravel.Data.Common.csproj"
             },
-            "C:\\Users\\Emo\\Desktop\\New folder\\Data\\ElectricTravel.Data.Models\\ElectricTravel.Data.Models.csproj": {
-              "projectPath": "C:\\Users\\Emo\\Desktop\\New folder\\Data\\ElectricTravel.Data.Models\\ElectricTravel.Data.Models.csproj"
+            "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Data\\ElectricTravel.Data.Models\\ElectricTravel.Data.Models.csproj": {
+              "projectPath": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Data\\ElectricTravel.Data.Models\\ElectricTravel.Data.Models.csproj"
             },
-            "C:\\Users\\Emo\\Desktop\\New folder\\ElectricTravel.Common\\ElectricTravel.Common.csproj": {
-              "projectPath": "C:\\Users\\Emo\\Desktop\\New folder\\ElectricTravel.Common\\ElectricTravel.Common.csproj"
+            "C:\\Users\\Emo\\Desktop\\ElectricTravel\\ElectricTravel.Common\\ElectricTravel.Common.csproj": {
+              "projectPath": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\ElectricTravel.Common\\ElectricTravel.Common.csproj"
             }
           }
         }

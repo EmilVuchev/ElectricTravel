@@ -66,11 +66,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Emo\\Desktop\\New folder\\ElectricTravel.Common\\ElectricTravel.Common.csproj",
+      "projectUniqueName": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\ElectricTravel.Common\\ElectricTravel.Common.csproj",
       "projectName": "ElectricTravel.Common",
-      "projectPath": "C:\\Users\\Emo\\Desktop\\New folder\\ElectricTravel.Common\\ElectricTravel.Common.csproj",
+      "projectPath": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\ElectricTravel.Common\\ElectricTravel.Common.csproj",
       "packagesPath": "C:\\Users\\Emo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Emo\\Desktop\\New folder\\ElectricTravel.Common\\obj\\",
+      "outputPath": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\ElectricTravel.Common\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

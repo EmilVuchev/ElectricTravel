@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "WbN0FP2o9nooiR48UB+mDfLJdFeu6wzqav4GgsVLEyNSz5HcOxFgdp0TUI6XrnkthuYObfs8hdKvgqRT5AAYHg==",
+  "dgSpecHash": "AuF/ySZiPQHFoXhQo0MW+cbZFHOb0u714YGWWgtELug5WeuEkVbfwXdKLlNy+m6Ct5NGvs1WZw2WwI1q2nPu5Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Emo\\Desktop\\New folder\\Tests\\Sandbox\\Sandbox.csproj",
+  "projectFilePath": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Tests\\Sandbox\\Sandbox.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Emo\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\Emo\\.nuget\\packages\\commandlineparser\\2.8.0\\commandlineparser.2.8.0.nupkg.sha512",

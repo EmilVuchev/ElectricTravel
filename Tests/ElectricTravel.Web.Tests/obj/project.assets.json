@@ -10800,11 +10800,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Emo\\Desktop\\New folder\\Tests\\ElectricTravel.Web.Tests\\ElectricTravel.Web.Tests.csproj",
+      "projectUniqueName": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Tests\\ElectricTravel.Web.Tests\\ElectricTravel.Web.Tests.csproj",
       "projectName": "ElectricTravel.Web.Tests",
-      "projectPath": "C:\\Users\\Emo\\Desktop\\New folder\\Tests\\ElectricTravel.Web.Tests\\ElectricTravel.Web.Tests.csproj",
+      "projectPath": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Tests\\ElectricTravel.Web.Tests\\ElectricTravel.Web.Tests.csproj",
       "packagesPath": "C:\\Users\\Emo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Emo\\Desktop\\New folder\\Tests\\ElectricTravel.Web.Tests\\obj\\",
+      "outputPath": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Tests\\ElectricTravel.Web.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -10823,8 +10823,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\Emo\\Desktop\\New folder\\Web\\ElectricTravel.Web\\ElectricTravel.Web.csproj": {
-              "projectPath": "C:\\Users\\Emo\\Desktop\\New folder\\Web\\ElectricTravel.Web\\ElectricTravel.Web.csproj"
+            "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Web\\ElectricTravel.Web\\ElectricTravel.Web.csproj": {
+              "projectPath": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Web\\ElectricTravel.Web\\ElectricTravel.Web.csproj"
             }
           }
         }

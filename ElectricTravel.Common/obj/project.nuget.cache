@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "bm0HTpfw+Kr+r0ogN97HxgJwXXmKydtkPG1Qm9St9h5kFdWTDDmNWlcsXHL07fOBdEqOoTffxMeqcDjui3mvHg==",
+  "dgSpecHash": "ycr79q+inGJKqPUP0jcQH7IR/2BRgZA+PGo9+VDVg+WDsOBLQ0UH3uL4qD0STmIADuyoN3vh4vtcwfmu9QF3nA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Emo\\Desktop\\New folder\\ElectricTravel.Common\\ElectricTravel.Common.csproj",
+  "projectFilePath": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\ElectricTravel.Common\\ElectricTravel.Common.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Emo\\.nuget\\packages\\stylecop.analyzers\\1.2.0-beta.205\\stylecop.analyzers.1.2.0-beta.205.nupkg.sha512",
     "C:\\Users\\Emo\\.nuget\\packages\\stylecop.analyzers.unstable\\1.2.0.205\\stylecop.analyzers.unstable.1.2.0.205.nupkg.sha512"

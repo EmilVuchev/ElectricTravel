@@ -7,13 +7,12 @@
     using System.Threading.Tasks;
 
     using ElectricTravel.Data.Common.Models;
-    using ElectricTravel.Data.Models;
-
+    using ElectricTravel.Data.Models.Car;
+    using ElectricTravel.Data.Models.User;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.EntityFrameworkCore.Query.Internal;
 
-    public class ElectricTravelDbContext : IdentityDbContext<User, Role, string>
+    public class ElectricTravelDbContext : IdentityDbContext<ElectricTravelUser, Role, string>
     {
         private static readonly MethodInfo SetIsDeletedQueryFilterMethod =
             typeof(ElectricTravelDbContext).GetMethod(
@@ -25,9 +24,7 @@
         {
         }
 
-        public DbSet<Setting> Settings { get; set; }
-
-        public DbSet<Car> Cars { get; set; }
+        public DbSet<ElectricCar> Cars { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 

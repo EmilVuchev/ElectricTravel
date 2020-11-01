@@ -18,3 +18,9 @@ C:\Users\Emo\Desktop\New folder\Data\ElectricTravel.Data\obj\Debug\netcoreapp3.1
 C:\Users\Emo\Desktop\New folder\Data\ElectricTravel.Data\obj\Debug\netcoreapp3.1\ElectricTravel.Data.dll
 C:\Users\Emo\Desktop\New folder\Data\ElectricTravel.Data\obj\Debug\netcoreapp3.1\ElectricTravel.Data.pdb
 C:\Users\Emo\Desktop\New folder\Data\ElectricTravel.Data\obj\Debug\netcoreapp3.1\ElectricTravel.Data.genruntimeconfig.cache
+C:\Users\Emo\Desktop\ElectricTravel\Data\ElectricTravel.Data\obj\Debug\netcoreapp3.1\ElectricTravel.Data.csprojAssemblyReference.cache
+C:\Users\Emo\Desktop\ElectricTravel\Data\ElectricTravel.Data\obj\Debug\netcoreapp3.1\ElectricTravel.Data.AssemblyInfoInputs.cache
+C:\Users\Emo\Desktop\ElectricTravel\Data\ElectricTravel.Data\obj\Debug\netcoreapp3.1\ElectricTravel.Data.AssemblyInfo.cs
+C:\Users\Emo\Desktop\ElectricTravel\Data\ElectricTravel.Data\obj\Debug\netcoreapp3.1\ElectricTravel.Data.csproj.CoreCompileInputs.cache
+C:\Users\Emo\Desktop\ElectricTravel\Data\ElectricTravel.Data\obj\Debug\netcoreapp3.1\ElectricTravel.Data.dll
+C:\Users\Emo\Desktop\ElectricTravel\Data\ElectricTravel.Data\obj\Debug\netcoreapp3.1\ElectricTravel.Data.pdb

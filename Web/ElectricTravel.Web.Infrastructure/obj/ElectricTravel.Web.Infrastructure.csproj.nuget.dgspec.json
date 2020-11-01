@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Emo\\Desktop\\New folder\\Web\\ElectricTravel.Web.Infrastructure\\ElectricTravel.Web.Infrastructure.csproj": {}
+    "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Web\\ElectricTravel.Web.Infrastructure\\ElectricTravel.Web.Infrastructure.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Emo\\Desktop\\New folder\\Web\\ElectricTravel.Web.Infrastructure\\ElectricTravel.Web.Infrastructure.csproj": {
+    "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Web\\ElectricTravel.Web.Infrastructure\\ElectricTravel.Web.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Emo\\Desktop\\New folder\\Web\\ElectricTravel.Web.Infrastructure\\ElectricTravel.Web.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Web\\ElectricTravel.Web.Infrastructure\\ElectricTravel.Web.Infrastructure.csproj",
         "projectName": "ElectricTravel.Web.Infrastructure",
-        "projectPath": "C:\\Users\\Emo\\Desktop\\New folder\\Web\\ElectricTravel.Web.Infrastructure\\ElectricTravel.Web.Infrastructure.csproj",
+        "projectPath": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Web\\ElectricTravel.Web.Infrastructure\\ElectricTravel.Web.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\Emo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Emo\\Desktop\\New folder\\Web\\ElectricTravel.Web.Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\Emo\\Desktop\\ElectricTravel\\Web\\ElectricTravel.Web.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
