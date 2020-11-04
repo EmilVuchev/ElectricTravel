@@ -133,17 +133,7 @@
             {
                 foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
             }
-        }
 
-        private static void SetIsDeletedQueryFilter<T>(ModelBuilder builder)
-            where T : class, IDeletableEntity
-        {
-            builder.Entity<T>().HasQueryFilter(e => !e.IsDeleted);
-        }
-
-        // Applies configurations
-        private void ConfigureUserIdentityRelations(ModelBuilder builder)
-        {
             builder.Entity<UserCar>()
                 .HasKey(uc => new { uc.UserId, uc.CarId });
 
@@ -162,6 +152,16 @@
             builder.Entity<CarVideo>()
                .HasKey(ci => new { ci.CarId, ci.VideoId });
         }
+
+        private static void SetIsDeletedQueryFilter<T>(ModelBuilder builder)
+            where T : class, IDeletableEntity
+        {
+            builder.Entity<T>().HasQueryFilter(e => !e.IsDeleted);
+        }
+
+        // Applies configurations
+        private void ConfigureUserIdentityRelations(ModelBuilder builder)
+            => builder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
 
         private void ApplyAuditInfoRules()
         {
