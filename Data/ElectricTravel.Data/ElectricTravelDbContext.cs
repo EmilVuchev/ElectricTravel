@@ -7,7 +7,14 @@
     using System.Threading.Tasks;
 
     using ElectricTravel.Data.Common.Models;
+    using ElectricTravel.Data.Models;
+    using ElectricTravel.Data.Models.Advertisement;
     using ElectricTravel.Data.Models.Car;
+    using ElectricTravel.Data.Models.Charging;
+    using ElectricTravel.Data.Models.Location;
+    using ElectricTravel.Data.Models.Message;
+    using ElectricTravel.Data.Models.Multimedia;
+    using ElectricTravel.Data.Models.News;
     using ElectricTravel.Data.Models.User;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
@@ -24,7 +31,61 @@
         {
         }
 
+        public DbSet<CarAdvert> CarAdverts { get; set; }
+
+        public DbSet<SharedTravelAdvert> SharedTravelAdverts { get; set; }
+
         public DbSet<ElectricCar> Cars { get; set; }
+
+        public DbSet<CarImage> CarImages { get; set; }
+
+        public DbSet<Make> Makes { get; set; }
+
+        public DbSet<Model> Models { get; set; }
+
+        public DbSet<CarVideo> CarVideos { get; set; }
+
+        public DbSet<CarType> CarTypes { get; set; }
+
+        public DbSet<ChargingStation> ChargingStations { get; set; }
+
+        public DbSet<PaymentMethod> PaymentMethods { get; set; }
+
+        public DbSet<StationPayment> StationPayments { get; set; }
+
+        public DbSet<Socket> Sockets { get; set; }
+
+        public DbSet<SocketPower> SocketPowers { get; set; }
+
+        public DbSet<SocketType> SocketTypes { get; set; }
+
+        public DbSet<Address> Addresses { get; set; }
+
+        public DbSet<City> Cities { get; set; }
+
+        public DbSet<Region> Regions { get; set; }
+
+        public DbSet<ChatMessage> ChatMessages { get; set; }
+
+        public DbSet<Group> Groups { get; set; }
+
+        public DbSet<UserGroup> UserGroups { get; set; }
+
+        public DbSet<Image> Images { get; set; }
+
+        public DbSet<Video> Videos { get; set; }
+
+        public DbSet<Article> Articles { get; set; }
+
+        public DbSet<Source> Sources { get; set; }
+
+        public DbSet<UserAddress> UserAddresses { get; set; }
+
+        public DbSet<UserCar> UserCars { get; set; }
+
+        public DbSet<UserRating> UserRatings { get; set; }
+
+        public DbSet<Setting> Settings { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 
@@ -82,7 +143,25 @@
 
         // Applies configurations
         private void ConfigureUserIdentityRelations(ModelBuilder builder)
-             => builder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
+        {
+            builder.Entity<UserCar>()
+                .HasKey(uc => new { uc.UserId, uc.CarId });
+
+            builder.Entity<UserAddress>()
+                .HasKey(ua => new { ua.UserId, ua.AddressId });
+
+            builder.Entity<UserGroup>()
+                .HasKey(ug => new { ug.UserId, ug.GroupId });
+
+            builder.Entity<StationPayment>()
+                .HasKey(sp => new { sp.PaymentId, sp.ChargingStationId });
+
+            builder.Entity<CarImage>()
+                .HasKey(ci => new { ci.CarId, ci.ImageId });
+
+            builder.Entity<CarVideo>()
+               .HasKey(ci => new { ci.CarId, ci.VideoId });
+        }
 
         private void ApplyAuditInfoRules()
         {

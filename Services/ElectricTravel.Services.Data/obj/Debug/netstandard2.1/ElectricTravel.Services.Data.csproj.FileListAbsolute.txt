@@ -20,3 +20,13 @@ C:\Users\Emo\Desktop\ElectricTravel\Services\ElectricTravel.Services.Data\obj\De
 C:\Users\Emo\Desktop\ElectricTravel\Services\ElectricTravel.Services.Data\obj\Debug\netstandard2.1\ElectricTravel.Services.Data.csproj.CoreCompileInputs.cache
 C:\Users\Emo\Desktop\ElectricTravel\Services\ElectricTravel.Services.Data\obj\Debug\netstandard2.1\ElectricTravel.Services.Data.dll
 C:\Users\Emo\Desktop\ElectricTravel\Services\ElectricTravel.Services.Data\obj\Debug\netstandard2.1\ElectricTravel.Services.Data.pdb
+C:\Users\Emo\Desktop\ElectricTravel\Services\ElectricTravel.Services.Data\bin\Debug\netstandard2.1\ElectricTravel.Services.Data.deps.json
+C:\Users\Emo\Desktop\ElectricTravel\Services\ElectricTravel.Services.Data\bin\Debug\netstandard2.1\ElectricTravel.Services.Data.dll
+C:\Users\Emo\Desktop\ElectricTravel\Services\ElectricTravel.Services.Data\bin\Debug\netstandard2.1\ElectricTravel.Services.Data.pdb
+C:\Users\Emo\Desktop\ElectricTravel\Services\ElectricTravel.Services.Data\bin\Debug\netstandard2.1\ElectricTravel.Data.Common.dll
+C:\Users\Emo\Desktop\ElectricTravel\Services\ElectricTravel.Services.Data\bin\Debug\netstandard2.1\ElectricTravel.Data.Models.dll
+C:\Users\Emo\Desktop\ElectricTravel\Services\ElectricTravel.Services.Data\bin\Debug\netstandard2.1\ElectricTravel.Services.Mapping.dll
+C:\Users\Emo\Desktop\ElectricTravel\Services\ElectricTravel.Services.Data\bin\Debug\netstandard2.1\ElectricTravel.Data.Common.pdb
+C:\Users\Emo\Desktop\ElectricTravel\Services\ElectricTravel.Services.Data\bin\Debug\netstandard2.1\ElectricTravel.Data.Models.pdb
+C:\Users\Emo\Desktop\ElectricTravel\Services\ElectricTravel.Services.Data\bin\Debug\netstandard2.1\ElectricTravel.Services.Mapping.pdb
+C:\Users\Emo\Desktop\ElectricTravel\Services\ElectricTravel.Services.Data\obj\Debug\netstandard2.1\ElectricTravel.Services.Data.csproj.CopyComplete

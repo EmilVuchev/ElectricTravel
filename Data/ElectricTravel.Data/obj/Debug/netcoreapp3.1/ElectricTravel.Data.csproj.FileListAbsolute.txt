@@ -24,3 +24,17 @@ C:\Users\Emo\Desktop\ElectricTravel\Data\ElectricTravel.Data\obj\Debug\netcoreap
 C:\Users\Emo\Desktop\ElectricTravel\Data\ElectricTravel.Data\obj\Debug\netcoreapp3.1\ElectricTravel.Data.csproj.CoreCompileInputs.cache
 C:\Users\Emo\Desktop\ElectricTravel\Data\ElectricTravel.Data\obj\Debug\netcoreapp3.1\ElectricTravel.Data.dll
 C:\Users\Emo\Desktop\ElectricTravel\Data\ElectricTravel.Data\obj\Debug\netcoreapp3.1\ElectricTravel.Data.pdb
+C:\Users\Emo\Desktop\ElectricTravel\Data\ElectricTravel.Data\bin\Debug\netcoreapp3.1\appsettings.json
+C:\Users\Emo\Desktop\ElectricTravel\Data\ElectricTravel.Data\bin\Debug\netcoreapp3.1\ElectricTravel.Data.deps.json
+C:\Users\Emo\Desktop\ElectricTravel\Data\ElectricTravel.Data\bin\Debug\netcoreapp3.1\ElectricTravel.Data.runtimeconfig.json
+C:\Users\Emo\Desktop\ElectricTravel\Data\ElectricTravel.Data\bin\Debug\netcoreapp3.1\ElectricTravel.Data.runtimeconfig.dev.json
+C:\Users\Emo\Desktop\ElectricTravel\Data\ElectricTravel.Data\bin\Debug\netcoreapp3.1\ElectricTravel.Data.dll
+C:\Users\Emo\Desktop\ElectricTravel\Data\ElectricTravel.Data\bin\Debug\netcoreapp3.1\ElectricTravel.Data.pdb
+C:\Users\Emo\Desktop\ElectricTravel\Data\ElectricTravel.Data\bin\Debug\netcoreapp3.1\ElectricTravel.Common.dll
+C:\Users\Emo\Desktop\ElectricTravel\Data\ElectricTravel.Data\bin\Debug\netcoreapp3.1\ElectricTravel.Data.Common.dll
+C:\Users\Emo\Desktop\ElectricTravel\Data\ElectricTravel.Data\bin\Debug\netcoreapp3.1\ElectricTravel.Data.Models.dll
+C:\Users\Emo\Desktop\ElectricTravel\Data\ElectricTravel.Data\bin\Debug\netcoreapp3.1\ElectricTravel.Common.pdb
+C:\Users\Emo\Desktop\ElectricTravel\Data\ElectricTravel.Data\bin\Debug\netcoreapp3.1\ElectricTravel.Data.Common.pdb
+C:\Users\Emo\Desktop\ElectricTravel\Data\ElectricTravel.Data\bin\Debug\netcoreapp3.1\ElectricTravel.Data.Models.pdb
+C:\Users\Emo\Desktop\ElectricTravel\Data\ElectricTravel.Data\obj\Debug\netcoreapp3.1\ElectricTravel.Data.csproj.CopyComplete
+C:\Users\Emo\Desktop\ElectricTravel\Data\ElectricTravel.Data\obj\Debug\netcoreapp3.1\ElectricTravel.Data.genruntimeconfig.cache
