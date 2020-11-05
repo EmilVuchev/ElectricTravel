@@ -21,7 +21,7 @@ namespace ElectricTravel.Data.Models.User
             this.Roles = new HashSet<IdentityUserRole<string>>();
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
-            this.Cars = new HashSet<ElectricCar>();
+            this.Cars = new HashSet<UserCar>();
             this.UserAddresses = new HashSet<UserAddress>();
             this.ChatMessages = new HashSet<ChatMessage>();
             this.Groups = new HashSet<UserGroup>();
@@ -73,7 +73,7 @@ namespace ElectricTravel.Data.Models.User
 
         public virtual ICollection<UserGroup> Groups { get; set; }
 
-        public virtual ICollection<ElectricCar> Cars { get; set; }
+        public virtual ICollection<UserCar> Cars { get; set; }
 
         public virtual ICollection<UserAddress> UserAddresses { get; set; }
 

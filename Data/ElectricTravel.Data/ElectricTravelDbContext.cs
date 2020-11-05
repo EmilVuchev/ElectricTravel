@@ -41,6 +41,8 @@
 
         public DbSet<Make> Makes { get; set; }
 
+        public DbSet<CarTypeMake> CarTypeMakes { get; set; }
+
         public DbSet<Model> Models { get; set; }
 
         public DbSet<CarVideo> CarVideos { get; set; }
@@ -151,6 +153,9 @@
 
             builder.Entity<CarVideo>()
                .HasKey(ci => new { ci.CarId, ci.VideoId });
+
+            builder.Entity<CarTypeMake>()
+               .HasKey(ctm => new { ctm.CarTypeId, ctm.MakeId });
         }
 
         private static void SetIsDeletedQueryFilter<T>(ModelBuilder builder)
