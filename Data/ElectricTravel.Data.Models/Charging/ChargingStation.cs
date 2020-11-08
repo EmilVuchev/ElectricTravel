@@ -9,7 +9,7 @@
     using ElectricTravel.Data.Models.Location;
     using ElectricTravel.Data.Models.Multimedia;
 
-    public class ChargingStation : BaseModel<int>
+    public class ChargingStation : BaseDeletableModel<int>
     {
         public ChargingStation()
         {

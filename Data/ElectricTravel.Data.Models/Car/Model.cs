@@ -5,7 +5,7 @@
 
     using ElectricTravel.Data.Common.Models;
 
-    public class Model : BaseModel<int>
+    public class Model : BaseDeletableModel<int>
     {
         public string Name { get; set; }
 

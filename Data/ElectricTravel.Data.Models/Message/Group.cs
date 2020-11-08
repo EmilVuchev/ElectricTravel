@@ -5,7 +5,7 @@
 
     using ElectricTravel.Data.Common.Models;
 
-    public class Group : BaseModel<int>
+    public class Group : BaseDeletableModel<int>
     {
         public Group()
         {

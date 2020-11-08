@@ -2,7 +2,7 @@
 {
     using ElectricTravel.Data.Common.Models;
 
-    public class SocketType : BaseModel<int>
+    public class SocketType : BaseDeletableModel<int>
     {
         public string Name { get; set; }
     }

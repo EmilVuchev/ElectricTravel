@@ -2,7 +2,7 @@
 {
     using ElectricTravel.Data.Common.Models;
 
-    public class SocketPower : BaseModel<int>
+    public class SocketPower : BaseDeletableModel<int>
     {
         public int KilowattHour { get; set; }
     }

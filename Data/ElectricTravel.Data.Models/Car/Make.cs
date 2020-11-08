@@ -4,7 +4,7 @@
 
     using ElectricTravel.Data.Common.Models;
 
-    public class Make : BaseModel<int>
+    public class Make : BaseDeletableModel<int>
     {
         public Make()
         {

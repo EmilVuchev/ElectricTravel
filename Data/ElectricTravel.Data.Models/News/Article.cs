@@ -6,7 +6,7 @@
     using ElectricTravel.Data.Common.Models;
     using ElectricTravel.Data.Models.User;
 
-    public class Article : BaseModel<int>
+    public class Article : BaseDeletableModel<int>
     {
         [Required]
         [MaxLength(100)]

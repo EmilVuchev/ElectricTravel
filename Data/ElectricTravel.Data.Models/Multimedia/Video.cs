@@ -4,7 +4,7 @@
 
     using ElectricTravel.Data.Common.Models;
 
-    public class Video : BaseModel<int>
+    public class Video : BaseDeletableModel<int>
     {
         [Required]
         public string Name { get; set; }

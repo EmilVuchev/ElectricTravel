@@ -7,7 +7,7 @@
     using ElectricTravel.Data.Common.Models;
     using ElectricTravel.Data.Models.User;
 
-    public class ChatMessage : BaseModel<string>
+    public class ChatMessage : BaseDeletableModel<string>
     {
         [MaxLength(2500)]
         public string Content { get; set; }

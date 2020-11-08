@@ -4,7 +4,7 @@
 
     using ElectricTravel.Data.Common.Models;
 
-    public class Socket : BaseModel<int>
+    public class Socket : BaseDeletableModel<int>
     {
         [ForeignKey(nameof(Power))]
         public int PowerId { get; set; }

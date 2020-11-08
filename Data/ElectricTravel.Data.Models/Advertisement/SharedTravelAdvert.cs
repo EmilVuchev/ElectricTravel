@@ -9,7 +9,7 @@
     using ElectricTravel.Data.Models.Location;
     using ElectricTravel.Data.Models.User;
 
-    public class SharedTravelAdvert : BaseModel<int>
+    public class SharedTravelAdvert : BaseDeletableModel<int>
     {
         public DateTime StartDateAndTime { get; set; }
 

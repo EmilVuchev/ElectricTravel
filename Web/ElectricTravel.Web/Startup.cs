@@ -10,6 +10,7 @@
     using ElectricTravel.Data.Repositories;
     using ElectricTravel.Data.Seeding;
     using ElectricTravel.Services.Data;
+    using ElectricTravel.Services.Data.Contracts;
     using ElectricTravel.Services.Mapping;
     using ElectricTravel.Services.Messaging;
     using ElectricTravel.Web.ViewModels;
@@ -67,6 +68,7 @@
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
+            services.AddTransient<ISharedTravelsService, SharedTravelsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

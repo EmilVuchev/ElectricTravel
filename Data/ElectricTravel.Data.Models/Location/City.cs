@@ -5,9 +5,10 @@ namespace ElectricTravel.Data.Models.Location
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
+    using ElectricTravel.Data.Common.Models;
     using ElectricTravel.Data.Models.Advertisement;
 
-    public class City : Area
+    public class City : BaseDeletableModel<int>
     {
         public City()
         {
@@ -16,6 +17,9 @@ namespace ElectricTravel.Data.Models.Location
             this.StartPointAdvert = new HashSet<SharedTravelAdvert>();
             this.EndPointAdvert = new HashSet<SharedTravelAdvert>();
         }
+
+        [Required]
+        public string Name { get; set; }
 
         [Required]
         [ForeignKey(nameof(Region))]

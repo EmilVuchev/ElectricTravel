@@ -5,7 +5,7 @@
 
     using ElectricTravel.Data.Common.Models;
 
-    public class PaymentMethod : BaseModel<int>
+    public class PaymentMethod : BaseDeletableModel<int>
     {
         public PaymentMethod()
         {

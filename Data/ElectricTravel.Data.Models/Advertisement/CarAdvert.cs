@@ -8,7 +8,7 @@
     using ElectricTravel.Data.Models.Location;
     using ElectricTravel.Data.Models.User;
 
-    public class CarAdvert : BaseModel<int>
+    public class CarAdvert : BaseDeletableModel<int>
     {
         [Required]
         [MaxLength(50)]
@@ -18,6 +18,7 @@
 
         public AdvertCurrency Currency { get; set; }
 
+        [MaxLength(3500)]
         public string Description { get; set; }
 
         [ForeignKey(nameof(City))]

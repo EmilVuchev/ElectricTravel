@@ -6,7 +6,7 @@
 
     using ElectricTravel.Data.Common.Models;
 
-    public class ElectricCar : BaseModel<int>
+    public class ElectricCar : BaseDeletableModel<int>
     {
         public ElectricCar()
         {
@@ -18,6 +18,7 @@
 
         public int Kilometres { get; set; }
 
+        [MaxLength(10)]
         public string Acceleration { get; set; }
 
         public double TopSpeed { get; set; }
@@ -45,19 +46,16 @@
 
         public int? LuggageCapacity { get; set; }
 
-        [Required]
         [ForeignKey(nameof(CarType))]
         public int CarTypeId { get; set; }
 
         public CarType CarType { get; set; }
 
-        [Required]
         [ForeignKey(nameof(Make))]
         public int MakeId { get; set; }
 
         public virtual Make Make { get; set; }
 
-        [Required]
         [ForeignKey(nameof(Model))]
         public int ModelId { get; set; }
 

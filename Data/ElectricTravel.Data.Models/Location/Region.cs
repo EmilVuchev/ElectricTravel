@@ -3,7 +3,9 @@ namespace ElectricTravel.Data.Models.Location
 {
     using System.Collections.Generic;
 
-    public class Region : Area
+    using ElectricTravel.Data.Common.Models;
+
+    public class Region : BaseDeletableModel<int>
     {
         public Region()
         {

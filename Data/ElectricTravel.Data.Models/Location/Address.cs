@@ -6,7 +6,7 @@ namespace ElectricTravel.Data.Models.Location
 
     using ElectricTravel.Data.Common.Models;
 
-    public class Address : BaseModel<int>
+    public class Address : BaseDeletableModel<int>
     {
         public string Street { get; set; }
 

@@ -4,7 +4,7 @@
 
     using ElectricTravel.Data.Common.Models;
 
-    public class CarType : BaseModel<int>
+    public class CarType : BaseDeletableModel<int>
     {
         public CarType()
         {
