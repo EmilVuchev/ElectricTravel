@@ -13,12 +13,6 @@
     {
         public DateTime StartDateAndTime { get; set; }
 
-        public DateTime Date => this.StartDateAndTime.Date;
-
-        public int Hour => this.StartDateAndTime.Hour;
-
-        public DayOfWeek Day => this.StartDateAndTime.DayOfWeek;
-
         public int Seats { get; set; }
 
         public bool SmokeRestriction { get; set; }
@@ -39,7 +33,7 @@
 
         public virtual City EndDestination { get; set; }
 
-        public AdvertStatus Status { get; set; }
+        public SharedTravelStatus Status { get; set; }
 
         [Required]
         [ForeignKey(nameof(CreatedBy))]

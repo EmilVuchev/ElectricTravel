@@ -1,8 +1,8 @@
 ﻿namespace ElectricTravel.Data.Models.Advertisement.Enumerations
 {
-    public enum AdvertStatus
+    public enum SharedTravelStatus
     {
-        ForSale = 1,
-        Sold = 2,
+        Active = 1,
+        Inactive = 2,
     }
 }

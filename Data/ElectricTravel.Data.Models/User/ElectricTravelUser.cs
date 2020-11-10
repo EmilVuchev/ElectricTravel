@@ -8,7 +8,6 @@ namespace ElectricTravel.Data.Models.User
 
     using ElectricTravel.Data.Common.Models;
     using ElectricTravel.Data.Models.Advertisement;
-    using ElectricTravel.Data.Models.Car;
     using ElectricTravel.Data.Models.Message;
     using ElectricTravel.Data.Models.Multimedia;
     using Microsoft.AspNetCore.Identity;
@@ -31,11 +30,9 @@ namespace ElectricTravel.Data.Models.User
             this.UserRatings = new HashSet<UserRating>();
         }
 
-        [Required]
         [MaxLength(20)]
         public string FirstName { get; set; }
 
-        [Required]
         [MaxLength(20)]
         public string LastName { get; set; }
 
@@ -54,10 +51,7 @@ namespace ElectricTravel.Data.Models.User
         [MaxLength(200)]
         public string ReasonToBeBlocked { get; set; }
 
-        [ForeignKey(nameof(Image))]
-        public int ImageId { get; set; }
-
-        public virtual Image Image { get; set; }
+        public virtual ICollection<Image> Image { get; set; }
 
         public virtual ICollection<UserRating> UserRatings { get; set; }
 

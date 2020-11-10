@@ -26,7 +26,7 @@
 
         public virtual City City { get; set; }
 
-        public AdvertStatus Status { get; set; }
+        public CarAdvertStatus Status { get; set; }
 
         [Required]
         [ForeignKey(nameof(CreatedBy))]

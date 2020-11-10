@@ -1,10 +1,11 @@
 ﻿namespace ElectricTravel.Web.Controllers
 {
     using System.Diagnostics;
+    using System.Threading.Tasks;
 
     using ElectricTravel.Services.Data.Contracts;
     using ElectricTravel.Web.ViewModels;
-
+    using ElectricTravel.Web.ViewModels.Home;
     using Microsoft.AspNetCore.Mvc;
 
     public class HomeController : BaseController
@@ -16,10 +17,16 @@
             this.sharedTravelsService = sharedTravelsService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            // var adverts = this.sharedTravelsService.GetRecentlyAddedAsync(5);
-            return this.View();
+            var adverts = await this.sharedTravelsService.GetRecentlyAddedAsync(5);
+
+            var model = new SharedTravelHomeListingViewModel
+            {
+                SharedTravels = adverts,
+            };
+
+            return this.View(model);
         }
 
         public IActionResult Privacy()

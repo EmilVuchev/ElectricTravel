@@ -3,10 +3,15 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    public interface ISharedTravelsService : IBaseDataService
+    using ElectricTravel.Web.InputViewModels.SharedTravel;
+    using ElectricTravel.Web.ViewModels.SharedTravels;
+
+    public interface ISharedTravelsService
     {
+        Task<SharedTravelDetailsViewModel> CreateAsync(SharedTravelCreateInputViewModel sharedTravelCreateInputModel);
+
         Task<IEnumerable<T>> GetAllAsync<T>();
 
-        Task<IEnumerable<T>> GetRecentlyAddedAsync<T>(int count = 0);
+        Task<IEnumerable<SharedTravelsViewModel>> GetRecentlyAddedAsync(int count = 0);
     }
 }

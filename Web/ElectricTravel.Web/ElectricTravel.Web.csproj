@@ -40,6 +40,11 @@
     <ProjectReference Include="..\..\Services\ElectricTravel.Services.Messaging\ElectricTravel.Services.Messaging.csproj" />
     <ProjectReference Include="..\..\Services\ElectricTravel.Services\ElectricTravel.Services.csproj" />
     <ProjectReference Include="..\ElectricTravel.Web.Infrastructure\ElectricTravel.Web.Infrastructure.csproj" />
+    <ProjectReference Include="..\ElectricTravel.Web.InputViewModels\ElectricTravel.Web.InputViewModels.csproj" />
     <ProjectReference Include="..\ElectricTravel.Web.ViewModels\ElectricTravel.Web.ViewModels.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\SharedTravels\" />
   </ItemGroup>
 </Project>
