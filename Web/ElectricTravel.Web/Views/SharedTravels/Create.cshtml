@@ -1,46 +1,74 @@
 ﻿@model ElectricTravel.Web.InputViewModels.SharedTravel.SharedTravelCreateInputViewModel
 @{
-    this.ViewData["Title"] = "Add new Shared Travel";
-   //// var categoryItems = this.Model.CategoriesItems.Select(x => new SelectListItem(x.Value, x.Key));
+    this.ViewData["Title"] = "Add new travel advert";
+    var cities = this.Model.Cities.Select(x => new SelectListItem(x.Value, x.Key));
+    var types = this.Model.TypesOfTravel.Select(x => new SelectListItem(x.Value, x.Key));
 }
 
 <form method="post" class="col-md-6 offset-md-3">
     <h1>@this.ViewData["Title"]</h1>
     <div asp-validation-summary="All" class="text-danger"></div>
+    @*<div class="form-group">
+            <label asp-for="EndDestinationId"></label>
+            <textarea asp-for="EndDestinationId" class="form-control" rows="5"></textarea>
+            <span asp-validation-for="EndDestinationId" class="text-danger"></span>
+        </div>*@
+    <div class="form-group">
+        <label asp-for="StartDateAndTime"></label>
+        <input asp-for="StartDateAndTime" class="form-control" />
+        <span asp-validation-for="StartDateAndTime" class="text-danger"></span>
+    </div>
+    @*<div class="form-group">
+            <label asp-for=""></label>
+            <input asp-for="" class="form-control" />
+            <span asp-validation-for="" class="text-danger"></span>
+        </div>*@
+    <div class="form-group">
+        <label asp-for="TypeOfTravelId"></label>
+        @*<vc:CategoriesDropDown name="TypeOfTravelId"></vc:CategoriesDropDown>*@
+        <select asp-for="TypeOfTravelId" class="form-control" asp-items="types"></select>
+        <span asp-validation-for="TypeOfTravelId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="SmokeRestriction"></label>
+        <input asp-for="SmokeRestriction" class="form-control" />
+        <span asp-validation-for="SmokeRestriction" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="WithReturnTrip"></label>
+        <input asp-for="WithReturnTrip" class="form-control" />
+        <span asp-validation-for="WithReturnTrip" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PlaceForLuggage"></label>
+        <input asp-for="PlaceForLuggage" class="form-control" />
+        <span asp-validation-for="PlaceForLuggage" class="text-danger"></span>
+    </div>
+    @*<div class="form-group">
+        <label asp-for=""></label>
+        <input asp-for="PlaceForLuggage" class="form-control" />
+        <span asp-validation-for="PlaceForLuggage" class="text-danger"></span>*@
+    @*</div>*@
+    <div class="form-group">
+        <label asp-for="Seats"></label>
+        <input asp-for="Seats" class="form-control" />
+        <span asp-validation-for="Seats" class="text-danger"></span>
+    </div>
     <div class="form-group">
         <label asp-for="StartDestinationId"></label>
-        <input asp-for="StartDestinationId" class="form-control" />
+        @*<vc:CategoriesDropDown name="CategoryId"></vc:CategoriesDropDown>*@
+        <select asp-for="StartDestinationId" class="form-control" asp-items="cities"></select>
         <span asp-validation-for="StartDestinationId" class="text-danger"></span>
     </div>
-    <!--<div class="form-group">
-        <label asp-for="Instructions"></label>
-        <textarea asp-for="Instructions" class="form-control" rows="5"></textarea>
-        <span asp-validation-for="Instructions" class="text-danger"></span>
-    </div>
     <div class="form-group">
-        <label asp-for="PreparationTime"></label>
-        <input asp-for="PreparationTime" class="form-control" />
-        <span asp-validation-for="PreparationTime" class="text-danger"></span>
+        <label asp-for="EndDestinationId"></label>
+        <vc:CategoriesDropDown name="EndDestinationId"></vc:CategoriesDropDown>
+        <select asp-for="EndDestinationId" class="form-control" asp-items="cities"></select>
+        <span asp-validation-for="EndDestinationId" class="text-danger"></span>
     </div>
-    <div class="form-group">
-        <label asp-for="CookingTime"></label>
-        <input asp-for="CookingTime" class="form-control" />
-        <span asp-validation-for="CookingTime" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="PortionsCount"></label>
-        <input asp-for="PortionsCount" class="form-control" />
-        <span asp-validation-for="PortionsCount" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="CategoryId"></label>-->
-        @*<vc:CategoriesDropDown name="CategoryId"></vc:CategoriesDropDown>*@
-        <!--<select asp-for="CategoryId" class="form-control" asp-items="categoryItems"></select>
-        <span asp-validation-for="CategoryId" class="text-danger"></span>
-    </div>
-    <div id="IngredientsContainer">
-        <label asp-for="Ingredients"></label>
-        <a class="btn btn-success" onclick="AddMoreIngredients()">+</a>
-    </div>-->
+    @*<div id="IngredientsContainer">
+            <label asp-for="Ingredients"></label>
+            <a class="btn btn-success" onclick="AddMoreIngredients()">+</a>
+        </div>*@
     <input type="submit" class="btn btn-primary" />
 </form>

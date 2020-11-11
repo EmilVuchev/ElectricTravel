@@ -14,6 +14,6 @@
         [ForeignKey(nameof(Type))]
         public int TypeId { get; set; }
 
-        public SocketType Type { get; set; }
+        public virtual SocketType Type { get; set; }
     }
 }

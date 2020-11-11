@@ -3,7 +3,6 @@
     using System;
 
     using ElectricTravel.Data.Models.Advertisement;
-    using ElectricTravel.Data.Models.Advertisement.Enumerations;
     using ElectricTravel.Services.Mapping;
 
     public class SharedTravelsViewModel : IMapFrom<SharedTravelAdvert>
@@ -34,7 +33,7 @@
         // public virtual City EndDestination { get; set; }
         public string EndDestinationName { get; set; }
 
-        public CarAdvertStatus Status { get; set; }
+        public SharedTravelStatus Status { get; set; }
 
         // public virtual ElectricTravelUser CreatedBy { get; set; }
         public string CreatedByUserName { get; set; }

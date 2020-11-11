@@ -19,6 +19,7 @@ namespace ElectricTravel.Data.Models.Location
         }
 
         [Required]
+        [MaxLength(30)]
         public string Name { get; set; }
 
         [Required]

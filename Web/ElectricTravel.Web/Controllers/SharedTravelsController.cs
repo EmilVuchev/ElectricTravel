@@ -4,17 +4,19 @@
 
     using ElectricTravel.Services.Data.Contracts;
     using ElectricTravel.Web.InputViewModels.SharedTravel;
-    using ElectricTravel.Web.ViewModels.SharedTravels;
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     public class SharedTravelsController : Controller
     {
         private readonly ISharedTravelsService sharedTravelsService;
+        private readonly ICitiesService citiesService;
+        private readonly ITypeOfTravelService typeOfTravelService;
 
-        public SharedTravelsController(ISharedTravelsService sharedTravelsService)
+        public SharedTravelsController(ISharedTravelsService sharedTravelsService, ICitiesService citiesService, ITypeOfTravelService typeOfTravelService)
         {
             this.sharedTravelsService = sharedTravelsService;
+            this.citiesService = citiesService;
+            this.typeOfTravelService = typeOfTravelService;
         }
 
         ////public async Task<IActionResult> Index()
@@ -26,7 +28,11 @@
 
         public IActionResult Create()
         {
-            return this.View();
+            var inputModel = new SharedTravelCreateInputViewModel();
+            inputModel.Cities = this.citiesService.GetAllAsKeyValuePairs();
+            inputModel.TypesOfTravel = this.typeOfTravelService.GetAllAsKeyValuePairs();
+
+            return this.View(inputModel);
         }
 
         [HttpPost]
@@ -34,7 +40,11 @@
         {
             if (!this.ModelState.IsValid)
             {
-                return this.View();
+                var inputModel = new SharedTravelCreateInputViewModel();
+                inputModel.Cities = this.citiesService.GetAllAsKeyValuePairs();
+                inputModel.TypesOfTravel = this.typeOfTravelService.GetAllAsKeyValuePairs();
+
+                return this.View(inputModel);
             }
 
             await this.sharedTravelsService.CreateAsync(input);

@@ -1,4 +1,4 @@
-﻿namespace ElectricTravel.Data.Seeding
+﻿namespace ElectricTravel.Data.Seeding.Contracts
 {
     using System;
     using System.Threading.Tasks;

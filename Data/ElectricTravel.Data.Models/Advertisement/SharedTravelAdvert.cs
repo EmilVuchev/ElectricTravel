@@ -5,7 +5,6 @@
     using System.ComponentModel.DataAnnotations.Schema;
 
     using ElectricTravel.Data.Common.Models;
-    using ElectricTravel.Data.Models.Advertisement.Enumerations;
     using ElectricTravel.Data.Models.Location;
     using ElectricTravel.Data.Models.User;
 
@@ -21,7 +20,10 @@
 
         public bool WithReturnTrip { get; set; }
 
-        public TypeTravel TypeOfTravel { get; set; }
+        [ForeignKey(nameof(TypeOfTravel))]
+        public int TypeOfTravelId { get; set; }
+
+        public virtual TypeTravel TypeOfTravel { get; set; }
 
         [ForeignKey(nameof(StartDestination))]
         public int StartDestinationId { get; set; }
@@ -33,7 +35,10 @@
 
         public virtual City EndDestination { get; set; }
 
-        public SharedTravelStatus Status { get; set; }
+        [ForeignKey(nameof(Status))]
+        public int StatusId { get; set; }
+
+        public virtual SharedTravelStatus Status { get; set; }
 
         [Required]
         [ForeignKey(nameof(CreatedBy))]

@@ -29,13 +29,13 @@
                 Seats = input.Seats,
                 SmokeRestriction = input.SmokeRestriction,
                 StartDateAndTime = input.StartDateAndTime,
-                Status = input.Status,
+                StatusId = input.StatusId,
                 CreatedById = input.CreatedById,
                 StartDestinationId = input.StartDestinationId,
                 EndDestinationId = input.EndDestinationId,
                 PlaceForLuggage = input.PlaceForLuggage,
                 WithReturnTrip = input.WithReturnTrip,
-                TypeOfTravel = input.TypeOfTravel,
+                TypeOfTravelId = input.TypeOfTravelId,
             };
 
             ////var viewModel = await this.GetViewModelByIdAsync<SharedTravelDetailsViewModel>(sharedTravelAdvert.Id);

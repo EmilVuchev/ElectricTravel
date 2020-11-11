@@ -39,6 +39,18 @@
 
         public DbSet<CarImage> CarImages { get; set; }
 
+        public DbSet<Currency> Currencies { get; set; }
+
+        public DbSet<SharedTravelStatus> SharedTravelStatus { get; set; }
+
+        public DbSet<CarAdvertStatus> CarAdvertStatus { get; set; }
+
+        public DbSet<TypeTravel> TypeTravels { get; set; }
+
+        public DbSet<StationCategory> StationCategories { get; set; }
+
+        public DbSet<ImageType> ImageTypes { get; set; }
+
         public DbSet<Make> Makes { get; set; }
 
         public DbSet<CarTypeMake> CarTypeMakes { get; set; }
@@ -50,6 +62,8 @@
         public DbSet<CarType> CarTypes { get; set; }
 
         public DbSet<ChargingStation> ChargingStations { get; set; }
+
+        public DbSet<Category> Categories { get; set; }
 
         public DbSet<PaymentMethod> PaymentMethods { get; set; }
 
@@ -156,6 +170,9 @@
 
             builder.Entity<CarTypeMake>()
                .HasKey(ctm => new { ctm.CarTypeId, ctm.MakeId });
+
+            builder.Entity<StationCategory>()
+                .HasKey(sc => new { sc.CategoryId, sc.StationId });
         }
 
         private static void SetIsDeletedQueryFilter<T>(ModelBuilder builder)

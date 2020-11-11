@@ -4,19 +4,20 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using ElectricTravel.Data.Models;
+    using ElectricTravel.Data.Models.Advertisement;
     using ElectricTravel.Data.Seeding.Contracts;
 
-    internal class SettingsSeeder : ISeeder
+    public class SharedTravelStatusSeeder : ISeeder
     {
         public async Task SeedAsync(ElectricTravelDbContext dbContext, IServiceProvider serviceProvider)
         {
-            if (dbContext.Settings.Any())
+            if (dbContext.SharedTravelStatus.Any())
             {
                 return;
             }
 
-            await dbContext.Settings.AddAsync(new Setting { Name = "Setting1", Value = "value1" });
+            await dbContext.SharedTravelStatus.AddAsync(new SharedTravelStatus { Name = "Active" });
+            await dbContext.SharedTravelStatus.AddAsync(new SharedTravelStatus { Name = "Inactive" });
         }
     }
 }

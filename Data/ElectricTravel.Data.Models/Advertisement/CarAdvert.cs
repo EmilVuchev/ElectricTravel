@@ -4,7 +4,6 @@
     using System.ComponentModel.DataAnnotations.Schema;
 
     using ElectricTravel.Data.Common.Models;
-    using ElectricTravel.Data.Models.Advertisement.Enumerations;
     using ElectricTravel.Data.Models.Location;
     using ElectricTravel.Data.Models.User;
 
@@ -16,17 +15,23 @@
 
         public decimal Price { get; set; }
 
-        public AdvertCurrency Currency { get; set; }
-
         [MaxLength(3500)]
         public string Description { get; set; }
 
         [ForeignKey(nameof(City))]
         public int CityId { get; set; }
 
-        public virtual City City { get; set; }
+        public City City { get; set; }
 
-        public CarAdvertStatus Status { get; set; }
+        [ForeignKey(nameof(Currency))]
+        public int CurrencyId { get; set; }
+
+        public virtual Currency Currency { get; set; }
+
+        [ForeignKey(nameof(Status))]
+        public int StatusId { get; set; }
+
+        public virtual CarAdvertStatus Status { get; set; }
 
         [Required]
         [ForeignKey(nameof(CreatedBy))]

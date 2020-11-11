@@ -2,6 +2,7 @@
 namespace ElectricTravel.Data.Models.Location
 {
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     using ElectricTravel.Data.Common.Models;
 
@@ -11,6 +12,10 @@ namespace ElectricTravel.Data.Models.Location
         {
             this.Cities = new HashSet<City>();
         }
+
+        [Required]
+        [MaxLength(50)]
+        public string Name { get; set; }
 
         public virtual ICollection<City> Cities { get; set; }
     }

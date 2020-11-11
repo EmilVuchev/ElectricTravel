@@ -1,6 +1,7 @@
 ﻿namespace ElectricTravel.Data.Models.User
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
     using ElectricTravel.Data.Common.Models;
@@ -8,6 +9,7 @@
 
     public class UserAddress : IDeletableEntity
     {
+        [Required]
         [ForeignKey(nameof(User))]
         public string UserId { get; set; }
 

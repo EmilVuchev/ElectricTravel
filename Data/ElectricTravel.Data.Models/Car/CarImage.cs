@@ -8,6 +8,7 @@
 
     public class CarImage : IDeletableEntity
     {
+        [ForeignKey(nameof(Car))]
         public int CarId { get; set; }
 
         public virtual ElectricCar Car { get; set; }

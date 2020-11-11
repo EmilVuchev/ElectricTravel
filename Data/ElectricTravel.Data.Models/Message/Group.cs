@@ -16,8 +16,8 @@
         [MaxLength(100)]
         public string Name { get; set; }
 
-        public ICollection<UserGroup> UsersGroups { get; set; }
+        public virtual ICollection<UserGroup> UsersGroups { get; set; }
 
-        public ICollection<ChatMessage> ChatMessages { get; set; }
+        public virtual ICollection<ChatMessage> ChatMessages { get; set; }
     }
 }

@@ -49,7 +49,7 @@
         [ForeignKey(nameof(CarType))]
         public int CarTypeId { get; set; }
 
-        public CarType CarType { get; set; }
+        public virtual CarType CarType { get; set; }
 
         [ForeignKey(nameof(Make))]
         public int MakeId { get; set; }

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ElectricTravel.Data.Migrations
 {
     [DbContext(typeof(ElectricTravelDbContext))]
-    [Migration("20201108193612_RefactorEntities")]
-    partial class RefactorEntities
+    [Migration("20201111174304_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -692,6 +692,9 @@ namespace ElectricTravel.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
@@ -814,6 +817,9 @@ namespace ElectricTravel.Data.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ElectricTravelUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -833,6 +839,8 @@ namespace ElectricTravel.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ElectricTravelUserId");
 
                     b.HasIndex("IsDeleted");
 
@@ -1015,12 +1023,8 @@ namespace ElectricTravel.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(20)")
                         .HasMaxLength(20);
-
-                    b.Property<int>("ImageId")
-                        .HasColumnType("int");
 
                     b.Property<bool>("IsBlocked")
                         .HasColumnType("bit");
@@ -1029,7 +1033,6 @@ namespace ElectricTravel.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(20)")
                         .HasMaxLength(20);
 
@@ -1074,8 +1077,6 @@ namespace ElectricTravel.Data.Migrations
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ImageId");
 
                     b.HasIndex("IsDeleted");
 
@@ -1524,6 +1525,13 @@ namespace ElectricTravel.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ElectricTravel.Data.Models.Multimedia.Image", b =>
+                {
+                    b.HasOne("ElectricTravel.Data.Models.User.ElectricTravelUser", null)
+                        .WithMany("Image")
+                        .HasForeignKey("ElectricTravelUserId");
+                });
+
             modelBuilder.Entity("ElectricTravel.Data.Models.News.Article", b =>
                 {
                     b.HasOne("ElectricTravel.Data.Models.News.Source", "Source")
@@ -1535,15 +1543,6 @@ namespace ElectricTravel.Data.Migrations
                     b.HasOne("ElectricTravel.Data.Models.User.ElectricTravelUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ElectricTravel.Data.Models.User.ElectricTravelUser", b =>
-                {
-                    b.HasOne("ElectricTravel.Data.Models.Multimedia.Image", "Image")
-                        .WithMany()
-                        .HasForeignKey("ImageId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });

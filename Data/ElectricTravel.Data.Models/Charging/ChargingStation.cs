@@ -5,7 +5,6 @@
     using System.ComponentModel.DataAnnotations.Schema;
 
     using ElectricTravel.Data.Common.Models;
-    using ElectricTravel.Data.Models.Charging.Enums;
     using ElectricTravel.Data.Models.Location;
     using ElectricTravel.Data.Models.Multimedia;
 
@@ -15,6 +14,7 @@
         {
             this.Sockets = new HashSet<Socket>();
             this.StationPayments = new HashSet<StationPayment>();
+            this.Categories = new HashSet<StationCategory>();
         }
 
         [Required]
@@ -22,8 +22,6 @@
         public string Name { get; set; }
 
         public string WorkTime { get; set; }
-
-        public StationCategory Category { get; set; }
 
         [MaxLength(2000)]
         public string Description { get; set; }
@@ -41,6 +39,8 @@
         public virtual Image Image { get; set; }
 
         public virtual ICollection<StationPayment> StationPayments { get; set; }
+
+        public virtual ICollection<StationCategory> Categories { get; set; }
 
         public virtual ICollection<Socket> Sockets { get; set; }
     }

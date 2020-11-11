@@ -1,6 +1,7 @@
 ﻿namespace ElectricTravel.Data.Models.Car
 {
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     using ElectricTravel.Data.Common.Models;
 
@@ -12,6 +13,8 @@
             this.Makes = new HashSet<CarTypeMake>();
         }
 
+        [Required]
+        [MaxLength(20)]
         public string Name { get; set; }
 
         public virtual ICollection<ElectricCar> Cars { get; set; }

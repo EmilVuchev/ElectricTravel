@@ -13,7 +13,7 @@
         [ForeignKey(nameof(Group))]
         public int GroupId { get; set; }
 
-        public Group Group { get; set; }
+        public virtual Group Group { get; set; }
 
         [Required]
         [ForeignKey(nameof(User))]

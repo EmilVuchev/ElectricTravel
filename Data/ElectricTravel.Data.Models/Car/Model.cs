@@ -7,6 +7,8 @@
 
     public class Model : BaseDeletableModel<int>
     {
+        [Required]
+        [MaxLength(20)]
         public string Name { get; set; }
 
         public int Year { get; set; }

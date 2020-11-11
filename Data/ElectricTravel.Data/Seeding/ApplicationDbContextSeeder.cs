@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using ElectricTravel.Data.Seeding.Contracts;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
 
@@ -27,6 +28,10 @@
                           {
                               new RolesSeeder(),
                               new SettingsSeeder(),
+                              new CurrencySeeder(),
+                              new CarAdvertStatusSeeder(),
+                              new TypeTravelSeeder(),
+                              new ImageTypeSeeder(),
                           };
 
             foreach (var seeder in seeders)

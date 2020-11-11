@@ -6,6 +6,7 @@
 
     using ElectricTravel.Common;
     using ElectricTravel.Data.Models.User;
+    using ElectricTravel.Data.Seeding.Contracts;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;
 
