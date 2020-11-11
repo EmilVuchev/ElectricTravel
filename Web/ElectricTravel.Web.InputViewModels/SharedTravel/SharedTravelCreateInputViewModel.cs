@@ -3,7 +3,6 @@
     using System;
 
     using ElectricTravel.Data.Models.Advertisement.Enumerations;
-    using ElectricTravel.Data.Models.User;
 
     public class SharedTravelCreateInputViewModel
     {
