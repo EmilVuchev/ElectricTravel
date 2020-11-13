@@ -5,35 +5,87 @@
     var types = this.Model.TypesOfTravel.Select(x => new SelectListItem(x.Value, x.Key));
 }
 
-<form method="post" class="col-md-6 offset-md-3">
+<div class="col-md-6 offset-3">
     <h1>@this.ViewData["Title"]</h1>
+</div>
+
+<form method="post" class="col-lg-12">
     <div asp-validation-summary="All" class="text-danger"></div>
+    <table>
+        <tr>
+            <td>
+                <div class="form-group">
+                    <label asp-for="StartDateAndTime"></label>
+                    @*<input type="datetime-local" name="name" value="@DateTime.UtcNow" />*@
+                    <input type="datetime-local" asp-for="StartDateAndTime" class="form-control" />
+                    <span asp-validation-for="StartDateAndTime" class="text-danger"></span>
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                    <label asp-for="TypeOfTravelId"></label>
+                    @*<vc:CategoriesDropDown name="TypeOfTravelId"></vc:CategoriesDropDown>*@
+                    <select asp-for="TypeOfTravelId" class="form-control" asp-items="types"></select>
+                    <span asp-validation-for="TypeOfTravelId" class="text-danger"></span>
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                    <label asp-for="Seats"></label>
+                    <input asp-for="Seats" class="form-control" />
+                    <span asp-validation-for="Seats" class="text-danger"></span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="form-group">
+                    <label asp-for="StartDestinationId"></label>
+                    @*<vc:CategoriesDropDown name="CategoryId"></vc:CategoriesDropDown>*@
+                    <select asp-for="StartDestinationId" class="form-control" asp-items="cities"></select>
+                    <span asp-validation-for="StartDestinationId" class="text-danger"></span>
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                    <label asp-for="EndDestinationId"></label>
+                    @*<vc:CategoriesDropDown name="EndDestinationId"></vc:CategoriesDropDown>*@
+                    <select asp-for="EndDestinationId" class="form-control" asp-items="cities"></select>
+                    <span asp-validation-for="EndDestinationId" class="text-danger"></span>
+                </div>
+            </td>
+            <td>
+                @*<div class="form-group">
+                        <label asp-for="SmokeRestriction"></label>
+                        <input asp-for="SmokeRestriction" class="form-control" />
+                        <span asp-validation-for="SmokeRestriction" class="text-danger"></span>
+                    </div>*@
+                <div class="form-check">
+                    <input class="checkbox-bootstrap" type="checkbox" asp-for="SmokeRestriction" />
+                    <label asp-for="SmokeRestriction"></label>
+                </div>
+                <div class="form-group">
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="customSwitch1" checked="">
+                        <label class="custom-control-label" for="customSwitch1">Toggle this switch element</label>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
     @*<div class="form-group">
             <label asp-for="EndDestinationId"></label>
             <textarea asp-for="EndDestinationId" class="form-control" rows="5"></textarea>
             <span asp-validation-for="EndDestinationId" class="text-danger"></span>
         </div>*@
-    <div class="form-group">
-        <label asp-for="StartDateAndTime"></label>
-        <input asp-for="StartDateAndTime" class="form-control" />
-        <span asp-validation-for="StartDateAndTime" class="text-danger"></span>
-    </div>
+
     @*<div class="form-group">
             <label asp-for=""></label>
             <input asp-for="" class="form-control" />
             <span asp-validation-for="" class="text-danger"></span>
         </div>*@
-    <div class="form-group">
-        <label asp-for="TypeOfTravelId"></label>
-        @*<vc:CategoriesDropDown name="TypeOfTravelId"></vc:CategoriesDropDown>*@
-        <select asp-for="TypeOfTravelId" class="form-control" asp-items="types"></select>
-        <span asp-validation-for="TypeOfTravelId" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="SmokeRestriction"></label>
-        <input asp-for="SmokeRestriction" class="form-control" />
-        <span asp-validation-for="SmokeRestriction" class="text-danger"></span>
-    </div>
+
+
     <div class="form-group">
         <label asp-for="WithReturnTrip"></label>
         <input asp-for="WithReturnTrip" class="form-control" />
@@ -49,23 +101,9 @@
         <input asp-for="PlaceForLuggage" class="form-control" />
         <span asp-validation-for="PlaceForLuggage" class="text-danger"></span>*@
     @*</div>*@
-    <div class="form-group">
-        <label asp-for="Seats"></label>
-        <input asp-for="Seats" class="form-control" />
-        <span asp-validation-for="Seats" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="StartDestinationId"></label>
-        @*<vc:CategoriesDropDown name="CategoryId"></vc:CategoriesDropDown>*@
-        <select asp-for="StartDestinationId" class="form-control" asp-items="cities"></select>
-        <span asp-validation-for="StartDestinationId" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="EndDestinationId"></label>
-        <vc:CategoriesDropDown name="EndDestinationId"></vc:CategoriesDropDown>
-        <select asp-for="EndDestinationId" class="form-control" asp-items="cities"></select>
-        <span asp-validation-for="EndDestinationId" class="text-danger"></span>
-    </div>
+
+
+
     @*<div id="IngredientsContainer">
             <label asp-for="Ingredients"></label>
             <a class="btn btn-success" onclick="AddMoreIngredients()">+</a>

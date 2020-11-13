@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewData["Title"] = "_NavbarDropdownPartial";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<a class="dropdown-item" asp-area="" asp-controller="SharedTravels" asp-action="All">All Adverts</a>
+@if (User.Identity.IsAuthenticated)
+{
+    <a class="dropdown-item" asp-area="" asp-controller="SharedTravels" asp-action="Create">Create Advert</a>
+    <a class="dropdown-item" asp-area="" asp-controller="SharedTravels" asp-action="AllByAuthor">My Adverts</a>
+}
+
+@*<a class="dropdown-item" href="#">Another action</a>
+<a class="dropdown-item" href="#">Something else here</a>
+<div class="dropdown-divider"></div>*@
+

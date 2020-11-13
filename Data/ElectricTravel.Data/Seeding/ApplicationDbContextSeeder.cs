@@ -32,6 +32,9 @@
                               new CarAdvertStatusSeeder(),
                               new TypeTravelSeeder(),
                               new ImageTypeSeeder(),
+                              new SharedTravelStatusSeeder(),
+                              new RegionSeeder(),
+                              new CitiesSeeder(),
                           };
 
             foreach (var seeder in seeders)

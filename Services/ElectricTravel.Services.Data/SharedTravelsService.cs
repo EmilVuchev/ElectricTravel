@@ -22,14 +22,14 @@
             this.sharedTravelsRepository = sharedTravelsRepository;
         }
 
-        public async Task CreateAsync(SharedTravelCreateInputViewModel input)
+        public async Task<SharedTravelDetailsViewModel> CreateAsync(SharedTravelCreateInputViewModel input)
         {
             var sharedTravelAdvert = new SharedTravelAdvert
             {
                 Seats = input.Seats,
                 SmokeRestriction = input.SmokeRestriction,
                 StartDateAndTime = input.StartDateAndTime,
-                StatusId = input.StatusId,
+                StatusId = 1,
                 CreatedById = input.CreatedById,
                 StartDestinationId = input.StartDestinationId,
                 EndDestinationId = input.EndDestinationId,
@@ -38,10 +38,12 @@
                 TypeOfTravelId = input.TypeOfTravelId,
             };
 
-            ////var viewModel = await this.GetViewModelByIdAsync<SharedTravelDetailsViewModel>(sharedTravelAdvert.Id);
-
             await this.sharedTravelsRepository.AddAsync(sharedTravelAdvert);
             await this.sharedTravelsRepository.SaveChangesAsync();
+
+            var viewModel = await this.GetViewModelByIdAsync<SharedTravelDetailsViewModel>(sharedTravelAdvert.Id);
+
+            return viewModel;
         }
 
         public Task DeleteByIdAsync(int id)
@@ -53,12 +55,39 @@
         {
             var adverts = await this.sharedTravelsRepository
                    .All()
-                   .Where(x => x.Status.ToString() == "Active")
+                   .Where(x => x.Status.Name == "Active")
                    .OrderBy(x => x.StartDateAndTime)
                    .To<TViewModel>()
                    .ToListAsync();
 
             return adverts;
+        }
+
+        public async Task<IEnumerable<TViewModel>> GetAllByAuthorId<TViewModel>(string id)
+        {
+            var adverts = await this.sharedTravelsRepository
+                .All()
+                .Where(a => a.CreatedById == id)
+                .To<TViewModel>()
+                .ToListAsync();
+
+            return adverts;
+        }
+
+        public async Task<TViewModel> GetViewModelByIdAsync<TViewModel>(int id)
+        {
+            var advert = await this.sharedTravelsRepository
+                .All()
+                .Where(a => a.Id == id)
+                .To<TViewModel>()
+                .FirstOrDefaultAsync();
+
+            if (advert == null)
+            {
+                throw new NullReferenceException("string.Format(ExceptionMessages.MovieNotFound, id)");
+            }
+
+            return advert;
         }
 
         public async Task<IEnumerable<SharedTravelsViewModel>> GetRecentlyAddedAsync(int count = 0)
@@ -71,22 +100,6 @@
                .ToListAsync();
 
             return recentlyAddedAdvert;
-        }
-
-        public async Task<TViewModel> GetViewModelByIdAsync<TViewModel>(int id)
-        {
-            var advert = await this.sharedTravelsRepository
-                .All()
-                .Where(m => m.Id == id)
-                .To<TViewModel>()
-                .FirstOrDefaultAsync();
-
-            if (advert == null)
-            {
-                throw new NullReferenceException("string.Format(ExceptionMessages.MovieNotFound, id)");
-            }
-
-            return advert;
         }
     }
 }
