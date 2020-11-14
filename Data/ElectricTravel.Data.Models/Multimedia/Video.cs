@@ -6,7 +6,7 @@
     using ElectricTravel.Data.Common.Models;
     using ElectricTravel.Data.Models.Car;
 
-    public class Video : BaseDeletableModel<int>
+    public class Video : BaseDeletableModel<string>
     {
         public Video()
         {

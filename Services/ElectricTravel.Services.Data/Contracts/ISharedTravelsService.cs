@@ -8,12 +8,14 @@
 
     public interface ISharedTravelsService
     {
-        Task<SharedTravelDetailsViewModel> CreateAsync(SharedTravelCreateInputViewModel input);
+        Task<SharedTravelAdvertIdViewModel> CreateAsync(SharedTravelCreateInputViewModel input);
 
         Task<IEnumerable<T>> GetAllAsync<T>();
 
         Task<IEnumerable<SharedTravelsViewModel>> GetRecentlyAddedAsync(int count = 0);
 
         Task<IEnumerable<T>> GetAllByAuthorId<T>(string id);
+
+        Task<TViewModel> GetViewModelByIdAsync<TViewModel>(string id);
     }
 }

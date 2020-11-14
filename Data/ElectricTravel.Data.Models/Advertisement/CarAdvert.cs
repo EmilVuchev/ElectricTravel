@@ -7,7 +7,7 @@
     using ElectricTravel.Data.Models.Location;
     using ElectricTravel.Data.Models.User;
 
-    public class CarAdvert : BaseDeletableModel<int>
+    public class CarAdvert : BaseDeletableModel<string>
     {
         [Required]
         [MaxLength(50)]

@@ -72,6 +72,7 @@
             services.AddTransient<ISharedTravelsService, SharedTravelsService>();
             services.AddTransient<ICitiesService, CitiesService>();
             services.AddTransient<ITypeOfTravelService, TypeOfTravelService>();
+            services.AddTransient<IUsersService, UsersService>();
             services.AddTransient<AspNetUserManager<ElectricTravelUser>>();
         }
 

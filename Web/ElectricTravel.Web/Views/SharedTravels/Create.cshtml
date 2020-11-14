@@ -5,108 +5,76 @@
     var types = this.Model.TypesOfTravel.Select(x => new SelectListItem(x.Value, x.Key));
 }
 
-<div class="col-md-6 offset-3">
-    <h1>@this.ViewData["Title"]</h1>
-</div>
 
-<form method="post" class="col-lg-12">
-    <div asp-validation-summary="All" class="text-danger"></div>
-    <table>
-        <tr>
-            <td>
-                <div class="form-group">
-                    <label asp-for="StartDateAndTime"></label>
-                    @*<input type="datetime-local" name="name" value="@DateTime.UtcNow" />*@
-                    <input type="datetime-local" asp-for="StartDateAndTime" class="form-control" />
-                    <span asp-validation-for="StartDateAndTime" class="text-danger"></span>
-                </div>
-            </td>
-            <td>
-                <div class="form-group">
-                    <label asp-for="TypeOfTravelId"></label>
-                    @*<vc:CategoriesDropDown name="TypeOfTravelId"></vc:CategoriesDropDown>*@
-                    <select asp-for="TypeOfTravelId" class="form-control" asp-items="types"></select>
-                    <span asp-validation-for="TypeOfTravelId" class="text-danger"></span>
-                </div>
-            </td>
-            <td>
-                <div class="form-group">
-                    <label asp-for="Seats"></label>
-                    <input asp-for="Seats" class="form-control" />
-                    <span asp-validation-for="Seats" class="text-danger"></span>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
+
+<form method="post">
+    <div class="container form-group" method="post">
+        <div class="row">
+            <h1>@this.ViewData["Title"]</h1>
+        </div>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="row">
+            <div class="col">
                 <div class="form-group">
                     <label asp-for="StartDestinationId"></label>
-                    @*<vc:CategoriesDropDown name="CategoryId"></vc:CategoriesDropDown>*@
                     <select asp-for="StartDestinationId" class="form-control" asp-items="cities"></select>
                     <span asp-validation-for="StartDestinationId" class="text-danger"></span>
                 </div>
-            </td>
-            <td>
+            </div>
+            <div class="col">
                 <div class="form-group">
                     <label asp-for="EndDestinationId"></label>
-                    @*<vc:CategoriesDropDown name="EndDestinationId"></vc:CategoriesDropDown>*@
                     <select asp-for="EndDestinationId" class="form-control" asp-items="cities"></select>
                     <span asp-validation-for="EndDestinationId" class="text-danger"></span>
                 </div>
-            </td>
-            <td>
-                @*<div class="form-group">
-                        <label asp-for="SmokeRestriction"></label>
-                        <input asp-for="SmokeRestriction" class="form-control" />
-                        <span asp-validation-for="SmokeRestriction" class="text-danger"></span>
-                    </div>*@
-                <div class="form-check">
-                    <input class="checkbox-bootstrap" type="checkbox" asp-for="SmokeRestriction" />
-                    <label asp-for="SmokeRestriction"></label>
-                </div>
-                <div class="form-group">
-                    <div class="custom-control custom-switch">
-                        <input type="checkbox" class="custom-control-input" id="customSwitch1" checked="">
-                        <label class="custom-control-label" for="customSwitch1">Toggle this switch element</label>
-                    </div>
-                </div>
-            </td>
-        </tr>
-    </table>
-    @*<div class="form-group">
-            <label asp-for="EndDestinationId"></label>
-            <textarea asp-for="EndDestinationId" class="form-control" rows="5"></textarea>
-            <span asp-validation-for="EndDestinationId" class="text-danger"></span>
-        </div>*@
-
-    @*<div class="form-group">
-            <label asp-for=""></label>
-            <input asp-for="" class="form-control" />
-            <span asp-validation-for="" class="text-danger"></span>
-        </div>*@
-
-
-    <div class="form-group">
-        <label asp-for="WithReturnTrip"></label>
-        <input asp-for="WithReturnTrip" class="form-control" />
-        <span asp-validation-for="WithReturnTrip" class="text-danger"></span>
+            </div>
+            <div class="col">
+                <label asp-for="Seats"></label>
+                <input type="number" min="1" max="7" value="1" asp-for="Seats" class="form-control" />
+                <span asp-validation-for="Seats" class="text-danger"></span>
+            </div>
+            <div class="col">
+                <label asp-for="StartDateAndTime"></label>
+                <input value ="" type="datetime-local" asp-for="StartDateAndTime" class="form-control" />
+                <span asp-validation-for="StartDateAndTime" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label asp-for="TypeOfTravelId"></label>
+                <select asp-for="TypeOfTravelId" class="form-control" asp-items="types"></select>
+                <span asp-validation-for="TypeOfTravelId" class="text-danger"></span>
+            </div>
+            <div class="col">
+                <label asp-for="SmokeRestriction"></label>
+                <select asp-for="SmokeRestriction" class="form-control">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+                <span asp-validation-for="SmokeRestriction" class="text-danger"></span>
+            </div>
+            <div class="col">
+                <label asp-for="WithReturnTrip"></label>
+                <select asp-for="WithReturnTrip" class="form-control">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+                <span asp-validation-for="WithReturnTrip" class="text-danger"></span>
+            </div>
+            <div class="col">
+                <label asp-for="PlaceForLuggage"></label>
+                <select asp-for="PlaceForLuggage" class="form-control">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+                <span asp-validation-for="PlaceForLuggage" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="p-3 mb-4">
+            <div class="text-center">
+                <input type="submit" class="btn btn-primary @*btn-default*@" value="SUBMIT" asp-controller="SharedTravels" asp-action="Create" />
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-        <label asp-for="PlaceForLuggage"></label>
-        <input asp-for="PlaceForLuggage" class="form-control" />
-        <span asp-validation-for="PlaceForLuggage" class="text-danger"></span>
-    </div>
-    @*<div class="form-group">
-        <label asp-for=""></label>
-        <input asp-for="PlaceForLuggage" class="form-control" />
-        <span asp-validation-for="PlaceForLuggage" class="text-danger"></span>*@
-    @*</div>*@
-
-
-
-    @*<div id="IngredientsContainer">
-            <label asp-for="Ingredients"></label>
-            <a class="btn btn-success" onclick="AddMoreIngredients()">+</a>
-        </div>*@
-    <input type="submit" class="btn btn-primary" />
 </form>
+

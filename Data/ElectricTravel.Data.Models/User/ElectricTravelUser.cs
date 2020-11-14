@@ -51,7 +51,10 @@ namespace ElectricTravel.Data.Models.User
         [MaxLength(200)]
         public string ReasonToBeBlocked { get; set; }
 
-        public virtual ICollection<Image> Image { get; set; }
+        [ForeignKey(nameof(Image))]
+        public string ImageId { get; set; }
+
+        public virtual Image Image { get; set; }
 
         public virtual ICollection<UserRating> UserRatings { get; set; }
 

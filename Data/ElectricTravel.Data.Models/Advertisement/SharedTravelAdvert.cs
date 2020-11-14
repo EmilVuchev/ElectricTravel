@@ -8,8 +8,13 @@
     using ElectricTravel.Data.Models.Location;
     using ElectricTravel.Data.Models.User;
 
-    public class SharedTravelAdvert : BaseDeletableModel<int>
+    public class SharedTravelAdvert : BaseDeletableModel<string>
     {
+        public SharedTravelAdvert()
+        {
+            this.Id = Guid.NewGuid().ToString();
+        }
+
         public DateTime StartDateAndTime { get; set; }
 
         public int Seats { get; set; }

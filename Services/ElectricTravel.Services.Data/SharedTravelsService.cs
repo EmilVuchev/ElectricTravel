@@ -22,26 +22,26 @@
             this.sharedTravelsRepository = sharedTravelsRepository;
         }
 
-        public async Task<SharedTravelDetailsViewModel> CreateAsync(SharedTravelCreateInputViewModel input)
+        public async Task<SharedTravelAdvertIdViewModel> CreateAsync(SharedTravelCreateInputViewModel input)
         {
             var sharedTravelAdvert = new SharedTravelAdvert
             {
-                Seats = input.Seats,
-                SmokeRestriction = input.SmokeRestriction,
-                StartDateAndTime = input.StartDateAndTime,
                 StatusId = 1,
+                Seats = input.Seats,
+                StartDateAndTime = input.StartDateAndTime,
                 CreatedById = input.CreatedById,
                 StartDestinationId = input.StartDestinationId,
                 EndDestinationId = input.EndDestinationId,
-                PlaceForLuggage = input.PlaceForLuggage,
-                WithReturnTrip = input.WithReturnTrip,
+                SmokeRestriction = input.SmokeRestriction == "yes" ? true : false,
+                PlaceForLuggage = input.PlaceForLuggage == "yes" ? true : false,
+                WithReturnTrip = input.WithReturnTrip == "yes" ? true : false,
                 TypeOfTravelId = input.TypeOfTravelId,
             };
 
             await this.sharedTravelsRepository.AddAsync(sharedTravelAdvert);
             await this.sharedTravelsRepository.SaveChangesAsync();
 
-            var viewModel = await this.GetViewModelByIdAsync<SharedTravelDetailsViewModel>(sharedTravelAdvert.Id);
+            var viewModel = new SharedTravelAdvertIdViewModel { Id = sharedTravelAdvert.Id };
 
             return viewModel;
         }
@@ -74,7 +74,7 @@
             return adverts;
         }
 
-        public async Task<TViewModel> GetViewModelByIdAsync<TViewModel>(int id)
+        public async Task<TViewModel> GetViewModelByIdAsync<TViewModel>(string id)
         {
             var advert = await this.sharedTravelsRepository
                 .All()

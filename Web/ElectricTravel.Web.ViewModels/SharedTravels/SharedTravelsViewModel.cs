@@ -7,7 +7,7 @@
 
     public class SharedTravelsViewModel : IMapFrom<SharedTravelAdvert>
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         public DateTime StartDateAndTime { get; set; }
 

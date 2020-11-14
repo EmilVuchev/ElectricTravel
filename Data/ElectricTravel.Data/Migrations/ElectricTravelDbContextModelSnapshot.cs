@@ -21,10 +21,8 @@ namespace ElectricTravel.Data.Migrations
 
             modelBuilder.Entity("ElectricTravel.Data.Models.Advertisement.CarAdvert", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("CityId")
                         .HasColumnType("int");
@@ -147,10 +145,8 @@ namespace ElectricTravel.Data.Migrations
 
             modelBuilder.Entity("ElectricTravel.Data.Models.Advertisement.SharedTravelAdvert", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CreatedById")
                         .IsRequired()
@@ -279,8 +275,8 @@ namespace ElectricTravel.Data.Migrations
                     b.Property<int>("CarId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ImageId")
-                        .HasColumnType("int");
+                    b.Property<string>("ImageId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
@@ -356,8 +352,8 @@ namespace ElectricTravel.Data.Migrations
                     b.Property<int>("CarId")
                         .HasColumnType("int");
 
-                    b.Property<int>("VideoId")
-                        .HasColumnType("int");
+                    b.Property<string>("VideoId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
@@ -579,8 +575,8 @@ namespace ElectricTravel.Data.Migrations
                         .HasColumnType("nvarchar(2000)")
                         .HasMaxLength(2000);
 
-                    b.Property<int?>("ImageId")
-                        .HasColumnType("int");
+                    b.Property<string>("ImageId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -993,10 +989,8 @@ namespace ElectricTravel.Data.Migrations
 
             modelBuilder.Entity("ElectricTravel.Data.Models.Multimedia.Image", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -1008,8 +1002,8 @@ namespace ElectricTravel.Data.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
-                    b.Property<string>("ElectricTravelUserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<string>("Extension")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -1030,8 +1024,6 @@ namespace ElectricTravel.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ElectricTravelUserId");
 
                     b.HasIndex("IsDeleted");
 
@@ -1073,10 +1065,8 @@ namespace ElectricTravel.Data.Migrations
 
             modelBuilder.Entity("ElectricTravel.Data.Models.Multimedia.Video", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -1253,6 +1243,9 @@ namespace ElectricTravel.Data.Migrations
                         .HasColumnType("nvarchar(20)")
                         .HasMaxLength(20);
 
+                    b.Property<string>("ImageId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<bool>("IsBlocked")
                         .HasColumnType("bit");
 
@@ -1304,6 +1297,8 @@ namespace ElectricTravel.Data.Migrations
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ImageId");
 
                     b.HasIndex("IsDeleted");
 
@@ -1619,7 +1614,7 @@ namespace ElectricTravel.Data.Migrations
                     b.HasOne("ElectricTravel.Data.Models.Multimedia.Image", "Image")
                         .WithMany()
                         .HasForeignKey("ImageId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -1649,7 +1644,7 @@ namespace ElectricTravel.Data.Migrations
                     b.HasOne("ElectricTravel.Data.Models.Multimedia.Video", "Video")
                         .WithMany("Cars")
                         .HasForeignKey("VideoId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -1793,10 +1788,6 @@ namespace ElectricTravel.Data.Migrations
 
             modelBuilder.Entity("ElectricTravel.Data.Models.Multimedia.Image", b =>
                 {
-                    b.HasOne("ElectricTravel.Data.Models.User.ElectricTravelUser", null)
-                        .WithMany("Image")
-                        .HasForeignKey("ElectricTravelUserId");
-
                     b.HasOne("ElectricTravel.Data.Models.Multimedia.ImageType", "Type")
                         .WithMany()
                         .HasForeignKey("TypeId")
@@ -1817,6 +1808,13 @@ namespace ElectricTravel.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ElectricTravel.Data.Models.User.ElectricTravelUser", b =>
+                {
+                    b.HasOne("ElectricTravel.Data.Models.Multimedia.Image", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageId");
                 });
 
             modelBuilder.Entity("ElectricTravel.Data.Models.User.UserAddress", b =>

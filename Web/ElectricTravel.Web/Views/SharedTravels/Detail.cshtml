@@ -1,4 +1,5 @@
-﻿@model ElectricTravel.Web.ViewModels.SharedTravels.SharedTravelDetailsViewModel
+﻿@using ElectricTravel.Web.ViewModels.SharedTravels 
+@model AdvertUserImageViewModel
 @{
     ViewData["Title"] = "Detail";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -33,8 +34,18 @@
     <p>
         <label>Route:</label>
         <span class="align-content-center">
-            "@Model.StartDestination.Name"<br>
-            "@Model.EndDestination.Name"
+            "@Model.AdvertInfo.StartDestinationName"<br>
+            "@Model.AdvertInfo.EndDestinationName"
+            "@Model.AdvertInfo.CreatedBy.FirstName"
+            "@Model.AdvertInfo.CreatedBy.LastName"
+            "@Model.AdvertInfo.PlaceForLuggage"
+            "@Model.AdvertInfo.Seats"
+            "@Model.AdvertInfo.SmokeRestriction"
+            "@Model.AdvertInfo.StartDateAndTime"
+            "@Model.AdvertInfo.StatusName"
+            "@Model.AdvertInfo.TypeOfTravel"
+            "@Model.AdvertInfo.WithReturnTrip"
+            "@Model.Image.Path"
         </span>
     </p>
 </div>

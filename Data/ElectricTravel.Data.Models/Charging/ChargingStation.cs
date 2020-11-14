@@ -34,7 +34,7 @@
         public virtual Address Address { get; set; }
 
         [ForeignKey(nameof(Image))]
-        public int? ImageId { get; set; }
+        public string ImageId { get; set; }
 
         public virtual Image Image { get; set; }
 

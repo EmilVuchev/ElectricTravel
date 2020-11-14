@@ -16,13 +16,15 @@
         private readonly ICitiesService citiesService;
         private readonly ITypeOfTravelService typeOfTravelService;
         private readonly AspNetUserManager<ElectricTravelUser> userManager;
+        private readonly IUsersService usersService;
 
-        public SharedTravelsController(ISharedTravelsService sharedTravelsService, ICitiesService citiesService, ITypeOfTravelService typeOfTravelService, AspNetUserManager<ElectricTravelUser> userManager)
+        public SharedTravelsController(ISharedTravelsService sharedTravelsService, ICitiesService citiesService, ITypeOfTravelService typeOfTravelService, AspNetUserManager<ElectricTravelUser> userManager, IUsersService usersService)
         {
             this.sharedTravelsService = sharedTravelsService;
             this.citiesService = citiesService;
             this.typeOfTravelService = typeOfTravelService;
             this.userManager = userManager;
+            this.usersService = usersService;
         }
 
         public async Task<IActionResult> All()
@@ -70,12 +72,31 @@
             input.CreatedById = userId;
 
             var outputViewModel = await this.sharedTravelsService.CreateAsync(input);
-            return this.View("Detail", outputViewModel);
+            return this.View("ThankYou", outputViewModel);
         }
 
-        public IActionResult Detail(SharedTravelDetailsViewModel output)
+        public IActionResult ThankYou()
         {
-            return this.View(output);
+            return this.View();
+        }
+
+        public async Task<IActionResult> Detail(string id)
+        {
+            var advert = await this.sharedTravelsService.GetViewModelByIdAsync<SharedTravelDetailsViewModel>(id);
+            var profilePic = await this.usersService.GetUserPictureByAdvertId(advert.Id);
+
+            if (advert == null)
+            {
+                return this.BadRequest();
+            }
+
+            var advertUserImage = new AdvertUserImageViewModel
+            {
+                AdvertInfo = advert,
+                Image = profilePic,
+            };
+
+            return this.View(advertUserImage);
         }
     }
 }

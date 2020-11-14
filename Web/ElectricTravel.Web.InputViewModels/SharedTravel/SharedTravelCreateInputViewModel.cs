@@ -14,13 +14,13 @@
         public int Seats { get; set; }
 
         [Display(Name = "Smoking restriction")]
-        public bool SmokeRestriction { get; set; }
+        public string SmokeRestriction { get; set; }
 
         [Display(Name = "Place for luggage")]
-        public bool PlaceForLuggage { get; set; }
+        public string PlaceForLuggage { get; set; }
 
         [Display(Name = "With return trip")]
-        public bool WithReturnTrip { get; set; }
+        public string WithReturnTrip { get; set; }
 
         [Range(1, 3)]
         [Display(Name = "Travel type")]
