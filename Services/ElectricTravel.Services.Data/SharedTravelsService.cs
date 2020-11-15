@@ -55,7 +55,7 @@
         {
             var adverts = await this.sharedTravelsRepository
                    .All()
-                   .Where(x => x.Status.Name == "Active")
+                   .Where(x => x.StatusId == 1)
                    .OrderBy(x => x.StartDateAndTime)
                    .To<TViewModel>()
                    .ToListAsync();

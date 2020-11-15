@@ -1,10 +1,14 @@
-﻿
+﻿@using ElectricTravel.Data.Models.User
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ElectricTravelUser> SignInManager
+@inject UserManager<ElectricTravelUser> UserManager
+
 <ul class="navbar-nav">
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Shared Travel</a>
         <div class="dropdown-menu">
             <a class="dropdown-item" asp-area="" asp-controller="SharedTravels" asp-action="All">All Adverts</a>
-            @if (User.Identity.IsAuthenticated)
+            @if (this.SignInManager.IsSignedIn(this.User))
             {
                 <a class="dropdown-item" asp-area="" asp-controller="SharedTravels" asp-action="Create">Create Advert</a>
                 <a class="dropdown-item" asp-area="" asp-controller="SharedTravels" asp-action="AllByAuthor">My Adverts</a>

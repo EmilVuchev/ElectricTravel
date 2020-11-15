@@ -49,8 +49,5 @@
     <Content Update="wwwroot\img\jannes-glas-87royqk4t6o-unsplash.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\img\martin-katler-DiJR_M1Mv_A-unsplash.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 </Project>

@@ -5,10 +5,8 @@
     var types = this.Model.TypesOfTravel.Select(x => new SelectListItem(x.Value, x.Key));
 }
 
-
-
 <form method="post">
-    <div class="container form-group" method="post">
+    <div class="container form-group text-light" method="post">
         <div class="row">
             <h1>@this.ViewData["Title"]</h1>
         </div>
@@ -35,7 +33,7 @@
             </div>
             <div class="col">
                 <label asp-for="StartDateAndTime"></label>
-                <input value ="" type="datetime-local" asp-for="StartDateAndTime" class="form-control" />
+                <input value="" type="datetime-local" asp-for="StartDateAndTime" class="form-control" />
                 <span asp-validation-for="StartDateAndTime" class="text-danger"></span>
             </div>
         </div>
@@ -78,3 +76,8 @@
     </div>
 </form>
 
+<style>
+    body {
+        text-decoration-color: #ff00dc;
+    }
+</style>

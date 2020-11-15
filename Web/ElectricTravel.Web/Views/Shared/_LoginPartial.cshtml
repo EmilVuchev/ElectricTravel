@@ -4,7 +4,7 @@
 @inject SignInManager<ElectricTravelUser> SignInManager
 @inject UserManager<ElectricTravelUser> UserManager
 
-<ul class="navbar-nav">
+<ul class="navbar-nav ml-auto">
     @if (this.SignInManager.IsSignedIn(this.User))
     {
         <li class="nav-item">

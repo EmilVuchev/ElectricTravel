@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Data\ElectricTravel.Data.Models\ElectricTravel.Data.Models.csproj" />
+    <ProjectReference Include="..\..\ElectricTravel.Common\ElectricTravel.Common.csproj" />
     <ProjectReference Include="..\..\Services\ElectricTravel.Services.Mapping\ElectricTravel.Services.Mapping.csproj" />
   </ItemGroup>
 

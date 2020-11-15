@@ -1,12 +1,42 @@
-﻿@model ElectricTravel.Web.ViewModels.Home.SharedTravelHomeListingViewModel
+﻿@*@model ElectricTravel.Web.ViewModels.Home.SharedTravelHomeListingViewModel*@
 @using ElectricTravel.Common
 @{
     this.ViewData["Title"] = "Home Page";
 }
 
-<div class="col-xs-6">
-    <img class="img-fluid max-width: 100%" src="~/img/jannes-glas-87royqk4t6o-unsplash.jpg" />
-</div>
+<div>
+        <img class="img-fluid" src="~/img/jannes-glas-87royqk4t6o-unsplash.jpg" />
+    </div>
+@*<div class="bg-">
+        <img class="img-fluid" src="~/img/pexels-pixabay-355904.jpg" alt="Alternate Text" />
+    </div>*@
+@*<div class="container my-4">
 
+    <p class="font-weight-bold text-white">Bootstrap background image full screen</p>
+
+    <p>
+        Detailed documentation and more examples (half background image, bakcground video) you can find in our 
+    </p>
+
+    <hr>
+
+
+</div>
+<div  id="asd"></div>
+
+<style>
+    body, html {
+        height: 100%;
+    }
+
+    #asd {
+        height: 100%;
+        width: 100%;
+        background-image: url('./img/jannes-glas-87royqk4t6o-unsplash.jpg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>*@
 
 

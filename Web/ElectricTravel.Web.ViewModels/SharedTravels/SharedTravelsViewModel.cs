@@ -21,11 +21,17 @@
 
         public bool SmokeRestriction { get; set; }
 
+        public string SmokeRestrictionAsString => this.SmokeRestriction == false ? "Yes" : "No";
+
         public bool PlaceForLuggage { get; set; }
+
+        public string PlaceForLuggageAsString => this.PlaceForLuggage == false ? "Yes" : "No";
 
         public bool WithReturnTrip { get; set; }
 
-        public TypeTravel TypeOfTravel { get; set; }
+        public string WithReturnTripAsString => this.WithReturnTrip == false ? "Yes" : "No";
+
+        public string TypeOfTravelName { get; set; }
 
         // public virtual City StartDestination { get; set; }
         public string StartDestinationName { get; set; }
