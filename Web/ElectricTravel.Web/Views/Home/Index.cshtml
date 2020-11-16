@@ -4,39 +4,48 @@
     this.ViewData["Title"] = "Home Page";
 }
 
-<div>
+@*<div>
         <img class="img-fluid" src="~/img/jannes-glas-87royqk4t6o-unsplash.jpg" />
-    </div>
+    </div>*@
 @*<div class="bg-">
         <img class="img-fluid" src="~/img/pexels-pixabay-355904.jpg" alt="Alternate Text" />
     </div>*@
-@*<div class="container my-4">
+<div class="container my-4">
 
     <p class="font-weight-bold text-white">Bootstrap background image full screen</p>
 
     <p>
-        Detailed documentation and more examples (half background image, bakcground video) you can find in our 
+        Detailed documentation and more examples (half background image, bakcground video) you can find in our
     </p>
 
     <hr>
 
 
 </div>
-<div  id="asd"></div>
+@*<div  id="asd"></div>
 
-<style>
-    body, html {
-        height: 100%;
-    }
+    <style>
+        body, html {
+            height: 100%;
+        }
 
-    #asd {
-        height: 100%;
-        width: 100%;
-        background-image: url('./img/jannes-glas-87royqk4t6o-unsplash.jpg');
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-</style>*@
+        #asd {
+            height: 100%;
+            width: 100%;
+            background-image: url('/img/jannes-glas-87royqk4t6o-unsplash.jpg');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>*@
+
+@section Scripts{
+    <style>
+        body {
+            background: url('../../../img/jannes-glas-87royqk4t6o-unsplash.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+    </style>
+}
 
 

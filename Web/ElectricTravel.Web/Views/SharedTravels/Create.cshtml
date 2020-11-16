@@ -1,4 +1,4 @@
-﻿@model ElectricTravel.Web.InputViewModels.SharedTravel.SharedTravelCreateInputViewModel
+﻿@model SharedTravelCreateInputViewModel
 @{
     this.ViewData["Title"] = "Add new travel advert";
     var cities = this.Model.Cities.Select(x => new SelectListItem(x.Value, x.Key));
@@ -70,14 +70,9 @@
         </div>
         <div class="p-3 mb-4">
             <div class="text-center">
-                <input type="submit" class="btn btn-primary @*btn-default*@" value="SUBMIT" asp-controller="SharedTravels" asp-action="Create" />
+                <input type="submit" class="btn btn-primary @*btn-default*@" value="CREATE" asp-controller="SharedTravels" asp-action="Create" />
             </div>
         </div>
     </div>
 </form>
 
-<style>
-    body {
-        text-decoration-color: #ff00dc;
-    }
-</style>

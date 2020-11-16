@@ -22,7 +22,7 @@
             this.sharedTravelsRepository = sharedTravelsRepository;
         }
 
-        public async Task<SharedTravelAdvertIdViewModel> CreateAsync(SharedTravelCreateInputViewModel input)
+        public async Task<string> CreateAsync(SharedTravelCreateInputViewModel input)
         {
             var sharedTravelAdvert = new SharedTravelAdvert
             {
@@ -41,9 +41,9 @@
             await this.sharedTravelsRepository.AddAsync(sharedTravelAdvert);
             await this.sharedTravelsRepository.SaveChangesAsync();
 
-            var viewModel = new SharedTravelAdvertIdViewModel { Id = sharedTravelAdvert.Id };
+            var sharedTravelId = sharedTravelAdvert.Id;
 
-            return viewModel;
+            return sharedTravelId;
         }
 
         public Task DeleteByIdAsync(int id)

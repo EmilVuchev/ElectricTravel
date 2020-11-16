@@ -1,5 +1,4 @@
-﻿@using ElectricTravel.Web.ViewModels.SharedTravels
-@model SharedTravelAdvertIdViewModel
+﻿@model string
 @{
     ViewData["Title"] = "ThankYou";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -11,5 +10,9 @@
     <h2>@User.Identity.Name!</h2>
 </content>
 
-<p><a asp-area="" asp-controller="SharedTravels" asp-action="Detail" asp-route-id="@Model.Id" class="text-primary">Link To Advert</a></p>
+<p>
+    <a asp-area="" asp-controller="SharedTravels" asp-action="Detail" asp-route-id="@Model" class="text-primary">
+        Link To Advert
+    </a>
+</p>
 
