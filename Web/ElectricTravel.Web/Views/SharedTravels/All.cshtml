@@ -6,9 +6,9 @@
 }
 <div class="container">
     <h1>All adverts</h1>
-    <table id="dtBasicExample" class=" container table table-striped table-bordered table-sm" cellspacing="0" width="100%">
-        <thead>
-            <tr class="text-primary">
+    <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+        <thead class="sorting_desc" aria-controls="dtBasicExample" rowspan="1" colspan="1">
+            <tr class="text-info">
                 <th scope="col"></th>
                 <th scope="col">@GlobalConstants.StartDestinationTitle</th>
                 <th scope="col">@GlobalConstants.DestinationTitle</th>
@@ -45,7 +45,16 @@
 
 @section Scripts
 {
-    <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+    <script src="~/js/addons/datatables.js"></script>
+    <link href="~/css/addons/datatables2.min.css" rel="stylesheet" />
+    @*<link href="~/css/addons/datatables.min.css" rel="stylesheet" />*@
+    @*<script>
+        $(document).ready(function () {
+                $('#dtOrderExample').DataTable({
+                    "order": [[3, "desc"]]
+                });
+                $('.dataTables_length').addClass('bs-select');
+            });</script>*@
     <script>
         $(document).ready(function () {
             $('#dtBasicExample').DataTable();
