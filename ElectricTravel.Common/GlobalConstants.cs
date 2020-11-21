@@ -20,14 +20,26 @@
 
         public const string AdvertDayTitle = "Day";
 
-        public const string AdvertSeatsTitle = "Free seats";
+        public const string AdvertSeatsTitle = "Seats";
 
-        public const string AdvertReturnTripTitle = "With return trip";
+        public const string AdvertReturnTripTitle = "Return trip";
 
-        public const string AdvertLuggageTitle = "Place for luggage";
+        public const string AdvertLuggageTitle = "Luggage";
 
         public const string AdvertSmokeRestrictionTitle = "Smoke restriction";
 
         public const string AdvertTypeTravelTitle = "Type travel";
+
+        public const string TrueState = "Yes";
+
+        public const string FalseState = "No";
+
+        public const int TravelTypeAsNumMinRange = 1;
+
+        public const int TravelTypeAsNumMaxRange = 3;
+
+        public const int AdvertDefaultStatus = 2;
+
+        public const string Details = "Details";
     }
 }

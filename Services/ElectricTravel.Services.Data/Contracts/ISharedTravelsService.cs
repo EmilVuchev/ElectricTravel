@@ -8,7 +8,7 @@
 
     public interface ISharedTravelsService
     {
-        Task<string> CreateAsync(SharedTravelCreateInputViewModel input);
+        Task<string> CreateAsync(SharedTravelCreateInputViewModel input, string userId);
 
         Task<IEnumerable<T>> GetAllAsync<T>();
 

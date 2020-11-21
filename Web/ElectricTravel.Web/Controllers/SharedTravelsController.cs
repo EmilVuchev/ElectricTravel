@@ -31,13 +31,19 @@
         {
             var adverts = await this.sharedTravelsService.GetAllAsync<SharedTravelsViewModel>();
 
+            if (adverts == null)
+            {
+                return this.NoContent();
+            }
+
             return this.View(adverts);
         }
 
         [Authorize]
-        public async Task<IActionResult> AllByAuthor(string id)
+        public async Task<IActionResult> AllByAuthor()
         {
-            var adverts = await this.sharedTravelsService.GetAllByAuthorId<SharedTravelsViewModel>(id);
+            var userId = this.userManager.GetUserId(this.User);
+            var adverts = await this.sharedTravelsService.GetAllByAuthorId<SharedTravelsViewModel>(userId);
 
             if (adverts == null)
             {
@@ -47,6 +53,7 @@
             return this.View(adverts);
         }
 
+        [Authorize]
         public IActionResult Create()
         {
             var inputModel = new SharedTravelCreateInputViewModel();
@@ -57,6 +64,7 @@
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create(SharedTravelCreateInputViewModel input)
         {
             if (!this.ModelState.IsValid)
@@ -69,9 +77,8 @@
             }
 
             var userId = this.userManager.GetUserId(this.User);
-            input.CreatedById = userId;
 
-            var outputViewModel = await this.sharedTravelsService.CreateAsync(input);
+            var outputViewModel = await this.sharedTravelsService.CreateAsync(input, userId);
             return this.View("ThankYou", outputViewModel);
         }
 
@@ -80,7 +87,7 @@
             return this.View();
         }
 
-        public async Task<IActionResult> Detail(string id)
+        public async Task<IActionResult> Details(string id)
         {
             var advert = await this.sharedTravelsService.GetViewModelByIdAsync<SharedTravelDetailsViewModel>(id);
             var profilePic = await this.usersService.GetUserPictureByAdvertId(advert.Id);

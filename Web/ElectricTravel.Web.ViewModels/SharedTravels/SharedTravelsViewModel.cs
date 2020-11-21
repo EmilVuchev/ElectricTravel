@@ -1,6 +1,7 @@
 ﻿namespace ElectricTravel.Web.ViewModels.SharedTravels
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
 
     using ElectricTravel.Data.Models.Advertisement;
     using ElectricTravel.Services.Mapping;
@@ -21,14 +22,17 @@
 
         public bool SmokeRestriction { get; set; }
 
+        [Display(Name = "Smoke restriction")]
         public string SmokeRestrictionAsString => this.SmokeRestriction == false ? "Yes" : "No";
 
         public bool PlaceForLuggage { get; set; }
 
+        [Display(Name = "Luggage")]
         public string PlaceForLuggageAsString => this.PlaceForLuggage == false ? "Yes" : "No";
 
         public bool WithReturnTrip { get; set; }
 
+        [Display(Name = "Return trip")]
         public string WithReturnTripAsString => this.WithReturnTrip == false ? "Yes" : "No";
 
         public string TypeOfTravelName { get; set; }

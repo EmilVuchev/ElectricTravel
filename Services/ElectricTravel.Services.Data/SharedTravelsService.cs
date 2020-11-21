@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using ElectricTravel.Common;
     using ElectricTravel.Data.Common.Repositories;
     using ElectricTravel.Data.Models.Advertisement;
     using ElectricTravel.Services.Data.Contracts;
@@ -22,19 +23,19 @@
             this.sharedTravelsRepository = sharedTravelsRepository;
         }
 
-        public async Task<string> CreateAsync(SharedTravelCreateInputViewModel input)
+        public async Task<string> CreateAsync(SharedTravelCreateInputViewModel input, string userId)
         {
             var sharedTravelAdvert = new SharedTravelAdvert
             {
-                StatusId = 1,
+                StatusId = GlobalConstants.AdvertDefaultStatus,
                 Seats = input.Seats,
                 StartDateAndTime = input.StartDateAndTime,
-                CreatedById = input.CreatedById,
+                CreatedById = userId,
                 StartDestinationId = input.StartDestinationId,
                 EndDestinationId = input.EndDestinationId,
-                SmokeRestriction = input.SmokeRestriction == "yes" ? true : false,
-                PlaceForLuggage = input.PlaceForLuggage == "yes" ? true : false,
-                WithReturnTrip = input.WithReturnTrip == "yes" ? true : false,
+                SmokeRestriction = IsTrue(input.SmokeRestriction),
+                PlaceForLuggage = IsTrue(input.PlaceForLuggage),
+                WithReturnTrip = IsTrue(input.WithReturnTrip),
                 TypeOfTravelId = input.TypeOfTravelId,
             };
 
@@ -55,7 +56,7 @@
         {
             var adverts = await this.sharedTravelsRepository
                    .All()
-                   .Where(x => x.StatusId == 1)
+                   .Where(x => x.StatusId == GlobalConstants.AdvertDefaultStatus)
                    .OrderBy(x => x.StartDateAndTime)
                    .To<TViewModel>()
                    .ToListAsync();
@@ -100,6 +101,11 @@
                .ToListAsync();
 
             return recentlyAddedAdvert;
+        }
+
+        private static bool IsTrue(string input)
+        {
+            return input == GlobalConstants.TrueState ? true : false;
         }
     }
 }

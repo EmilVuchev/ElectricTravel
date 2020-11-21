@@ -35,6 +35,11 @@
         "dist/jquery.validate.unobtrusive.js",
         "dist/jquery.validate.unobtrusive.min.js"
       ]
+    },
+    {
+      "library": "fontawesome@5.6.3",
+      "destination": "wwwroot/lib/fontawesome-free-5.15.1-web/webfonts/",
+      "files": ["index.min.js"]
     }
   ]
 }

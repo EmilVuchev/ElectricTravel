@@ -1,0 +1,51 @@
+﻿@model AdvertUserImageViewModel
+@{
+    this.ViewData["Title"] = "Trip details";
+    this.Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <table class="table col-md-6 text-light table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Created By</th>
+                <th scope="col">"@Model.AdvertInfo.StartDestinationName"</th>
+                <th scope="col">@Model.AdvertInfo.EndDestinationName</th>
+                <th scope="col">@Model.AdvertInfo.PlaceForLuggage</th>
+                <th scope="col">@Model.AdvertInfo.Seats</th>
+                <th scope="col">@Model.AdvertInfo.SmokeRestriction</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.AdvertInfo.CreatedBy.UserName</td>
+                @*<td class="table-active">@Model.PlaceForLuggage</td>
+                    <td class="table-active">@Model.Seats</td>
+                    <td class="table-active">@Model.SmokeRestriction</td>
+                    <td class="table-active">@Model.StartDestination.Name</td>
+                    <td class="table-active">@Model.EndDestination.Name</td>*@
+            </tr>
+        </tbody>
+    </table>
+</div>
+@*<div class="col1 one-half">
+        <h2>@this.ViewData["Title"]</h2>
+        <p>
+            <label>Route:</label>
+            <span class="align-content-center">
+                "@Model.AdvertInfo.StartDestinationName"<br>
+                "@Model.AdvertInfo.EndDestinationName"
+                "@Model.AdvertInfo.CreatedBy.FirstName"
+                "@Model.AdvertInfo.CreatedBy.LastName"
+                "@Model.AdvertInfo.PlaceForLuggage"
+                "@Model.AdvertInfo.Seats"
+                "@Model.AdvertInfo.SmokeRestriction"
+                "@Model.AdvertInfo.StartDateAndTime"
+                "@Model.AdvertInfo.StatusName"
+                "@Model.AdvertInfo.TypeOfTravel"
+                "@Model.AdvertInfo.WithReturnTrip"
+                "@Model.Image.Path"
+            </span>
+        </p>
+    </div>*@
+

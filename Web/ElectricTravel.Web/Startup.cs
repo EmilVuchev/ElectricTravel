@@ -45,6 +45,8 @@
             services.AddDefaultIdentity<ElectricTravelUser>(IdentityOptionsProvider.GetIdentityOptions)
                 .AddRoles<Role>().AddEntityFrameworkStores<ElectricTravelDbContext>();
 
+            services.AddDatabaseDeveloperPageExceptionFilter();
+
             services.Configure<CookiePolicyOptions>(
                 options =>
                     {
@@ -92,7 +94,7 @@
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
+                app.UseMigrationsEndPoint();
             }
             else
             {

@@ -46,24 +46,24 @@
             <div class="col">
                 <label asp-for="SmokeRestriction"></label>
                 <select asp-for="SmokeRestriction" class="form-control">
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
+                    <option>@GlobalConstants.TrueState</option>
+                    <option>@GlobalConstants.FalseState</option>
                 </select>
                 <span asp-validation-for="SmokeRestriction" class="text-danger"></span>
             </div>
             <div class="col">
                 <label asp-for="WithReturnTrip"></label>
                 <select asp-for="WithReturnTrip" class="form-control">
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
+                    <option>@GlobalConstants.TrueState</option>
+                    <option>@GlobalConstants.FalseState</option>
                 </select>
                 <span asp-validation-for="WithReturnTrip" class="text-danger"></span>
             </div>
             <div class="col">
                 <label asp-for="PlaceForLuggage"></label>
                 <select asp-for="PlaceForLuggage" class="form-control">
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
+                    <option>@GlobalConstants.TrueState</option>
+                    <option>@GlobalConstants.FalseState</option>
                 </select>
                 <span asp-validation-for="PlaceForLuggage" class="text-danger"></span>
             </div>
