@@ -37,15 +37,12 @@
 
         public string TypeOfTravelName { get; set; }
 
-        // public virtual City StartDestination { get; set; }
         public string StartDestinationName { get; set; }
 
-        // public virtual City EndDestination { get; set; }
         public string EndDestinationName { get; set; }
 
         public SharedTravelStatus Status { get; set; }
 
-        // public virtual ElectricTravelUser CreatedBy { get; set; }
         public string CreatedByUserName { get; set; }
     }
 }

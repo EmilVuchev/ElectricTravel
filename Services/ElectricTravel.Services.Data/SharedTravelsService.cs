@@ -8,6 +8,7 @@
     using ElectricTravel.Common;
     using ElectricTravel.Data.Common.Repositories;
     using ElectricTravel.Data.Models.Advertisement;
+    using ElectricTravel.Services.Data.Common;
     using ElectricTravel.Services.Data.Contracts;
     using ElectricTravel.Services.Mapping;
     using ElectricTravel.Web.InputViewModels.SharedTravel;
@@ -27,7 +28,7 @@
         {
             var sharedTravelAdvert = new SharedTravelAdvert
             {
-                StatusId = GlobalConstants.AdvertDefaultStatus,
+                StatusId = ServicesConstants.AdvertDefaultStatus,
                 Seats = input.Seats,
                 StartDateAndTime = input.StartDateAndTime,
                 CreatedById = userId,
@@ -56,7 +57,7 @@
         {
             var adverts = await this.sharedTravelsRepository
                    .All()
-                   .Where(x => x.StatusId == GlobalConstants.AdvertDefaultStatus)
+                   .Where(x => x.StatusId == ServicesConstants.AdvertDefaultStatus)
                    .OrderBy(x => x.StartDateAndTime)
                    .To<TViewModel>()
                    .ToListAsync();
@@ -85,6 +86,7 @@
 
             if (advert == null)
             {
+                ////TODO Exception Messages
                 throw new NullReferenceException("string.Format(ExceptionMessages.MovieNotFound, id)");
             }
 

@@ -1,33 +1,36 @@
-﻿@model AdvertUserImageViewModel
+﻿@model SharedTravelDetailsViewModel
 @{
     this.ViewData["Title"] = "Trip details";
     this.Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container">
-    <table class="table col-md-6 text-light table-striped">
-        <thead>
-            <tr>
-                <th scope="col">Created By</th>
-                <th scope="col">"@Model.AdvertInfo.StartDestinationName"</th>
-                <th scope="col">@Model.AdvertInfo.EndDestinationName</th>
-                <th scope="col">@Model.AdvertInfo.PlaceForLuggage</th>
-                <th scope="col">@Model.AdvertInfo.Seats</th>
-                <th scope="col">@Model.AdvertInfo.SmokeRestriction</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>@Model.AdvertInfo.CreatedBy.UserName</td>
-                @*<td class="table-active">@Model.PlaceForLuggage</td>
-                    <td class="table-active">@Model.Seats</td>
-                    <td class="table-active">@Model.SmokeRestriction</td>
-                    <td class="table-active">@Model.StartDestination.Name</td>
-                    <td class="table-active">@Model.EndDestination.Name</td>*@
-            </tr>
-        </tbody>
-    </table>
-</div>
+@*<div class="container">
+        <table class="table col-md-6 text-light table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Created By</th>
+                    <th scope="col">"@Model.AdvertInfo.StartDestinationName"</th>
+                    <th scope="col">@Model.AdvertInfo.EndDestinationName</th>
+                    <th scope="col">@Model.AdvertInfo.PlaceForLuggage</th>
+                    <th scope="col">@Model.AdvertInfo.Seats</th>
+                    <th scope="col">@Model.AdvertInfo.SmokeRestriction</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@Model.AdvertInfo.CreatedBy.UserName</td>
+                    <td>@Model.AdvertInfo.CreatedBy.FirstName</td>
+                    <td>@Model.AdvertInfo.CreatedBy.LastName</td>
+                    <td>@Model.AdvertInfo.CreatedBy.ImagePath</td>
+                    <td class="table-active">@Model.PlaceForLuggage</td>
+                        <td class="table-active">@Model.Seats</td>
+                        <td class="table-active">@Model.SmokeRestriction</td>
+                        <td class="table-active">@Model.StartDestination.Name</td>
+                        <td class="table-active">@Model.EndDestination.Name</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>*@
 @*<div class="col1 one-half">
         <h2>@this.ViewData["Title"]</h2>
         <p>
@@ -48,4 +51,78 @@
             </span>
         </p>
     </div>*@
+<hr />
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Trip details</h2>
+            <p>
+                <label>From: </label>
+                <span class="float-sm-right">
+                    @Model.StartDestinationName
+                </span>
+            </p>
+            <p>
+                <label>To: </label>
+                <span class="float-sm-right">
+                    @Model.EndDestinationName
+                </span>
+            </p>
+            @*<p>
+                    <label>Разстояние / време:</label>
+                    <span class="right" id="outputDiv">
+                    </span>
+                </p>*@
+            <p>
+                <label>Departure date and time:</label>
+                <span class="float-sm-right">@Model.StartDateAndTime</span>
+            </p>
+            <p>
+                <label>Available seats:</label>
+                <span class="float-sm-right">@Model.Seats</span>
+            </p>
+            <p>
+                <label>Luggage:</label>
+                <span class="float-sm-right">@Model.PlaceForLuggage</span>
+            </p>
+            <p>
+                <label>Return Trip:</label>
+                <span class="float-sm-right">@Model.WithReturnTrip</span>
+            </p>
+            <p>
+                <label>Smoking:</label>
+                <span class="float-sm-right">@Model.SmokeRestriction</span>
+            </p>
+            <p>
+                <label>Travel type:</label>
+                <span class="float-sm-right">@Model.TypeOfTravelName</span>
+            </p>
+            <div class="content"></div>
+        </div>
+        <div class="col-md-6">
+            <h2>Driver details</h2>
+            <img class="modal-avatar" src="@*@Model.CreatedBy.ImagePath*@" alt="Курче">
+            <p>
+                <label>Name:</label>
+                <span class="float-sm-right">@(Model.CreatedBy.FirstName + " " + Model.CreatedBy.LastName)</span>
+            </p>
+            <p><label>Рейтинг:</label><span class="right">(<strong style="color: green; font-weight: bold">+0</strong> / <strong style="color: red; font-weight: bold">-0</strong>) <em class="thumb "></em></span></p>
+            <p>
+                <label>Car:</label>
+                <span class="float-sm-right">@(Model.CreatedBy.CarMake + " " + Model.CreatedBy.CarModel)</span>
+            </p>
+            <p>
+                <label>Car pictures:</label>
+
+            </p>
+            <p>
+                <label>Phone number:</label>
+                <span class="float-sm-right">@Model.CreatedBy.PhoneNumber</span>
+            </p>
+            @*<form asp->
+
+        </form>*@
+        </div>
+    </div>
+</div>
 

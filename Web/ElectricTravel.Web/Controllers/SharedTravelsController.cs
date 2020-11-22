@@ -89,21 +89,14 @@
 
         public async Task<IActionResult> Details(string id)
         {
-            var advert = await this.sharedTravelsService.GetViewModelByIdAsync<SharedTravelDetailsViewModel>(id);
-            var profilePic = await this.usersService.GetUserPictureByAdvertId(advert.Id);
+            var advertUserInfo = await this.sharedTravelsService.GetViewModelByIdAsync<SharedTravelDetailsViewModel>(id);
 
-            if (advert == null)
+            if (advertUserInfo == null)
             {
                 return this.BadRequest();
             }
 
-            var advertUserImage = new AdvertUserImageViewModel
-            {
-                AdvertInfo = advert,
-                Image = profilePic,
-            };
-
-            return this.View(advertUserImage);
+            return this.View(advertUserInfo);
         }
     }
 }

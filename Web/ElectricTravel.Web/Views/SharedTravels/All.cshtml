@@ -1,34 +1,40 @@
 ﻿@model IEnumerable<SharedTravelsViewModel>
 @{
     this.ViewData["Title"] = "Shared Travel Adverts";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+
     var count = 1;
+    const string DateTitle = "Date";
+    const string HourTitle = "Hour";
+    const string DayTitle = "Day";
+    const string SeatsTitle = "Seats";
+    const string DetailsTitle = "Details";
 }
-<hr />
-<div class="container sm blablabla text-white">
+
+<div class="container sm custom-bg text-white">
+    <hr />
     <h1 class="text-center">@this.ViewData["Title"]</h1>
     <hr />
     <table id="dtBasicExample" class="table table-striped row-cols-3 text-center text-white" cellspacing="0">
         <thead class="sorting_desc" aria-controls="dtBasicExample" rowspan="1" colspan="1">
-            <tr class="text-dark">
+            <tr class="text-white-50">
                 <th scope="col"></th>
                 <th scope="col">@GlobalConstants.StartDestinationTitle</th>
-                <th scope="col">@GlobalConstants.DestinationTitle</th>
-                <th scope="col">@GlobalConstants.AdvertDateTitle</th>
-                <th scope="col">@GlobalConstants.AdvertHourTitle</th>
-                <th scope="col">@GlobalConstants.AdvertDayTitle</th>
-                <th scope="col">@GlobalConstants.AdvertTypeTravelTitle</th>
-                <th scope="col">@GlobalConstants.AdvertSeatsTitle</th>
+                <th scope="col">@GlobalConstants.EndDestinationTitle</th>
+                <th scope="col">@DateTitle</th>
+                <th scope="col">@HourTitle</th>
+                <th scope="col">@DayTitle</th>
+                <th scope="col">@GlobalConstants.TravelType</th>
+                <th scope="col">@SeatsTitle</th>
                 @*<th scope="col">@GlobalConstants.AdvertSmokeRestrictionTitle</th>
                     <th scope="col">@GlobalConstants.AdvertLuggageTitle</th>
                     <th scope="col">@GlobalConstants.AdvertReturnTripTitle</th>*@
-                <th scope="col">@GlobalConstants.Details</th>
+                <th scope="col">@DetailsTitle</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var advert in Model)
             {
-                <tr class="text-white">
+                <tr>
                     <th>@(count++)</th>
                     <td>@advert.StartDestinationName</td>
                     <td>@advert.EndDestinationName</td>
@@ -37,14 +43,11 @@
                     <td>@advert.Day</td>
                     <td>@advert.TypeOfTravelName</td>
                     <td>@advert.Seats</td>
-                    @*<td>@advert.SmokeRestrictionAsString</td>
-                        <td>@advert.PlaceForLuggageAsString</td>
-                        <td>@advert.WithReturnTripAsString</td>*@
                     <td>
                         <a class="btn btn-primary" asp-action="Details" asp-route-id="@advert.Id"><i class="far fa-eye"></i></a>
-                        @*<button type="button" class="btn btn-primary" asp-controller="SharedTravels" asp-action="Details" asp-route-id="@advert.Id"><i class="far fa-eye"></i></button>*@
-                        @*<button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
-                            <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>*@
+                        @*<button type="button" class="btn btn-primary" asp-controller="SharedTravels" asp-action="Details" asp-route-id="@advert.Id"><i class="far fa-eye"></i></button>
+                            @*<button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
+                                <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>*@
                     </td>
                 </tr>
             }
@@ -56,25 +59,11 @@
 {
     <script src="~/js/addons/datatables.js"></script>
     <link href="~/css/addons/datatables.min.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" />
 
     <script>
         $(document).ready(function () {
             $('#dtBasicExample').DataTable();
             $('.dataTables_length').addClass('bs-select');
         });</script>
-
-    <style>
-        body {
-            background: url('../../../img/neonbrand-orGJcWVI6js-unsplash.jpg') no-repeat center center fixed;
-            background-size: cover;
-        }
-
-        .page-link {
-            color : rgb(255, 255, 255)
-        }
-
-        .blablabla {
-            background-color: rgba(0, 0, 0, 0.50);
-        }
-    </style>
 }

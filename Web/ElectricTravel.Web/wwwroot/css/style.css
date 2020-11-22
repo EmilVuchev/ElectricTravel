@@ -1,0 +1,12 @@
+body {
+    background: url('../../../img/neonbrand-orGJcWVI6js-unsplash.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.page-link {
+    color: rgb(255, 255, 255); 
+}
+
+.custom-bg {
+    background-color: rgba(0, 0, 0, 0.50);
+}

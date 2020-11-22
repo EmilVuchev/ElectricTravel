@@ -16,9 +16,9 @@
                 return;
             }
 
-            await dbContext.TypeTravels.AddAsync(new TypeTravel { Name = "SingleTrip" });
-            await dbContext.TypeTravels.AddAsync(new TypeTravel { Name = "WeeklyTrip" });
-            await dbContext.TypeTravels.AddAsync(new TypeTravel { Name = "MonthlyTrip" });
+            await dbContext.TypeTravels.AddAsync(new TypeTravel { Name = "Single Trip" });
+            await dbContext.TypeTravels.AddAsync(new TypeTravel { Name = "Weekly Trip" });
+            await dbContext.TypeTravels.AddAsync(new TypeTravel { Name = "Monthly Trip" });
         }
     }
 }

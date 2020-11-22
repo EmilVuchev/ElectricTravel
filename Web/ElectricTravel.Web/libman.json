@@ -37,9 +37,12 @@
       ]
     },
     {
-      "library": "fontawesome@5.6.3",
-      "destination": "wwwroot/lib/fontawesome-free-5.15.1-web/webfonts/",
-      "files": ["index.min.js"]
+      "library": "@fortawesome/fontawesome-free@5.15.1",
+      "destination": "wwwroot/lib/fontawesome-free-5.15.1-web/",
+      "files": [
+        "css/all.css",
+        "js/all.js"
+      ]
     }
   ]
 }

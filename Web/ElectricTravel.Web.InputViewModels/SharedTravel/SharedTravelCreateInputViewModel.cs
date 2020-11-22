@@ -8,35 +8,36 @@
     using ElectricTravel.Common;
     using ElectricTravel.Data.Models.Advertisement;
     using ElectricTravel.Services.Mapping;
+    using ElectricTravel.Web.InputViewModels.Common;
 
     public class SharedTravelCreateInputViewModel : IMapTo<SharedTravelAdvert>, IHaveCustomMappings
     {
-        [Display(Name = "Start trip date")]
+        [Display(Name = InputViewModelsConstants.StartTripDateAndTime)]
         public DateTime StartDateAndTime { get; set; }
 
-        [Range(1, 7)]
+        [Range(InputViewModelsConstants.SeatsRangeMinValue, InputViewModelsConstants.SeatsRangeMaxValue)]
         public int Seats { get; set; }
 
         [Required]
-        [Display(Name = "Smoking restriction")]
+        [Display(Name = GlobalConstants.Smoking)]
         public string SmokeRestriction { get; set; }
 
         [Required]
-        [Display(Name = "Place for luggage")]
+        [Display(Name = GlobalConstants.PlaceForLuggage)]
         public string PlaceForLuggage { get; set; }
 
         [Required]
-        [Display(Name = "Return trip")]
+        [Display(Name = GlobalConstants.ReturnTrip)]
         public string WithReturnTrip { get; set; }
 
-        [Range(GlobalConstants.TravelTypeAsNumMinRange, GlobalConstants.TravelTypeAsNumMaxRange)]
-        [Display(Name = "Travel type")]
+        [Range(InputViewModelsConstants.TravelTypeAsNumMinRange, InputViewModelsConstants.TravelTypeAsNumMaxRange)]
+        [Display(Name = GlobalConstants.TravelType)]
         public int TypeOfTravelId { get; set; }
 
-        [Display(Name = "Trip starts from")]
+        [Display(Name = GlobalConstants.StartDestinationTitle)]
         public int StartDestinationId { get; set; }
 
-        [Display(Name = "Trip ends at")]
+        [Display(Name = GlobalConstants.EndDestinationTitle)]
         public int EndDestinationId { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> Cities { get; set; }
