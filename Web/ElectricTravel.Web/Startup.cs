@@ -14,6 +14,7 @@
     using ElectricTravel.Services.Mapping;
     using ElectricTravel.Services.Messaging;
     using ElectricTravel.Web.ViewModels;
+    using Microsoft.AspNetCore.Authentication.Facebook;
 
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -60,6 +61,21 @@
                         options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
                     }).AddRazorRuntimeCompilation();
             services.AddRazorPages();
+
+            services.AddAuthentication()
+                .AddFacebook(facebookOptions =>
+                {
+                    facebookOptions.AppId = this.configuration["Authentication:Facebook:AppId"];
+                    facebookOptions.AppSecret = this.configuration["Authentication:Facebook:AppSecret"];
+                })
+                .AddGoogle(options =>
+                {
+                    IConfigurationSection googleAuthNSection =
+                        this.configuration.GetSection("Authentication:Google");
+
+                    options.ClientId = googleAuthNSection["ClientId"];
+                    options.ClientSecret = googleAuthNSection["ClientSecret"];
+                });
 
             services.AddSingleton(this.configuration);
 

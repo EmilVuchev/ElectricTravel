@@ -1,7 +1,7 @@
 ﻿@page
 @model RegisterModel
 @{
-    ViewData["Title"] = "Register";
+    this.ViewData["Title"] = "Register";
 }
 
 @*<div class="container">
@@ -82,7 +82,7 @@
                     <!-- Background image for card set in CSS! -->
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title text-center">Register</h5>
+                    <h5 class="card-title text-center">@this.ViewData["Title"]</h5>
                     <form class="form-signin">
                         <div class="form-label-group">
                             <input type="text" id="inputUserame" class="form-control" placeholder="Username" required autofocus>
@@ -106,16 +106,43 @@
                             <label for="inputConfirmPassword">Confirm password</label>
                         </div>
 
-                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Register</button>
+                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">@this.ViewData["Title"]</button>
                         <a class="d-block text-center mt-2 small" asp-area="Identity" asp-controller="Account" asp-action="Login">Log In</a>
                         <hr class="my-4">
-                        @foreach (var provider in Model.ExternalLogins)
-                        {
-                            <button asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" type="submit" class="btn btn-lg btn-google btn-block text-uppercase" name="provider" value="@*@provider.Name*@" title="Log in using your @*@provider.DisplayName*@ account">@*@provider.DisplayName*@</button>
-                        }
                         @*<button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign up with Google</button>
                             <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign up with Facebook</button>*@
                     </form>
+                    @{
+                        if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                        {
+                            <div>
+                                <p>
+                                    There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
+                                    for details on setting up this ASP.NET application to support logging in via external services.
+                                </p>
+                            </div>
+                        }
+                        else
+                        {
+                            <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-signin">
+                                <div>
+                                    <p>
+                                        @foreach (var provider in Model.ExternalLogins)
+                                        {
+                                            if (provider.Name == "Facebook")
+                                            {
+                                                <button type="submit" class="btn btn-lg btn-facebook btn-block text-uppercase" name="provider" value="@provider.Name" title="Sign Up using your @provider.DisplayName account"><i class="fab fa-facebook-f mr-2"></i> Register with @provider.DisplayName</button>
+                                            }
+                                            else if (provider.Name == "Google")
+                                            {
+                                                <button class="btn btn-lg btn-google btn-block text-uppercase text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Register with @provider.Name</button>
+                                            }
+                                        }
+                                    </p>
+                                </div>
+                            </form>
+                        }
+                    }
                 </div>
             </div>
         </div>
