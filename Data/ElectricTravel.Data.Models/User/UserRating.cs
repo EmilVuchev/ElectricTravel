@@ -13,6 +13,6 @@
 
         public virtual ElectricTravelUser User { get; set; }
 
-        public int Rating { get; set; }
+        public double Value { get; set; }
     }
 }

@@ -52,8 +52,11 @@
         </p>
     </div>*@
 <hr />
-<div class="container">
-    <div class="row">
+
+
+
+<!--<div class="container">
+    <div class="row mb-4">
         <div class="col-md-6">
             <h2>Trip details</h2>
             <p>
@@ -68,11 +71,6 @@
                     @Model.EndDestinationName
                 </span>
             </p>
-            @*<p>
-                    <label>Разстояние / време:</label>
-                    <span class="right" id="outputDiv">
-                    </span>
-                </p>*@
             <p>
                 <label>Departure date and time:</label>
                 <span class="float-sm-right">@Model.StartDateAndTime</span>
@@ -106,6 +104,18 @@
                 <label>Name:</label>
                 <span class="float-sm-right">@(Model.CreatedBy.FirstName + " " + Model.CreatedBy.LastName)</span>
             </p>
+            <ul class="fa-grip-horizontal">
+                <li class="single-meta list-inline">
+                    <ul class="item-rating">
+                        <li class="star-fill list-inline-item" data-vote="1"><i class="fas fa-star"></i></li>
+                        <li class="star-fill list-inline-item" data-vote="2"><i class="fas fa-star"></i></li>
+                        <li class="star-fill list-inline-item" data-vote="3"><i class="fas fa-star"></i></li>
+                        <li class="star-fill list-inline-item" data-vote="4"><i class="fas fa-star"></i></li>
+                        <li class="star-fill list-inline-item" data-vote="5"><i class="fas fa-star"></i></li>
+                        <li><span id="averageVoteValue">@Model.CreatedBy.Rating.ToString("0.0")</span><span> / 5</span> </li>
+                    </ul>
+                </li>
+            </ul>
             <p><label>Рейтинг:</label><span class="right">(<strong style="color: green; font-weight: bold">+0</strong> / <strong style="color: red; font-weight: bold">-0</strong>) <em class="thumb "></em></span></p>
             <p>
                 <label>Car:</label>
@@ -118,11 +128,735 @@
             <p>
                 <label>Phone number:</label>
                 <span class="float-sm-right">@Model.CreatedBy.PhoneNumber</span>
-            </p>
-            @*<form asp->
+            </p>-->
+@*<form asp->
 
-        </form>*@
-        </div>
+    </form>*@
+<!--</div>
     </div>
 </div>
+<form method="post" id="antiForgeryForm"></form>-->
+@*@section Scripts{
+        <script>
+            $("li[data-vote]").each(function (el) {
+                $(this).click(function () {
+                    var value = $(this).attr("data-vote");
+                    var userId = @Model.CreatedBy.Id;
+                    var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
+                    var data = { userId: userId, value: value };
+                    $.ajax({
+                        type: "POST",
+                        url: "/api/Ratings",
+                        data: JSON.stringify(data),
+                        headers: {
+                            'X-CSRF-TOKEN': antiForgeryToken
+                        },
+                        success: function (data) {
+                            $('#averageVoteValue').html(data.averageRate.toFixed(1));
+                        },
+                        contentType: 'application/json',
+                    });
+                })
+            });
+        </script>
+    }*@
 
+<!--<div id="cck512_mainbody" class="seb_css3 vertical cck512-deepest">
+
+    <div id="profile">
+
+        <a href="/images/694/530364_573476169333963_1127974745_n.jpg" class="modal"><div id="profile_avatar"><img class="thumb" src="/images/694/_thumb1/530364_573476169333963_1127974745_n.jpg" height="72" /></div></a>
+
+        <div id="profile_info">
+            <div id="profile_name">Здравко Шарков</div>
+            <div id="profile_phone">
+
+                Няма гласове
+
+            </div>
+
+            <div id="profile_buttons">
+                Идентифицирайте се за да видите повече информация!
+            </div>
+        </div>
+
+        <a href="/images/694/12_1_1456945106_41045.jpg" class="modal"><div id="profile_carphoto"><img class="thumb" src="/images/694/12_1_1456945106_41045.jpg" height="72" /></div></a>
+
+        <div id="profile_carinfo">
+            <div id="profile_automobile">Mercedec Vito</div>
+            <div id="profile_automobileyear">2010</div>
+        </div>
+
+    </div>
+
+
+    <div id="travelevent_full">
+
+        <div id="travelevent_dates">
+
+            <div id="travelevent_dateandhour">
+                <h3>Дата / час на тръгване<span></span></h3>
+                <div id="traveldate">
+                    <div id="traveldate_date">16</div>
+                    <div id="traveldate_month">Април</div>
+                </div>
+                <div id="traveldate_hour">
+                    10:30<span> ч.</span>
+                </div>
+            </div>
+
+            <div id="travelevent_details">
+                <div id="freeplaces">
+                    <span>4</span>
+                    Свободни места
+                </div>
+                <div id="detailchecks">
+
+                    <div id="detailchecks_timetype_7">Ежеседмично пътуване</div>
+
+                    <div id="detailchecks_clima">Климатик в колата</div>                 <div id="detailchecks_nosmoker">Без пушене в колата</div>
+
+                    <div id="detailchecks_lagguage">Възможност за багаж</div>
+
+                </div>
+            </div>
+
+            <div id="travelevent_dateandhour_back">
+                <h3>Дата / час на връщане<span></span></h3>
+                Без обратно пътуване.
+            </div>
+
+        </div>
+
+        <div id="destinationsandmap">
+            <div id="destinations">
+                <div id="startdestinationt">
+                    <span>Начална дестинация:</span>
+                    София
+                </div>
+                <div id="waystationst">
+                    <span>Междинни спирки:</span>
+                    няма
+                </div>
+                <div id="enddestinationt">
+                    <span>Крайна дестинация:</span>
+                    Париж Франция
+                </div>
+            </div>
+            <div id="map">
+            </div>
+        </div>
+
+        <script type="text/javascript">
+<!--
+            function onload_gdir(func) {
+                var oldonload = window.onload;
+                if (typeof window.onload != 'function') { window.onload = func; } else {
+                    window.onload = function () { if (oldonload) { oldonload(); } func(); }
+                }
+            }
+
+            function display_gdir_gmap(id, centerLatitude, centerLongitude, startZoom, description, kml, control, maptype, show_marker, addoverview, addscale, addgoogle, streetview) {
+                var latlng = new google.maps.LatLng(centerLatitude, centerLongitude);
+                if (startZoom == 0 || startZoom == '') startZoom = 10;
+                var mapdiv = document.getElementById("gdir_gmap" + id);
+                var myOptions = {
+                    zoom: startZoom,
+                    center: latlng
+                };
+                var map = new google.maps.Map(mapdiv, myOptions);
+                if (kml != '') {
+                    var myKMLOptions = {
+                        //suppressInfoWindows: true,
+                        map: map,
+                        preserveViewport: true
+                    };
+                    var georssLayer = new google.maps.KmlLayer(kml, myKMLOptions);
+                    georssLayer.setMap(map);
+                }
+                format_gdir(map, control, maptype, show_marker, addoverview, addscale, addgoogle);
+                format2_gdir(map, id, streetview);
+
+                if (show_marker) show_gmap_marker(map, latlng, centerLatitude, centerLongitude, description);
+                return map;
+            }
+
+            function format_gdir(map, control, maptype, show_marker, addoverview, addscale, addgoogle) {
+                if (addscale == 1) map.setOptions({ scaleControl: true });
+                //if (addoverview=='1') {map.setOptions({overviewMapControl: true, overviewMapControlOptions:{opened: true}});} else {map.setOptions({overviewMapControl: false});}
+                if (addoverview == 1) map.setOptions({ overviewMapControl: true, overviewMapControlOptions: { opened: true } });
+                //map.setOptions({google.maps.MapTypeId: ROADMAP});
+                if (maptype == 'SATELLITE') { map.setOptions({ MapTypeId: google.maps.MapTypeId.SATELLITE }); }
+                else if (maptype == 'TERRAIN') { map.setOptions({ MapTypeId: google.maps.MapTypeId.TERRAIN }); }
+                else if (maptype == 'HYBRID') { map.setOptions({ MapTypeId: google.maps.MapTypeId.HYBRID }); }
+                else { map.setOptions({ MapTypeId: google.maps.MapTypeId.ROADMAP }); }
+            }
+
+            function format2_gdir(map, id, streetview) {
+                if (streetview == 1) { map.setOptions({ streetViewControl: true }); }
+                else { map.setOptions({ streetViewControl: false }); }
+
+            }
+
+            function show_gmap_marker(map, latlng, centerLatitude, centerLongitude, description) {
+                var desc = description;
+                if (desc == '') desc = '(' + centerLatitude + ', ' + centerLongitude + ')';
+                var title_desc = desc.replace(/<br \/>/g, ' ');
+                title_desc = title_desc.replace(/~/g, '');
+                var marker = new google.maps.Marker({
+                    position: latlng,
+                    map: map,
+                    title: title_desc
+                });
+                var infowindow = new google.maps.InfoWindow({ content: desc.replace(/~/g, '<br />') });
+                google.maps.event.addListener(marker, 'click', function () { infowindow.open(map, marker); });
+            }
+
+            -->
+@*</script>
+            <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;language=bg"></script>
+            <script type="text/javascript">
+    <!--
+                function format_gdir_from(from, centerLatitude, centerLongitude) {
+                    if (from != '') {
+                        return from;
+                    } else {
+                        return new google.maps.LatLng(centerLatitude, centerLongitude);
+                    }
+                }
+
+            function format_gdir_from2(from, centerLatitude, centerLongitude) {
+                if (from != '') {
+                    var latlng_RegExp = /(-?\d+\.\d+)\s*,\s*(-?\d+\.\d+)/;
+                    if (latlng_RegExp.test(from)) {
+                        var str = from.match(latlng_RegExp);
+                        return new google.maps.LatLng(str[1], str[2]);
+                    } else {
+                        return from;
+                    }
+                } else {
+                    return new google.maps.LatLng(centerLatitude, centerLongitude);
+                }
+            }
+
+            function display_gdir(id, centerLatitude, centerLongitude, startZoom, kml, from, to, mode, control, maptype, show_marker, addoverview, addscale, addgoogle, streetview, stopover, unit) {
+                var latlng_RegExp = /(-?\d+\.\d+)\s*,\s*(-?\d+\.\d+)/;
+                if (latlng_RegExp.test(from)) {
+                    var str = from.match(latlng_RegExp);
+                    display_gdir_gmap_and_gdir(id, str[1], str[2], startZoom, kml, from, to, mode, control, maptype, show_marker, addoverview, addscale, addgoogle, streetview, stopover, unit)
+                } else {
+                    var geocoder = new google.maps.Geocoder();
+                    geocoder.geocode({ 'address': format_gdir_from(from, centerLatitude, centerLongitude) }, function (results, status) {
+                        if (status == google.maps.GeocoderStatus.OK) {
+                            display_gdir_gmap_and_gdir(id, results[0].geometry.location.lat(), results[0].geometry.location.lng(), startZoom, kml, from, to, mode, control, maptype, show_marker, addoverview, addscale, addgoogle, streetview, stopover, unit);
+                        } else {
+                            alert('Google cannot decode your address: ' + addr);
+                            return;
+                        }
+                    });
+                }
+            }
+
+            function display_gdir_gmap_and_gdir(id, lat, lng, startZoom, kml, from, to, mode, control, maptype, show_marker, addoverview, addscale, addgoogle, streetview, stopover, unit) {
+                show_marker = 0;
+                var map = display_gdir_gmap(id, lat, lng, startZoom, from, kml, control, maptype, show_marker, addoverview, addscale, addgoogle, streetview);
+                var directionsDisplay = new google.maps.DirectionsRenderer();
+                directionsDisplay.setMap(map);
+                gdir_calcRoute(id, directionsDisplay, lat, lng, from, to, mode, stopover, unit);
+            }
+
+            function gdir_calcWaypts(waypoints) {
+                var waypts = [];
+                if (waypoints != '') {
+                    var waypts_str_array = waypoints.split(';');
+                    for (i = 0; i < waypts_str_array.length; i++) {
+                        var myRegExp = /\(nostop\)/;
+                        var str = waypts_str_array[i];
+                        var matchPos1 = str.search(myRegExp);
+                        if (matchPos1 != -1) {
+                            var str2 = str.replace(myRegExp, '');
+                            //waypts.push({location:str2, stopover:false});
+                            waypts.push({ location: format_gdir_from2(str2, 0, 0), stopover: false });
+                        } else {
+                            //waypts.push({location:waypts_str_array[i], stopover:true});
+                            waypts.push({ location: format_gdir_from2(waypts_str_array[i], 0, 0), stopover: true });
+                        }
+                    }
+                }
+                return waypts;
+            }
+
+            function gdir_calcRoute(id, directionsDisplay, centerLatitude, centerLongitude, from, to, mode, stopover, unit) {
+                var waypts = gdir_calcWaypts(stopover);
+
+                if (unit == 'METRIC') { unit2 = 0; }
+                else if (unit == 'IMPERIAL') { unit2 = 1; }
+
+                var request;
+                if (unit == '') {
+                    request = {
+                        origin: format_gdir_from2(from, centerLatitude, centerLongitude),
+                        destination: format_gdir_from2(to, centerLatitude, centerLongitude),
+                        waypoints: waypts,
+                        //optimizeWaypoints: true,
+                        travelMode: google.maps.TravelMode[mode]
+                    };
+                } else {
+                    request = {
+                        origin: format_gdir_from2(from, centerLatitude, centerLongitude),
+                        destination: format_gdir_from2(to, centerLatitude, centerLongitude),
+                        waypoints: waypts,
+                        //optimizeWaypoints: true,
+                        travelMode: google.maps.TravelMode[mode],
+                        unitSystem: unit2
+                    };
+                }
+
+                var directionsService = new google.maps.DirectionsService();
+                var directionsPanel = document.getElementById("gdir_gdir" + id);
+                directionsDisplay.setPanel(directionsPanel);
+                directionsService.route(request, function (response, status) {
+                    if (status == google.maps.DirectionsStatus.OK) {
+                        directionsDisplay.setDirections(response);
+                    }
+                });
+
+                //format2_gdir(map, id, streetview);
+
+            }
+
+            </script>
+
+            <script type="text/javascript">
+    <!--
+                function init_gdir(id, centerLatitude, centerLongitude, startZoom, kml, from, to, mode, control, maptype, show_marker, addoverview, addscale, addgoogle, streetview, stopover, unit) {
+                    display_gdir(id, centerLatitude, centerLongitude, startZoom, kml, from, to, mode, control, maptype, show_marker, addoverview, addscale, addgoogle, streetview, stopover, unit);
+                }
+            -->
+            </script>
+
+            </p>
+            <table class="googleDirections">
+                <tr>
+                    <td valign="top"><div class="gdir_body" id="gdir_gmap0" style="width: 598px; height: 260px"></div></td>
+                </tr>
+            </table>
+            <p>
+                <script type="text/javascript">
+    <!--
+
+                    function load_gdir() {
+                        init_gdir('0', 0, 0, 15, '', 'София', 'Париж Франция', 'DRIVING', '', '', '1', '0', '0', '', '1', '', '');
+                    }
+                onload_gdir(load_gdir);
+                //window.onunload = GUnload;
+                -->
+                </script>
+        </div>
+    </div>
+
+    <div id="detailsinfo">
+        <h3>Допълнителна информация<span></span></h3>
+        Автомобика разполага с всички екстри и удобства за едно комфортно и добро пътуване.
+    </div>
+
+        </div>
+
+        </div></div>-->--> End: SEBLOD 3.x (App Builder & CCK for Joomla!) { www.seblod.com }
+        </div>*@
+
+@*</div>*@
+
+@*<div class="single-recipe-layout1">
+    <div class="ctg-name">@Model.StatusName</div>
+    <h2 class="item-title">@this.ViewData["Title"]</h2>
+    <div class="row mb-4">
+        <div class="col-xl-9 col-12">
+            <ul class="entry-meta">
+                <li class="single-meta">
+                    <i class="far fa-calendar-alt"></i>
+                    @Model.StartDateAndTime.ToShortDateString()
+                </li>
+                <li class="single-meta">
+                    <i class="fas fa-user"></i> by*@
+@*@if (string.IsNullOrWhiteSpace(Model.AddedByUserEmail))
+    {
+        <a href="@Model.OriginalUrl" target="_blank">recepti.gotvach.bg</a>
+    }
+    else
+    {
+        <span>@Model.AddedByUserEmail</span>
+    }*@
+@*</li>
+    <li class="single-meta">
+        <ul class="item-rating">
+            <li class="star-fill" data-vote="1"><i class="fas fa-star"></i></li>
+            <li class="star-fill" data-vote="2"><i class="fas fa-star"></i></li>
+            <li class="star-fill" data-vote="3"><i class="fas fa-star"></i></li>
+            <li class="star-fill" data-vote="4"><i class="fas fa-star"></i></li>
+            <li class="star-fill" data-vote="5"><i class="fas fa-star"></i></li>
+            <li><span id="averageVoteValue">@Model.CreatedBy.Rating.ToString("0.0")</span><span> / 5</span> </li>
+        </ul>
+    </li>*@
+@*</ul>
+        </div>
+    </div>
+    <div class="item-figure">
+        <img class="img-fluid w-100" src="@Model.CreatedBy.ImagePath" alt="@Model.CreatedBy.FirstName" />
+    </div>
+    <div class="item-feature">
+        <ul>
+            <li>
+                <div class="feature-wrap">
+                    <div class="media">
+                        <div class="feature-icon">
+                            <i class="far fa-clock"></i>
+                        </div>
+                        <div class="media-body space-sm">
+                            <div class="feature-title">PREP TIME</div>
+                            <div class="feature-sub-title"> Mins</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>*@
+@*<div class="feature-wrap">
+            <div class="media">
+                <div class="feature-icon">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <div class="media-body space-sm">
+                    <div class="feature-title">COOK TIME</div>
+                    <div class="feature-sub-title"> Mins</div>
+                </div>
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="feature-wrap">
+            <div class="media">
+                <div class="feature-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="media-body space-sm">
+                    <div class="feature-title">SERVING</div>
+                    <div class="feature-sub-title">*@
+@*@Model.PortionsCount
+    @if (Model.PortionsCount == 1)
+    {
+        <span>Person</span>
+    }
+    else
+    {
+        <span>People</span>
+    }*@
+@*</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="feature-wrap">
+                    <div class="media">
+                        <div class="feature-icon">
+                            <i class="fa fa-list-ol"></i>
+                        </div>
+                        <div class="media-body space-sm">
+                            <div class="feature-title">CATEGORY RECIPES</div>
+                            <div class="feature-sub-title">@Model.CategoryRecipesCount</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>*@
+@*<div class="making-elements-wrap">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="item-description">
+                        @model.instructions
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <div class="ingridients-wrap">
+                        <h3 class="item-title"><i class="fas fa-list-ul"></i>Ingridients</h3>
+                        @foreach (var ingredient in Model.Ingredients)
+                        {
+                            <div class="checkbox checkbox-primary">
+                                <label for="checkbox1">@ingredient.Quantity @ingredient.IngredientName</label>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form method="post" id="antiForgeryForm"></form>*@
+@*@section Scripts {
+    <link href="~/css/customCss.css" rel="stylesheet" />
+    <script>
+        $("li[data-vote]").each(function (el) {
+            $(this).click(function () {
+                console.log($(this))
+                var value = $(this).attr("data-vote");
+                var recipeId = @Model.CreatedBy.Id;
+                var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
+                var data = { recipeId: recipeId, value: value };
+                $.ajax({
+                    type: "POST",
+                    url: "/api/Votes",
+                    data: JSON.stringify(data),
+                    headers: {
+                        'X-CSRF-TOKEN': antiForgeryToken
+                    },
+                    success: function (data) {
+                        $('#averageVoteValue').html(data.averageVote.toFixed(1));
+                    },
+                    contentType: 'application/json',
+                });
+            })
+        });
+    </script>*@
+@*}*@
+
+
+<section class='rating-widget'>
+
+    <!-- Rating Stars Box -->
+    <div class='rating-stars text-center'>
+        <ul id='stars'>
+            <li class='star' title='Poor' data-value='1'>
+                <i class='fa fa-star fa-fw'></i>
+            </li>
+            <li class='star' title='Fair' data-value='2'>
+                <i class='fa fa-star fa-fw'></i>
+            </li>
+            <li class='star' title='Good' data-value='3'>
+                <i class='fa fa-star fa-fw'></i>
+            </li>
+            <li class='star' title='Excellent' data-value='4'>
+                <i class='fa fa-star fa-fw'></i>
+            </li>
+            <li class='star' title='WOW!!!' data-value='5'>
+                <i class='fa fa-star fa-fw'></i>
+            </li>
+        </ul>
+    </div>
+
+</section>
+
+@section Scripts{
+    <style>
+        body {
+            font-family: "Open Sans", Helvetica, Arial, sans-serif;
+            color: #555;
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+            *:before, *:after {
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                box-sizing: border-box;
+            }
+
+        .clearfix {
+            clear: both;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        a {
+            color: tomato;
+            text-decoration: none;
+        }
+
+            a:hover {
+                color: #2196f3;
+            }
+
+        pre {
+            display: block;
+            padding: 9.5px;
+            margin: 0 0 10px;
+            font-size: 13px;
+            line-height: 1.42857143;
+            color: #333;
+            word-break: break-all;
+            word-wrap: break-word;
+            background-color: #F5F5F5;
+            border: 1px solid #CCC;
+            border-radius: 4px;
+        }
+
+        .header {
+            padding: 20px 0;
+            position: relative;
+            margin-bottom: 10px;
+        }
+
+            .header:after {
+                content: "";
+                display: block;
+                height: 1px;
+                background: #eee;
+                position: absolute;
+                left: 30%;
+                right: 30%;
+            }
+
+            .header h2 {
+                font-size: 3em;
+                font-weight: 300;
+                margin-bottom: 0.2em;
+            }
+
+            .header p {
+                font-size: 14px;
+            }
+
+
+
+        #a-footer {
+            margin: 20px 0;
+        }
+
+        .new-react-version {
+            padding: 20px 20px;
+            border: 1px solid #eee;
+            border-radius: 20px;
+            box-shadow: 0 2px 12px 0 rgba(0,0,0,0.1);
+            text-align: center;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+            .new-react-version .react-svg-logo {
+                text-align: center;
+                max-width: 60px;
+                margin: 20px auto;
+                margin-top: 0;
+            }
+
+
+
+
+
+        .success-box {
+            margin: 50px 0;
+            padding: 10px 10px;
+            border: 1px solid #eee;
+            background: #f9f9f9;
+        }
+
+            .success-box img {
+                margin-right: 10px;
+                display: inline-block;
+                vertical-align: top;
+            }
+
+            .success-box > div {
+                vertical-align: top;
+                display: inline-block;
+                color: #888;
+            }
+
+
+
+        /* Rating Star Widgets Style */
+        .rating-stars ul {
+            list-style-type: none;
+            padding: 0;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+        }
+
+            .rating-stars ul > li.star {
+                display: inline-block;
+            }
+
+                /* Idle State of the stars */
+                .rating-stars ul > li.star > i.fa {
+                    font-size: 2.5em; /* Change the size of the stars */
+                    color: #ccc; /* Color on idle state */
+                }
+
+                /* Hover state of the stars */
+                .rating-stars ul > li.star.hover > i.fa {
+                    color: #FFCC36;
+                }
+
+                /* Selected state of the stars */
+                .rating-stars ul > li.star.selected > i.fa {
+                    color: #FF912C;
+                }
+    </style>
+    <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            /* 1. Visualizing things on Hover - See next part for action on click */
+            $('#stars li').on('mouseover', function () {
+                var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
+
+                // Now highlight all the stars that's not after the current hovered star
+                $(this).parent().children('li.star').each(function (e) {
+                    if (e < onStar) {
+                        $(this).addClass('hover');
+                    }
+                    else {
+                        $(this).removeClass('hover');
+                    }
+                });
+
+            }).on('mouseout', function () {
+                $(this).parent().children('li.star').each(function (e) {
+                    $(this).removeClass('hover');
+                });
+            });
+
+
+            /* 2. Action to perform on click */
+            $('#stars li').on('click', function () {
+                var onStar = parseInt($(this).data('value'), 10); // The star currently selected
+                var stars = $(this).parent().children('li.star');
+
+                for (i = 0; i < stars.length; i++) {
+                    $(stars[i]).removeClass('selected');
+                }
+
+                for (i = 0; i < onStar; i++) {
+                    $(stars[i]).addClass('selected');
+                }
+
+                // JUST RESPONSE (Not needed)
+                var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
+                var msg = "";
+                if (ratingValue > 1) {
+                    msg = "Thanks! You rated this " + ratingValue + " stars.";
+                }
+                else {
+                    msg = "We will improve ourselves. You rated this " + ratingValue + " stars.";
+                }
+                responseMessage(msg);
+
+            });
+
+
+        });
+
+
+        function responseMessage(msg) {
+            $('.success-box').fadeIn(200);
+            $('.success-box div.text-message').html("<span>" + msg + "</span>");
+        }</script>
+}

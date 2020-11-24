@@ -15,14 +15,22 @@
         private readonly ISharedTravelsService sharedTravelsService;
         private readonly ICitiesService citiesService;
         private readonly ITypeOfTravelService typeOfTravelService;
+        private readonly IRatingService ratingService;
         private readonly AspNetUserManager<ElectricTravelUser> userManager;
         private readonly IUsersService usersService;
 
-        public SharedTravelsController(ISharedTravelsService sharedTravelsService, ICitiesService citiesService, ITypeOfTravelService typeOfTravelService, AspNetUserManager<ElectricTravelUser> userManager, IUsersService usersService)
+        public SharedTravelsController(
+            ISharedTravelsService sharedTravelsService,
+            IUsersService usersService,
+            ICitiesService citiesService,
+            ITypeOfTravelService typeOfTravelService,
+            IRatingService ratingService,
+            AspNetUserManager<ElectricTravelUser> userManager)
         {
             this.sharedTravelsService = sharedTravelsService;
             this.citiesService = citiesService;
             this.typeOfTravelService = typeOfTravelService;
+            this.ratingService = ratingService;
             this.userManager = userManager;
             this.usersService = usersService;
         }
