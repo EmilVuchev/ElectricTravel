@@ -24,12 +24,13 @@
 
         public async Task SetRateAsync(string userId, string assessorId, double value)
         {
-            var userRate = this.userRatingRepository.All().FirstOrDefault(x => x.UserId == assessorId);
+            var userRate = this.userRatingRepository.All().FirstOrDefault(x => x.AssessorId == assessorId);
 
             if (userRate == null)
             {
                 userRate = new UserRating
                 {
+                    AssessorId = assessorId,
                     UserId = userId,
                     Value = value,
                 };

@@ -8,6 +8,12 @@
     public class UserRating : BaseDeletableModel<int>
     {
         [Required]
+        [ForeignKey(nameof(Assessor))]
+        public string AssessorId { get; set; }
+
+        public ElectricTravelUser Assessor { get; set; }
+
+        [Required]
         [ForeignKey(nameof(User))]
         public string UserId { get; set; }
 

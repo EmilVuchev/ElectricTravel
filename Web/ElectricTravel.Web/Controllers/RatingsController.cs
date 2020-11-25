@@ -25,6 +25,12 @@
         public async Task<ActionResult<PostRateResponseModel>> Post(PostRateInputModel input)
         {
             var assessorId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            if (assessorId == input.UserId)
+            {
+                return this.Unauthorized();
+            }
+
             await this.ratingService.SetRateAsync(input.UserId, assessorId, input.Value);
             var averageRate = this.ratingService.GetAverageRating(input.UserId);
             return new PostRateResponseModel { AverageRate = averageRate };

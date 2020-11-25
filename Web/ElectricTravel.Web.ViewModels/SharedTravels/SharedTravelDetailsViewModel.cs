@@ -27,7 +27,7 @@
 
         public string StatusName { get; set; }
 
-        public UserAdvertInfoViewModel CreatedBy { get; set; }
+        public string CreatedById { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {

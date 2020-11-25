@@ -28,6 +28,7 @@ namespace ElectricTravel.Data.Models.User
             this.SharedTravelAdverts = new HashSet<SharedTravelAdvert>();
             this.FavouritesAdverts = new HashSet<CarAdvert>();
             this.UserRatings = new HashSet<UserRating>();
+            this.EvaluatedUsers = new HashSet<UserRating>();
         }
 
         [MaxLength(20)]
@@ -56,7 +57,11 @@ namespace ElectricTravel.Data.Models.User
 
         public virtual Image Image { get; set; }
 
+        [InverseProperty("User")]
         public virtual ICollection<UserRating> UserRatings { get; set; }
+
+        [InverseProperty("Assessor")]
+        public virtual ICollection<UserRating> EvaluatedUsers { get; set; }
 
         [InverseProperty("CreatedBy")]
         public virtual ICollection<CarAdvert> CarAdverts { get; set; }
