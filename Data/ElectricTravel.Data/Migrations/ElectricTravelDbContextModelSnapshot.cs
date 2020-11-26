@@ -158,6 +158,10 @@ namespace ElectricTravel.Data.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Description")
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
                     b.Property<int>("EndDestinationId")
                         .HasColumnType("int");
 
@@ -1013,8 +1017,8 @@ namespace ElectricTravel.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Path")
                         .IsRequired()
@@ -1023,11 +1027,16 @@ namespace ElectricTravel.Data.Migrations
                     b.Property<int>("TypeId")
                         .HasColumnType("int");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
 
                     b.HasIndex("TypeId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Images");
                 });
@@ -1243,9 +1252,6 @@ namespace ElectricTravel.Data.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<string>("ImageId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<bool>("IsBlocked")
                         .HasColumnType("bit");
 
@@ -1297,8 +1303,6 @@ namespace ElectricTravel.Data.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ImageId");
 
                     b.HasIndex("IsDeleted");
 
@@ -1868,7 +1872,13 @@ namespace ElectricTravel.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("ElectricTravel.Data.Models.User.ElectricTravelUser", "User")
+                        .WithMany("Images")
+                        .HasForeignKey("UserId");
+
                     b.Navigation("Type");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ElectricTravel.Data.Models.News.Article", b =>
@@ -1888,15 +1898,6 @@ namespace ElectricTravel.Data.Migrations
                     b.Navigation("Source");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("ElectricTravel.Data.Models.User.ElectricTravelUser", b =>
-                {
-                    b.HasOne("ElectricTravel.Data.Models.Multimedia.Image", "Image")
-                        .WithMany()
-                        .HasForeignKey("ImageId");
-
-                    b.Navigation("Image");
                 });
 
             modelBuilder.Entity("ElectricTravel.Data.Models.User.UserAddress", b =>
@@ -2110,6 +2111,8 @@ namespace ElectricTravel.Data.Migrations
                     b.Navigation("FavouritesAdverts");
 
                     b.Navigation("Groups");
+
+                    b.Navigation("Images");
 
                     b.Navigation("Logins");
 

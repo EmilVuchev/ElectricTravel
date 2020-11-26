@@ -29,6 +29,7 @@ namespace ElectricTravel.Data.Models.User
             this.FavouritesAdverts = new HashSet<CarAdvert>();
             this.UserRatings = new HashSet<UserRating>();
             this.EvaluatedUsers = new HashSet<UserRating>();
+            this.Images = new HashSet<Image>();
         }
 
         [MaxLength(20)]
@@ -52,10 +53,7 @@ namespace ElectricTravel.Data.Models.User
         [MaxLength(200)]
         public string ReasonToBeBlocked { get; set; }
 
-        [ForeignKey(nameof(Image))]
-        public string ImageId { get; set; }
-
-        public virtual Image Image { get; set; }
+        public virtual ICollection<Image> Images { get; set; }
 
         [InverseProperty("User")]
         public virtual ICollection<UserRating> UserRatings { get; set; }

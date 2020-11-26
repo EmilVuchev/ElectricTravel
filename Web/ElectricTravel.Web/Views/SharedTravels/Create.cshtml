@@ -7,6 +7,7 @@
 
 <form method="post">
     <div class="container form-group text-light" method="post">
+        <br />
         <div class="row">
             <h1>@this.ViewData["Title"]</h1>
         </div>
@@ -27,50 +28,71 @@
                 </div>
             </div>
             <div class="col">
-                <label asp-for="Seats"></label>
-                <input type="number" min="1" max="7" value="1" asp-for="Seats" class="form-control" />
-                <span asp-validation-for="Seats" class="text-danger"></span>
+                <div class="form-group">
+                    <label asp-for="Seats"></label>
+                    <input type="number" min="1" max="7" value="1" asp-for="Seats" class="form-control" />
+                    <span asp-validation-for="Seats" class="text-danger"></span>
+                </div>
             </div>
             <div class="col">
-                <label asp-for="StartDateAndTime"></label>
-                <input value="" type="datetime-local" asp-for="StartDateAndTime" class="form-control" />
-                <span asp-validation-for="StartDateAndTime" class="text-danger"></span>
+                <div class="form-group">
+                    <label asp-for="StartDateAndTime"></label>
+                    <input value="" type="datetime-local" asp-for="StartDateAndTime" class="form-control" />
+                    <span asp-validation-for="StartDateAndTime" class="text-danger"></span>
+                </div>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <label asp-for="TypeOfTravelId"></label>
-                <select asp-for="TypeOfTravelId" class="form-control" asp-items="types"></select>
-                <span asp-validation-for="TypeOfTravelId" class="text-danger"></span>
+                <div class="form-group">
+                    <label asp-for="TypeOfTravelId"></label>
+                    <select asp-for="TypeOfTravelId" class="form-control" asp-items="types"></select>
+                    <span asp-validation-for="TypeOfTravelId" class="text-danger"></span>
+                </div>
             </div>
             <div class="col">
-                <label asp-for="SmokeRestriction"></label>
-                <select asp-for="SmokeRestriction" class="form-control">
-                    <option>@GlobalConstants.TrueState</option>
-                    <option>@GlobalConstants.FalseState</option>
-                </select>
-                <span asp-validation-for="SmokeRestriction" class="text-danger"></span>
+                <div class="form-group">
+                    <label asp-for="SmokeRestriction"></label>
+                    <select asp-for="SmokeRestriction" class="form-control">
+                        <option>@GlobalConstants.TrueState</option>
+                        <option>@GlobalConstants.FalseState</option>
+                    </select>
+                    <span asp-validation-for="SmokeRestriction" class="text-danger"></span>
+                </div>
             </div>
             <div class="col">
-                <label asp-for="WithReturnTrip"></label>
-                <select asp-for="WithReturnTrip" class="form-control">
-                    <option>@GlobalConstants.TrueState</option>
-                    <option>@GlobalConstants.FalseState</option>
-                </select>
-                <span asp-validation-for="WithReturnTrip" class="text-danger"></span>
+                <div class="form-group">
+                    <label asp-for="WithReturnTrip"></label>
+                    <select asp-for="WithReturnTrip" class="form-control">
+                        <option>@GlobalConstants.TrueState</option>
+                        <option>@GlobalConstants.FalseState</option>
+                    </select>
+                    <span asp-validation-for="WithReturnTrip" class="text-danger"></span>
+                </div>
             </div>
             <div class="col">
-                <label asp-for="PlaceForLuggage"></label>
-                <select asp-for="PlaceForLuggage" class="form-control">
-                    <option>@GlobalConstants.TrueState</option>
-                    <option>@GlobalConstants.FalseState</option>
-                </select>
-                <span asp-validation-for="PlaceForLuggage" class="text-danger"></span>
+                <div class="form-group">
+                    <label asp-for="PlaceForLuggage"></label>
+                    <select asp-for="PlaceForLuggage" class="form-control">
+                        <option>@GlobalConstants.TrueState</option>
+                        <option>@GlobalConstants.FalseState</option>
+                    </select>
+                    <span asp-validation-for="PlaceForLuggage" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label asp-for="Description"></label>
+                    <textarea asp-for="Description" class="form-control" rows="8"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
             </div>
         </div>
         <div class="p-3 mb-4">
             <div class="text-center">
-                <input type="submit" class="btn btn-primary @*btn-default*@" value="CREATE" asp-controller="SharedTravels" asp-action="Create" />
+                <input type="submit" class="btn btn-primary" value="CREATE" asp-controller="SharedTravels" asp-action="Create" />
             </div>
         </div>
     </div>

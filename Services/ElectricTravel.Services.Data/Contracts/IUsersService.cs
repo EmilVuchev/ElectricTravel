@@ -1,11 +1,20 @@
 ﻿namespace ElectricTravel.Services.Data.Contracts
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using ElectricTravel.Web.ViewModels.Images;
+    using ElectricTravel.Data.Models.User;
+    using ElectricTravel.Web.ViewModels.SharedTravels;
+    using Microsoft.AspNetCore.Http;
 
     public interface IUsersService
     {
-        Task<ImageViewModel> GetUserPictureByAdvertId(string id);
+        //Task<ImageViewModel> GetUserPictureByAdvertId(string id);
+
+        Task<DriverInfoViewModel> GetDriverInfo(string id);
+
+        Task UpdateUser(ElectricTravelUser user);
+
+        Task UploadImages(ElectricTravelUser user, IEnumerable<IFormFile> images, string imagePath);
     }
 }

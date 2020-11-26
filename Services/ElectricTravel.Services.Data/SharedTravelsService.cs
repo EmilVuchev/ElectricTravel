@@ -38,6 +38,7 @@
                 PlaceForLuggage = IsTrue(input.PlaceForLuggage),
                 WithReturnTrip = IsTrue(input.WithReturnTrip),
                 TypeOfTravelId = input.TypeOfTravelId,
+                Description = input.Description,
             };
 
             await this.sharedTravelsRepository.AddAsync(sharedTravelAdvert);

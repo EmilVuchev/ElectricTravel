@@ -1,5 +1,6 @@
 ﻿namespace ElectricTravel.Web.Controllers
 {
+    using System.Security.Claims;
     using System.Threading.Tasks;
 
     using ElectricTravel.Data.Models.User;
@@ -95,16 +96,28 @@
             return this.View();
         }
 
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> TripDetails(string id)
         {
-            var advertUserInfo = await this.sharedTravelsService.GetViewModelByIdAsync<SharedTravelDetailsViewModel>(id);
+            var advertInfo = await this.sharedTravelsService.GetViewModelByIdAsync<SharedTravelDetailsViewModel>(id);
 
-            if (advertUserInfo == null)
+            if (advertInfo == null)
             {
                 return this.BadRequest();
             }
 
-            return this.View(advertUserInfo);
+            return this.View(advertInfo);
+        }
+
+        public async Task<IActionResult> DriverDetails(string id)
+        {
+            var driver = await this.usersService.GetDriverInfo(id);
+
+            if (driver == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.View(driver);
         }
     }
 }

@@ -42,7 +42,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElectricTravel.Web.Tests", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElectricTravel.Web.ViewModels", "Web\ElectricTravel.Web.ViewModels\ElectricTravel.Web.ViewModels.csproj", "{13B7AACB-9C85-4409-8D4B-95A67D0DFFF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElectricTravel.Web.InputViewModels", "Web\ElectricTravel.Web.InputViewModels\ElectricTravel.Web.InputViewModels.csproj", "{4FCB81E4-F918-4940-82BA-849DBCE0B982}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElectricTravel.Web.InputViewModels", "Web\ElectricTravel.Web.InputViewModels\ElectricTravel.Web.InputViewModels.csproj", "{4FCB81E4-F918-4940-82BA-849DBCE0B982}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

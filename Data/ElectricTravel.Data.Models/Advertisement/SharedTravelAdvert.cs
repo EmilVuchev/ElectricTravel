@@ -25,6 +25,9 @@
 
         public bool WithReturnTrip { get; set; }
 
+        [MaxLength(300)]
+        public string Description { get; set; }
+
         [ForeignKey(nameof(TypeOfTravel))]
         public int TypeOfTravelId { get; set; }
 

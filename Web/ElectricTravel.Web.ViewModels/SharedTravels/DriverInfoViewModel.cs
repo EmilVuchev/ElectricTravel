@@ -1,4 +1,5 @@
-﻿namespace ElectricTravel.Web.ViewModels.SharedTravels
+﻿
+namespace ElectricTravel.Web.ViewModels.SharedTravels
 {
     using System.Linq;
 
@@ -6,7 +7,7 @@
     using ElectricTravel.Data.Models.User;
     using ElectricTravel.Services.Mapping;
 
-    public class UserAdvertInfoViewModel : IMapFrom<ElectricTravelUser>, IHaveCustomMappings
+    public class DriverInfoViewModel : IMapFrom<ElectricTravelUser>, IHaveCustomMappings
     {
         public string Id { get; set; }
 
@@ -28,7 +29,7 @@
 
         public void CreateMappings(IProfileExpression configuration)
         {
-            configuration.CreateMap<ElectricTravelUser, UserAdvertInfoViewModel>()
+            configuration.CreateMap<ElectricTravelUser, DriverInfoViewModel>()
                 .ForMember(x => x.Rating, opt =>
                 opt.MapFrom(x => x.UserRatings.Count == 0 ? 0 : x.UserRatings.Average(r => r.Value)));
         }

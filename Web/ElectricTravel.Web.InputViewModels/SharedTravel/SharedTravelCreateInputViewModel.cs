@@ -40,6 +40,9 @@
         [Display(Name = GlobalConstants.EndDestinationTitle)]
         public int EndDestinationId { get; set; }
 
+        [MaxLength(300)]
+        public string Description { get; set; }
+
         public IEnumerable<KeyValuePair<string, string>> Cities { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> TypesOfTravel { get; set; }

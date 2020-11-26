@@ -10,16 +10,16 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ElectricTravel.Data.Migrations
 {
     [DbContext(typeof(ElectricTravelDbContext))]
-    [Migration("20201114172924_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20201126205030_EditImageNameLenght")]
+    partial class EditImageNameLenght
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.9")
+                .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "5.0.0");
 
             modelBuilder.Entity("ElectricTravel.Data.Models.Advertisement.CarAdvert", b =>
                 {
@@ -43,8 +43,8 @@ namespace ElectricTravel.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(3500)")
-                        .HasMaxLength(3500);
+                        .HasMaxLength(3500)
+                        .HasColumnType("nvarchar(3500)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -63,8 +63,8 @@ namespace ElectricTravel.Data.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -88,7 +88,7 @@ namespace ElectricTravel.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -104,8 +104,8 @@ namespace ElectricTravel.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(10)")
-                        .HasMaxLength(10);
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.HasKey("Id");
 
@@ -119,7 +119,7 @@ namespace ElectricTravel.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -135,8 +135,8 @@ namespace ElectricTravel.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(10)")
-                        .HasMaxLength(10);
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.HasKey("Id");
 
@@ -159,6 +159,10 @@ namespace ElectricTravel.Data.Migrations
 
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.Property<int>("EndDestinationId")
                         .HasColumnType("int");
@@ -215,7 +219,7 @@ namespace ElectricTravel.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -231,8 +235,8 @@ namespace ElectricTravel.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(10)")
-                        .HasMaxLength(10);
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.HasKey("Id");
 
@@ -246,7 +250,7 @@ namespace ElectricTravel.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -262,8 +266,8 @@ namespace ElectricTravel.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(15)")
-                        .HasMaxLength(15);
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.HasKey("Id");
 
@@ -300,7 +304,7 @@ namespace ElectricTravel.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -316,8 +320,8 @@ namespace ElectricTravel.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(20)")
-                        .HasMaxLength(20);
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("Id");
 
@@ -377,23 +381,23 @@ namespace ElectricTravel.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("Acceleration")
-                        .HasColumnType("nvarchar(10)")
-                        .HasMaxLength(10);
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Battery")
                         .IsRequired()
-                        .HasColumnType("nvarchar(10)")
-                        .HasMaxLength(10);
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<int>("CarTypeId")
                         .HasColumnType("int");
 
                     b.Property<string>("Color")
-                        .HasColumnType("nvarchar(20)")
-                        .HasMaxLength(20);
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -405,12 +409,12 @@ namespace ElectricTravel.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Drive")
-                        .HasColumnType("nvarchar(10)")
-                        .HasMaxLength(10);
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("ElectricityConsumption")
-                        .HasColumnType("nvarchar(10)")
-                        .HasMaxLength(10);
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<int>("HorsePower")
                         .HasColumnType("int");
@@ -463,7 +467,7 @@ namespace ElectricTravel.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -492,7 +496,7 @@ namespace ElectricTravel.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -511,8 +515,8 @@ namespace ElectricTravel.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(20)")
-                        .HasMaxLength(20);
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<int>("Year")
                         .HasColumnType("int");
@@ -531,7 +535,7 @@ namespace ElectricTravel.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -547,8 +551,8 @@ namespace ElectricTravel.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(2)")
-                        .HasMaxLength(2);
+                        .HasMaxLength(2)
+                        .HasColumnType("nvarchar(2)");
 
                     b.HasKey("Id");
 
@@ -562,7 +566,7 @@ namespace ElectricTravel.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<int?>("AddressId")
                         .HasColumnType("int");
@@ -574,8 +578,8 @@ namespace ElectricTravel.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(2000)")
-                        .HasMaxLength(2000);
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
 
                     b.Property<string>("ImageId")
                         .HasColumnType("nvarchar(450)");
@@ -591,8 +595,8 @@ namespace ElectricTravel.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(30)")
-                        .HasMaxLength(30);
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("WorkTime")
                         .HasColumnType("nvarchar(max)");
@@ -613,7 +617,7 @@ namespace ElectricTravel.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -642,7 +646,7 @@ namespace ElectricTravel.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<int?>("ChargingStationId")
                         .HasColumnType("int");
@@ -683,7 +687,7 @@ namespace ElectricTravel.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -712,7 +716,7 @@ namespace ElectricTravel.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -728,8 +732,8 @@ namespace ElectricTravel.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(15)")
-                        .HasMaxLength(15);
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.HasKey("Id");
 
@@ -789,7 +793,7 @@ namespace ElectricTravel.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<int>("CityId")
                         .HasColumnType("int");
@@ -802,8 +806,8 @@ namespace ElectricTravel.Data.Migrations
 
                     b.Property<string>("District")
                         .IsRequired()
-                        .HasColumnType("nvarchar(30)")
-                        .HasMaxLength(30);
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -828,7 +832,7 @@ namespace ElectricTravel.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -844,8 +848,8 @@ namespace ElectricTravel.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(30)")
-                        .HasMaxLength(30);
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<int>("RegionId")
                         .HasColumnType("int");
@@ -864,7 +868,7 @@ namespace ElectricTravel.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -880,8 +884,8 @@ namespace ElectricTravel.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -896,8 +900,8 @@ namespace ElectricTravel.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Content")
-                        .HasColumnType("nvarchar(2500)")
-                        .HasMaxLength(2500);
+                        .HasMaxLength(2500)
+                        .HasColumnType("nvarchar(2500)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -941,7 +945,7 @@ namespace ElectricTravel.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -956,8 +960,8 @@ namespace ElectricTravel.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
@@ -1001,8 +1005,8 @@ namespace ElectricTravel.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Extension")
                         .HasColumnType("nvarchar(max)");
@@ -1015,8 +1019,8 @@ namespace ElectricTravel.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(30)")
-                        .HasMaxLength(30);
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Path")
                         .IsRequired()
@@ -1025,11 +1029,16 @@ namespace ElectricTravel.Data.Migrations
                     b.Property<int>("TypeId")
                         .HasColumnType("int");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
 
                     b.HasIndex("TypeId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Images");
                 });
@@ -1039,7 +1048,7 @@ namespace ElectricTravel.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -1055,8 +1064,8 @@ namespace ElectricTravel.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(20)")
-                        .HasMaxLength(20);
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("Id");
 
@@ -1077,8 +1086,8 @@ namespace ElectricTravel.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -1088,8 +1097,8 @@ namespace ElectricTravel.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(20)")
-                        .HasMaxLength(20);
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("Path")
                         .IsRequired()
@@ -1107,12 +1116,12 @@ namespace ElectricTravel.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("Content")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasMaxLength(5000);
+                        .HasMaxLength(5000)
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -1135,8 +1144,8 @@ namespace ElectricTravel.Data.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -1158,7 +1167,7 @@ namespace ElectricTravel.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -1174,8 +1183,8 @@ namespace ElectricTravel.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -1189,7 +1198,7 @@ namespace ElectricTravel.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -1235,18 +1244,15 @@ namespace ElectricTravel.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(20)")
-                        .HasMaxLength(20);
-
-                    b.Property<string>("ImageId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<bool>("IsBlocked")
                         .HasColumnType("bit");
@@ -1255,8 +1261,8 @@ namespace ElectricTravel.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(20)")
-                        .HasMaxLength(20);
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -1268,12 +1274,12 @@ namespace ElectricTravel.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
@@ -1285,8 +1291,8 @@ namespace ElectricTravel.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("ReasonToBeBlocked")
-                        .HasColumnType("nvarchar(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -1295,21 +1301,19 @@ namespace ElectricTravel.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ImageId");
 
                     b.HasIndex("IsDeleted");
 
                     b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
+                        .HasDatabaseName("EmailIndex");
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasName("UserNameIndex")
+                        .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
@@ -1337,12 +1341,12 @@ namespace ElectricTravel.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("NormalizedName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
@@ -1350,7 +1354,7 @@ namespace ElectricTravel.Data.Migrations
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasName("RoleNameIndex")
+                        .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
@@ -1407,7 +1411,11 @@ namespace ElectricTravel.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
+
+                    b.Property<string>("AssessorId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -1421,14 +1429,16 @@ namespace ElectricTravel.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Rating")
-                        .HasColumnType("int");
-
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<double>("Value")
+                        .HasColumnType("float");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("AssessorId");
 
                     b.HasIndex("IsDeleted");
 
@@ -1442,7 +1452,7 @@ namespace ElectricTravel.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -1466,7 +1476,7 @@ namespace ElectricTravel.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -1570,6 +1580,16 @@ namespace ElectricTravel.Data.Migrations
                         .HasForeignKey("StatusId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("City");
+
+                    b.Navigation("CreatedBy");
+
+                    b.Navigation("Currency");
+
+                    b.Navigation("LikedBy");
+
+                    b.Navigation("Status");
                 });
 
             modelBuilder.Entity("ElectricTravel.Data.Models.Advertisement.SharedTravelAdvert", b =>
@@ -1603,6 +1623,16 @@ namespace ElectricTravel.Data.Migrations
                         .HasForeignKey("TypeOfTravelId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("CreatedBy");
+
+                    b.Navigation("EndDestination");
+
+                    b.Navigation("StartDestination");
+
+                    b.Navigation("Status");
+
+                    b.Navigation("TypeOfTravel");
                 });
 
             modelBuilder.Entity("ElectricTravel.Data.Models.Car.CarImage", b =>
@@ -1618,6 +1648,10 @@ namespace ElectricTravel.Data.Migrations
                         .HasForeignKey("ImageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Car");
+
+                    b.Navigation("Image");
                 });
 
             modelBuilder.Entity("ElectricTravel.Data.Models.Car.CarTypeMake", b =>
@@ -1633,6 +1667,10 @@ namespace ElectricTravel.Data.Migrations
                         .HasForeignKey("MakeId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("CarType");
+
+                    b.Navigation("Make");
                 });
 
             modelBuilder.Entity("ElectricTravel.Data.Models.Car.CarVideo", b =>
@@ -1648,6 +1686,10 @@ namespace ElectricTravel.Data.Migrations
                         .HasForeignKey("VideoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Car");
+
+                    b.Navigation("Video");
                 });
 
             modelBuilder.Entity("ElectricTravel.Data.Models.Car.ElectricCar", b =>
@@ -1669,6 +1711,12 @@ namespace ElectricTravel.Data.Migrations
                         .HasForeignKey("ModelId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("CarType");
+
+                    b.Navigation("Make");
+
+                    b.Navigation("Model");
                 });
 
             modelBuilder.Entity("ElectricTravel.Data.Models.Car.Model", b =>
@@ -1678,6 +1726,8 @@ namespace ElectricTravel.Data.Migrations
                         .HasForeignKey("MakeId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Make");
                 });
 
             modelBuilder.Entity("ElectricTravel.Data.Models.Charging.ChargingStation", b =>
@@ -1689,6 +1739,10 @@ namespace ElectricTravel.Data.Migrations
                     b.HasOne("ElectricTravel.Data.Models.Multimedia.Image", "Image")
                         .WithMany()
                         .HasForeignKey("ImageId");
+
+                    b.Navigation("Address");
+
+                    b.Navigation("Image");
                 });
 
             modelBuilder.Entity("ElectricTravel.Data.Models.Charging.Socket", b =>
@@ -1708,6 +1762,10 @@ namespace ElectricTravel.Data.Migrations
                         .HasForeignKey("TypeId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Power");
+
+                    b.Navigation("Type");
                 });
 
             modelBuilder.Entity("ElectricTravel.Data.Models.Charging.StationCategory", b =>
@@ -1723,6 +1781,10 @@ namespace ElectricTravel.Data.Migrations
                         .HasForeignKey("StationId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Station");
                 });
 
             modelBuilder.Entity("ElectricTravel.Data.Models.Charging.StationPayment", b =>
@@ -1738,6 +1800,10 @@ namespace ElectricTravel.Data.Migrations
                         .HasForeignKey("PaymentId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("ChargingStation");
+
+                    b.Navigation("Payment");
                 });
 
             modelBuilder.Entity("ElectricTravel.Data.Models.Location.Address", b =>
@@ -1747,6 +1813,8 @@ namespace ElectricTravel.Data.Migrations
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("City");
                 });
 
             modelBuilder.Entity("ElectricTravel.Data.Models.Location.City", b =>
@@ -1756,6 +1824,8 @@ namespace ElectricTravel.Data.Migrations
                         .HasForeignKey("RegionId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Region");
                 });
 
             modelBuilder.Entity("ElectricTravel.Data.Models.Message.ChatMessage", b =>
@@ -1771,6 +1841,10 @@ namespace ElectricTravel.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Group");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ElectricTravel.Data.Models.Message.UserGroup", b =>
@@ -1786,6 +1860,10 @@ namespace ElectricTravel.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Group");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ElectricTravel.Data.Models.Multimedia.Image", b =>
@@ -1795,6 +1873,14 @@ namespace ElectricTravel.Data.Migrations
                         .HasForeignKey("TypeId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("ElectricTravel.Data.Models.User.ElectricTravelUser", "User")
+                        .WithMany("Images")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Type");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ElectricTravel.Data.Models.News.Article", b =>
@@ -1810,13 +1896,10 @@ namespace ElectricTravel.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-                });
 
-            modelBuilder.Entity("ElectricTravel.Data.Models.User.ElectricTravelUser", b =>
-                {
-                    b.HasOne("ElectricTravel.Data.Models.Multimedia.Image", "Image")
-                        .WithMany()
-                        .HasForeignKey("ImageId");
+                    b.Navigation("Source");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ElectricTravel.Data.Models.User.UserAddress", b =>
@@ -1832,6 +1915,10 @@ namespace ElectricTravel.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Address");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ElectricTravel.Data.Models.User.UserCar", b =>
@@ -1847,15 +1934,29 @@ namespace ElectricTravel.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Car");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ElectricTravel.Data.Models.User.UserRating", b =>
                 {
+                    b.HasOne("ElectricTravel.Data.Models.User.ElectricTravelUser", "Assessor")
+                        .WithMany("EvaluatedUsers")
+                        .HasForeignKey("AssessorId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("ElectricTravel.Data.Models.User.ElectricTravelUser", "User")
                         .WithMany("UserRatings")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Assessor");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -1907,6 +2008,123 @@ namespace ElectricTravel.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ElectricTravel.Data.Models.Advertisement.CarAdvertStatus", b =>
+                {
+                    b.Navigation("CarAdverts");
+                });
+
+            modelBuilder.Entity("ElectricTravel.Data.Models.Advertisement.Currency", b =>
+                {
+                    b.Navigation("CarAdverts");
+                });
+
+            modelBuilder.Entity("ElectricTravel.Data.Models.Advertisement.SharedTravelStatus", b =>
+                {
+                    b.Navigation("SharedTravelAdverts");
+                });
+
+            modelBuilder.Entity("ElectricTravel.Data.Models.Advertisement.TypeTravel", b =>
+                {
+                    b.Navigation("SharedTravelAdvert");
+                });
+
+            modelBuilder.Entity("ElectricTravel.Data.Models.Car.CarType", b =>
+                {
+                    b.Navigation("Cars");
+
+                    b.Navigation("Makes");
+                });
+
+            modelBuilder.Entity("ElectricTravel.Data.Models.Car.ElectricCar", b =>
+                {
+                    b.Navigation("Images");
+
+                    b.Navigation("Videos");
+                });
+
+            modelBuilder.Entity("ElectricTravel.Data.Models.Car.Make", b =>
+                {
+                    b.Navigation("CarTypes");
+
+                    b.Navigation("Models");
+                });
+
+            modelBuilder.Entity("ElectricTravel.Data.Models.Charging.Category", b =>
+                {
+                    b.Navigation("Stations");
+                });
+
+            modelBuilder.Entity("ElectricTravel.Data.Models.Charging.ChargingStation", b =>
+                {
+                    b.Navigation("Categories");
+
+                    b.Navigation("Sockets");
+
+                    b.Navigation("StationPayments");
+                });
+
+            modelBuilder.Entity("ElectricTravel.Data.Models.Charging.PaymentMethod", b =>
+                {
+                    b.Navigation("StationsPayment");
+                });
+
+            modelBuilder.Entity("ElectricTravel.Data.Models.Location.City", b =>
+                {
+                    b.Navigation("Addresses");
+
+                    b.Navigation("CarAdverts");
+
+                    b.Navigation("EndPointAdvert");
+
+                    b.Navigation("StartPointAdvert");
+                });
+
+            modelBuilder.Entity("ElectricTravel.Data.Models.Location.Region", b =>
+                {
+                    b.Navigation("Cities");
+                });
+
+            modelBuilder.Entity("ElectricTravel.Data.Models.Message.Group", b =>
+                {
+                    b.Navigation("ChatMessages");
+
+                    b.Navigation("UsersGroups");
+                });
+
+            modelBuilder.Entity("ElectricTravel.Data.Models.Multimedia.Video", b =>
+                {
+                    b.Navigation("Cars");
+                });
+
+            modelBuilder.Entity("ElectricTravel.Data.Models.User.ElectricTravelUser", b =>
+                {
+                    b.Navigation("CarAdverts");
+
+                    b.Navigation("Cars");
+
+                    b.Navigation("ChatMessages");
+
+                    b.Navigation("Claims");
+
+                    b.Navigation("EvaluatedUsers");
+
+                    b.Navigation("FavouritesAdverts");
+
+                    b.Navigation("Groups");
+
+                    b.Navigation("Images");
+
+                    b.Navigation("Logins");
+
+                    b.Navigation("Roles");
+
+                    b.Navigation("SharedTravelAdverts");
+
+                    b.Navigation("UserAddresses");
+
+                    b.Navigation("UserRatings");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,12 +1,12 @@
 ﻿namespace ElectricTravel.Web.Areas.Identity.Pages.Account.Manage
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Linq;
     using System.Threading.Tasks;
 
     using ElectricTravel.Data.Models.User;
+    using ElectricTravel.Services.Data.Contracts;
+    using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -16,13 +16,19 @@
     {
         private readonly UserManager<ElectricTravelUser> _userManager;
         private readonly SignInManager<ElectricTravelUser> _signInManager;
+        private readonly IUsersService usersService;
+        private readonly IWebHostEnvironment environment;
 
         public IndexModel(
             UserManager<ElectricTravelUser> userManager,
-            SignInManager<ElectricTravelUser> signInManager)
+            SignInManager<ElectricTravelUser> signInManager,
+            IUsersService usersService,
+            IWebHostEnvironment environment)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            this.usersService = usersService;
+            this.environment = environment;
         }
 
         public string Username { get; set; }
@@ -50,7 +56,7 @@
             [EmailAddress]
             public string Email { get; set; }
 
-            public IFormFile Image { get; set; }
+            public IEnumerable<IFormFile> Images { get; set; }
         }
 
         private async Task LoadAsync(ElectricTravelUser user)
@@ -80,32 +86,54 @@
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var user = await _userManager.GetUserAsync(User);
+            var user = await this._userManager.GetUserAsync(this.User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return this.NotFound($"Unable to load user with ID '{this._userManager.GetUserId(this.User)}'.");
             }
 
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                await LoadAsync(user);
-                return Page();
+                await this.LoadAsync(user);
+                return this.Page();
             }
 
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            if (Input.PhoneNumber != phoneNumber)
+            var phoneNumber = await this._userManager.GetPhoneNumberAsync(user);
+
+            if (this.Input.PhoneNumber != phoneNumber)
             {
-                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
+                var setPhoneResult = await this._userManager.SetPhoneNumberAsync(user, this.Input.PhoneNumber);
                 if (!setPhoneResult.Succeeded)
                 {
-                    StatusMessage = "Unexpected error when trying to set phone number.";
-                    return RedirectToPage();
+                    this.StatusMessage = "Unexpected error when trying to set phone number.";
+                    return this.RedirectToPage();
                 }
             }
 
-            await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your profile has been updated";
-            return RedirectToPage();
+            if (this.Input.FirstName != user.FirstName || this.Input.LastName != user.LastName)
+            {
+                try
+                {
+                    user.FirstName = this.Input.FirstName;
+                    user.LastName = this.Input.LastName;
+
+                    await this.usersService.UpdateUser(user);
+                }
+                catch (System.Exception)
+                {
+                    this.StatusMessage = "Unexpected error when trying to update user info.";
+                    return this.RedirectToPage();
+                }
+            }
+
+            if (this.Input.Images != null)
+            {
+                await this.usersService.UploadImages(user, this.Input.Images, $"{this.environment.WebRootPath}/images");
+            }
+
+            await this._signInManager.RefreshSignInAsync(user);
+            this.StatusMessage = "Your profile has been updated";
+            return this.RedirectToPage();
         }
     }
 }

@@ -16,10 +16,11 @@
                 return;
             }
 
-            await dbContext.ImageTypes.AddAsync(new ImageType { Name = "UserPicture" });
-            await dbContext.ImageTypes.AddAsync(new ImageType { Name = "CarExterior" });
-            await dbContext.ImageTypes.AddAsync(new ImageType { Name = "CarInterior" });
-            await dbContext.ImageTypes.AddAsync(new ImageType { Name = "ChargingStation" });
+            await dbContext.ImageTypes.AddAsync(new ImageType { Name = "User Picture" });
+            await dbContext.ImageTypes.AddAsync(new ImageType { Name = "Profile Picture" });
+            await dbContext.ImageTypes.AddAsync(new ImageType { Name = "Car Exterior" });
+            await dbContext.ImageTypes.AddAsync(new ImageType { Name = "Car Interior" });
+            await dbContext.ImageTypes.AddAsync(new ImageType { Name = "Charging Station" });
         }
     }
 }

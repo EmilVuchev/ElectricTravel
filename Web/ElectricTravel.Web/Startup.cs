@@ -5,7 +5,6 @@
     using ElectricTravel.Data;
     using ElectricTravel.Data.Common;
     using ElectricTravel.Data.Common.Repositories;
-    using ElectricTravel.Data.Models;
     using ElectricTravel.Data.Models.User;
     using ElectricTravel.Data.Repositories;
     using ElectricTravel.Data.Seeding;
@@ -14,7 +13,6 @@
     using ElectricTravel.Services.Mapping;
     using ElectricTravel.Services.Messaging;
     using ElectricTravel.Web.ViewModels;
-    using Microsoft.AspNetCore.Authentication.Facebook;
 
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -60,6 +58,7 @@
                     {
                         options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
                     }).AddRazorRuntimeCompilation();
+
             services.AddRazorPages();
 
             services.AddAntiforgery(options =>
