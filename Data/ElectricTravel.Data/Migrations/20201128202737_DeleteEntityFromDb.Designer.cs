@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ElectricTravel.Data.Migrations
 {
     [DbContext(typeof(ElectricTravelDbContext))]
-    [Migration("20201126205030_EditImageNameLenght")]
-    partial class EditImageNameLenght
+    [Migration("20201128202737_DeleteEntityFromDb")]
+    partial class DeleteEntityFromDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -446,6 +446,9 @@ namespace ElectricTravel.Data.Migrations
                     b.Property<double>("TopSpeed")
                         .HasColumnType("float");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("Year")
                         .HasColumnType("int");
 
@@ -458,6 +461,8 @@ namespace ElectricTravel.Data.Migrations
                     b.HasIndex("MakeId");
 
                     b.HasIndex("ModelId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Cars");
                 });
@@ -1383,29 +1388,6 @@ namespace ElectricTravel.Data.Migrations
                     b.ToTable("UserAddresses");
                 });
 
-            modelBuilder.Entity("ElectricTravel.Data.Models.User.UserCar", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("CarId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.HasKey("UserId", "CarId");
-
-                    b.HasIndex("CarId");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.ToTable("UserCars");
-                });
-
             modelBuilder.Entity("ElectricTravel.Data.Models.User.UserRating", b =>
                 {
                     b.Property<int>("Id")
@@ -1712,11 +1694,17 @@ namespace ElectricTravel.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("ElectricTravel.Data.Models.User.ElectricTravelUser", "User")
+                        .WithMany("Cars")
+                        .HasForeignKey("UserId");
+
                     b.Navigation("CarType");
 
                     b.Navigation("Make");
 
                     b.Navigation("Model");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ElectricTravel.Data.Models.Car.Model", b =>
@@ -1917,25 +1905,6 @@ namespace ElectricTravel.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Address");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("ElectricTravel.Data.Models.User.UserCar", b =>
-                {
-                    b.HasOne("ElectricTravel.Data.Models.Car.ElectricCar", "Car")
-                        .WithMany()
-                        .HasForeignKey("CarId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("ElectricTravel.Data.Models.User.ElectricTravelUser", "User")
-                        .WithMany("Cars")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Car");
 
                     b.Navigation("User");
                 });

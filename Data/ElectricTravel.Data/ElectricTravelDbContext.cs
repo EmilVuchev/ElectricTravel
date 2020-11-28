@@ -97,8 +97,6 @@
 
         public DbSet<UserAddress> UserAddresses { get; set; }
 
-        public DbSet<UserCar> UserCars { get; set; }
-
         public DbSet<UserRating> UserRatings { get; set; }
 
         public DbSet<Setting> Settings { get; set; }
@@ -149,9 +147,6 @@
             {
                 foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
             }
-
-            builder.Entity<UserCar>()
-                .HasKey(uc => new { uc.UserId, uc.CarId });
 
             builder.Entity<UserAddress>()
                 .HasKey(ua => new { ua.UserId, ua.AddressId });

@@ -69,20 +69,12 @@
 
             this.Username = userName;
 
-            var userWithImages = await this.userManager.Users.Include(x => new { x.Images, x.Cars }).SingleAsync();
+            var userWithImages = await this.userManager.Users.Include(x => x.Images).SingleAsync();
             var imagesPaths = new List<string>();
 
             foreach (var image in userWithImages.Images)
             {
                 imagesPaths.Add(image.Path);
-            }
-
-            foreach (var car in userWithImages.Cars)
-            {
-                foreach (var image in car.Car.Images)
-                {
-                    imagesPaths.Add(image.Image.Path);
-                }
             }
 
             this.Input = new InputModel
@@ -97,6 +89,7 @@
         public async Task<IActionResult> OnGetAsync()
         {
             var user = await this.userManager.GetUserAsync(this.User);
+
             if (user == null)
             {
                 return this.NotFound($"Unable to load user with ID '{this.userManager.GetUserId(this.User)}'.");
