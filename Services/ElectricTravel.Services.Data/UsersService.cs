@@ -18,12 +18,11 @@
 
     public class UsersService : IUsersService
     {
-        private string UserPicture = "User Picture";
-
         private readonly string[] allowedExtensions = new[] { "jpg", "png", "gif", "jpeg" };
         private readonly IDeletableEntityRepository<ElectricTravelUser> userRepository;
         private readonly IDeletableEntityRepository<SharedTravelAdvert> sharedTravelRepository;
         private readonly IDeletableEntityRepository<ImageType> imageTypeRepository;
+        private string userPicture = "User Picture";
 
         public UsersService(
             IDeletableEntityRepository<ElectricTravelUser> userRepository,
@@ -77,13 +76,15 @@
             await this.userRepository.SaveChangesAsync();
         }
 
-        public async Task UploadImages(ElectricTravelUser user, IEnumerable<IFormFile> images, string imagePath)
+        public async Task UploadImages(string userId, IEnumerable<IFormFile> images, string imagePath)
         {
             Directory.CreateDirectory($"{imagePath}/userImages/");
 
             var imageType = this.imageTypeRepository
                 .AllAsNoTracking()
-                .FirstOrDefault(x => x.Name == this.UserPicture);
+                .FirstOrDefault(x => x.Name == this.userPicture);
+
+            var user = this.userRepository.All().FirstOrDefault(x => x.Id == userId);
 
             foreach (var image in images)
             {
@@ -103,7 +104,7 @@
                     UserId = user.Id,
                     Extension = extension,
                     Name = imageName,
-                    Path = physicalPath,
+                    Path = $"../../images/userImages/{imageName}.{extension}",
                     Type = imageType,
                 };
 

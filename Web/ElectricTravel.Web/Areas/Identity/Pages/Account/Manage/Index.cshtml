@@ -26,18 +26,22 @@
                 <input asp-for="Input.PhoneNumber" class="form-control" />
                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
             </div>
-            @*<div class="form-group">
-                    <label for="exampleInputFile">File input</label>
-                    <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
-                    <small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
-                </div>*@
             <div class="form-group">
                 <label asp-for="Input.Images"></label>
-                <input asp-for="Input.Images" class="form-control" />
+                <input asp-for="Input.Images" class="form-control-file" />
                 <span asp-validation-for="Input.Images" class="text-danger"></span>
             </div>
             <button id="update-profile-button" type="submit" class="btn btn-primary">Save</button>
         </form>
+    </div>
+    <div class="col">
+        <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+            <div class="form-group item-figure"></div>
+            @foreach (var path in Model.Input.ImagesPaths)
+            {
+                <img class="img-fluid w-100" src="@path" alt="My profile picture">
+            }
+        </div>
     </div>
 </div>
 

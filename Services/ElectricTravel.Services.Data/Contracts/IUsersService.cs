@@ -15,6 +15,6 @@
 
         Task UpdateUser(ElectricTravelUser user);
 
-        Task UploadImages(ElectricTravelUser user, IEnumerable<IFormFile> images, string imagePath);
+        Task UploadImages(string userId, IEnumerable<IFormFile> images, string imagePath);
     }
 }

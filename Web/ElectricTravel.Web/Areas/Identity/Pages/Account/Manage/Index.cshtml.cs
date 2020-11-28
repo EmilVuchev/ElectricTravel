@@ -11,11 +11,12 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
+    using Microsoft.EntityFrameworkCore;
 
     public partial class IndexModel : PageModel
     {
-        private readonly UserManager<ElectricTravelUser> _userManager;
-        private readonly SignInManager<ElectricTravelUser> _signInManager;
+        private readonly UserManager<ElectricTravelUser> userManager;
+        private readonly SignInManager<ElectricTravelUser> signInManager;
         private readonly IUsersService usersService;
         private readonly IWebHostEnvironment environment;
 
@@ -25,8 +26,8 @@
             IUsersService usersService,
             IWebHostEnvironment environment)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
+            this.userManager = userManager;
+            this.signInManager = signInManager;
             this.usersService = usersService;
             this.environment = environment;
         }
@@ -57,39 +58,53 @@
             public string Email { get; set; }
 
             public IEnumerable<IFormFile> Images { get; set; }
+
+            public IEnumerable<string> ImagesPaths { get; set; }
         }
 
         private async Task LoadAsync(ElectricTravelUser user)
         {
-            var userName = await _userManager.GetUserNameAsync(user);
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            var userName = await this.userManager.GetUserNameAsync(user);
+            var phoneNumber = await this.userManager.GetPhoneNumberAsync(user);
 
-            Username = userName;
+            this.Username = userName;
 
-            Input = new InputModel
+            var userWithImages = await this.userManager.Users.Include(x => x.Images).SingleAsync();
+            var imagesPaths = new List<string>();
+
+            foreach (var image in userWithImages.Images)
             {
-                PhoneNumber = phoneNumber
+                imagesPaths.Add(image.Path);
+            }
+
+            this.Input = new InputModel
+            {
+                FirstName = userWithImages.FirstName,
+                LastName = userWithImages.LastName,
+                PhoneNumber = phoneNumber,
+                ImagesPaths = imagesPaths,
             };
         }
 
         public async Task<IActionResult> OnGetAsync()
         {
-            var user = await _userManager.GetUserAsync(User);
+            var user = await this.userManager.GetUserAsync(this.User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return this.NotFound($"Unable to load user with ID '{this.userManager.GetUserId(this.User)}'.");
             }
 
-            await LoadAsync(user);
-            return Page();
+            await this.LoadAsync(user);
+            return this.Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var user = await this._userManager.GetUserAsync(this.User);
+            var user = await this.userManager.GetUserAsync(this.User);
+
             if (user == null)
             {
-                return this.NotFound($"Unable to load user with ID '{this._userManager.GetUserId(this.User)}'.");
+                return this.NotFound($"Unable to load user with ID '{this.userManager.GetUserId(this.User)}'.");
             }
 
             if (!this.ModelState.IsValid)
@@ -98,11 +113,11 @@
                 return this.Page();
             }
 
-            var phoneNumber = await this._userManager.GetPhoneNumberAsync(user);
+            var phoneNumber = await this.userManager.GetPhoneNumberAsync(user);
 
             if (this.Input.PhoneNumber != phoneNumber)
             {
-                var setPhoneResult = await this._userManager.SetPhoneNumberAsync(user, this.Input.PhoneNumber);
+                var setPhoneResult = await this.userManager.SetPhoneNumberAsync(user, this.Input.PhoneNumber);
                 if (!setPhoneResult.Succeeded)
                 {
                     this.StatusMessage = "Unexpected error when trying to set phone number.";
@@ -128,10 +143,10 @@
 
             if (this.Input.Images != null)
             {
-                await this.usersService.UploadImages(user, this.Input.Images, $"{this.environment.WebRootPath}/images");
+                await this.usersService.UploadImages(user.Id, this.Input.Images, $"{this.environment.WebRootPath}/images");
             }
 
-            await this._signInManager.RefreshSignInAsync(user);
+            await this.signInManager.RefreshSignInAsync(user);
             this.StatusMessage = "Your profile has been updated";
             return this.RedirectToPage();
         }

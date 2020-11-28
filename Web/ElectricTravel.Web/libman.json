@@ -58,6 +58,16 @@
         "webfonts/fa-solid-900.woff",
         "webfonts/fa-solid-900.woff2"
       ]
+    },
+    {
+      "library": "mdbootstrap@4.19.1",
+      "destination": "wwwroot/lib/mdb/",
+      "files": [
+        "css/addons/datatables.min.css",
+        "css/addons/datatables2.min.css",
+        "css/style.css",
+        "js/addons/datatables.min.js"
+      ]
     }
   ]
 }
