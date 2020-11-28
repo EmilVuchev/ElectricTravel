@@ -69,12 +69,20 @@
 
             this.Username = userName;
 
-            var userWithImages = await this.userManager.Users.Include(x => x.Images).SingleAsync();
+            var userWithImages = await this.userManager.Users.Include(x => new { x.Images, x.Cars }).SingleAsync();
             var imagesPaths = new List<string>();
 
             foreach (var image in userWithImages.Images)
             {
                 imagesPaths.Add(image.Path);
+            }
+
+            foreach (var car in userWithImages.Cars)
+            {
+                foreach (var image in car.Car.Images)
+                {
+                    imagesPaths.Add(image.Image.Path);
+                }
             }
 
             this.Input = new InputModel
@@ -143,7 +151,7 @@
 
             if (this.Input.Images != null)
             {
-                await this.usersService.UploadImages(user.Id, this.Input.Images, $"{this.environment.WebRootPath}/images");
+                await this.usersService.UploadImages(user.Id, this.Input.Images, $"{this.environment.WebRootPath}/img");
             }
 
             await this.signInManager.RefreshSignInAsync(user);

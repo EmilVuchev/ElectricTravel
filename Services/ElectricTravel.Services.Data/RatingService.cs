@@ -2,13 +2,14 @@
 {
     using System.Linq;
     using System.Threading.Tasks;
+
     using ElectricTravel.Data.Common.Repositories;
     using ElectricTravel.Data.Models.User;
     using ElectricTravel.Services.Data.Contracts;
 
     public class RatingService : IRatingService
     {
-        private readonly IDeletableEntityRepository<ElectricTravelUser> userRepository;
+        ////private readonly IDeletableEntityRepository<ElectricTravelUser> userRepository;
         private readonly IDeletableEntityRepository<UserRating> userRatingRepository;
 
         public RatingService(IDeletableEntityRepository<UserRating> userRatingRepository)

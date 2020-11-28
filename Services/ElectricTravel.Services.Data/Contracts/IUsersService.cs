@@ -9,8 +9,7 @@
 
     public interface IUsersService
     {
-        //Task<ImageViewModel> GetUserPictureByAdvertId(string id);
-
+        ////Task<ImageViewModel> GetUserPictureByAdvertId(string id);
         Task<DriverInfoViewModel> GetDriverInfo(string id);
 
         Task UpdateUser(ElectricTravelUser user);

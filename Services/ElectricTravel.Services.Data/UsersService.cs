@@ -34,30 +34,30 @@
             this.imageTypeRepository = imageTypeRepository;
         }
 
-        //public async Task<ImageViewModel> GetUserPictureByAdvertId(string id)
-        //{
-        //    var advert = await this.sharedTravelRepository.GetByIdWithDeletedAsync(id);
-        //    var user = await this.userRepository.GetByIdWithDeletedAsync(advert.CreatedById);
-        //    var image = new ImageViewModel();
+        ////public async Task<ImageViewModel> GetUserPictureByAdvertId(string id)
+        ////{
+        ////    var advert = await this.sharedTravelRepository.GetByIdWithDeletedAsync(id);
+        ////    var user = await this.userRepository.GetByIdWithDeletedAsync(advert.CreatedById);
+        ////    var image = new ImageViewModel();
 
-        //    if (user.Image == null)
-        //    {
-        //        return null;
-        //        ////throw new NullReferenceException("TODOText");
-        //    }
+        ////    if (user.Image == null)
+        ////    {
+        ////        return null;
+        ////        ////throw new NullReferenceException("TODOText");
+        ////    }
 
-        //    var userImageType = user.Image.Type.Name;
+        ////    var userImageType = user.Image.Type.Name;
 
-        //    if (userImageType == GlobalConstants.UserImageType)
-        //    {
-        //        image.Description = user.Image.Description;
-        //        image.Extension = user.Image.Extension;
-        //        image.Name = user.Image.Name;
-        //        image.Path = user.Image.Path;
-        //    }
+        ////    if (userImageType == GlobalConstants.UserImageType)
+        ////    {
+        ////        image.Description = user.Image.Description;
+        ////        image.Extension = user.Image.Extension;
+        ////        image.Name = user.Image.Name;
+        ////        image.Path = user.Image.Path;
+        ////    }
 
-        //    return image;
-        //}
+        ////    return image;
+        ////}
 
         public async Task<DriverInfoViewModel> GetDriverInfo(string id)
         {
@@ -104,7 +104,7 @@
                     UserId = user.Id,
                     Extension = extension,
                     Name = imageName,
-                    Path = $"../../images/userImages/{imageName}.{extension}",
+                    Path = $"../../img/userImages/{imageName}.{extension}",
                     Type = imageType,
                 };
 
