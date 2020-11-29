@@ -274,29 +274,6 @@ namespace ElectricTravel.Data.Migrations
                     b.ToTable("TypeTravels");
                 });
 
-            modelBuilder.Entity("ElectricTravel.Data.Models.Car.CarImage", b =>
-                {
-                    b.Property<int>("CarId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ImageId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.HasKey("CarId", "ImageId");
-
-                    b.HasIndex("ImageId");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.ToTable("CarImages");
-                });
-
             modelBuilder.Entity("ElectricTravel.Data.Models.Car.CarType", b =>
                 {
                     b.Property<int>("Id")
@@ -349,29 +326,6 @@ namespace ElectricTravel.Data.Migrations
                     b.HasIndex("MakeId");
 
                     b.ToTable("CarTypeMakes");
-                });
-
-            modelBuilder.Entity("ElectricTravel.Data.Models.Car.CarVideo", b =>
-                {
-                    b.Property<int>("CarId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("VideoId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.HasKey("CarId", "VideoId");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.HasIndex("VideoId");
-
-                    b.ToTable("CarVideos");
                 });
 
             modelBuilder.Entity("ElectricTravel.Data.Models.Car.ElectricCar", b =>
@@ -1011,8 +965,13 @@ namespace ElectricTravel.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<int>("ElectricCarId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Extension")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -1036,6 +995,8 @@ namespace ElectricTravel.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ElectricCarId");
 
                     b.HasIndex("IsDeleted");
 
@@ -1092,6 +1053,14 @@ namespace ElectricTravel.Data.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
+                    b.Property<int>("ElectricCarId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Extension")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -1108,6 +1077,8 @@ namespace ElectricTravel.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ElectricCarId");
 
                     b.HasIndex("IsDeleted");
 
@@ -1615,25 +1586,6 @@ namespace ElectricTravel.Data.Migrations
                     b.Navigation("TypeOfTravel");
                 });
 
-            modelBuilder.Entity("ElectricTravel.Data.Models.Car.CarImage", b =>
-                {
-                    b.HasOne("ElectricTravel.Data.Models.Car.ElectricCar", "Car")
-                        .WithMany("Images")
-                        .HasForeignKey("CarId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("ElectricTravel.Data.Models.Multimedia.Image", "Image")
-                        .WithMany()
-                        .HasForeignKey("ImageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Car");
-
-                    b.Navigation("Image");
-                });
-
             modelBuilder.Entity("ElectricTravel.Data.Models.Car.CarTypeMake", b =>
                 {
                     b.HasOne("ElectricTravel.Data.Models.Car.CarType", "CarType")
@@ -1651,25 +1603,6 @@ namespace ElectricTravel.Data.Migrations
                     b.Navigation("CarType");
 
                     b.Navigation("Make");
-                });
-
-            modelBuilder.Entity("ElectricTravel.Data.Models.Car.CarVideo", b =>
-                {
-                    b.HasOne("ElectricTravel.Data.Models.Car.ElectricCar", "Car")
-                        .WithMany("Videos")
-                        .HasForeignKey("CarId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("ElectricTravel.Data.Models.Multimedia.Video", "Video")
-                        .WithMany("Cars")
-                        .HasForeignKey("VideoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Car");
-
-                    b.Navigation("Video");
                 });
 
             modelBuilder.Entity("ElectricTravel.Data.Models.Car.ElectricCar", b =>
@@ -1854,6 +1787,12 @@ namespace ElectricTravel.Data.Migrations
 
             modelBuilder.Entity("ElectricTravel.Data.Models.Multimedia.Image", b =>
                 {
+                    b.HasOne("ElectricTravel.Data.Models.Car.ElectricCar", "Car")
+                        .WithMany("Images")
+                        .HasForeignKey("ElectricCarId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("ElectricTravel.Data.Models.Multimedia.ImageType", "Type")
                         .WithMany()
                         .HasForeignKey("TypeId")
@@ -1864,9 +1803,22 @@ namespace ElectricTravel.Data.Migrations
                         .WithMany("Images")
                         .HasForeignKey("UserId");
 
+                    b.Navigation("Car");
+
                     b.Navigation("Type");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ElectricTravel.Data.Models.Multimedia.Video", b =>
+                {
+                    b.HasOne("ElectricTravel.Data.Models.Car.ElectricCar", "Car")
+                        .WithMany("Videos")
+                        .HasForeignKey("ElectricCarId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Car");
                 });
 
             modelBuilder.Entity("ElectricTravel.Data.Models.News.Article", b =>
@@ -2058,11 +2010,6 @@ namespace ElectricTravel.Data.Migrations
                     b.Navigation("ChatMessages");
 
                     b.Navigation("UsersGroups");
-                });
-
-            modelBuilder.Entity("ElectricTravel.Data.Models.Multimedia.Video", b =>
-                {
-                    b.Navigation("Cars");
                 });
 
             modelBuilder.Entity("ElectricTravel.Data.Models.User.ElectricTravelUser", b =>

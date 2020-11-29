@@ -1,9 +1,8 @@
-﻿namespace ElectricTravel.Data.Migrations
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
+
+namespace ElectricTravel.Data.Migrations
 {
-    using System;
-
-    using Microsoft.EntityFrameworkCore.Migrations;
-
     public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -316,24 +315,6 @@
                 });
 
             migrationBuilder.CreateTable(
-                name: "Videos",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Path = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Videos", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -529,39 +510,6 @@
                 });
 
             migrationBuilder.CreateTable(
-                name: "Images",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Extension = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Path = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    TypeId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Images", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Images_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Images_ImageTypes_TypeId",
-                        column: x => x.TypeId,
-                        principalTable: "ImageTypes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "CarTypeMakes",
                 columns: table => new
                 {
@@ -691,6 +639,7 @@
                     CarTypeId = table.Column<int>(type: "int", nullable: false),
                     MakeId = table.Column<int>(type: "int", nullable: false),
                     ModelId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
@@ -699,6 +648,12 @@
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Cars", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Cars_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Cars_CarTypes_CarTypeId",
                         column: x => x.CarTypeId,
@@ -854,79 +809,93 @@
                 });
 
             migrationBuilder.CreateTable(
-                name: "CarImages",
+                name: "Images",
                 columns: table => new
                 {
-                    CarId = table.Column<int>(type: "int", nullable: false),
-                    ImageId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Extension = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Path = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    TypeId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    ElectricCarId = table.Column<int>(type: "int", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CarImages", x => new { x.CarId, x.ImageId });
+                    table.PrimaryKey("PK_Images", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CarImages_Cars_CarId",
-                        column: x => x.CarId,
-                        principalTable: "Cars",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_CarImages_Images_ImageId",
-                        column: x => x.ImageId,
-                        principalTable: "Images",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CarVideos",
-                columns: table => new
-                {
-                    CarId = table.Column<int>(type: "int", nullable: false),
-                    VideoId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CarVideos", x => new { x.CarId, x.VideoId });
-                    table.ForeignKey(
-                        name: "FK_CarVideos_Cars_CarId",
-                        column: x => x.CarId,
-                        principalTable: "Cars",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_CarVideos_Videos_VideoId",
-                        column: x => x.VideoId,
-                        principalTable: "Videos",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UserCars",
-                columns: table => new
-                {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CarId = table.Column<int>(type: "int", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserCars", x => new { x.UserId, x.CarId });
-                    table.ForeignKey(
-                        name: "FK_UserCars_AspNetUsers_UserId",
+                        name: "FK_Images_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_UserCars_Cars_CarId",
-                        column: x => x.CarId,
+                        name: "FK_Images_Cars_ElectricCarId",
+                        column: x => x.ElectricCarId,
                         principalTable: "Cars",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Images_ImageTypes_TypeId",
+                        column: x => x.TypeId,
+                        principalTable: "ImageTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Videos",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Path = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Extension = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
+                    ElectricCarId = table.Column<int>(type: "int", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Videos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Videos_Cars_ElectricCarId",
+                        column: x => x.ElectricCarId,
+                        principalTable: "Cars",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserAddresses",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    AddressId = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserAddresses", x => new { x.UserId, x.AddressId });
+                    table.ForeignKey(
+                        name: "FK_UserAddresses_Addresses_AddressId",
+                        column: x => x.AddressId,
+                        principalTable: "Addresses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_UserAddresses_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -961,32 +930,6 @@
                         name: "FK_ChargingStations_Images_ImageId",
                         column: x => x.ImageId,
                         principalTable: "Images",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UserAddresses",
-                columns: table => new
-                {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    AddressId = table.Column<int>(type: "int", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserAddresses", x => new { x.UserId, x.AddressId });
-                    table.ForeignKey(
-                        name: "FK_UserAddresses_Addresses_AddressId",
-                        column: x => x.AddressId,
-                        principalTable: "Addresses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_UserAddresses_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -1190,16 +1133,6 @@
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CarImages_ImageId",
-                table: "CarImages",
-                column: "ImageId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CarImages_IsDeleted",
-                table: "CarImages",
-                column: "IsDeleted");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Cars_CarTypeId",
                 table: "Cars",
                 column: "CarTypeId");
@@ -1220,6 +1153,11 @@
                 column: "ModelId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Cars_UserId",
+                table: "Cars",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_CarTypeMakes_IsDeleted",
                 table: "CarTypeMakes",
                 column: "IsDeleted");
@@ -1233,16 +1171,6 @@
                 name: "IX_CarTypes_IsDeleted",
                 table: "CarTypes",
                 column: "IsDeleted");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CarVideos_IsDeleted",
-                table: "CarVideos",
-                column: "IsDeleted");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CarVideos_VideoId",
-                table: "CarVideos",
-                column: "VideoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Categories_IsDeleted",
@@ -1298,6 +1226,11 @@
                 name: "IX_Groups_IsDeleted",
                 table: "Groups",
                 column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Images_ElectricCarId",
+                table: "Images",
+                column: "ElectricCarId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Images_IsDeleted",
@@ -1455,16 +1388,6 @@
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserCars_CarId",
-                table: "UserCars",
-                column: "CarId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserCars_IsDeleted",
-                table: "UserCars",
-                column: "IsDeleted");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_UserGroups_GroupId",
                 table: "UserGroups",
                 column: "GroupId");
@@ -1488,6 +1411,11 @@
                 name: "IX_UserRatings_UserId",
                 table: "UserRatings",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Videos_ElectricCarId",
+                table: "Videos",
+                column: "ElectricCarId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Videos_IsDeleted",
@@ -1519,13 +1447,7 @@
                 name: "CarAdverts");
 
             migrationBuilder.DropTable(
-                name: "CarImages");
-
-            migrationBuilder.DropTable(
                 name: "CarTypeMakes");
-
-            migrationBuilder.DropTable(
-                name: "CarVideos");
 
             migrationBuilder.DropTable(
                 name: "ChatMessages");
@@ -1549,13 +1471,13 @@
                 name: "UserAddresses");
 
             migrationBuilder.DropTable(
-                name: "UserCars");
-
-            migrationBuilder.DropTable(
                 name: "UserGroups");
 
             migrationBuilder.DropTable(
                 name: "UserRatings");
+
+            migrationBuilder.DropTable(
+                name: "Videos");
 
             migrationBuilder.DropTable(
                 name: "Sources");
@@ -1568,9 +1490,6 @@
 
             migrationBuilder.DropTable(
                 name: "Currencies");
-
-            migrationBuilder.DropTable(
-                name: "Videos");
 
             migrationBuilder.DropTable(
                 name: "SharedTravelStatus");
@@ -1594,9 +1513,6 @@
                 name: "PaymentMethods");
 
             migrationBuilder.DropTable(
-                name: "Cars");
-
-            migrationBuilder.DropTable(
                 name: "Groups");
 
             migrationBuilder.DropTable(
@@ -1606,25 +1522,28 @@
                 name: "Images");
 
             migrationBuilder.DropTable(
+                name: "Cities");
+
+            migrationBuilder.DropTable(
+                name: "Cars");
+
+            migrationBuilder.DropTable(
+                name: "ImageTypes");
+
+            migrationBuilder.DropTable(
+                name: "Regions");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
                 name: "CarTypes");
 
             migrationBuilder.DropTable(
                 name: "Models");
 
             migrationBuilder.DropTable(
-                name: "Cities");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "ImageTypes");
-
-            migrationBuilder.DropTable(
                 name: "Makes");
-
-            migrationBuilder.DropTable(
-                name: "Regions");
         }
     }
 }

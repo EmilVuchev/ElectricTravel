@@ -5,6 +5,7 @@
     using System.ComponentModel.DataAnnotations.Schema;
 
     using ElectricTravel.Data.Common.Models;
+    using ElectricTravel.Data.Models.Multimedia;
     using ElectricTravel.Data.Models.User;
     using MyFirstAspNetCoreApplication.ValidationAttributes;
 
@@ -12,8 +13,8 @@
     {
         public ElectricCar()
         {
-            this.Images = new HashSet<CarImage>();
-            this.Videos = new HashSet<CarVideo>();
+            this.Images = new HashSet<Image>();
+            this.Videos = new HashSet<Video>();
         }
 
         [Range(50.0, 2000.0)]
@@ -76,9 +77,9 @@
 
         public virtual ElectricTravelUser User { get; set; }
 
-        public virtual ICollection<CarImage> Images { get; set; }
+        public virtual ICollection<Image> Images { get; set; }
 
-        public virtual ICollection<CarVideo> Videos { get; set; }
+        public virtual ICollection<Video> Videos { get; set; }
 
     }
 }

@@ -35,6 +35,9 @@
                               new SharedTravelStatusSeeder(),
                               new RegionSeeder(),
                               new CitiesSeeder(),
+                              new CarTypesSeeder(),
+                              new CarMakesSeeder(),
+                              new CarModelsSeeder(),
                           };
 
             foreach (var seeder in seeders)

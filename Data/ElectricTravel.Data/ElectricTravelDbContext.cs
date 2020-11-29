@@ -37,8 +37,6 @@
 
         public DbSet<ElectricCar> Cars { get; set; }
 
-        public DbSet<CarImage> CarImages { get; set; }
-
         public DbSet<Currency> Currencies { get; set; }
 
         public DbSet<SharedTravelStatus> SharedTravelStatus { get; set; }
@@ -56,8 +54,6 @@
         public DbSet<CarTypeMake> CarTypeMakes { get; set; }
 
         public DbSet<Model> Models { get; set; }
-
-        public DbSet<CarVideo> CarVideos { get; set; }
 
         public DbSet<CarType> CarTypes { get; set; }
 
@@ -156,12 +152,6 @@
 
             builder.Entity<StationPayment>()
                 .HasKey(sp => new { sp.PaymentId, sp.ChargingStationId });
-
-            builder.Entity<CarImage>()
-                .HasKey(ci => new { ci.CarId, ci.ImageId });
-
-            builder.Entity<CarVideo>()
-               .HasKey(ci => new { ci.CarId, ci.VideoId });
 
             builder.Entity<CarTypeMake>()
                .HasKey(ctm => new { ctm.CarTypeId, ctm.MakeId });

@@ -4,9 +4,19 @@
 
     using ElectricTravel.Data.Models.Car;
     using ElectricTravel.Services.Mapping;
+    using ElectricTravel.Web.ViewModels.Images;
+    using ElectricTravel.Web.ViewModels.Videos;
 
     public class CarViewModel : IMapFrom<ElectricCar>
     {
+        public string CarMakeName { get; set; }
+
+        public int CarMakeId { get; set; }
+
+        public string CarModelName { get; set; }
+
+        public int CarModelId { get; set; }
+
         public double Range { get; set; }
 
         public int Kilometres { get; set; }
@@ -33,10 +43,8 @@
 
         public int? LuggageCapacity { get; set; }
 
-        public IEnumerable<KeyValuePair<string, string>> CarTypes { get; set; }
+        public ICollection<ImageViewModel> Images { get; set; }
 
-        public IEnumerable<KeyValuePair<string, string>> Makes { get; set; }
-
-        public IEnumerable<KeyValuePair<string, string>> Models { get; set; }
+        public ICollection<VideoViewModel> Videos { get; set; }
     }
 }

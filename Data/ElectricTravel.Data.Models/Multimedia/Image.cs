@@ -5,6 +5,7 @@
     using System.ComponentModel.DataAnnotations.Schema;
 
     using ElectricTravel.Data.Common.Models;
+    using ElectricTravel.Data.Models.Car;
     using ElectricTravel.Data.Models.User;
 
     public class Image : BaseDeletableModel<string>
@@ -18,6 +19,8 @@
         [MaxLength(50)]
         public string Name { get; set; }
 
+        [Required]
+        [MaxLength(20)]
         public string Extension { get; set; }
 
         [Required]
@@ -35,5 +38,10 @@
         public string UserId { get; set; }
 
         public virtual ElectricTravelUser User { get; set; }
+
+        [ForeignKey(nameof(Car))]
+        public int ElectricCarId { get; set; }
+
+        public virtual ElectricCar Car { get; set; }
     }
 }

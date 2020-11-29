@@ -17,7 +17,6 @@
             }
 
             await dbContext.ImageTypes.AddAsync(new ImageType { Name = "User Picture" });
-            await dbContext.ImageTypes.AddAsync(new ImageType { Name = "Profile Picture" });
             await dbContext.ImageTypes.AddAsync(new ImageType { Name = "Car Exterior" });
             await dbContext.ImageTypes.AddAsync(new ImageType { Name = "Car Interior" });
             await dbContext.ImageTypes.AddAsync(new ImageType { Name = "Charging Station" });
