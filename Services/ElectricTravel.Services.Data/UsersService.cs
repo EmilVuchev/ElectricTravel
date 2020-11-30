@@ -15,6 +15,8 @@
     using ElectricTravel.Web.ViewModels.SharedTravels;
     using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
+    using SixLabors.ImageSharp;
+    using SixLabors.ImageSharp.Processing;
 
     public class UsersService : IUsersService
     {
@@ -86,9 +88,9 @@
 
             var user = this.userRepository.All().FirstOrDefault(x => x.Id == userId);
 
-            foreach (var image in images)
+            foreach (var imageFile in images)
             {
-                var extension = Path.GetExtension(image.FileName).TrimStart('.');
+                var extension = Path.GetExtension(imageFile.FileName).TrimStart('.');
 
                 if (!this.allowedExtensions.Any(x => extension.EndsWith(x)))
                 {
@@ -99,7 +101,7 @@
 
                 var physicalPath = $"{imagePath}/userImages/{imageName}.{extension}";
 
-                var dbImage = new Image
+                var dbImage = new ElectricTravel.Data.Models.Multimedia.Image
                 {
                     UserId = user.Id,
                     Extension = extension,
@@ -110,8 +112,22 @@
 
                 user.Images.Add(dbImage);
 
-                using Stream fileStream = new FileStream(physicalPath, FileMode.Create);
-                await image.CopyToAsync(fileStream);
+                using var image = SixLabors.ImageSharp.Image.Load(imageFile.OpenReadStream());
+
+                var maxWidth = 640;
+                var maxHeight = 640;
+                var ratio = (float)image.Width / image.Height;
+                var width = maxWidth;
+                var height = (int)Math.Floor(maxWidth / ratio);
+
+                if (height > maxHeight)
+                {
+                    height = maxHeight;
+                    width = (int)Math.Floor(maxHeight * ratio);
+                }
+
+                image.Mutate(x => x.Resize(width, height));
+                image.Save(physicalPath);
             }
 
             this.userRepository.Update(user);

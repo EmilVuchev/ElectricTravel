@@ -40,7 +40,7 @@
         public virtual ElectricTravelUser User { get; set; }
 
         [ForeignKey(nameof(Car))]
-        public int ElectricCarId { get; set; }
+        public int? ElectricCarId { get; set; }
 
         public virtual ElectricCar Car { get; set; }
     }

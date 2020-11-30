@@ -19,6 +19,6 @@
 
         Task CreateCarAsync(ElectricCarsInputViewModel input, string userId);
 
-        Task UploadVideosAndImages(int carId, IEnumerable<IFormFile> videos, string videoDescription, IEnumerable<IFormFile> images, string imageType, string path);
+        ////Task UploadVideosAndImages(int carId, IEnumerable<IFormFile> videos, string videoDescription, IEnumerable<IFormFile> images, string imageType, string path);
     }
 }

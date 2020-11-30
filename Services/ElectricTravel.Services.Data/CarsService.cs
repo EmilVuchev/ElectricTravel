@@ -15,6 +15,8 @@
     using ElectricTravel.Web.ViewModels.Cars;
     using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
+    using SixLabors.ImageSharp;
+    using SixLabors.ImageSharp.Processing;
 
     public class CarsService : ICarsService
     {
@@ -143,9 +145,9 @@
 
         private async Task UploadFile(ElectricCar car, string path, IEnumerable<IFormFile> files, string fileDescriber)
         {
-            foreach (var item in files)
+            foreach (var file in files)
             {
-                var extension = Path.GetExtension(item.FileName).TrimStart('.');
+                var extension = Path.GetExtension(file.FileName).TrimStart('.');
 
                 var itemName = Guid.NewGuid().ToString();
 
@@ -181,8 +183,7 @@
                     }
 
                     physicalPath = $"{path}/carImages/{itemName}.{extension}";
-
-                    var dbImage = new Image
+                    var dbImage = new ElectricTravel.Data.Models.Multimedia.Image
                     {
                         ElectricCarId = car.Id,
                         Extension = extension,
@@ -194,8 +195,10 @@
                     car.Images.Add(dbImage);
                 }
 
-                using Stream fileStream = new FileStream(physicalPath, FileMode.Create);
-                await item.CopyToAsync(fileStream);
+                using var image = SixLabors.ImageSharp.Image.Load(file.OpenReadStream());
+                ////TODO image resize algorithm
+                image.Mutate(x => x.Resize(795, 300));
+                image.Save(physicalPath);
             }
 
             this.carRepository.Update(car);

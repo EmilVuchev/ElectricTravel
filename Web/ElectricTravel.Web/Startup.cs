@@ -81,6 +81,8 @@
                     options.ClientSecret = googleAuthNSection["ClientSecret"];
                 });
 
+            ////services.AddImageSharp();
+
             services.AddSingleton(this.configuration);
 
             // Data repositories
@@ -127,6 +129,8 @@
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+            ////app.UseImageSharp();
 
             app.UseRouting();
 
