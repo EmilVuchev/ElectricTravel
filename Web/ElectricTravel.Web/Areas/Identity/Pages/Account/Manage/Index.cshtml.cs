@@ -6,6 +6,7 @@
 
     using ElectricTravel.Data.Models.User;
     using ElectricTravel.Services.Data.Contracts;
+    using ElectricTravel.Web.ViewModels.Images;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
@@ -18,17 +19,20 @@
         private readonly UserManager<ElectricTravelUser> userManager;
         private readonly SignInManager<ElectricTravelUser> signInManager;
         private readonly IUsersService usersService;
+        private readonly IImagesService imagesService;
         private readonly IWebHostEnvironment environment;
 
         public IndexModel(
             UserManager<ElectricTravelUser> userManager,
             SignInManager<ElectricTravelUser> signInManager,
             IUsersService usersService,
+            IImagesService imagesService,
             IWebHostEnvironment environment)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.usersService = usersService;
+            this.imagesService = imagesService;
             this.environment = environment;
         }
 
@@ -59,7 +63,9 @@
 
             public IEnumerable<IFormFile> Images { get; set; }
 
-            public IEnumerable<string> ImagesPaths { get; set; }
+            public IEnumerable<ProfileImageViewModel> ImagesInfo { get; set; }
+
+            public ProfileImageViewModel ImageInfo { get; set; }
         }
 
         private async Task LoadAsync(ElectricTravelUser user)
@@ -69,20 +75,14 @@
 
             this.Username = userName;
 
-            var userWithImages = await this.userManager.Users.Include(x => x.Images).SingleAsync();
-            var imagesPaths = new List<string>();
-
-            foreach (var image in userWithImages.Images)
-            {
-                imagesPaths.Add(image.Path);
-            }
+            var profileImages = await this.imagesService.GetProfileImagesByUserId(user.Id);
 
             this.Input = new InputModel
             {
-                FirstName = userWithImages.FirstName,
-                LastName = userWithImages.LastName,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
                 PhoneNumber = phoneNumber,
-                ImagesPaths = imagesPaths,
+                ImagesInfo = profileImages,
             };
         }
 
@@ -142,9 +142,22 @@
                 }
             }
 
+            ////if (this.Input.ImageInfo.IsForDeletion)
+            ////{
+            ////    await this.imagesService.DeleteAsync(this.Input.ImageInfo.Id);
+            ////}
+
+            foreach (var imageInfo in this.Input.ImagesInfo)
+            {
+                if (imageInfo.IsForDeletion)
+                {
+                    await this.imagesService.DeleteAsync(imageInfo.Id);
+                }
+            }
+
             if (this.Input.Images != null)
             {
-                await this.usersService.UploadImages(user.Id, this.Input.Images, $"{this.environment.WebRootPath}/img");
+                await this.imagesService.UploadImages(user.Id, this.Input.Images, $"{this.environment.WebRootPath}/img");
             }
 
             await this.signInManager.RefreshSignInAsync(user);

@@ -63,7 +63,7 @@
 
             services.AddAntiforgery(options =>
             {
-                options.HeaderName = "X-CSRF-TOKEN";
+                options.HeaderName = this.configuration["AntiforgeryToken:HeaderName"];
             });
 
             services.AddAuthentication()
@@ -80,8 +80,6 @@
                     options.ClientId = googleAuthNSection["ClientId"];
                     options.ClientSecret = googleAuthNSection["ClientSecret"];
                 });
-
-            ////services.AddImageSharp();
 
             services.AddSingleton(this.configuration);
 
@@ -100,6 +98,7 @@
             services.AddTransient<AspNetUserManager<ElectricTravelUser>>();
             services.AddTransient<IRatingService, RatingService>();
             services.AddTransient<ICarsService, CarsService>();
+            services.AddTransient<IImagesService, ImagesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

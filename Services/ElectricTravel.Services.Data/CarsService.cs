@@ -100,7 +100,7 @@
             return carTypes;
         }
 
-        public async Task CreateCarAsync(ElectricCarsInputViewModel input, string userId)
+        public async Task CreateCarAsync(ElectricCarInputViewModel input, string userId)
         {
             var car = new ElectricCar
             {

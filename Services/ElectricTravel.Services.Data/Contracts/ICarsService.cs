@@ -17,7 +17,7 @@
 
         IEnumerable<KeyValuePair<string, string>> GetAllCarTypesAsKeyValuePairs();
 
-        Task CreateCarAsync(ElectricCarsInputViewModel input, string userId);
+        Task CreateCarAsync(ElectricCarInputViewModel input, string userId);
 
         ////Task UploadVideosAndImages(int carId, IEnumerable<IFormFile> videos, string videoDescription, IEnumerable<IFormFile> images, string imageType, string path);
     }

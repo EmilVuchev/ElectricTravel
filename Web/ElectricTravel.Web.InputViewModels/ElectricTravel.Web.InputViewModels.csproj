@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Data\ElectricTravel.Data.Models\ElectricTravel.Data.Models.csproj" />
     <ProjectReference Include="..\..\ElectricTravel.Common\ElectricTravel.Common.csproj" />
     <ProjectReference Include="..\..\Services\ElectricTravel.Services.Mapping\ElectricTravel.Services.Mapping.csproj" />

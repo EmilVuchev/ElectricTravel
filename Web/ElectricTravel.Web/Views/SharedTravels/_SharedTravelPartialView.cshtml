@@ -1,0 +1,62 @@
+﻿@model IEnumerable<SharedTravelsViewModel>
+@{
+    var count = 1;
+    const string DateTitle = "Date";
+    const string HourTitle = "Hour";
+    const string DayTitle = "Day";
+    const string SeatsTitle = "Seats";
+    const string DetailsTitle = "Details";
+}
+
+<table id="dtBasicExample" class="table table-striped row-cols-3 text-center text-white" cellspacing="0">
+    <thead class="sorting_desc" aria-controls="dtBasicExample" rowspan="1" colspan="1">
+        <tr class="text-white-50">
+            <th scope="col"></th>
+            <th scope="col">@GlobalConstants.StartDestinationTitle</th>
+            <th scope="col">@GlobalConstants.EndDestinationTitle</th>
+            <th scope="col">@DateTitle</th>
+            <th scope="col">@HourTitle</th>
+            <th scope="col">@DayTitle</th>
+            <th scope="col">@GlobalConstants.TravelType</th>
+            <th scope="col">@SeatsTitle</th>
+            @*<th scope="col">@GlobalConstants.AdvertSmokeRestrictionTitle</th>
+                <th scope="col">@GlobalConstants.AdvertLuggageTitle</th>
+                <th scope="col">@GlobalConstants.AdvertReturnTripTitle</th>*@
+            <th scope="col">@DetailsTitle</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var advert in Model)
+        {
+            <tr>
+                <th>@(count++)</th>
+                <td>@advert.StartDestinationName</td>
+                <td>@advert.EndDestinationName</td>
+                <td>@advert.Date</td>
+                <td>@advert.Hour</td>
+                <td>@advert.Day</td>
+                <td>@advert.TypeOfTravelName</td>
+                <td>@advert.Seats</td>
+                <td>
+                    <a class="btn btn-primary" asp-action="TripDetails" asp-route-id="@advert.Id"><i class="far fa-eye"></i></a>
+                    @*<button type="button" class="btn btn-primary" asp-controller="SharedTravels" asp-action="Details" asp-route-id="@advert.Id"><i class="far fa-eye"></i></button>
+                        @*<button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
+                            <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>*@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts
+{
+    <script src="~/lib/mdb/js/addons/datatables.min.js"></script>
+    <link href="~/lib/mdb/css/addons/datatables.min.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" />
+
+    <script>
+        $(document).ready(function () {
+            $('#dtBasicExample').DataTable();
+            $('.dataTables_length').addClass('bs-select');
+        });</script>
+}
