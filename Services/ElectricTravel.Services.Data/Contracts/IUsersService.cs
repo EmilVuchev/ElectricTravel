@@ -13,7 +13,5 @@
         Task<DriverInfoViewModel> GetDriverInfo(string id);
 
         Task UpdateUser(ElectricTravelUser user);
-
-        Task UploadImages(string userId, IEnumerable<IFormFile> images, string imagePath);
     }
 }

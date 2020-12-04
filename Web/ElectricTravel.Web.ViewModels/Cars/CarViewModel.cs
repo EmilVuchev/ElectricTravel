@@ -5,7 +5,6 @@
     using ElectricTravel.Data.Models.Car;
     using ElectricTravel.Services.Mapping;
     using ElectricTravel.Web.ViewModels.Images;
-    using ElectricTravel.Web.ViewModels.Videos;
 
     public class CarViewModel : IMapFrom<ElectricCar>
     {
@@ -44,7 +43,5 @@
         public int? LuggageCapacity { get; set; }
 
         public ICollection<ImageViewModel> Images { get; set; }
-
-        public ICollection<VideoViewModel> Videos { get; set; }
     }
 }

@@ -131,7 +131,6 @@
             int carId, IEnumerable<IFormFile> videos, string videoDescription, IEnumerable<IFormFile> images, string imageType, string path)
         {
             Directory.CreateDirectory($"{path}/carImages/");
-            Directory.CreateDirectory($"{path}/carVideos/");
 
             var typeImage = this.imageTypeRepository
                 .AllAsNoTracking()
@@ -143,7 +142,7 @@
             await this.UploadFile(car, path, videos, videoDescription);
         }
 
-        private async Task UploadFile(ElectricCar car, string path, IEnumerable<IFormFile> files, string fileDescriber)
+        private async Task UploadFile(ElectricCar car, string path, IEnumerable<IFormFile> files, string imageType)
         {
             foreach (var file in files)
             {
@@ -153,47 +152,27 @@
 
                 var typeImage = this.imageTypeRepository
                 .AllAsNoTracking()
-                .FirstOrDefault(x => x.Name == fileDescriber);
+                .FirstOrDefault(x => x.Name == imageType);
 
                 var physicalPath = string.Empty;
 
-                if (typeImage == null)
+                if (!this.allowedExtensions.Any(x => extension.EndsWith(x)))
                 {
-                    if (!this.allowedExtensions.Any(x => extension.EndsWith(x)))
-                    {
-                        throw new Exception($"Invalid video extension {extension}");
-                    }
-
-                    physicalPath = $"{path}/carVideos/{itemName}.{extension}";
-
-                    var dbVideo = new Video
-                    {
-                        ElectricCarId = car.Id,
-                        Extension = extension,
-                        Name = itemName,
-                        Path = $"../../car/carVideos/{itemName}.{extension}",
-                        Description = fileDescriber,
-                    };
+                    throw new Exception($"Invalid image extension {extension}");
                 }
-                else
+
+                physicalPath = $"{path}/carImages/{itemName}.{extension}";
+                var dbImage = new ElectricTravel.Data.Models.Multimedia.Image
                 {
-                    if (!this.allowedExtensions.Any(x => extension.EndsWith(x)))
-                    {
-                        throw new Exception($"Invalid video extension {extension}");
-                    }
+                    ElectricCarId = car.Id,
+                    Extension = extension,
+                    Name = itemName,
+                    Path = $"../../car/carImages/{itemName}.{extension}",
+                    Type = typeImage,
+                };
 
-                    physicalPath = $"{path}/carImages/{itemName}.{extension}";
-                    var dbImage = new ElectricTravel.Data.Models.Multimedia.Image
-                    {
-                        ElectricCarId = car.Id,
-                        Extension = extension,
-                        Name = itemName,
-                        Path = $"../../car/carImages/{itemName}.{extension}",
-                        Type = typeImage,
-                    };
+                car.Images.Add(dbImage);
 
-                    car.Images.Add(dbImage);
-                }
 
                 using var image = SixLabors.ImageSharp.Image.Load(file.OpenReadStream());
                 ////TODO image resize algorithm
@@ -204,64 +183,5 @@
             this.carRepository.Update(car);
             await this.carRepository.SaveChangesAsync();
         }
-
-        ////foreach (var image in images)
-        ////{
-        ////    var extension = Path.GetExtension(image.FileName).TrimStart('.');
-
-        ////    if (!this.allowedExtensions.Any(x => extension.EndsWith(x)))
-        ////    {
-        ////        throw new Exception($"Invalid image extension {extension}");
-        ////    }
-
-        ////    var imageName = Guid.NewGuid().ToString();
-
-        ////    var physicalPath = $"{path}/carImages/{imageName}.{extension}";
-
-        ////    var dbImage = new Image
-        ////    {
-        ////        ElectricCarId = car.Id,
-        ////        Extension = extension,
-        ////        Name = imageName,
-        ////        Path = $"../../car/carImages/{imageName}.{extension}",
-        ////        Type = typeImage,
-        ////    };
-
-        ////    car.Images.Add(dbImage);
-
-        ////    using Stream fileStream = new FileStream(physicalPath, FileMode.Create);
-        ////    await image.CopyToAsync(fileStream);
-        ////}
-
-        ////foreach (var video in videos)
-        ////{
-        ////    var extension = Path.GetExtension(video.FileName).TrimStart('.');
-
-        ////    if (!this.allowedExtensions.Any(x => extension.EndsWith(x)))
-        ////    {
-        ////        throw new Exception($"Invalid video extension {extension}");
-        ////    }
-
-        ////    var videoName = Guid.NewGuid().ToString();
-
-        ////    var physicalPath = $"{path}/carVideos/{videoName}.{extension}";
-
-        ////    var dbVideo = new Video
-        ////    {
-        ////        ElectricCarId = car.Id,
-        ////        Extension = extension,
-        ////        Name = videoName,
-        ////        Path = $"../../car/carVideos/{videoName}.{extension}",
-        ////        Description = videoDescription,
-        ////    };
-
-        ////    car.Videos.Add(dbVideo);
-
-        ////    using Stream fileStream = new FileStream(physicalPath, FileMode.Create);
-        ////    await video.CopyToAsync(fileStream);
-        ////}
-
-        ////this.carRepository.Update(car);
-        ////await this.carRepository.SaveChangesAsync();
     }
 }

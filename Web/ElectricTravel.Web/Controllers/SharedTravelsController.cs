@@ -2,7 +2,7 @@
 {
     using System.Security.Claims;
     using System.Threading.Tasks;
-
+    using ElectricTravel.Common;
     using ElectricTravel.Data.Models.User;
     using ElectricTravel.Services.Data.Contracts;
     using ElectricTravel.Web.InputViewModels.SharedTravel;
@@ -62,7 +62,7 @@
             return this.View(adverts);
         }
 
-        [Authorize]
+        [Authorize(Roles = GlobalConstants.DriverRoleName)]
         public IActionResult Create()
         {
             var inputModel = new SharedTravelCreateInputViewModel();
@@ -73,7 +73,7 @@
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = GlobalConstants.DriverRoleName + ", " + GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> Create(SharedTravelCreateInputViewModel input)
         {
             if (!this.ModelState.IsValid)

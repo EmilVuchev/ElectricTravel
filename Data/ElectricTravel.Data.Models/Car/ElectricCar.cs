@@ -14,7 +14,6 @@
         public ElectricCar()
         {
             this.Images = new HashSet<Image>();
-            this.Videos = new HashSet<Video>();
         }
 
         [Range(50.0, 2000.0)]
@@ -78,8 +77,5 @@
         public virtual ElectricTravelUser User { get; set; }
 
         public virtual ICollection<Image> Images { get; set; }
-
-        public virtual ICollection<Video> Videos { get; set; }
-
     }
 }

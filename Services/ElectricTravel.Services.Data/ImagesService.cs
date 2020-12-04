@@ -5,12 +5,12 @@
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
+
     using ElectricTravel.Common;
     using ElectricTravel.Data.Common.Repositories;
     using ElectricTravel.Data.Models.Multimedia;
     using ElectricTravel.Services.Data.Contracts;
     using ElectricTravel.Services.Mapping;
-    using ElectricTravel.Web.ViewModels.Images;
     using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
     using SixLabors.ImageSharp;
@@ -30,30 +30,34 @@
             this.imageTypeRepository = imageTypeRepository;
         }
 
-        public async Task DeleteAsync(string id)
+        public async Task DeleteAsync(string imageId)
         {
             var image = this.imageRepository.All()
-                .FirstOrDefault(x => x.Id == id);
+                .FirstOrDefault(x => x.Id == imageId);
 
             this.imageRepository.Delete(image);
+
             await this.imageRepository.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<ProfileImageViewModel>> GetProfileImagesByUserId(string userId)
+        public async Task<IEnumerable<T>> GetProfileImagesByUserId<T>(string userId)
         {
             return await this.imageRepository.AllAsNoTracking()
                  .Where(x => x.UserId == userId && x.Type.Name == GlobalConstants.UserImageType)
-                .To<ProfileImageViewModel>()
+                .To<T>()
                 .ToListAsync();
         }
 
+        ////TODO This method should work both with cars pictures and user pictures
         public async Task UploadImages(string userId, IEnumerable<IFormFile> images, string imagePath)
         {
             Directory.CreateDirectory($"{imagePath}/userImages/");
 
-            var imageType = this.imageTypeRepository
+            var imageTypeId = this.imageTypeRepository
                 .AllAsNoTracking()
-                .FirstOrDefault(x => x.Name == GlobalConstants.UserImageType);
+                .Where(x => x.Name == GlobalConstants.UserImageType)
+                .Select(x => x.Id)
+                .FirstOrDefault();
 
             foreach (var imageFile in images)
             {
@@ -74,10 +78,11 @@
                     Extension = extension,
                     Name = imageName,
                     Path = $"../../img/userImages/{imageName}.{extension}",
-                    Type = imageType,
+                    TypeId = imageTypeId,
                 };
 
                 await this.imageRepository.AddAsync(dbImage);
+                await this.imageRepository.SaveChangesAsync();
 
                 using var image = SixLabors.ImageSharp.Image.Load(imageFile.OpenReadStream());
 
@@ -96,8 +101,6 @@
                 image.Mutate(x => x.Resize(width, height));
                 image.Save(physicalPath);
             }
-
-            await this.imageRepository.SaveChangesAsync();
         }
     }
 }

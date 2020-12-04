@@ -1,5 +1,6 @@
 ﻿@page
 @model RegisterModel
+@using ElectricTravel.Common
 @{
     this.ViewData["Title"] = "Register";
 }
@@ -90,32 +91,36 @@
                             <label asp-for="Input.UserName"></label>
                             <span asp-validation-for="Input.UserName" class="text-danger"></span>
                         </div>
-
                         <div class="form-label-group">
                             <input type="email" asp-for="Input.Email" class="form-control" placeholder="Email address" required>
                             <label asp-for="Input.Email"></label>
                             <span asp-validation-for="Input.Email" class="text-danger"></span>
                         </div>
-
                         <hr>
-
                         <div class="form-label-group">
                             <input type="password" asp-for="Input.Password" class="form-control" placeholder="Password" required>
                             <label asp-for="Input.Password"></label>
                             <span asp-validation-for="Input.Password" class="text-danger"></span>
                         </div>
-
                         <div class="form-label-group">
                             <input type="password" asp-for="Input.ConfirmPassword" class="form-control" placeholder="Password" required>
                             <label asp-for="Input.ConfirmPassword"></label>
                             <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                         </div>
-
+                        <hr>
+                        <div class="form-label-group">
+                            <select asp-for="Input.UserRole" class="form-control custom-select" placeholder="Role">
+                                <option value="@GlobalConstants.DriverRoleName">@GlobalConstants.DriverRoleName</option>
+                                <option value="@GlobalConstants.PassengerRoleName">@GlobalConstants.PassengerRoleName</option>
+                            </select>
+                            <span asp-validation-for="Input.UserRole" class="text-danger"></span>
+                        </div>
+                        <hr>
                         <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">@this.ViewData["Title"]</button>
                         <a class="d-block text-center mt-2 small" asp-area="Identity" asp-controller="Account" asp-action="Login">Log In</a>
                         <hr class="my-4">
                         @*<button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign up with Google</button>
-        <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign up with Facebook</button>*@
+                            <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign up with Facebook</button>*@
                     </form>
                     @{
                         if ((Model.ExternalLogins?.Count ?? 0) == 0)

@@ -85,8 +85,6 @@
 
         public DbSet<Image> Images { get; set; }
 
-        public DbSet<Video> Videos { get; set; }
-
         public DbSet<Article> Articles { get; set; }
 
         public DbSet<Source> Sources { get; set; }

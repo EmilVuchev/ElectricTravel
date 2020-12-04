@@ -7,40 +7,6 @@ namespace ElectricTravel.Web.InputViewModels.ElectricCars
 {
     public class ElectricCarInputViewModel
     {
-        ////    public int CarMakeId { get; set; }
-
-        ////    public int CarModelId { get; set; }
-
-        ////    public int CarTypeId { get; set; }
-
-        ////    public double Range { get; set; }
-
-        ////    public int Kilometres { get; set; }
-
-        ////    public string Acceleration { get; set; }
-
-        ////    public double TopSpeed { get; set; }
-
-        ////    public string Battery { get; set; }
-
-        ////    public string ElectricityConsumption { get; set; }
-
-        ////    public string Drive { get; set; }
-
-        ////    public int Year { get; set; }
-
-        ////    public int HorsePower { get; set; }
-
-        ////    public int Seats { get; set; }
-
-        ////    public int Doors { get; set; }
-
-        ////    public string Color { get; set; }
-
-        ////    public int? LuggageCapacity { get; set; }
-
-        //public ICollection<ImageViewModel> Images { get; set; }
-
         [Range(50.0, 2000.0)]
         public double Range { get; set; }
 
@@ -92,16 +58,10 @@ namespace ElectricTravel.Web.InputViewModels.ElectricCars
         [Display(Name = "Car make")]
         public int CarMakeId { get; set; }
 
-        ////public string CarMakeName { get; set; }
-
         [Display(Name = "Car model")]
         public int CarModelId { get; set; }
 
-        ////public string CarModelName { get; set; }
-
         public IEnumerable<IFormFile> Images { get; set; }
-
-        ////public IEnumerable<string> ImagesPaths { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> CarTypes { get; set; }
 

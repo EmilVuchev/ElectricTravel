@@ -10,8 +10,8 @@
     {
         Task UploadImages(string userId, IEnumerable<IFormFile> images, string imagePath);
 
-        Task<IEnumerable<ProfileImageViewModel>> GetProfileImagesByUserId(string userId);
+        Task<IEnumerable<T>> GetProfileImagesByUserId<T>(string userId);
 
-        Task DeleteAsync(string id);
+        Task DeleteAsync(string imageId);
     }
 }

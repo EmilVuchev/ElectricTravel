@@ -4,15 +4,14 @@
     using System.ComponentModel.DataAnnotations;
     using System.Threading.Tasks;
 
+    using ElectricTravel.Common;
     using ElectricTravel.Data.Models.User;
     using ElectricTravel.Services.Data.Contracts;
-    using ElectricTravel.Web.ViewModels.Images;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
-    using Microsoft.EntityFrameworkCore;
 
     public partial class IndexModel : PageModel
     {
@@ -63,9 +62,11 @@
 
             public IEnumerable<IFormFile> Images { get; set; }
 
-            public IEnumerable<ProfileImageViewModel> ImagesInfo { get; set; }
+            [Required]
+            [Display(Name = "You are a")]
+            public string Role { get; set; }
 
-            public ProfileImageViewModel ImageInfo { get; set; }
+            public IEnumerable<string> Roles { get; set; }
         }
 
         private async Task LoadAsync(ElectricTravelUser user)
@@ -74,15 +75,27 @@
             var phoneNumber = await this.userManager.GetPhoneNumberAsync(user);
 
             this.Username = userName;
+            var userRoles = await this.userManager.GetRolesAsync(user);
 
-            var profileImages = await this.imagesService.GetProfileImagesByUserId(user.Id);
+            var roles = new List<string>();
+
+            if (userRoles[0] == GlobalConstants.DriverRoleName)
+            {
+                roles.Add(userRoles[0]);
+                roles.Add(GlobalConstants.PassengerRoleName);
+            }
+            else
+            {
+                roles.Add(userRoles[0]);
+                roles.Add(GlobalConstants.DriverRoleName);
+            }
 
             this.Input = new InputModel
             {
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 PhoneNumber = phoneNumber,
-                ImagesInfo = profileImages,
+                Roles = roles,
             };
         }
 
@@ -142,17 +155,15 @@
                 }
             }
 
-            ////if (this.Input.ImageInfo.IsForDeletion)
-            ////{
-            ////    await this.imagesService.DeleteAsync(this.Input.ImageInfo.Id);
-            ////}
-
-            foreach (var imageInfo in this.Input.ImagesInfo)
+            if (this.Input.Role == GlobalConstants.DriverRoleName)
             {
-                if (imageInfo.IsForDeletion)
-                {
-                    await this.imagesService.DeleteAsync(imageInfo.Id);
-                }
+                await this.userManager.RemoveFromRoleAsync(user, GlobalConstants.PassengerRoleName);
+                await this.userManager.AddToRoleAsync(user, GlobalConstants.DriverRoleName);
+            }
+            else
+            {
+                await this.userManager.RemoveFromRoleAsync(user, GlobalConstants.DriverRoleName);
+                await this.userManager.AddToRoleAsync(user, GlobalConstants.PassengerRoleName);
             }
 
             if (this.Input.Images != null)

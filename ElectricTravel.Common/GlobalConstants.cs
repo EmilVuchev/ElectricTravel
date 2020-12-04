@@ -6,6 +6,10 @@
 
         public const string AdministratorRoleName = "Administrator";
 
+        public const string DriverRoleName = "Driver";
+
+        public const string PassengerRoleName = "Passenger";
+
         public const string UserImageType = "User Picture";
 
         public const string TrueState = "Yes";

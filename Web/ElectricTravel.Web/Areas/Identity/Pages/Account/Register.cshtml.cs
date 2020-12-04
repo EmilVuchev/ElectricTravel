@@ -8,7 +8,7 @@
     using System.Text;
     using System.Text.Encodings.Web;
     using System.Threading.Tasks;
-
+    using ElectricTravel.Common;
     using ElectricTravel.Data.Models.User;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authorization;
@@ -68,6 +68,9 @@
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            public string UserRole { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -83,12 +86,22 @@
 
             if (this.ModelState.IsValid)
             {
-                var user = new ElectricTravelUser { UserName = this.Input.UserName, Email = this.Input.Email };
+                var user = new ElectricTravelUser { UserName = this.Input.UserName, Email = this.Input.Email, };
+
                 var result = await this.userManager.CreateAsync(user, this.Input.Password);
 
                 if (result.Succeeded)
                 {
                     this.logger.LogInformation("User created a new account with password.");
+
+                    if (this.Input.UserRole == GlobalConstants.DriverRoleName)
+                    {
+                        await this.userManager.AddToRoleAsync(user, GlobalConstants.DriverRoleName);
+                    }
+                    else
+                    {
+                        await this.userManager.AddToRoleAsync(user, GlobalConstants.PassengerRoleName);
+                    }
 
                     var code = await this.userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
