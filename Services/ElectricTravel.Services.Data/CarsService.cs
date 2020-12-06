@@ -12,7 +12,6 @@
     using ElectricTravel.Services.Data.Contracts;
     using ElectricTravel.Services.Mapping;
     using ElectricTravel.Web.InputViewModels.ElectricCars;
-    using ElectricTravel.Web.ViewModels.Cars;
     using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
     using SixLabors.ImageSharp;
@@ -41,11 +40,11 @@
             this.imageTypeRepository = imageTypeRepository;
         }
 
-        public async Task<IEnumerable<CarViewModel>> GetCarsByUserId(string userId)
+        public async Task<IEnumerable<T>> GetCarsByUserId<T>(string userId)
         {
             var cars = await this.carRepository.AllAsNoTracking()
                .Where(x => x.UserId == userId)
-               .To<CarViewModel>()
+               .To<T>()
                .ToListAsync();
 
             return cars;
@@ -100,7 +99,7 @@
             return carTypes;
         }
 
-        public async Task CreateCarAsync(ElectricCarInputViewModel input, string userId)
+        public async Task<int> CreateCarAsync(ElectricCarInputViewModel input, string userId)
         {
             var car = new ElectricCar
             {
@@ -124,7 +123,24 @@
             };
 
             await this.carRepository.AddAsync(car);
-            await this.carRepository.SaveChangesAsync();
+            var count = await this.carRepository.SaveChangesAsync();
+            return count;
+        }
+
+        public async Task<bool> DeleteCarAsync(int? carId)
+        {
+            var car = this.carRepository.All()
+                .FirstOrDefault(x => x.Id == carId);
+
+            this.carRepository.Delete(car);
+            var deletedCount = await this.carRepository.SaveChangesAsync();
+
+            if (deletedCount == 0)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public async Task UploadVideosAndImages(
@@ -140,6 +156,21 @@
 
             await this.UploadFile(car, path, images, imageType);
             await this.UploadFile(car, path, videos, videoDescription);
+        }
+
+        public Task<T> EditAsync<T>(int? id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<T> GetCarById<T>(int? id)
+        {
+            var car = await this.carRepository.AllAsNoTracking()
+                .Where(x => x.Id == id)
+                .To<T>()
+                .FirstOrDefaultAsync();
+
+            return car;
         }
 
         private async Task UploadFile(ElectricCar car, string path, IEnumerable<IFormFile> files, string imageType)

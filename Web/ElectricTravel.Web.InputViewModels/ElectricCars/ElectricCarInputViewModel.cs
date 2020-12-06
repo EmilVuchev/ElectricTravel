@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
-using MyFirstAspNetCoreApplication.ValidationAttributes;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
-namespace ElectricTravel.Web.InputViewModels.ElectricCars
+﻿namespace ElectricTravel.Web.InputViewModels.ElectricCars
 {
+    using Microsoft.AspNetCore.Http;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
     public class ElectricCarInputViewModel
     {
         [Range(50.0, 2000.0)]
@@ -25,14 +24,14 @@ namespace ElectricTravel.Web.InputViewModels.ElectricCars
         [MaxLength(10)]
         public string Battery { get; set; }
 
-        [Display(Name = "Consumtion")]
+        [Display(Name = "Consumption")]
         [MaxLength(10)]
         public string ElectricityConsumption { get; set; }
 
         [MaxLength(10)]
         public string Drive { get; set; }
 
-        [CurrentYearMaxValue(1900)]
+        [Range(1900, 2100, ErrorMessage = "Year should be between 1900 and now")]
         public int Year { get; set; }
 
         [Display(Name = "Horse power")]

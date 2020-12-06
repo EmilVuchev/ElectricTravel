@@ -22,12 +22,6 @@
                         <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">News</a>
                     </li>
                     <partial name="_NavbarDropdownPartial" />
-                    @if (this.User.IsInRole(GlobalConstants.DriverRoleName))
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="ElectricCars" asp-action="Index">My Cars</a>
-                        </li>
-                    }
                     @if (this.User.Identity.IsAuthenticated)
                     {
                         <li class="nav-item">

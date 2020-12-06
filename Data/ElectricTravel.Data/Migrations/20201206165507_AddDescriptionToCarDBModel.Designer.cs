@@ -4,14 +4,16 @@ using ElectricTravel.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ElectricTravel.Data.Migrations
 {
     [DbContext(typeof(ElectricTravelDbContext))]
-    partial class ElectricTravelDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201206165507_AddDescriptionToCarDBModel")]
+    partial class AddDescriptionToCarDBModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -358,8 +360,8 @@ namespace ElectricTravel.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
+                        .HasMaxLength(3000)
+                        .HasColumnType("nvarchar(3000)");
 
                     b.Property<int>("Doors")
                         .HasColumnType("int");

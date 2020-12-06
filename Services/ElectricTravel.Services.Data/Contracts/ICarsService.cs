@@ -5,11 +5,10 @@
 
     using ElectricTravel.Web.InputViewModels.ElectricCars;
     using ElectricTravel.Web.ViewModels.Cars;
-    using Microsoft.AspNetCore.Http;
 
     public interface ICarsService
     {
-        Task<IEnumerable<CarViewModel>> GetCarsByUserId(string userId);
+        Task<IEnumerable<T>> GetCarsByUserId<T>(string userId);
 
         public IEnumerable<KeyValuePair<string, string>> GetAllCarModelsAsKeyValuePairs();
 
@@ -17,7 +16,13 @@
 
         IEnumerable<KeyValuePair<string, string>> GetAllCarTypesAsKeyValuePairs();
 
-        Task CreateCarAsync(ElectricCarInputViewModel input, string userId);
+        Task<int> CreateCarAsync(ElectricCarInputViewModel input, string userId);
+
+        Task<bool> DeleteCarAsync(int? carId);
+
+        Task<T> EditAsync<T>(int? id);
+
+        Task<T> GetCarById<T>(int? id);
 
         ////Task UploadVideosAndImages(int carId, IEnumerable<IFormFile> videos, string videoDescription, IEnumerable<IFormFile> images, string imageType, string path);
     }

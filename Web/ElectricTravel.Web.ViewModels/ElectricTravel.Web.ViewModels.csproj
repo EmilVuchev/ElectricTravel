@@ -23,6 +23,7 @@
     <ProjectReference Include="..\..\Data\ElectricTravel.Data.Models\ElectricTravel.Data.Models.csproj" />
     <ProjectReference Include="..\..\ElectricTravel.Common\ElectricTravel.Common.csproj" />
     <ProjectReference Include="..\..\Services\ElectricTravel.Services.Mapping\ElectricTravel.Services.Mapping.csproj" />
+    <ProjectReference Include="..\ElectricTravel.Web.InputViewModels\ElectricTravel.Web.InputViewModels.csproj" />
   </ItemGroup>
 
 </Project>

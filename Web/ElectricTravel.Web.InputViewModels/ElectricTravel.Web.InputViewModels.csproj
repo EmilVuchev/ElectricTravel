@@ -14,4 +14,8 @@
     <ProjectReference Include="..\..\Services\ElectricTravel.Services.Mapping\ElectricTravel.Services.Mapping.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Images\" />
+  </ItemGroup>
+
 </Project>

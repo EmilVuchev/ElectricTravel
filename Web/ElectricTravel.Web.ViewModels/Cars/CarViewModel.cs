@@ -8,13 +8,15 @@
 
     public class CarViewModel : IMapFrom<ElectricCar>
     {
-        public string CarMakeName { get; set; }
+        public int Id { get; set; }
 
-        public int CarMakeId { get; set; }
+        public string MakeName { get; set; }
 
-        public string CarModelName { get; set; }
+        public int MakeId { get; set; }
 
-        public int CarModelId { get; set; }
+        public string ModelName { get; set; }
+
+        public int ModelId { get; set; }
 
         public double Range { get; set; }
 
@@ -37,6 +39,8 @@
         public int Seats { get; set; }
 
         public int Doors { get; set; }
+
+        public string Description { get; set; }
 
         public string Color { get; set; }
 
