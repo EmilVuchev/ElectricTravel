@@ -2,6 +2,6 @@
 {
     public static class ServicesConstants
     {
-        public const int AdvertDefaultStatus = 2;
+        public const string AdvertDefaultStatus = "Active";
     }
 }

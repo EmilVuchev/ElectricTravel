@@ -5,6 +5,7 @@
     using ElectricTravel.Common;
     using ElectricTravel.Data.Models.User;
     using ElectricTravel.Services.Data.Contracts;
+    using ElectricTravel.Web.Controllers.Common;
     using ElectricTravel.Web.InputViewModels.SharedTravel;
     using ElectricTravel.Web.ViewModels.SharedTravels;
     using Microsoft.AspNetCore.Authorization;
@@ -36,30 +37,59 @@
             this.usersService = usersService;
         }
 
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All(int id = 1)
         {
-            var adverts = await this.sharedTravelsService.GetAllAsync<SharedTravelsViewModel>();
+            if (id <= 0)
+            {
+                return this.NotFound();
+            }
+
+            var adverts = await this.sharedTravelsService.GetAllAsync<SharedTravelsViewModel>(id, ControllersConstants.ItemsPerPage);
 
             if (adverts == null)
             {
                 return this.NoContent();
             }
 
-            return this.View(adverts);
+            var viewModel = new AdvertsListViewModel
+            {
+                IsUserAdverts = false,
+                ItemsPerPage = ControllersConstants.ItemsPerPage,
+                PageNumber = id,
+                AdvertsCount = await this.sharedTravelsService.GetAllAdvertsCount(),
+                Adverts = adverts,
+            };
+
+            return this.View(viewModel);
         }
 
         [Authorize]
-        public async Task<IActionResult> AllByAuthor()
+        public async Task<IActionResult> AllByAuthor(int id = 1)
         {
+            if (id <= 0)
+            {
+                return this.NotFound();
+            }
+
+            const int itemsPerPage = 10;
             var userId = this.userManager.GetUserId(this.User);
-            var adverts = await this.sharedTravelsService.GetAllByAuthorId<SharedTravelsViewModel>(userId);
+            var adverts = await this.sharedTravelsService.GetAllByAuthorId<SharedTravelsViewModel>(userId, id, itemsPerPage);
 
             if (adverts == null)
             {
-                return this.View("Error");
+                return this.NoContent();
             }
 
-            return this.View(adverts);
+            var viewModel = new AdvertsListViewModel
+            {
+                IsUserAdverts = true,
+                ItemsPerPage = itemsPerPage,
+                PageNumber = id,
+                AdvertsCount = await this.sharedTravelsService.GetAdvertsCountByUser(userId),
+                Adverts = adverts,
+            };
+
+            return this.View(viewModel);
         }
 
         [Authorize(Roles = GlobalConstants.DriverRoleName)]

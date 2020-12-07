@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SharedTravelsViewModel>
+﻿@model AdvertsListViewModel
 @{
     var count = 1;
     const string DateTitle = "Date";
@@ -6,8 +6,27 @@
     const string DayTitle = "Day";
     const string SeatsTitle = "Seats";
     const string DetailsTitle = "Details";
+    const string DefaultController = "SharedTravels";
+    const string DefaultAction = "All";
+    const string ActionName = "AllByAuthor";
+    var controller = this.ViewContext.RouteData.Values["controller"].ToString();
+    var action = this.ViewContext.RouteData.Values["Action"].ToString();
 }
 
+@if (controller == DefaultController && action == DefaultAction)
+{
+    action = "SearchByDestinations";
+}
+else if (controller == DefaultController && action == ActionName) 
+{
+    action = "SearchForUserAdvertsDestination";
+}
+
+<form method="get" class="form-inline my-2 my-lg-0 text-right justify-content-end" asp-area="" asp-controller="SearchAdverts" asp-action="@action">
+    <input type="search" placeholder="Enter destination" class="form-control mr-sm-2" value="@this.ViewData["Getadvertsdetails"]" name="search" />
+    <input type="submit" value="Search" class="btn btn-outline-primary page-link  my-2 my-sm-0" />
+</form>
+<br />
 <table id="dtBasicExample" class="table table-striped row-cols-3 text-center text-white" cellspacing="0">
     <thead class="sorting_desc" aria-controls="dtBasicExample" rowspan="1" colspan="1">
         <tr class="text-white-50">
@@ -19,14 +38,11 @@
             <th scope="col">@DayTitle</th>
             <th scope="col">@GlobalConstants.TravelType</th>
             <th scope="col">@SeatsTitle</th>
-            @*<th scope="col">@GlobalConstants.AdvertSmokeRestrictionTitle</th>
-                <th scope="col">@GlobalConstants.AdvertLuggageTitle</th>
-                <th scope="col">@GlobalConstants.AdvertReturnTripTitle</th>*@
             <th scope="col">@DetailsTitle</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var advert in Model)
+        @foreach (var advert in Model.Adverts)
         {
             <tr>
                 <th>@(count++)</th>
@@ -38,26 +54,12 @@
                 <td>@advert.TypeOfTravelName</td>
                 <td>@advert.Seats</td>
                 <td>
-                    <a class="btn btn-primary" asp-action="TripDetails" asp-route-id="@advert.Id"><i class="far fa-eye"></i></a>
-                    @*<button type="button" class="btn btn-primary" asp-controller="SharedTravels" asp-action="Details" asp-route-id="@advert.Id"><i class="far fa-eye"></i></button>
-                        @*<button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
-                            <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>*@
+                    <a class="btn btn-primary"asp-controller="SharedTravels" asp-action="TripDetails" asp-route-id="@advert.Id"><i class="far fa-eye"></i></a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+<div class="text-right"><partial name="_PagingPartial" model="@Model" /></div>
+<hr />
 
-@section Scripts
-{
-    <script src="~/lib/mdb/js/addons/datatables.min.js"></script>
-    <link href="~/lib/mdb/css/addons/datatables.min.css" rel="stylesheet" />
-    <link href="~/css/style.css" rel="stylesheet" />
-
-    <script>
-        $(document).ready(function () {
-            $('#dtBasicExample').DataTable();
-            $('.dataTables_length').addClass('bs-select');
-        });
-    </script>
-}
