@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SharedTravelsViewModel>
+﻿@model AdvertsListViewModel
 @{
     this.ViewData["Title"] = "Your adverts";
     this.Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,13 +8,13 @@
     <hr />
     <h1 class="text-center">@this.ViewData["Title"]</h1>
     <hr />
-    <partial name="_SharedTravelPartialView" model="@Model" />
+    <partial name="_SharedTravelPartial" model="@Model" />
 </div>
 
 @section Scripts{
-    <script src="~/lib/mdb/js/addons/datatables.min.js"></script>
-    <script src="~/js/customTable.js"></script>
-    <link href="~/lib/mdb/css/addons/datatables.min.css" rel="stylesheet" />
-    <link href="~/css/style.css" rel="stylesheet" />
+    <link href="~/lib/mdb/css/addons/datatables.min.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/css/style.css" rel="stylesheet" asp-append-version="true" />
+    <script src="~/lib/mdb/js/addons/datatables.min.js" asp-append-version="true"></script>
+    <script src="~/js/customtable.js" asp-append-version="true"></script>
 }
 

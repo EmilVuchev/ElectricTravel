@@ -18,17 +18,27 @@
     public class SharedTravelsService : ISharedTravelsService
     {
         private readonly IDeletableEntityRepository<SharedTravelAdvert> sharedTravelsRepository;
+        private readonly IDeletableEntityRepository<SharedTravelStatus> sharedTravelStatusRepository;
 
-        public SharedTravelsService(IDeletableEntityRepository<SharedTravelAdvert> sharedTravelsRepository)
+        public SharedTravelsService(
+            IDeletableEntityRepository<SharedTravelAdvert> sharedTravelsRepository,
+            IDeletableEntityRepository<SharedTravelStatus> sharedTravelStatusRepository)
         {
             this.sharedTravelsRepository = sharedTravelsRepository;
+            this.sharedTravelStatusRepository = sharedTravelStatusRepository;
         }
 
         public async Task<string> CreateAsync(SharedTravelCreateInputViewModel input, string userId)
         {
+            var statusId = this.sharedTravelStatusRepository
+                .AllAsNoTracking()
+                .Where(x => x.Name == ServicesConstants.AdvertDefaultStatus)
+                .Select(x => x.Id)
+                .FirstOrDefault();
+
             var sharedTravelAdvert = new SharedTravelAdvert
             {
-                StatusId = ServicesConstants.AdvertDefaultStatus,
+                StatusId = statusId,
                 Seats = input.Seats,
                 StartDateAndTime = input.StartDateAndTime,
                 CreatedById = userId,
@@ -54,35 +64,104 @@
             throw new System.NotImplementedException();
         }
 
-        public async Task<IEnumerable<TViewModel>> GetAllAsync<TViewModel>()
+        public async Task<IEnumerable<T>> GetAllAsync<T>(int page, int itemsPerPage = 10)
         {
             var adverts = await this.sharedTravelsRepository
-                   .All()
-                   .Where(x => x.StatusId == ServicesConstants.AdvertDefaultStatus)
+                   .AllAsNoTracking()
+                   .Where(x => x.Status.Name == ServicesConstants.AdvertDefaultStatus)
+                   .Skip(PageFormula(page, itemsPerPage))
+                   .Take(itemsPerPage)
                    .OrderBy(x => x.StartDateAndTime)
-                   .To<TViewModel>()
+                   .To<T>()
                    .ToListAsync();
 
             return adverts;
         }
 
-        public async Task<IEnumerable<TViewModel>> GetAllByAuthorId<TViewModel>(string id)
+        public async Task<IEnumerable<T>> GetAllByAuthorId<T>(string id, int page, int itemsPerPage)
         {
             var adverts = await this.sharedTravelsRepository
                 .All()
                 .Where(a => a.CreatedById == id)
-                .To<TViewModel>()
+                .Skip(PageFormula(page, itemsPerPage))
+                .Take(itemsPerPage)
+                .To<T>()
                 .ToListAsync();
 
             return adverts;
         }
 
-        public async Task<TViewModel> GetViewModelByIdAsync<TViewModel>(string id)
+        public async Task<IEnumerable<T>> GetByDestinationAsync<T>(string search, int page, int itemsPerPage)
+        {
+            var destination = search.ToLower();
+
+            return await this.sharedTravelsRepository
+                 .AllAsNoTracking()
+                 .Where(x => x.StartDestination.Name.ToLower() == destination || x.EndDestination.Name.ToLower() == destination)
+                 .Skip(PageFormula(page, itemsPerPage))
+                 .Take(itemsPerPage)
+                 .To<T>()
+                 .ToListAsync();
+        }
+
+        public async Task<IEnumerable<T>> GetUserAdvertByDestination<T>(string search, string userId, int page, int itemsPerPage)
+        {
+            var destination = search.ToLower();
+
+            return await this.sharedTravelsRepository
+                .AllAsNoTracking()
+                .Where(x =>
+                    x.CreatedById == userId &&
+                    (x.StartDestination.Name.ToLower() == destination || x.EndDestination.Name.ToLower() == destination))
+                .Skip(PageFormula(page, itemsPerPage))
+                .Take(itemsPerPage)
+                .To<T>()
+                .ToListAsync();
+        }
+
+        public async Task<int> GetAdvertsCountByUser(string userId)
+        {
+            return await this.sharedTravelsRepository
+                .All()
+                .Where(x => x.CreatedById == userId)
+                .CountAsync();
+        }
+
+        public async Task<int> GetAllAdvertsCount()
+        {
+            return await this.sharedTravelsRepository
+                .All()
+                .CountAsync();
+        }
+
+        public async Task<int> GetSearchedUserAdvertsCount(string search, string userId)
+        {
+            var destination = search.ToLower();
+
+            return await this.sharedTravelsRepository
+                .AllAsNoTracking()
+                .Where(x =>
+                    x.CreatedById == userId &&
+                    (x.StartDestination.Name.ToLower() == destination || x.EndDestination.Name.ToLower() == destination))
+                .CountAsync();
+        }
+
+        public async Task<int> GetSearchedAdvertsCount(string search)
+        {
+            var destination = search.ToLower();
+
+            return await this.sharedTravelsRepository
+                    .AllAsNoTracking()
+                    .Where(x => x.StartDestination.Name.ToLower() == destination || x.EndDestination.Name.ToLower() == destination)
+                    .CountAsync();
+        }
+
+        public async Task<T> GetViewModelByIdAsync<T>(string id)
         {
             var advert = await this.sharedTravelsRepository
                 .All()
                 .Where(a => a.Id == id)
-                .To<TViewModel>()
+                .To<T>()
                 .FirstOrDefaultAsync();
 
             if (advert == null)
@@ -109,6 +188,11 @@
         private static bool IsTrue(string input)
         {
             return input == GlobalConstants.TrueState ? true : false;
+        }
+
+        private static int PageFormula(int page, int itemsPerPage)
+        {
+            return (page - 1) * itemsPerPage;
         }
     }
 }

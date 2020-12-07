@@ -4,13 +4,10 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    using AutoMapper;
     using ElectricTravel.Common;
-    using ElectricTravel.Data.Models.Advertisement;
-    using ElectricTravel.Services.Mapping;
     using ElectricTravel.Web.InputViewModels.Common;
 
-    public class SharedTravelCreateInputViewModel /*: IMapTo<SharedTravelAdvert>, IHaveCustomMappings*/
+    public class SharedTravelCreateInputViewModel 
     {
         [Display(Name = InputViewModelsConstants.StartTripDateAndTime)]
         public DateTime StartDateAndTime { get; set; }
@@ -46,18 +43,5 @@
         public IEnumerable<KeyValuePair<string, string>> Cities { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> TypesOfTravel { get; set; }
-
-        ////public void CreateMappings(IProfileExpression configuration)
-        ////{
-        ////    configuration.CreateMap<SharedTravelCreateInputViewModel, SharedTravelAdvert>().ForMember(
-        ////        m => m.PlaceForLuggage,
-        ////        opt => opt.MapFrom(x => x.PlaceForLuggage == GlobalConstants.TrueState))
-        ////        .ForMember(
-        ////        m => m.SmokeRestriction,
-        ////        opt => opt.MapFrom(x => x.SmokeRestriction == GlobalConstants.TrueState))
-        ////        .ForMember(
-        ////        m => m.WithReturnTrip,
-        ////        opt => opt.MapFrom(x => x.WithReturnTrip == GlobalConstants.TrueState));
-        ////}
     }
 }
