@@ -3,15 +3,16 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using ElectricTravel.Web.ViewModels.Images;
-    using Microsoft.AspNetCore.Http;
+    using ElectricTravel.Web.InputViewModels.Images;
 
     public interface IImagesService
     {
-        Task UploadImages(string userId, IEnumerable<IFormFile> images, string imagePath);
+        Task UploadImages(ImageUploadViewModel imageUpload);
 
         Task<IEnumerable<T>> GetProfileImagesByUserId<T>(string userId);
 
         Task DeleteAsync(string imageId);
+
+        Task<int> GetImageTypeId(string userImageType);
     }
 }

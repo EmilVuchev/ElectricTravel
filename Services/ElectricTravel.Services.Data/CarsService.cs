@@ -12,6 +12,7 @@
     using ElectricTravel.Services.Data.Contracts;
     using ElectricTravel.Services.Mapping;
     using ElectricTravel.Web.InputViewModels.ElectricCars;
+    using ElectricTravel.Web.ViewModels.Cars;
     using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
     using SixLabors.ImageSharp;
@@ -38,6 +39,31 @@
             this.carMakesRepository = carMakesRepository;
             this.carTypesRepository = carTypesRepository;
             this.imageTypeRepository = imageTypeRepository;
+        }
+
+        public IEnumerable<VehicleMakeViewModel> GetMakes()
+        {
+            return this.carMakesRepository.AllAsNoTracking().To<VehicleMakeViewModel>().ToList();
+        }
+
+        public List<VehicleModelViewModel> GetModelsByMakeId(int makeId)
+        {
+            var models = this.carModelRepository.AllAsNoTracking()
+                .Where(x => x.MakeId == makeId).To<VehicleModelViewModel>().ToList();
+            return models;
+        }
+
+        public IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairsById(int id)
+        {
+            return this.carMakesRepository.AllAsNoTracking()
+                .Where(x => x.CarTypes.Any(y => y.CarTypeId == id))
+                .Select(x => new
+                {
+                    x.Id,
+                    x.Name,
+                })
+                .OrderBy(x => x.Name)
+                .ToList().Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Name));
         }
 
         public async Task<IEnumerable<T>> GetCarsByUserId<T>(string userId)
@@ -123,8 +149,8 @@
             };
 
             await this.carRepository.AddAsync(car);
-            var count = await this.carRepository.SaveChangesAsync();
-            return count;
+            await this.carRepository.SaveChangesAsync();
+            return car.Id;
         }
 
         public async Task<bool> DeleteCarAsync(int? carId)
@@ -143,20 +169,20 @@
             return true;
         }
 
-        public async Task UploadVideosAndImages(
-            int carId, IEnumerable<IFormFile> videos, string videoDescription, IEnumerable<IFormFile> images, string imageType, string path)
-        {
-            Directory.CreateDirectory($"{path}/carImages/");
+        ////public async Task UploadVideosAndImages(
+        ////    int carId, IEnumerable<IFormFile> videos, string videoDescription, IEnumerable<IFormFile> images, string imageType, string path)
+        ////{
+        ////    Directory.CreateDirectory($"{path}/carImages/");
 
-            var typeImage = this.imageTypeRepository
-                .AllAsNoTracking()
-                .FirstOrDefault(x => x.Name == imageType);
+        ////    var typeImage = this.imageTypeRepository
+        ////        .AllAsNoTracking()
+        ////        .FirstOrDefault(x => x.Name == imageType);
 
-            var car = this.carRepository.All().FirstOrDefault(x => x.Id == carId);
+        ////    var car = this.carRepository.All().FirstOrDefault(x => x.Id == carId);
 
-            await this.UploadFile(car, path, images, imageType);
-            await this.UploadFile(car, path, videos, videoDescription);
-        }
+        ////    await this.UploadFile(car, path, images, imageType);
+        ////    await this.UploadFile(car, path, videos, videoDescription);
+        ////}
 
         public Task<T> EditAsync<T>(int? id)
         {
@@ -173,46 +199,45 @@
             return car;
         }
 
-        private async Task UploadFile(ElectricCar car, string path, IEnumerable<IFormFile> files, string imageType)
-        {
-            foreach (var file in files)
-            {
-                var extension = Path.GetExtension(file.FileName).TrimStart('.');
+        ////private async Task UploadFile(ElectricCar car, string path, IEnumerable<IFormFile> files, string imageType)
+        ////{
+        ////    foreach (var file in files)
+        ////    {
+        ////        var extension = Path.GetExtension(file.FileName).TrimStart('.');
 
-                var itemName = Guid.NewGuid().ToString();
+        ////        var itemName = Guid.NewGuid().ToString();
 
-                var typeImage = this.imageTypeRepository
-                .AllAsNoTracking()
-                .FirstOrDefault(x => x.Name == imageType);
+        ////        var typeImage = this.imageTypeRepository
+        ////        .AllAsNoTracking()
+        ////        .FirstOrDefault(x => x.Name == imageType);
 
-                var physicalPath = string.Empty;
+        ////        var physicalPath = string.Empty;
 
-                if (!this.allowedExtensions.Any(x => extension.EndsWith(x)))
-                {
-                    throw new Exception($"Invalid image extension {extension}");
-                }
+        ////        if (!this.allowedExtensions.Any(x => extension.EndsWith(x)))
+        ////        {
+        ////            throw new Exception($"Invalid image extension {extension}");
+        ////        }
 
-                physicalPath = $"{path}/carImages/{itemName}.{extension}";
-                var dbImage = new ElectricTravel.Data.Models.Multimedia.Image
-                {
-                    ElectricCarId = car.Id,
-                    Extension = extension,
-                    Name = itemName,
-                    Path = $"../../car/carImages/{itemName}.{extension}",
-                    Type = typeImage,
-                };
+        ////        physicalPath = $"{path}/carImages/{itemName}.{extension}";
+        ////        var dbImage = new ElectricTravel.Data.Models.Multimedia.Image
+        ////        {
+        ////            ElectricCarId = car.Id,
+        ////            Extension = extension,
+        ////            Name = itemName,
+        ////            Path = $"../../car/carImages/{itemName}.{extension}",
+        ////            Type = typeImage,
+        ////        };
 
-                car.Images.Add(dbImage);
+        ////        car.Images.Add(dbImage);
 
+        ////        using var image = SixLabors.ImageSharp.Image.Load(file.OpenReadStream());
+        ////        ////TODO image resize algorithm
+        ////        image.Mutate(x => x.Resize(795, 300));
+        ////        image.Save(physicalPath);
+        ////    }
 
-                using var image = SixLabors.ImageSharp.Image.Load(file.OpenReadStream());
-                ////TODO image resize algorithm
-                image.Mutate(x => x.Resize(795, 300));
-                image.Save(physicalPath);
-            }
-
-            this.carRepository.Update(car);
-            await this.carRepository.SaveChangesAsync();
-        }
+        ////    this.carRepository.Update(car);
+        ////    await this.carRepository.SaveChangesAsync();
+        ////}
     }
 }

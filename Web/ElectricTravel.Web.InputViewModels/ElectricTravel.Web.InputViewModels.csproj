@@ -6,16 +6,17 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.0" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.205">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Data\ElectricTravel.Data.Models\ElectricTravel.Data.Models.csproj" />
     <ProjectReference Include="..\..\ElectricTravel.Common\ElectricTravel.Common.csproj" />
     <ProjectReference Include="..\..\Services\ElectricTravel.Services.Mapping\ElectricTravel.Services.Mapping.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Images\" />
   </ItemGroup>
 
 </Project>

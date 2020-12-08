@@ -11,6 +11,7 @@
     using ElectricTravel.Data.Models.Multimedia;
     using ElectricTravel.Services.Data.Contracts;
     using ElectricTravel.Services.Mapping;
+    using ElectricTravel.Web.InputViewModels.Images;
     using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
     using SixLabors.ImageSharp;
@@ -40,6 +41,15 @@
             await this.imageRepository.SaveChangesAsync();
         }
 
+        public async Task<int> GetImageTypeId(string userImageType)
+        {
+            return await this.imageTypeRepository
+           .AllAsNoTracking()
+           .Where(x => x.Name == userImageType)
+           .Select(x => x.Id)
+           .FirstOrDefaultAsync();
+        }
+
         public async Task<IEnumerable<T>> GetProfileImagesByUserId<T>(string userId)
         {
             return await this.imageRepository.AllAsNoTracking()
@@ -49,17 +59,14 @@
         }
 
         ////TODO This method should work both with cars pictures and user pictures
-        public async Task UploadImages(string userId, IEnumerable<IFormFile> images, string imagePath)
+        public async Task UploadImages(ImageUploadViewModel imageUploadModel)
         {
-            Directory.CreateDirectory($"{imagePath}/userImages/");
+            Directory.CreateDirectory($"{imageUploadModel.Path}/userImages/");
+            Directory.CreateDirectory($"{imageUploadModel.Path}/carImages/");
 
-            var imageTypeId = this.imageTypeRepository
-                .AllAsNoTracking()
-                .Where(x => x.Name == GlobalConstants.UserImageType)
-                .Select(x => x.Id)
-                .FirstOrDefault();
+            var imageTypeId = await this.GetImageTypeId(imageUploadModel.ImageTypeName);
 
-            foreach (var imageFile in images)
+            foreach (var imageFile in imageUploadModel.Images)
             {
                 var extension = Path.GetExtension(imageFile.FileName).TrimStart('.');
 
@@ -70,14 +77,28 @@
 
                 var imageName = Guid.NewGuid().ToString();
 
-                var physicalPath = $"{imagePath}/userImages/{imageName}.{extension}";
+                var physicalPath = string.Empty;
+                var relativePath = string.Empty;
+                int? carId = imageUploadModel.CarId;
+
+                if (imageUploadModel.ImageTypeName == GlobalConstants.CarExternalImage)
+                {
+                    physicalPath = $"{imageUploadModel.Path}/carImages/{imageName}.{extension}";
+                    relativePath = $"../../img/carImages/{imageName}.{extension}";
+                }
+                else if (imageUploadModel.ImageTypeName == GlobalConstants.UserImageType)
+                {
+                    physicalPath = $"{imageUploadModel.Path}/userImages/{imageName}.{extension}";
+                    relativePath = $"../../img/userImages/{imageName}.{extension}";
+                }
 
                 var dbImage = new ElectricTravel.Data.Models.Multimedia.Image
                 {
-                    UserId = userId,
+                    ElectricCarId = carId,
+                    UserId = imageUploadModel.UserId,
                     Extension = extension,
                     Name = imageName,
-                    Path = $"../../img/userImages/{imageName}.{extension}",
+                    Path = relativePath,
                     TypeId = imageTypeId,
                 };
 

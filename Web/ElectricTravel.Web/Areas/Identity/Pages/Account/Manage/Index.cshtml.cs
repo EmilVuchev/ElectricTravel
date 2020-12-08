@@ -7,6 +7,7 @@
     using ElectricTravel.Common;
     using ElectricTravel.Data.Models.User;
     using ElectricTravel.Services.Data.Contracts;
+    using ElectricTravel.Web.InputViewModels.Images;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
@@ -168,7 +169,14 @@
 
             if (this.Input.Images != null)
             {
-                await this.imagesService.UploadImages(user.Id, this.Input.Images, $"{this.environment.WebRootPath}/img");
+                var imageUploadModel = new ImageUploadViewModel();
+                imageUploadModel.CarId = null;
+                imageUploadModel.UserId = user.Id;
+                imageUploadModel.Images = this.Input.Images;
+                imageUploadModel.Path = $"{this.environment.WebRootPath}/img";
+                imageUploadModel.ImageTypeName = GlobalConstants.UserImageType;
+
+                await this.imagesService.UploadImages(imageUploadModel);
             }
 
             await this.signInManager.RefreshSignInAsync(user);

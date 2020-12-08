@@ -12,6 +12,8 @@
 
         public const string UserImageType = "User Picture";
 
+        public const string CarExternalImage = "Car Exterior";
+
         public const string TrueState = "Yes";
 
         public const string FalseState = "No";

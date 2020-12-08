@@ -2,18 +2,13 @@
 @{
     this.ViewData["Title"] = "Add car";
     var carTypes = this.Model.CarTypes.Select(x => new SelectListItem(x.Value, x.Key));
-    var carMakes = this.Model.CarMakes.Select(x => new SelectListItem(x.Value, x.Key));
-    var carModels = this.Model.CarModels.Select(x => new SelectListItem(x.Value, x.Key));
 }
 
 <div class="container sm custom-bg">
-    <hr/>
+    <hr />
     <form method="post" enctype="multipart/form-data">
         <div class="container form-group text-light" method="post">
             <br />
-            <div class="row">
-
-            </div>
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="row">
                 <div class="col">
@@ -26,14 +21,16 @@
                 <div class="col">
                     <div class="form-group">
                         <label asp-for="CarMakeId"></label>
-                        <select asp-for="CarMakeId" class="form-control" asp-items="carMakes"></select>
+                        <select asp-for="CarMakeId" class="form-control" asp-items="@ViewBag.Makes" id="makeslist">
+                            <option>Select</option>
+                        </select>
                         <span asp-validation-for="CarMakeId" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group">
                         <label asp-for="CarModelId"></label>
-                        <select asp-for="CarModelId" class="form-control" asp-items="carModels"></select>
+                        <select asp-for="CarModelId" class="form-control" id="modelslist"></select>
                         <span asp-validation-for="CarModelId" class="text-danger"></span>
                     </div>
                 </div>
@@ -135,6 +132,15 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="exampleInputFile">Pictures input</label>
+                        <input asp-for="Images" type="file" class="form-control-file" id="exampleInputFile" />
+                        <span asp-validation-for="Images" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
             <div class="p-3 mb-4">
                 <div class="text-center">
                     <input type="submit" class="btn btn-primary" value="ADD CAR" asp-action="Create" />
@@ -146,5 +152,28 @@
 
 @section Scripts{
     <link href="~/css/style.css" rel="stylesheet" />
+    <script type="text/javascript">
+        //Insert default item "Select" in dropdownlist on load
+        $(document).ready(function () {
+            var items = "<option value='0'>Select</option>";
+            $("#modelslist").html(items);
+        });
+
+        //Bind City dropdownlist
+        $("#makeslist").change(function () {
+            var makeId = $("#makeslist").val();
+            var url = "/ElectricCars/GetModelsList";
+
+            $.getJSON(url, { MakeId: makeId }, function (data) {
+                var item = "";
+                $("#modelslist").empty();
+                $.each(data, function (i, model) {
+                    item += '<option value="' + model.value + '">' + model.text + '</option>'
+                });
+                $("#modelslist").html(item);
+            });
+        });
+    </script>
 }
+
 

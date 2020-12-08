@@ -6,10 +6,13 @@
     using ElectricTravel.Data.Models.User;
     using ElectricTravel.Services.Data.Contracts;
     using ElectricTravel.Web.InputViewModels.ElectricCars;
+    using ElectricTravel.Web.InputViewModels.Images;
     using ElectricTravel.Web.ViewModels.Cars;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Rendering;
 
     [Authorize(Roles = GlobalConstants.DriverRoleName)]
     public class ElectricCarsController : Controller
@@ -17,15 +20,18 @@
         private readonly ICarsService carsService;
         private readonly IImagesService imagesService;
         private readonly UserManager<ElectricTravelUser> userManager;
+        private readonly IWebHostEnvironment environment;
 
         public ElectricCarsController(
             ICarsService carsService,
             IImagesService imagesService,
-            UserManager<ElectricTravelUser> userManager)
+            UserManager<ElectricTravelUser> userManager,
+            IWebHostEnvironment environment)
         {
             this.carsService = carsService;
             this.imagesService = imagesService;
             this.userManager = userManager;
+            this.environment = environment;
         }
 
         public async Task<IActionResult> Index()
@@ -41,11 +47,19 @@
             return this.View(cars);
         }
 
+        [HttpGet]
+        public JsonResult GetModelsList(int makeId)
+        {
+            var citylist = new SelectList(this.carsService.GetModelsByMakeId(makeId), "Id", "Name");
+            return this.Json(citylist);
+
+        }
+
         public IActionResult Create()
         {
+            this.ViewBag.Makes = new SelectList(this.carsService.GetMakes(), nameof(VehicleMakeViewModel.Id), nameof(VehicleMakeViewModel.Name));
+
             var inputModel = new ElectricCarInputViewModel();
-            inputModel.CarMakes = this.carsService.GetAllCarMakesAsKeyValuePairs();
-            inputModel.CarModels = this.carsService.GetAllCarModelsAsKeyValuePairs();
             inputModel.CarTypes = this.carsService.GetAllCarTypesAsKeyValuePairs();
 
             return this.View(inputModel);
@@ -60,7 +74,17 @@
             }
 
             var userId = this.userManager.GetUserId(this.User);
-            var count = await this.carsService.CreateCarAsync(input, userId);
+            var carId = await this.carsService.CreateCarAsync(input, userId);
+
+            var imagePath = $"{this.environment.WebRootPath}/img";
+            var imageUploadModel = new ImageUploadViewModel();
+            imageUploadModel.Images = input.Images;
+            imageUploadModel.Path = imagePath;
+            imageUploadModel.UserId = userId;
+            imageUploadModel.ImageTypeName = GlobalConstants.CarExternalImage;
+            imageUploadModel.CarId = carId;
+
+            await this.imagesService.UploadImages(imageUploadModel);
             return this.RedirectToAction("Index");
         }
 

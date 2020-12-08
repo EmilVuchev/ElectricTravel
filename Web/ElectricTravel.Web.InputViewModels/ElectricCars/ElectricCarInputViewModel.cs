@@ -1,8 +1,8 @@
 ﻿namespace ElectricTravel.Web.InputViewModels.ElectricCars
 {
-    using Microsoft.AspNetCore.Http;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using Microsoft.AspNetCore.Http;
 
     public class ElectricCarInputViewModel
     {
@@ -31,7 +31,7 @@
         [MaxLength(10)]
         public string Drive { get; set; }
 
-        [Range(1900, 2100, ErrorMessage = "Year should be between 1900 and now")]
+        [Range(1900, 2020, ErrorMessage = "Year should be between 1900 and now")]
         public int Year { get; set; }
 
         [Display(Name = "Horse power")]
@@ -63,9 +63,5 @@
         public IEnumerable<IFormFile> Images { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> CarTypes { get; set; }
-
-        public IEnumerable<KeyValuePair<string, string>> CarMakes { get; set; }
-
-        public IEnumerable<KeyValuePair<string, string>> CarModels { get; set; }
     }
 }
