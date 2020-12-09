@@ -7,11 +7,18 @@
 
 <div class="container text-center text-light custom-bg">
     <hr />
-    @if (this.TempData["Deleted"] != null)
+    @if (this.TempData.ContainsKey("Deleted"))
     {
         <div class="alert alert-@this.TempData["Deleted"]; alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             @this.TempData["Deleted"]
+        </div>
+    }
+    @if (this.TempData.ContainsKey("Message"))
+    {
+        <div class="alert alert-@this.TempData["Message"]; alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            @this.TempData["Message"]
         </div>
     }
     <div class="row">
@@ -34,7 +41,7 @@
                         <h3 class="card-header"><i class="fas fa-car"></i> @(carInfo.MakeName + " " + carInfo.ModelName)</h3>
                         <div class="card-body">
                             <h5 class="card-title">@carInfo.Battery</h5>
-                            <h6 class="card-subtitle text-muted">Electricity Consumption : @carInfo.ElectricityConsumption</h6>
+                            <h6 class="card-subtitle text-white">Electricity Consumption : @carInfo.ElectricityConsumption</h6>
                         </div>
                         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                             <hr />
@@ -42,10 +49,6 @@
                                 @if (!carInfo.Images.Any())
                                 {
                                     <img class="border-top border-bottom" src="~/img/race-car-svgrepo-com.svg" />
-                                    @*<svg xmlns="~/img/userImages/1505049423.svg" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
-                                            <rect width="100%" height="100%" fill="#868e96"></rect>
-                                            <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
-                                        </svg>*@
                                 }
                                 else
                                 {
@@ -55,15 +58,14 @@
                                         {
                                             <div class="carousel-item active">
                                                 <img class="d-block w-100" src="@image.Path"
-                                                     alt="First slide">
+                                                     alt="First slide" />
                                             </div>
                                         }
                                         else
                                         {
-
                                             <div class="carousel-item">
                                                 <img class="d-block w-100" src="@image.Path"
-                                                     alt="Second slide">
+                                                     alt="Second slide" />
                                             </div>
                                         }
 

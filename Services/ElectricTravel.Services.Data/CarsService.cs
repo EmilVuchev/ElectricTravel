@@ -1,8 +1,8 @@
-﻿namespace ElectricTravel.Services.Data
+﻿
+namespace ElectricTravel.Services.Data
 {
     using System;
     using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -13,37 +13,34 @@
     using ElectricTravel.Services.Mapping;
     using ElectricTravel.Web.InputViewModels.ElectricCars;
     using ElectricTravel.Web.ViewModels.Cars;
-    using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
-    using SixLabors.ImageSharp;
-    using SixLabors.ImageSharp.Processing;
 
     public class CarsService : ICarsService
     {
         private readonly IDeletableEntityRepository<ElectricCar> carRepository;
         private readonly IDeletableEntityRepository<Model> carModelRepository;
-        private readonly IDeletableEntityRepository<Make> carMakesRepository;
-        private readonly IDeletableEntityRepository<CarType> carTypesRepository;
-        private readonly IDeletableEntityRepository<ImageType> imageTypeRepository;
+        private readonly IDeletableEntityRepository<Make> carMakeRepository;
+        private readonly IDeletableEntityRepository<CarType> carTypeRepository;
+        private readonly IDeletableEntityRepository<Image> imageRepository;
         private string[] allowedExtensions = new[] { "jpg", "png", "gif", "jpeg" };
 
         public CarsService(
             IDeletableEntityRepository<ElectricCar> carRepository,
             IDeletableEntityRepository<Model> carModelRepository,
-            IDeletableEntityRepository<Make> carMakesRepository,
-            IDeletableEntityRepository<CarType> carTypesRepository,
-            IDeletableEntityRepository<ImageType> imageTypeRepository)
+            IDeletableEntityRepository<Make> carMakeRepository,
+            IDeletableEntityRepository<CarType> carTypeRepository,
+            IDeletableEntityRepository<Image> imageRepository)
         {
             this.carRepository = carRepository;
             this.carModelRepository = carModelRepository;
-            this.carMakesRepository = carMakesRepository;
-            this.carTypesRepository = carTypesRepository;
-            this.imageTypeRepository = imageTypeRepository;
+            this.carMakeRepository = carMakeRepository;
+            this.carTypeRepository = carTypeRepository;
+            this.imageRepository = imageRepository;
         }
 
         public IEnumerable<VehicleMakeViewModel> GetMakes()
         {
-            return this.carMakesRepository.AllAsNoTracking().To<VehicleMakeViewModel>().ToList();
+            return this.carMakeRepository.AllAsNoTracking().To<VehicleMakeViewModel>().ToList();
         }
 
         public List<VehicleModelViewModel> GetModelsByMakeId(int makeId)
@@ -55,7 +52,7 @@
 
         public IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairsById(int id)
         {
-            return this.carMakesRepository.AllAsNoTracking()
+            return this.carMakeRepository.AllAsNoTracking()
                 .Where(x => x.CarTypes.Any(y => y.CarTypeId == id))
                 .Select(x => new
                 {
@@ -78,7 +75,7 @@
 
         public IEnumerable<KeyValuePair<string, string>> GetAllCarMakesAsKeyValuePairs()
         {
-            var carMakes = this.carMakesRepository.AllAsNoTracking()
+            var carMakes = this.carMakeRepository.AllAsNoTracking()
                 .Select(x => new
                 {
                     x.Id,
@@ -113,7 +110,7 @@
 
         public IEnumerable<KeyValuePair<string, string>> GetAllCarTypesAsKeyValuePairs()
         {
-            var carTypes = this.carTypesRepository.AllAsNoTracking()
+            var carTypes = this.carTypeRepository.AllAsNoTracking()
                 .Select(x => new
                 {
                     x.Id,
@@ -158,6 +155,19 @@
             var car = this.carRepository.All()
                 .FirstOrDefault(x => x.Id == carId);
 
+            var images = await this.imageRepository.All()
+                .Where(x => x.ElectricCarId == carId)
+                .ToListAsync();
+
+            if (images != null)
+            {
+                foreach (var image in images)
+                {
+                    this.imageRepository.Delete(image);
+                    await this.imageRepository.SaveChangesAsync();
+                }
+            }
+
             this.carRepository.Delete(car);
             var deletedCount = await this.carRepository.SaveChangesAsync();
 
@@ -169,26 +179,6 @@
             return true;
         }
 
-        ////public async Task UploadVideosAndImages(
-        ////    int carId, IEnumerable<IFormFile> videos, string videoDescription, IEnumerable<IFormFile> images, string imageType, string path)
-        ////{
-        ////    Directory.CreateDirectory($"{path}/carImages/");
-
-        ////    var typeImage = this.imageTypeRepository
-        ////        .AllAsNoTracking()
-        ////        .FirstOrDefault(x => x.Name == imageType);
-
-        ////    var car = this.carRepository.All().FirstOrDefault(x => x.Id == carId);
-
-        ////    await this.UploadFile(car, path, images, imageType);
-        ////    await this.UploadFile(car, path, videos, videoDescription);
-        ////}
-
-        public Task<T> EditAsync<T>(int? id)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<T> GetCarById<T>(int? id)
         {
             var car = await this.carRepository.AllAsNoTracking()
@@ -198,46 +188,5 @@
 
             return car;
         }
-
-        ////private async Task UploadFile(ElectricCar car, string path, IEnumerable<IFormFile> files, string imageType)
-        ////{
-        ////    foreach (var file in files)
-        ////    {
-        ////        var extension = Path.GetExtension(file.FileName).TrimStart('.');
-
-        ////        var itemName = Guid.NewGuid().ToString();
-
-        ////        var typeImage = this.imageTypeRepository
-        ////        .AllAsNoTracking()
-        ////        .FirstOrDefault(x => x.Name == imageType);
-
-        ////        var physicalPath = string.Empty;
-
-        ////        if (!this.allowedExtensions.Any(x => extension.EndsWith(x)))
-        ////        {
-        ////            throw new Exception($"Invalid image extension {extension}");
-        ////        }
-
-        ////        physicalPath = $"{path}/carImages/{itemName}.{extension}";
-        ////        var dbImage = new ElectricTravel.Data.Models.Multimedia.Image
-        ////        {
-        ////            ElectricCarId = car.Id,
-        ////            Extension = extension,
-        ////            Name = itemName,
-        ////            Path = $"../../car/carImages/{itemName}.{extension}",
-        ////            Type = typeImage,
-        ////        };
-
-        ////        car.Images.Add(dbImage);
-
-        ////        using var image = SixLabors.ImageSharp.Image.Load(file.OpenReadStream());
-        ////        ////TODO image resize algorithm
-        ////        image.Mutate(x => x.Resize(795, 300));
-        ////        image.Save(physicalPath);
-        ////    }
-
-        ////    this.carRepository.Update(car);
-        ////    await this.carRepository.SaveChangesAsync();
-        ////}
     }
 }

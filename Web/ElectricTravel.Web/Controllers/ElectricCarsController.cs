@@ -70,22 +70,28 @@
         {
             if (!this.ModelState.IsValid)
             {
-                return this.Redirect("/ElectricCars/Create");
+                return this.RedirectToAction(nameof(this.Create));
             }
-
             var userId = this.userManager.GetUserId(this.User);
             var carId = await this.carsService.CreateCarAsync(input, userId);
 
-            var imagePath = $"{this.environment.WebRootPath}/img";
-            var imageUploadModel = new ImageUploadViewModel();
-            imageUploadModel.Images = input.Images;
-            imageUploadModel.Path = imagePath;
-            imageUploadModel.UserId = userId;
-            imageUploadModel.ImageTypeName = GlobalConstants.CarExternalImage;
-            imageUploadModel.CarId = carId;
+            if (input.Images != null)
+            {
+                var imagePath = $"{this.environment.WebRootPath}/img";
 
-            await this.imagesService.UploadImages(imageUploadModel);
-            return this.RedirectToAction("Index");
+                var imageUploadModel = new ImageUploadViewModel();
+                imageUploadModel.Images = input.Images;
+                imageUploadModel.Path = imagePath;
+                imageUploadModel.UserId = userId;
+                imageUploadModel.ImageTypeName = GlobalConstants.CarExternalImage;
+                imageUploadModel.CarId = carId;
+
+                await this.imagesService.UploadImages(imageUploadModel);
+            }
+
+            this.TempData["Message"] = "You can drive now. Your car is created successufully";
+
+            return this.RedirectToAction(nameof(this.Index));
         }
 
         public async Task<IActionResult> Edit(int? id)
@@ -95,7 +101,7 @@
                 return this.NotFound();
             }
 
-            var car = await this.carsService.EditAsync<CarViewModel>(id);
+            var car = await this.carsService.GetCarById<CarViewModel>(id);
 
             if (car == null)
             {
@@ -168,12 +174,8 @@
             {
                 this.TempData["Deleted"] = "Successfully deleted!";
             }
-            else
-            {
-                this.TempData["Deleted"] = "Something is wrong - unsuccessfull delete! Try again later!";
-            }
 
-            return this.RedirectToAction("Index");
+            return this.RedirectToAction(nameof(this.Index));
         }
     }
 }
