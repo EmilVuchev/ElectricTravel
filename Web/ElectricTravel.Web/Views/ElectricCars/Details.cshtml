@@ -5,6 +5,13 @@
 
 <br />
 <div class="container">
+    @if (this.TempData.ContainsKey("Message"))
+    {
+        <div class="alert alert-@this.TempData["Message"]; alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            @this.TempData["Message"]
+        </div>
+    }
     <div class="card text-center text-light custom-bg">
         <div class="card-header text-center"><h2>@this.ViewData["Title"]</h2></div>
         <div class="card-body">
@@ -206,7 +213,7 @@
                             </a>
                             <form method="post">
                                 <div class="text-center">
-                                    <input type="submit" class="btn btn-primary btn-sm" value="Delete" asp-action="DeletePicture" asp-route-id="@image.Id" />
+                                    <input type="submit" class="btn btn-primary btn-sm" value="Delete" asp-controller="Images" asp-action="DeleteCarPicture" asp-route-id="@image.Id" asp-route-carId="@Model.Id" />
                                 </div>
                             </form>
                         </div>

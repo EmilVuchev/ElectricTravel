@@ -12,7 +12,6 @@
     using ElectricTravel.Services.Data.Contracts;
     using ElectricTravel.Services.Mapping;
     using ElectricTravel.Web.InputViewModels.Images;
-    using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
     using SixLabors.ImageSharp;
     using SixLabors.ImageSharp.Processing;
@@ -31,14 +30,21 @@
             this.imageTypeRepository = imageTypeRepository;
         }
 
-        public async Task DeleteAsync(string imageId)
+        public async Task<bool> DeleteAsync(string imageId)
         {
             var image = this.imageRepository.All()
                 .FirstOrDefault(x => x.Id == imageId);
 
             this.imageRepository.Delete(image);
 
-            await this.imageRepository.SaveChangesAsync();
+            var countChanges = await this.imageRepository.SaveChangesAsync();
+
+            if (countChanges == 0)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public async Task<int> GetImageTypeId(string userImageType)

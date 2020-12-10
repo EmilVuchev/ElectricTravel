@@ -13,6 +13,7 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
+    using Microsoft.AspNetCore.Routing;
 
     [Authorize(Roles = GlobalConstants.DriverRoleName)]
     public class ElectricCarsController : Controller
@@ -50,8 +51,8 @@
         [HttpGet]
         public JsonResult GetModelsList(int makeId)
         {
-            var citylist = new SelectList(this.carsService.GetModelsByMakeId(makeId), "Id", "Name");
-            return this.Json(citylist);
+            var modelsList = new SelectList(this.carsService.GetModelsByMakeId(makeId), "Id", "Name");
+            return this.Json(modelsList);
 
         }
 
@@ -72,6 +73,7 @@
             {
                 return this.RedirectToAction(nameof(this.Create));
             }
+
             var userId = this.userManager.GetUserId(this.User);
             var carId = await this.carsService.CreateCarAsync(input, userId);
 
@@ -101,48 +103,33 @@
                 return this.NotFound();
             }
 
-            var car = await this.carsService.GetCarById<CarViewModel>(id);
+            this.ViewBag.Makes = new SelectList(this.carsService.GetMakes(), nameof(VehicleMakeViewModel.Id), nameof(VehicleMakeViewModel.Name));
+            var inputModel = await this.carsService.GetCarByIdForEdit(id);
+            inputModel.CarTypes = this.carsService.GetAllCarTypesAsKeyValuePairs();
 
-            if (car == null)
+            if (inputModel == null)
             {
                 return this.NotFound();
             }
 
-            return this.View(car);
+            return this.View(inputModel);
         }
 
-        ////[HttpPost]
-        ////public async Task<IActionResult> Edit(int id, ElectricCarInputViewModel car)
-        ////{
-        ////    if (id != car.Id)
-        ////    {
-        ////        return this.NotFound();
-        ////    }
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, ElectricCarEditInputViewModel input)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View("Error");
+            }
 
-        ////    if (this.ModelState.IsValid)
-        ////    {
-        ////        try
-        ////        {
-        ////            this.dataRepository.Update(category);
-        ////            await this.dataRepository.SaveChangesAsync();
-        ////        }
-        ////        catch (DbUpdateConcurrencyException)
-        ////        {
-        ////            if (!this.CategoryExists(category.Id))
-        ////            {
-        ////                return this.NotFound();
-        ////            }
-        ////            else
-        ////            {
-        ////                throw;
-        ////            }
-        ////        }
+            var userId = this.userManager.GetUserId(this.User);
 
-        ////        return this.RedirectToAction(nameof(this.Index));
-        ////    }
-
-        ////    return this.View(category);
-        ////}
+            await this.carsService.UpdateAsync(id, input, userId);
+            return this.RedirectToAction(
+                nameof(this.Details),
+                new RouteValueDictionary(new { controller = "ElectricCars", action = "Details", Id = id }));
+        }
 
         public async Task<IActionResult> Details(int? id)
         {

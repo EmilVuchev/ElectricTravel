@@ -7,6 +7,7 @@
     using ElectricTravel.Services.Data.Contracts;
     using ElectricTravel.Web.Controllers.Common;
     using ElectricTravel.Web.InputViewModels.SharedTravel;
+    using ElectricTravel.Web.ViewModels.Cars;
     using ElectricTravel.Web.ViewModels.SharedTravels;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
@@ -18,6 +19,7 @@
         private readonly ICitiesService citiesService;
         private readonly ITypeOfTravelService typeOfTravelService;
         private readonly IRatingService ratingService;
+        private readonly ICarsService carsService;
         private readonly AspNetUserManager<ElectricTravelUser> userManager;
         private readonly IUsersService usersService;
 
@@ -27,12 +29,14 @@
             ICitiesService citiesService,
             ITypeOfTravelService typeOfTravelService,
             IRatingService ratingService,
+            ICarsService carsService,
             AspNetUserManager<ElectricTravelUser> userManager)
         {
             this.sharedTravelsService = sharedTravelsService;
             this.citiesService = citiesService;
             this.typeOfTravelService = typeOfTravelService;
             this.ratingService = ratingService;
+            this.carsService = carsService;
             this.userManager = userManager;
             this.usersService = usersService;
         }
@@ -140,14 +144,19 @@
 
         public async Task<IActionResult> DriverDetails(string id)
         {
-            var driver = await this.usersService.GetDriverInfo(id);
+            var user = await this.userManager.FindByIdAsync(id);
+            var isInRole = await this.userManager.IsInRoleAsync(user, GlobalConstants.DriverRoleName);
 
-            if (driver == null)
+            if (!isInRole)
             {
                 return this.NotFound();
             }
 
-            return this.View(driver);
+            var model = new DriverCarListViewModel();
+            model.Driver = await this.usersService.GetDriverInfo<DriverInfoViewModel>(id);
+            model.Cars = await this.carsService.GetCarsByUserId<DriverCarViewModel>(id);
+
+            return this.View(model);
         }
     }
 }

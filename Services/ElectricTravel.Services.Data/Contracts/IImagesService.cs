@@ -11,7 +11,7 @@
 
         Task<IEnumerable<T>> GetProfileImagesByUserId<T>(string userId);
 
-        Task DeleteAsync(string imageId);
+        Task<bool> DeleteAsync(string imageId);
 
         Task<int> GetImageTypeId(string userImageType);
     }

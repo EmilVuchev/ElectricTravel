@@ -1,11 +1,111 @@
-﻿@model DriverInfoViewModel
+﻿@model ElectricTravel.Web.ViewModels.Cars.DriverCarListViewModel
 @{
-    ViewData["Title"] = "DriverDetails";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    this.ViewData["Title"] = "Driver Details";
+    this.Layout = "~/Views/Shared/_Layout.cshtml";
+    var text = string.Empty;
+    var listOfStrings = new List<string>();
 }
 
-<h1>@Model.UserName</h1>
+<br />
+<div class="container">
+    <div class="card text-white custom-bg">
+        <div class="card-header text-center"><h2>@this.ViewData["Title"]</h2></div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label asp-for="Driver.UserName"></label>
+                                <span>@Model.Driver.UserName</span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label asp-for="Driver.Name"></label>
+                                <span>@(Model.Driver.FirstName + " " + Model.Driver.LastName)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label asp-for="Driver.PhoneNumber"></label>
+                                <span>
+                                    @Model.Driver.PhoneNumber
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label asp-for="Driver.Email"></label>
+                                <span>
+                                    @Model.Driver.Email
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="row">
+                                <div class="col">
+                                    <label asp-for="Cars"></label>
+                                    @foreach (var car in Model.Cars)
+                                    {
+                                        text = car.MakeName + " " + car.ModelName;
+                                        listOfStrings.Add(text);
+                                    }
+                                    <span>@(string.Join(", ",listOfStrings))</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label asp-for="Driver.Rating"></label>
+                                <span>@Model.Driver.Rating</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="col thumb">
+                        <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title=""
+                           data-image="@Model.Driver.ImagePath"
+                           data-target="#image-gallery">
+                            <img class="img-thumbnail"
+                                 src="@Model.Driver.ImagePath">
+                        </a>
+                    </div>
+                    <div class="modal fade" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="image-gallery-title"></h4>
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        <span aria-hidden="true">×</span><span class="sr-only">Close</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <img id="image-gallery-image" class="img-responsive col-md-12" src="@Model.Driver.ImagePath">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary float-left" id="show-previous-image">
+                                        <i class="fa fa-arrow-left"></i>
+                                    </button>
+                                    <button type="button" id="show-next-image" class="btn btn-secondary float-right">
+                                        <i class="fa fa-arrow-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-
-<span>BLAblalblalbbal</span>
+@section Scripts{
+    <link href="~/css/style.css" rel="stylesheet" />
+}
 

@@ -6,6 +6,13 @@
 
 <div class="container custom-bg">
     <hr>
+    @if (this.TempData.ContainsKey("Message"))
+    {
+        <div class="alert alert-@this.TempData["Message"]; alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            @this.TempData["Message"]
+        </div>
+    }
     <div class="row">
         <div class="col">
             <div class="container">
@@ -20,11 +27,6 @@
                                     <div class="carousel-item active text-center">
                                         <img class="d-block w-100" src="@image.Path"
                                              alt="First slide">
-                                        @*<form method="post">
-                                                <div class="text-center">
-                                                    <input type="submit" value="Delete" asp-action="DeletePicture" asp-route-id="@image.Id">
-                                                </div>
-                                            </form>*@
                                     </div>
                                 }
                                 else
@@ -73,7 +75,7 @@
                                 </a>
                                 <form method="post">
                                     <div class="text-center">
-                                        <input type="submit" class="btn btn-primary btn-sm" value="Delete" asp-action="DeletePicture" asp-route-id="@image.Id" />
+                                        <input type="submit" class="btn btn-primary btn-sm" value="Delete" asp-controller="Images" asp-action="DeleteUserPicture" asp-route-id="@image.Id" />
                                     </div>
                                 </form>
                             </div>

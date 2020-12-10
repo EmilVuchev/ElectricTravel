@@ -143,6 +143,7 @@ namespace ElectricTravel.Services.Data
                 UserId = userId,
                 Year = input.Year,
                 CarTypeId = input.CarTypeId,
+                Description = input.Description,
             };
 
             await this.carRepository.AddAsync(car);
@@ -179,6 +180,35 @@ namespace ElectricTravel.Services.Data
             return true;
         }
 
+        public async Task<ElectricCarEditInputViewModel> GetCarByIdForEdit(int? id)
+        {
+            var car = await this.carRepository.AllAsNoTracking()
+                   .Where(x => x.Id == id)
+                   .Select(x => new ElectricCarEditInputViewModel
+                   {
+                       Id = x.Id,
+                       Seats = x.Seats,
+                       TopSpeed = x.TopSpeed,
+                       Acceleration = x.Acceleration,
+                       Battery = x.Battery,
+                       Color = x.Color,
+                       Description = x.Description,
+                       Doors = x.Doors,
+                       Drive = x.Drive,
+                       ElectricityConsumption = x.ElectricityConsumption,
+                       HorsePower = x.HorsePower,
+                       Kilometres = x.Kilometres,
+                       LuggageCapacity = x.LuggageCapacity,
+                       Range = x.Range,
+                       Year = x.Year,
+                       //MakeName = x.Make.Name,
+                       //ModelName = x.Model.Name,
+                   })
+                   .FirstOrDefaultAsync();
+
+            return car;
+        }
+
         public async Task<T> GetCarById<T>(int? id)
         {
             var car = await this.carRepository.AllAsNoTracking()
@@ -187,6 +217,36 @@ namespace ElectricTravel.Services.Data
                 .FirstOrDefaultAsync();
 
             return car;
+        }
+
+        public async Task UpdateAsync(int id, ElectricCarEditInputViewModel input, string userId)
+        {
+            var car = await this.carRepository.All()
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync();
+
+            car.Acceleration = input.Acceleration;
+            car.Battery = input.Battery;
+            car.CarTypeId = input.CarTypeId;
+            car.Color = input.Color;
+            car.Description = input.Description;
+            car.Doors = input.Doors;
+            car.Drive = input.Drive;
+            car.ElectricityConsumption = input.ElectricityConsumption;
+            car.HorsePower = input.HorsePower;
+            car.Kilometres = input.Kilometres;
+            car.LuggageCapacity = input.LuggageCapacity;
+            car.MakeId = input.CarMakeId;
+            car.ModelId = input.CarModelId;
+            car.Range = input.Range;
+            car.Seats = input.Seats;
+            car.TopSpeed = input.TopSpeed;
+            car.UserId = userId;
+            car.Year = input.Year;
+            car.CarTypeId = input.CarTypeId;
+
+            this.carRepository.Update(car);
+            await this.carRepository.SaveChangesAsync();
         }
     }
 }

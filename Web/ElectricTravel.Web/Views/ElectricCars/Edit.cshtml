@@ -1,7 +1,8 @@
-﻿@model ElectricTravel.Web.ViewModels.Cars.CarViewModel
+﻿@model ElectricTravel.Web.InputViewModels.ElectricCars.ElectricCarEditInputViewModel
 
 @{
     this.ViewData["Title"] = "Edit car";
+    var carTypes = this.Model.CarTypes.Select(x => new SelectListItem(x.Value, x.Key));
 }
 
 <br />
@@ -11,30 +12,44 @@
             <h2>@this.ViewData["Title"]</h2>
         </div>
         <div class="card-body">
-            <div class="row">
-                <form asp-action="Edit">
+            <form asp-action="Edit" enctype="multipart/form-data">
+                <div class="row">
                     <div asp-validation-summary="All" class="text-danger"></div>
                     <div class="col">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="row">
+                                    <div class="col">
+                                        <label asp-for="CarTypeId"></label>
+                                    </div>
+                                    <div class="col text-white-50">
+                                        <select asp-for="CarTypeId" class="form-control" asp-items="carTypes">
+                                            <option>Select</option>
+                                        </select>
+                                        <span asp-validation-for="CarTypeId" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
                         <div class="row">
                             <div class="col">
                                 <div class="row">
                                     <div class="col">
-                                        <label asp-for="MakeName"></label>
+                                        <label asp-for="CarMakeId"></label>
                                     </div>
                                     <div class="col">
-                                        <input asp-for="MakeName" class="form-control" />
-                                        <span asp-validation-for="MakeName" class="text-danger"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="row">
-                                    <div class="col">
-                                        <label asp-for="ModelName"></label>
+                                        <select asp-for="CarMakeId" class="form-control" asp-items="@ViewBag.Makes" id="makeslist">
+                                            <option>Select</option>
+                                        </select>
+                                        <span asp-validation-for="CarMakeId" class="text-danger"></span>
                                     </div>
                                     <div class="col">
-                                        <input asp-for="ModelName" class="form-control" />
-                                        <span asp-validation-for="ModelName" class="text-danger"></span>
+                                        <label asp-for="CarModelId"></label>
+                                    </div>
+                                    <div class="col">
+                                        <select asp-for="CarModelId" class="form-control" id="modelslist"></select>
+                                        <span asp-validation-for="CarModelId" class="text-danger"></span>
                                     </div>
                                 </div>
                             </div>
@@ -218,68 +233,38 @@
                                 </div>
                             </div>
                         </div>
-                        <br />
+                    </div>
+                    <div class="col">
                         <div class="row">
                             <div class="col">
-                                <a class="btn btn-info" asp-controller="ElectricCars" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+                                <img class="" src="~/img/race-car-svgrepo-com.svg" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="exampleInputFile">Pictures input</label>
+                                    <input asp-for="Images" class="form-control-file" id="exampleInputFile" />
+                                    <span asp-validation-for="Images" class="text-danger"></span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </form>
-                    @foreach (var image in Model.Images)
-                    {
-                        <div class="col thumb">
-                            <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title=""
-                               data-image="@image.Path"
-                               data-target="#image-gallery">
-                                <img class="img-thumbnail"
-                                     src="@image.Path"
-                                     alt="@image.Name">
-                            </a>
-                            <form method="post">
-                                <div class="text-center">
-                                    <input type="submit" class="btn btn-primary btn-sm" value="Delete" asp-action="DeletePicture" asp-route-id="@image.Id" />
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal fade" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title" id="image-gallery-title"></h4>
-                                        <button type="button" class="close" data-dismiss="modal">
-                                            <span aria-hidden="true">×</span><span class="sr-only">Close</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <img id="image-gallery-image" class="img-responsive col-md-12" src="@image.Path">
-                                    </div>
-                                    <div class="modal-footer">
-                                        <div>
-                                            @image.Description
-                                        </div>
-                                        <button type="button" class="btn btn-secondary float-left" id="show-previous-image">
-                                            <i class="fa fa-arrow-left"></i>
-                                        </button>
-                                        <button type="button" id="show-next-image" class="btn btn-secondary float-right">
-                                            <i class="fa fa-arrow-right"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    }
-                @if(!Model.Images.Any())
-                {
+                </div>
+                <input type="hidden" asp-for="Id" />
+                <br />
+                <div class="row">
                     <div class="col">
-                        <img class="" src="~/img/race-car-svgrepo-com.svg" />
+                        <button class="btn btn-info" type="submit" asp-controller="ElectricCars" asp-action="Edit" asp-route-id="@Model.Id">Save changes</button>
                     </div>
-                }
-            </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 
 @section Scripts{
     <link href="~/css/style.css" rel="stylesheet" />
+
+    <script src="~/js/car.js"></script>
 }

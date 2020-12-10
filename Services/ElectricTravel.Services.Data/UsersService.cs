@@ -9,7 +9,8 @@
     using ElectricTravel.Data.Models.User;
     using ElectricTravel.Services.Data.Contracts;
     using ElectricTravel.Services.Mapping;
-    using ElectricTravel.Web.ViewModels.SharedTravels;
+
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
 
     public class UsersService : IUsersService
@@ -18,16 +19,20 @@
         private readonly IDeletableEntityRepository<ElectricTravelUser> userRepository;
         private readonly IDeletableEntityRepository<SharedTravelAdvert> sharedTravelRepository;
         private readonly IDeletableEntityRepository<ImageType> imageTypeRepository;
-        private string userPicture = "User Picture";
+        private readonly UserManager<ElectricTravelUser> userManager;
+
+        ////private string userPicture = "User Picture";
 
         public UsersService(
             IDeletableEntityRepository<ElectricTravelUser> userRepository,
             IDeletableEntityRepository<SharedTravelAdvert> sharedTravelRepository,
-            IDeletableEntityRepository<ImageType> imageTypeRepository)
+            IDeletableEntityRepository<ImageType> imageTypeRepository,
+            UserManager<ElectricTravelUser> userManager)
         {
             this.userRepository = userRepository;
             this.sharedTravelRepository = sharedTravelRepository;
             this.imageTypeRepository = imageTypeRepository;
+            this.userManager = userManager;
         }
 
         ////public async Task<ImageViewModel> GetUserPictureByAdvertId(string id)
@@ -55,12 +60,12 @@
         ////    return image;
         ////}
 
-        public async Task<DriverInfoViewModel> GetDriverInfo(string id)
+        public async Task<T> GetDriverInfo<T>(string id)
         {
             var driver = await this.userRepository
                  .AllAsNoTracking()
                  .Where(x => x.Id == id)
-                 .To<DriverInfoViewModel>()
+                 .To<T>()
                  .FirstOrDefaultAsync();
 
             return driver;

@@ -22,10 +22,14 @@
 
         Task<T> GetCarById<T>(int? id);
 
+        Task<ElectricCarEditInputViewModel> GetCarByIdForEdit(int? id);
+
         IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairsById(int id);
 
         IEnumerable<VehicleMakeViewModel> GetMakes();
 
         List<VehicleModelViewModel> GetModelsByMakeId(int makeId);
+
+        Task UpdateAsync(int id, ElectricCarEditInputViewModel input, string userId);
     }
 }
