@@ -59,22 +59,53 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <hr />
+                    <div class="row">
                         <div class="col">
-                            <div class="form-group">
-                                <label asp-for="Driver.Rating"></label>
-                                <span>@Model.Driver.Rating</span>
-                            </div>
+                            <label asp-for="Driver.Rating"></label>
+                            <span id="averageVoteValue">@Model.Driver.Rating.ToString("0.0")</span>
+                            <span> / 5</span>
                         </div>
+                        <div class="col">
+                            <label>Rate driver: </label>
+                        </div>
+
+                    </div>
+                    <div class="row offset-4">
+                        <ul>
+                            <li class="list-inline">
+                                <ul id="list" class="item-rating">
+                                    <li class="star-fill list-inline-item" data-vote="1"><i class="ratingStar fas fa-star"></i></li>
+                                    <li class="star-fill list-inline-item" data-vote="2"><i class="ratingStar fas fa-star"></i></li>
+                                    <li class="star-fill list-inline-item" data-vote="3"><i class="ratingStar fas fa-star"></i></li>
+                                    <li class="star-fill list-inline-item" data-vote="4"><i class="ratingStar fas fa-star"></i></li>
+                                    <li class="star-fill list-inline-item" data-vote="5"><i class="ratingStar fas fa-star"></i></li>
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 <div class="col">
                     <div class="col thumb">
-                        <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title=""
-                           data-image="@Model.Driver.ImagePath"
-                           data-target="#image-gallery">
-                            <img class="img-thumbnail"
-                                 src="@Model.Driver.ImagePath">
-                        </a>
+                        @if (Model.Driver.ImagePath == null)
+                        {
+                            <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title=""
+                               data-image="~/img/default-profile-picture1.jpg"
+                               data-target="#image-gallery">
+                                <img class="img-thumbnail"
+                                     src="~/img/default-profile-picture1.jpg">
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title=""
+                               data-image="@Model.Driver.ImagePath"
+                               data-target="#image-gallery">
+                                <img class="img-thumbnail"
+                                     src="@Model.Driver.ImagePath">
+                            </a>
+                        }
                     </div>
                     <div class="modal fade" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
@@ -86,7 +117,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <img id="image-gallery-image" class="img-responsive col-md-12" src="@Model.Driver.ImagePath">
+                                    <img id="image-gallery-image" class="img-responsive col-md-12" src="~/img/default-profile-picture1.jpg">
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary float-left" id="show-previous-image">
@@ -104,8 +135,46 @@
         </div>
     </div>
 </div>
+<form method="post" id="antiForgeryForm"></form>
 
 @section Scripts{
     <link href="~/css/style.css" rel="stylesheet" />
+
+    <style>
+        .ratingStar:hover {
+            background-color: yellow;
+        }
+    </style>
+    <script>
+        $(".ratingStar").hover(function () {
+            $(".ratingStar").addClass("far").removeClass("fas");
+
+            $(this).addClass("fas").removeClass("far");
+            $(this).prevAll(".ratingStar").addClass("fas").removeClass("far");
+        });
+
+    </script>
+    <script>
+       $("li[data-vote]").each(function (el) {
+                $(this).click(function () {
+                    var value = $(this).attr("data-vote");
+                    var userId = "@Model.Driver.Id";
+                    var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
+                    var data = { userId: userId, value: value };
+                    $.ajax({
+                        type: "POST",
+                        url: "/api/Ratings",
+                        data: JSON.stringify(data),
+                        headers: {
+                            'X-CSRF-TOKEN': antiForgeryToken
+                        },
+                        success: function (data) {
+                            $('#averageVoteValue').html(data.averageRate.toFixed(1));
+                        },
+                        contentType: 'application/json',
+                    });
+                })
+            });
+    </script>
 }
 

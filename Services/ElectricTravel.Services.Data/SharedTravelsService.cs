@@ -59,6 +59,7 @@
             return sharedTravelId;
         }
 
+        ////TODO
         public Task DeleteByIdAsync(int id)
         {
             throw new System.NotImplementedException();
@@ -163,12 +164,6 @@
                 .Where(a => a.Id == id)
                 .To<T>()
                 .FirstOrDefaultAsync();
-
-            if (advert == null)
-            {
-                ////TODO Exception Messages
-                throw new NullReferenceException("string.Format(ExceptionMessages.MovieNotFound, id)");
-            }
 
             return advert;
         }

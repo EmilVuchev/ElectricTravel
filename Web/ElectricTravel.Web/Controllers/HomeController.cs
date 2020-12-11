@@ -29,10 +29,6 @@
             return this.View(model);
         }
 
-        // public async Task<IActionResult> UploadImage()
-        // {
-        //    return null;
-        // }
         public IActionResult Privacy()
         {
             return this.View();

@@ -5,7 +5,7 @@
 
     using ElectricTravel.Services.Data.Contracts;
     using ElectricTravel.Web.InputViewModels.Rates;
-    using ElectricTravel.Web.ViewModels.Rates;
+    using ElectricTravel.Web.ViewModels.Ratings;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
@@ -22,7 +22,7 @@
 
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult<PostRateResponseModel>> Post(PostRateInputModel input)
+        public async Task<ActionResult<RatingViewModel>> Post(PostRateInputModel input)
         {
             var assessorId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
@@ -33,7 +33,7 @@
 
             await this.ratingService.SetRateAsync(input.UserId, assessorId, input.Value);
             var averageRate = this.ratingService.GetAverageRating(input.UserId);
-            return new PostRateResponseModel { AverageRate = averageRate };
+            return new RatingViewModel { AverageRate = averageRate, };
         }
     }
 }

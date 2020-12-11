@@ -5,6 +5,7 @@ namespace ElectricTravel.Web.ViewModels.SharedTravels
     using System.Linq;
 
     using AutoMapper;
+    using AutoMapper.Configuration.Annotations;
     using ElectricTravel.Data.Models.User;
     using ElectricTravel.Services.Mapping;
 
@@ -28,6 +29,7 @@ namespace ElectricTravel.Web.ViewModels.SharedTravels
         [Display(Name = "Phone number: ")]
         public string PhoneNumber { get; set; }
 
+        [Ignore]
         public string ImagePath { get; set; }
 
         [Display(Name = "Rating: ")]
@@ -36,8 +38,6 @@ namespace ElectricTravel.Web.ViewModels.SharedTravels
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<ElectricTravelUser, DriverInfoViewModel>()
-                .ForMember(x => x.ImagePath, opt =>
-                opt.MapFrom(x => x.Images.FirstOrDefault(y => y.UserId == this.Id).Path))
                 .ForMember(x => x.Rating, opt =>
                 opt.MapFrom(x => x.UserRatings.Count == 0 ? 0 : x.UserRatings.Average(r => r.Value)));
         }

@@ -9,6 +9,8 @@
     {
         Task UploadImages(ImageUploadViewModel imageUpload);
 
+        Task<string> GetSingleProfileImagePathByUserId(string userId);
+
         Task<IEnumerable<T>> GetProfileImagesByUserId<T>(string userId);
 
         Task<bool> DeleteAsync(string imageId);

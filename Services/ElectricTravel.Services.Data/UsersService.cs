@@ -21,8 +21,6 @@
         private readonly IDeletableEntityRepository<ImageType> imageTypeRepository;
         private readonly UserManager<ElectricTravelUser> userManager;
 
-        ////private string userPicture = "User Picture";
-
         public UsersService(
             IDeletableEntityRepository<ElectricTravelUser> userRepository,
             IDeletableEntityRepository<SharedTravelAdvert> sharedTravelRepository,
@@ -34,31 +32,6 @@
             this.imageTypeRepository = imageTypeRepository;
             this.userManager = userManager;
         }
-
-        ////public async Task<ImageViewModel> GetUserPictureByAdvertId(string id)
-        ////{
-        ////    var advert = await this.sharedTravelRepository.GetByIdWithDeletedAsync(id);
-        ////    var user = await this.userRepository.GetByIdWithDeletedAsync(advert.CreatedById);
-        ////    var image = new ImageViewModel();
-
-        ////    if (user.Image == null)
-        ////    {
-        ////        return null;
-        ////        ////throw new NullReferenceException("TODOText");
-        ////    }
-
-        ////    var userImageType = user.Image.Type.Name;
-
-        ////    if (userImageType == GlobalConstants.UserImageType)
-        ////    {
-        ////        image.Description = user.Image.Description;
-        ////        image.Extension = user.Image.Extension;
-        ////        image.Name = user.Image.Name;
-        ////        image.Path = user.Image.Path;
-        ////    }
-
-        ////    return image;
-        ////}
 
         public async Task<T> GetDriverInfo<T>(string id)
         {

@@ -1,7 +1,7 @@
 ﻿namespace ElectricTravel.Web.Controllers
 {
-    using System.Security.Claims;
     using System.Threading.Tasks;
+
     using ElectricTravel.Common;
     using ElectricTravel.Data.Models.User;
     using ElectricTravel.Services.Data.Contracts;
@@ -20,6 +20,7 @@
         private readonly ITypeOfTravelService typeOfTravelService;
         private readonly IRatingService ratingService;
         private readonly ICarsService carsService;
+        private readonly IImagesService imagesService;
         private readonly AspNetUserManager<ElectricTravelUser> userManager;
         private readonly IUsersService usersService;
 
@@ -30,6 +31,7 @@
             ITypeOfTravelService typeOfTravelService,
             IRatingService ratingService,
             ICarsService carsService,
+            IImagesService imagesService,
             AspNetUserManager<ElectricTravelUser> userManager)
         {
             this.sharedTravelsService = sharedTravelsService;
@@ -37,6 +39,7 @@
             this.typeOfTravelService = typeOfTravelService;
             this.ratingService = ratingService;
             this.carsService = carsService;
+            this.imagesService = imagesService;
             this.userManager = userManager;
             this.usersService = usersService;
         }
@@ -132,6 +135,11 @@
 
         public async Task<IActionResult> TripDetails(string id)
         {
+            if (id == null)
+            {
+                return this.NotFound();
+            }
+
             var advertInfo = await this.sharedTravelsService.GetViewModelByIdAsync<SharedTravelDetailsViewModel>(id);
 
             if (advertInfo == null)
@@ -154,6 +162,7 @@
 
             var model = new DriverCarListViewModel();
             model.Driver = await this.usersService.GetDriverInfo<DriverInfoViewModel>(id);
+            model.Driver.ImagePath = await this.imagesService.GetSingleProfileImagePathByUserId(id);
             model.Cars = await this.carsService.GetCarsByUserId<DriverCarViewModel>(id);
 
             return this.View(model);

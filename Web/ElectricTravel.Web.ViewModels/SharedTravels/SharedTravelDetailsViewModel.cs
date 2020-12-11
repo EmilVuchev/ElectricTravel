@@ -2,6 +2,8 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+
     using AutoMapper;
     using ElectricTravel.Common;
     using ElectricTravel.Data.Models.Advertisement;
@@ -33,13 +35,13 @@
         [Display(Name = "To: ")]
         public string EndDestinationName { get; set; }
 
-        [Display(Name = "Status: ")]
-        public string StatusName { get; set; }
-
         public string CreatedById { get; set; }
 
         [Display(Name = "Driver: ")]
         public string CreatedByUserName { get; set; }
+
+        [Display(Name = "Driver Rating: ")]
+        public double Rating { get; set; }
 
         [Display(Name = "Description: ")]
         public string Description { get; set; }
@@ -47,6 +49,8 @@
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<SharedTravelAdvert, SharedTravelDetailsViewModel>()
+                .ForMember(x => x.Rating, opt =>
+                    opt.MapFrom(x => x.CreatedBy.UserRatings.Count() == 0 ? 0 : x.CreatedBy.UserRatings.Average(v => v.Value)))
                 .ForMember(
                m => m.SmokeRestriction,
                opt => opt.MapFrom(x => x.SmokeRestriction == true ? GlobalConstants.TrueState : GlobalConstants.FalseState))

@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace ElectricTravel.Web.InputViewModels.Rates
+﻿namespace ElectricTravel.Web.InputViewModels.Rates
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class PostRateInputModel
     {
         [Required]

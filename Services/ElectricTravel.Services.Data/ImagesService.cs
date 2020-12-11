@@ -64,7 +64,16 @@
                 .ToListAsync();
         }
 
-        ////TODO This method should work both with cars pictures and user pictures
+        public async Task<string> GetSingleProfileImagePathByUserId(string userId)
+        {
+            var imagePath = await this.imageRepository.AllAsNoTracking()
+                .Where(x => x.UserId == userId && x.Type.Name == GlobalConstants.UserImageType)
+                .Select(x => x.Path)
+                .FirstOrDefaultAsync();
+
+            return imagePath;
+        }
+
         public async Task UploadImages(ImageUploadViewModel imageUploadModel)
         {
             Directory.CreateDirectory($"{imageUploadModel.Path}/userImages/");

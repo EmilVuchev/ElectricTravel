@@ -18,8 +18,13 @@
                 </div>
                 <div class="col">
                     <div class="form-group">
-                        <label asp-for="StatusName"></label>
-                        <span>@Model.StatusName</span>
+                        <label asp-for="CreatedByUserName"></label>
+                        <span>
+                            @Model.CreatedByUserName
+                            <a class="btn btn-primary" asp-action="DriverDetails" asp-route-id="@Model.CreatedById">
+                                <i class="far fa-user"></i>
+                            </a>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -42,8 +47,10 @@
                 </div>
                 <div class="col">
                     <div class="form-group">
-                        <label asp-for="CreatedByUserName"></label>
-                        <span>@Model.CreatedByUserName <a class="btn btn-primary" asp-action="DriverDetails" asp-route-id="@Model.CreatedById"><i class="far fa-user"></i></a></span>
+                        <label asp-for="Rating"></label>
+                        <span>
+                            @Model.Rating/5.0<i class="fas fa-star"></i>
+                        </span>
                     </div>
                 </div>
                 <div class="col">
@@ -79,17 +86,11 @@
                     </div>
                 </div>
             </div>
-            @*<div class="col">
-                    <div class="form-group">
-                        <label asp-for="@Model.Description"></label>
-                        <span>@Model.Description</span>
-                    </div>
-                </div>*@
             <div class="row">
                 <div class="col">
                     <div class="form-group">
                         <label asp-for="Description"></label>
-                        <br/>
+                        <br />
                         <span>@Model.Description</span>
                     </div>
                 </div>
@@ -97,117 +98,9 @@
         </div>
     </div>
 </div>
-
-
-
-
-@*<hr />
-    <div class="container">
-        <div class="col-lg-10 col-xl-9 mx-auto">
-            <div>
-                <h2>@this.ViewData["Title"]</h2>
-                <p>
-                    <label asp-for="@Model.StartDestinationName"></label>
-                    <span class="float-sm-right">
-                        @Model.StartDestinationName
-                    </span>
-                </p>
-                <p>
-                    <label asp-for="@Model.EndDestinationName"></label>
-                    <span class="float-sm-right">
-                        @Model.EndDestinationName
-                    </span>
-                </p>
-                <p>
-                    <label>Departure date and time:</label>
-                    <span class="float-sm-right">@Model.StartDateAndTime</span>
-                </p>
-                <p>
-                    <label>Available seats:</label>
-                    <span class="float-sm-right">@Model.Seats</span>
-                </p>
-                <p>
-                    <label>Place for Luggage:</label>
-                    <span class="float-sm-right">@Model.PlaceForLuggage</span>
-                </p>
-                <p>
-                    <label>Return Trip:</label>
-                    <span class="float-sm-right">@Model.WithReturnTrip</span>
-                </p>
-                <p>
-                    <label>Smoking:</label>
-                    <span class="float-sm-right">@Model.SmokeRestriction</span>
-                </p>
-                <p>
-                    <label>Travel type:</label>
-                    <span class="float-sm-right">@Model.TypeOfTravelName</span>
-                </p>
-                <div class="content"></div>
-            </div>*@
-<!--<div class="col-md-6">
-    <h2>Driver details</h2>-->
-@*<img class="modal-avatar" src="@Model.CreatedBy.ImagePath" alt="Курче">*@
-<!--<p>
-    <label>Name:</label>-->
-@*<span class="float-sm-right">@(Model.CreatedBy.FirstName + " " + Model.CreatedBy.LastName)</span>*@
-<!--</p>
-<ul class="fa-grip-horizontal">
-    <li class="single-meta list-inline">
-        <ul-->
-@*id="list"*@
-<!--class="item-rating">
-<li class="star-fill list-inline-item" data-vote="1"><i class="fas fa-star"></i></li>
-<li class="star-fill list-inline-item" data-vote="2"><i class="fas fa-star"></i></li>
-<li class="star-fill list-inline-item" data-vote="3"><i class="fas fa-star"></i></li>
-<li class="star-fill list-inline-item" data-vote="4"><i class="fas fa-star"></i></li>
-<li class="star-fill list-inline-item" data-vote="5"><i class="fas fa-star"></i></li>
-<li><span id="averageVoteValue">-->
-@*@Model.CreatedBy.Rating.ToString(*@<!--"0.0"-->@*)*@
-<!--</span><span> / 5</span> </li>
-        </ul>
-    </li>
-</ul>
-<p>
-    <label>Car:</label>-->
-@*<span class="float-sm-right">@(Model.CreatedBy.CarMake + " " + Model.CreatedBy.CarModel)</span>*@
-<!--</p>
-<p>
-    <label>Car pictures:</label>
-
-</p>
-<p>
-    <label>Phone number:</label>-->
-@*<span class="float-sm-right">@Model.CreatedBy.PhoneNumber</span>*@
-<!--</p>
-</div>-->
-    </div>
-</div>
 <form method="post" id="antiForgeryForm"></form>
 
 @section Scripts{
-
     <link href="~/css/style.css" rel="stylesheet" />
-    <script>
-            $("li[data-vote]").each(function (el) {
-                $(this).click(function () {
-                    var value = $(this).attr("data-vote");
-                    var userId = "@Model.CreatedById";
-                    var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
-                    var data = { userId: userId, value: value };
-                    $.ajax({
-                        type: "POST",
-                        url: "/api/Ratings",
-                        data: JSON.stringify(data),
-                        headers: {
-                            'X-CSRF-TOKEN': antiForgeryToken
-                        },
-                        success: function (data) {
-                            $('#averageVoteValue').html(data.averageRate.toFixed(1));
-                        },
-                        contentType: 'application/json',
-                    });
-                })
-            });
-    </script>
 }
 
