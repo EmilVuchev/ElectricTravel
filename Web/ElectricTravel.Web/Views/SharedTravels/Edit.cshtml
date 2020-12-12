@@ -1,0 +1,103 @@
+﻿@model ElectricTravel.Web.InputViewModels.SharedTravel.SharedTravelEditInputViewModel
+@{
+    this.ViewData["Title"] = "Edit Advert";
+    var cities = this.Model.Cities.Select(x => new SelectListItem(x.Value, x.Key));
+    var types = this.Model.TypesOfTravel.Select(x => new SelectListItem(x.Value, x.Key));
+}
+
+<div class="container custom-bg text-center text-light">
+    <form method="post">
+        <br />
+        <h1 class="text-center">@this.ViewData["Title"]</h1>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label asp-for="StartDestinationId"></label>
+                    <select asp-for="StartDestinationId" class="form-control" asp-items="cities"></select>
+                    <span asp-validation-for="StartDestinationId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label asp-for="EndDestinationId"></label>
+                    <select asp-for="EndDestinationId" class="form-control" asp-items="cities"></select>
+                    <span asp-validation-for="EndDestinationId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label asp-for="Seats"></label>
+                    <input type="number" min="1" max="7" value="1" asp-for="Seats" class="form-control" />
+                    <span asp-validation-for="Seats" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label asp-for="StartDateAndTime"></label>
+                    <input value="" type="datetime-local" asp-for="StartDateAndTime" class="form-control" />
+                    <span asp-validation-for="StartDateAndTime" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label asp-for="TypeOfTravelId"></label>
+                    <select asp-for="TypeOfTravelId" class="form-control" asp-items="types"></select>
+                    <span asp-validation-for="TypeOfTravelId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label asp-for="SmokeRestriction"></label>
+                    <select asp-for="SmokeRestriction" class="form-control">
+                        <option>@GlobalConstants.TrueState</option>
+                        <option>@GlobalConstants.FalseState</option>
+                    </select>
+                    <span asp-validation-for="SmokeRestriction" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label asp-for="WithReturnTrip"></label>
+                    <select asp-for="WithReturnTrip" class="form-control">
+                        <option>@GlobalConstants.TrueState</option>
+                        <option>@GlobalConstants.FalseState</option>
+                    </select>
+                    <span asp-validation-for="WithReturnTrip" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label asp-for="PlaceForLuggage"></label>
+                    <select asp-for="PlaceForLuggage" class="form-control">
+                        <option>@GlobalConstants.TrueState</option>
+                        <option>@GlobalConstants.FalseState</option>
+                    </select>
+                    <span asp-validation-for="PlaceForLuggage" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label asp-for="Description"></label>
+                    <textarea asp-for="Description" class="form-control" rows="8"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="p-3 mb-4">
+            <div class="text-center">
+                <input type="submit" class="btn btn-info" value="EDIT" asp-controller="SharedTravels" asp-action="Edit"  asp-route-id="@Model.Id"/>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts{
+    <link href="~/css/style.css" rel="stylesheet" />
+}
+
+

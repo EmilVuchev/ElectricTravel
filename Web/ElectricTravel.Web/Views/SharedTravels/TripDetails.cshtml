@@ -1,11 +1,22 @@
 ﻿@model SharedTravelDetailsViewModel
+@using ElectricTravel.Data.Models.User
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ElectricTravelUser> UserManager
 @{
     this.ViewData["Title"] = "Trip details";
     this.Layout = "~/Views/Shared/_Layout.cshtml";
+    var userId = this.UserManager.GetUserId(this.User);
 }
 
 <br />
 <div class="container">
+    @if (this.TempData.ContainsKey("Message"))
+    {
+        <div class="alert alert-@this.TempData["Message"]; alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            @this.TempData["Message"]
+        </div>
+    }
     <div class="card text-white custom-bg">
         <div class="card-header text-center"><h2>@this.ViewData["Title"]</h2></div>
         <div class="card-body">
@@ -92,6 +103,15 @@
                         <label asp-for="Description"></label>
                         <br />
                         <span>@Model.Description</span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        @if (userId == Model.CreatedById)
+                        {
+                            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-info"><i class="fas fa-edit"></i></a>
+                            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                        }
                     </div>
                 </div>
             </div>

@@ -6,6 +6,13 @@
 
 <div class="container sm custom-bg text-white">
     <hr />
+    @if (this.TempData.ContainsKey("Message"))
+    {
+        <div class="alert alert-@this.TempData["Message"]; alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            @this.TempData["Message"]
+        </div>
+    }
     <h1 class="text-center">@this.ViewData["Title"]</h1>
     <hr />
     <partial name="_SharedTravelPartial" model="@Model" />

@@ -1,29 +1,21 @@
-﻿@*@model ElectricTravel.Web.ViewModels.Home.SharedTravelHomeListingViewModel*@
+﻿@model ElectricTravel.Web.ViewModels.Home.SharedTravelHomeListingViewModel
 @using ElectricTravel.Common
 @{
     this.ViewData["Title"] = "Home Page";
 }
 
 <div class="container my-4">
-
-    <p class="font-weight-bold text-white">Bootstrap background image full screen</p>
-
-    <p>
-        Detailed documentation and more examples (half background image, bakcground video) you can find in our
-    </p>
-
-    <hr>
-
+    @foreach (var advert in Model.SharedTravels)
+    {
+        <span>@advert.StartDestinationName</span>
+        <span>@advert.WithReturnTripAsString</span>
+    }
 
 </div>
 
 @section Scripts{
-    <style>
-        body {
-            background: url('../../../img/jannes-glas-87royqk4t6o-unsplash.jpg') no-repeat center center fixed;
-            background-size: cover;
-        }
-    </style>
+    <link href="~/css/home.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
 }
 
 

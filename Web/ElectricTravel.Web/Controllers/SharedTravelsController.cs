@@ -6,12 +6,14 @@
     using ElectricTravel.Data.Models.User;
     using ElectricTravel.Services.Data.Contracts;
     using ElectricTravel.Web.Controllers.Common;
+    using ElectricTravel.Web.InputViewModels.ElectricCars;
     using ElectricTravel.Web.InputViewModels.SharedTravel;
     using ElectricTravel.Web.ViewModels.Cars;
     using ElectricTravel.Web.ViewModels.SharedTravels;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Routing;
 
     public class SharedTravelsController : Controller
     {
@@ -123,14 +125,27 @@
             }
 
             var userId = this.userManager.GetUserId(this.User);
+            var createdBy = await this.userManager.FindByIdAsync(userId);
 
-            var outputViewModel = await this.sharedTravelsService.CreateAsync(input, userId);
-            return this.View("ThankYou", outputViewModel);
+            var advertId = await this.sharedTravelsService.CreateAsync(input, userId);
+
+            var model = new ThankYouVIewModel()
+            {
+                AdvertId = advertId,
+                UserName = createdBy.UserName,
+            };
+
+            return this.View("ThankYou", model);
         }
 
-        public IActionResult ThankYou()
+        public IActionResult ThankYou(ThankYouVIewModel model)
         {
-            return this.View();
+            if (model.AdvertId == null || model.UserName == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.View(model);
         }
 
         public async Task<IActionResult> TripDetails(string id)
@@ -166,6 +181,71 @@
             model.Cars = await this.carsService.GetCarsByUserId<DriverCarViewModel>(id);
 
             return this.View(model);
+        }
+
+        [Authorize(Roles = GlobalConstants.DriverRoleName)]
+        public async Task<IActionResult> Delete(string id)
+        {
+            if (id == null)
+            {
+                return this.NotFound();
+            }
+
+            var userId = this.userManager.GetUserId(this.User);
+
+            var isDeleted = await this.sharedTravelsService.DeleteAsync(id, userId);
+
+            if (isDeleted)
+            {
+                this.TempData["Message"] = "Your advert has been deleted";
+            }
+
+            return this.RedirectToAction("All");
+        }
+
+        [Authorize(Roles = GlobalConstants.DriverRoleName)]
+        public async Task<IActionResult> Edit(string id)
+        {
+            if (id == null)
+            {
+                return this.NotFound();
+            }
+
+            var inputModel = await this.sharedTravelsService.GetViewModelByIdAsync(id);
+            inputModel.Id = id;
+            inputModel.Cities = this.citiesService.GetAllAsKeyValuePairs();
+            inputModel.TypesOfTravel = this.typeOfTravelService.GetAllAsKeyValuePairs();
+
+            if (inputModel == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.View(inputModel);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = GlobalConstants.DriverRoleName)]
+        public async Task<IActionResult> Edit(string id, SharedTravelEditInputViewModel input)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                ////??????
+                return this.View("Error");
+            }
+
+            var userId = this.userManager.GetUserId(this.User);
+
+            var hasEdited = await this.sharedTravelsService.UpdateAsync(id, input, userId);
+
+            if (hasEdited)
+            {
+                this.TempData["Message"] = "Your advert has been edited";
+            }
+
+            return this.RedirectToAction(
+                nameof(this.TripDetails),
+                new RouteValueDictionary(new { controller = "SharedTravels", action = "TripDetails", Id = id }));
         }
     }
 }

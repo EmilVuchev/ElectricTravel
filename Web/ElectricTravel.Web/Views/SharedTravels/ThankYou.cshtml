@@ -1,18 +1,25 @@
-﻿@model string
+﻿@model ThankYouVIewModel
 @{
     this.ViewData["Title"] = "ThankYou";
     this.Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<content class="text-center alert-secondary">
-    <h1 class="text-success">Thank you</h1>
-    <h2>for your advert,</h2>
-    <h2>@User.Identity.Name!</h2>
-</content>
+<br />
+<div class="container custom-bg">
+    <br />
+    <content class="text-center alert-secondary">
+        <h1 class="text-success">Thank You!</h1>
+        <h2>
+            @Model.UserName, your  <a asp-area="" asp-controller="SharedTravels" asp-action="TripDetails" asp-route-id="@Model.AdvertId" class="text-primary">
+                advert
+            </a> has been created!
+        </h2>
+    </content>
+    <br />
+</div>
 
-<p>
-    <a asp-area="" asp-controller="SharedTravels" asp-action="TripDetails" asp-route-id="@Model" class="text-primary">
-        Link To Advert
-    </a>
-</p>
+
+@section Scripts{
+    <link href="~/css/style.css" rel="stylesheet" />
+}
 

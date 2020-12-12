@@ -10,6 +10,10 @@
     {
         Task<string> CreateAsync(SharedTravelCreateInputViewModel input, string userId);
 
+        Task<bool> UpdateAsync(string id, SharedTravelEditInputViewModel input, string userId);
+
+        Task<bool> DeleteAsync(string advertId, string userId);
+
         Task<IEnumerable<T>> GetAllAsync<T>(int page, int itemsPerPage = 10);
 
         Task<IEnumerable<SharedTravelsViewModel>> GetRecentlyAddedAsync(int count = 0);
@@ -17,6 +21,8 @@
         Task<IEnumerable<T>> GetAllByAuthorId<T>(string userId, int page, int itemsPerPage);
 
         Task<T> GetViewModelByIdAsync<T>(string id);
+
+        Task<SharedTravelEditInputViewModel> GetViewModelByIdAsync(string id);
 
         Task<int> GetAdvertsCountByUser(string userId);
 

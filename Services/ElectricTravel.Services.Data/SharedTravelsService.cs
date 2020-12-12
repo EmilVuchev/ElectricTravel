@@ -1,6 +1,5 @@
 ﻿namespace ElectricTravel.Services.Data
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -59,10 +58,52 @@
             return sharedTravelId;
         }
 
-        ////TODO
-        public Task DeleteByIdAsync(int id)
+        public async Task<bool> DeleteAsync(string advertId, string userId)
         {
-            throw new System.NotImplementedException();
+            var advert = await this.sharedTravelsRepository.All()
+                .FirstOrDefaultAsync(x => x.Id == advertId && x.CreatedById == userId);
+
+            if (advert == null)
+            {
+                return false;
+            }
+
+            this.sharedTravelsRepository.Delete(advert);
+            await this.sharedTravelsRepository.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> UpdateAsync(string id, SharedTravelEditInputViewModel input, string userId)
+        {
+            var statusId = this.sharedTravelStatusRepository
+                .AllAsNoTracking()
+                .Where(x => x.Name == ServicesConstants.AdvertDefaultStatus)
+                .Select(x => x.Id)
+                .FirstOrDefault();
+
+            var advert = await this.sharedTravelsRepository.All()
+                 .FirstOrDefaultAsync(x => x.Id == id && x.CreatedById == userId);
+
+            if (advert == null)
+            {
+                return false;
+            }
+
+            advert.CreatedById = userId;
+            advert.Description = input.Description;
+            advert.EndDestinationId = input.EndDestinationId;
+            advert.StartDestinationId = input.StartDestinationId;
+            advert.PlaceForLuggage = IsTrue(input.PlaceForLuggage);
+            advert.WithReturnTrip = IsTrue(input.WithReturnTrip);
+            advert.SmokeRestriction = IsTrue(input.SmokeRestriction);
+            advert.Seats = input.Seats;
+            advert.StartDateAndTime = input.StartDateAndTime;
+            advert.TypeOfTravelId = input.TypeOfTravelId;
+            advert.StatusId = statusId;
+
+            this.sharedTravelsRepository.Update(advert);
+            await this.sharedTravelsRepository.SaveChangesAsync();
+            return true;
         }
 
         public async Task<IEnumerable<T>> GetAllAsync<T>(int page, int itemsPerPage = 10)
@@ -168,6 +209,27 @@
             return advert;
         }
 
+        public async Task<SharedTravelEditInputViewModel> GetViewModelByIdAsync(string id)
+        {
+            var advert = await this.sharedTravelsRepository
+                .All()
+                .Where(a => a.Id == id)
+                .Select(x => new SharedTravelEditInputViewModel
+                {
+                    Description = x.Description,
+                    Seats = x.Seats,
+                    PlaceForLuggage = BoolToString(x.PlaceForLuggage),
+                    SmokeRestriction = BoolToString(x.SmokeRestriction),
+                    WithReturnTrip = BoolToString(x.WithReturnTrip),
+                    StartDateAndTime = x.StartDateAndTime,
+                    StartDestinationId = x.StartDestinationId,
+                    EndDestinationId = x.EndDestinationId,
+                })
+                .FirstOrDefaultAsync();
+
+            return advert;
+        }
+
         public async Task<IEnumerable<SharedTravelsViewModel>> GetRecentlyAddedAsync(int count = 0)
         {
             var recentlyAddedAdvert = await this.sharedTravelsRepository
@@ -178,6 +240,11 @@
                .ToListAsync();
 
             return recentlyAddedAdvert;
+        }
+
+        private static string BoolToString(bool input)
+        {
+            return input == true ? GlobalConstants.TrueState : GlobalConstants.FalseState;
         }
 
         private static bool IsTrue(string input)

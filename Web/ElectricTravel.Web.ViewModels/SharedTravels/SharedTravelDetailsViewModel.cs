@@ -11,6 +11,8 @@
 
     public class SharedTravelDetailsViewModel : IMapFrom<SharedTravelAdvert>, IHaveCustomMappings
     {
+        public string Id { get; set; }
+
         [Display(Name = "Departure time:")]
         public DateTime StartDateAndTime { get; set; }
 
