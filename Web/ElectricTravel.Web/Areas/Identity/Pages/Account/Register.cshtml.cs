@@ -1,13 +1,12 @@
 ﻿namespace ElectricTravel.Web.Areas.Identity.Pages.Account
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
-    using System.Security.Claims;
     using System.Text;
     using System.Text.Encodings.Web;
     using System.Threading.Tasks;
+
     using ElectricTravel.Common;
     using ElectricTravel.Data.Models.User;
     using Microsoft.AspNetCore.Authentication;
@@ -98,7 +97,7 @@
                     {
                         await this.userManager.AddToRoleAsync(user, GlobalConstants.DriverRoleName);
                     }
-                    else
+                    else if (this.Input.UserRole == GlobalConstants.PassengerRoleName)
                     {
                         await this.userManager.AddToRoleAsync(user, GlobalConstants.PassengerRoleName);
                     }

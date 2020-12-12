@@ -77,7 +77,6 @@
 
             this.Username = userName;
             var userRoles = await this.userManager.GetRolesAsync(user);
-
             var roles = new List<string>();
 
             if (userRoles[0] == GlobalConstants.DriverRoleName)
@@ -85,10 +84,15 @@
                 roles.Add(userRoles[0]);
                 roles.Add(GlobalConstants.PassengerRoleName);
             }
-            else
+            else if (userRoles[0] == GlobalConstants.PassengerRoleName)
             {
                 roles.Add(userRoles[0]);
                 roles.Add(GlobalConstants.DriverRoleName);
+            }
+            else
+            {
+                roles.Add(userRoles[0]);
+                roles.Add(GlobalConstants.AdministratorRoleName);
             }
 
             this.Input = new InputModel

@@ -5,6 +5,7 @@
     var types = this.Model.TypesOfTravel.Select(x => new SelectListItem(x.Value, x.Key));
 }
 
+<br />
 <div class="container custom-bg text-center text-light">
     <form method="post">
         <br />
@@ -90,7 +91,7 @@
         </div>
         <div class="p-3 mb-4">
             <div class="text-center">
-                <input type="submit" class="btn btn-info" value="EDIT" asp-controller="SharedTravels" asp-action="Edit"  asp-route-id="@Model.Id"/>
+                <input type="submit" class="btn btn-info" value="EDIT" asp-controller="SharedTravels" asp-action="Edit" asp-route-id="@Model.Id" />
             </div>
         </div>
     </form>

@@ -1,8 +1,6 @@
 ﻿namespace ElectricTravel.Web.Controllers
 {
     using System.Threading.Tasks;
-
-    using ElectricTravel.Common;
     using ElectricTravel.Data.Models.User;
     using ElectricTravel.Services.Data.Contracts;
     using ElectricTravel.Web.ViewModels.Images;
@@ -11,7 +9,7 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
-    [Authorize(Roles = GlobalConstants.DriverRoleName)]
+    [Authorize]
     public class GalleriesController : Controller
     {
         private readonly IImagesService imagesService;

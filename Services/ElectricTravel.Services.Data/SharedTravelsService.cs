@@ -7,24 +7,29 @@
     using ElectricTravel.Common;
     using ElectricTravel.Data.Common.Repositories;
     using ElectricTravel.Data.Models.Advertisement;
+    using ElectricTravel.Data.Models.User;
     using ElectricTravel.Services.Data.Common;
     using ElectricTravel.Services.Data.Contracts;
     using ElectricTravel.Services.Mapping;
     using ElectricTravel.Web.InputViewModels.SharedTravel;
     using ElectricTravel.Web.ViewModels.SharedTravels;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
 
     public class SharedTravelsService : ISharedTravelsService
     {
         private readonly IDeletableEntityRepository<SharedTravelAdvert> sharedTravelsRepository;
         private readonly IDeletableEntityRepository<SharedTravelStatus> sharedTravelStatusRepository;
+        private readonly UserManager<ElectricTravelUser> userManager;
 
         public SharedTravelsService(
             IDeletableEntityRepository<SharedTravelAdvert> sharedTravelsRepository,
-            IDeletableEntityRepository<SharedTravelStatus> sharedTravelStatusRepository)
+            IDeletableEntityRepository<SharedTravelStatus> sharedTravelStatusRepository,
+            UserManager<ElectricTravelUser> userManager)
         {
             this.sharedTravelsRepository = sharedTravelsRepository;
             this.sharedTravelStatusRepository = sharedTravelStatusRepository;
+            this.userManager = userManager;
         }
 
         public async Task<string> CreateAsync(SharedTravelCreateInputViewModel input, string userId)
@@ -60,8 +65,10 @@
 
         public async Task<bool> DeleteAsync(string advertId, string userId)
         {
+            bool isAdmin = await this.IsAdmin(userId);
+
             var advert = await this.sharedTravelsRepository.All()
-                .FirstOrDefaultAsync(x => x.Id == advertId && x.CreatedById == userId);
+                .FirstOrDefaultAsync(x => x.Id == advertId && (x.CreatedById == userId || isAdmin));
 
             if (advert == null)
             {
@@ -75,6 +82,8 @@
 
         public async Task<bool> UpdateAsync(string id, SharedTravelEditInputViewModel input, string userId)
         {
+            var isAdmin = await this.IsAdmin(userId);
+
             var statusId = this.sharedTravelStatusRepository
                 .AllAsNoTracking()
                 .Where(x => x.Name == ServicesConstants.AdvertDefaultStatus)
@@ -82,7 +91,7 @@
                 .FirstOrDefault();
 
             var advert = await this.sharedTravelsRepository.All()
-                 .FirstOrDefaultAsync(x => x.Id == id && x.CreatedById == userId);
+                 .FirstOrDefaultAsync(x => x.Id == id && (x.CreatedById == userId || isAdmin));
 
             if (advert == null)
             {
@@ -255,6 +264,13 @@
         private static int PageFormula(int page, int itemsPerPage)
         {
             return (page - 1) * itemsPerPage;
+        }
+
+        private async Task<bool> IsAdmin(string userId)
+        {
+            var user = await this.userManager.FindByIdAsync(userId);
+            var isAdmin = await this.userManager.IsInRoleAsync(user, GlobalConstants.AdministratorRoleName);
+            return isAdmin;
         }
     }
 }

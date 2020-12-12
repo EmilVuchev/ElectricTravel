@@ -6,7 +6,6 @@
     using ElectricTravel.Data.Models.User;
     using ElectricTravel.Services.Data.Contracts;
     using ElectricTravel.Web.Controllers.Common;
-    using ElectricTravel.Web.InputViewModels.ElectricCars;
     using ElectricTravel.Web.InputViewModels.SharedTravel;
     using ElectricTravel.Web.ViewModels.Cars;
     using ElectricTravel.Web.ViewModels.SharedTravels;
@@ -101,7 +100,7 @@
             return this.View(viewModel);
         }
 
-        [Authorize(Roles = GlobalConstants.DriverRoleName)]
+        [Authorize(Roles = GlobalConstants.DriverRoleName + ", " + GlobalConstants.AdministratorRoleName)]
         public IActionResult Create()
         {
             var inputModel = new SharedTravelCreateInputViewModel();
@@ -168,11 +167,16 @@
         public async Task<IActionResult> DriverDetails(string id)
         {
             var user = await this.userManager.FindByIdAsync(id);
-            var isInRole = await this.userManager.IsInRoleAsync(user, GlobalConstants.DriverRoleName);
+            var isDriver = await this.userManager.IsInRoleAsync(user, GlobalConstants.DriverRoleName);
+            var isAdmin = await this.userManager.IsInRoleAsync(user, GlobalConstants.AdministratorRoleName);
 
-            if (!isInRole)
+            if (isAdmin)
             {
-                return this.NotFound();
+                return this.RedirectToAction(nameof(this.All));
+            }
+            else if (!isDriver)
+            {
+                return this.NoContent();
             }
 
             var model = new DriverCarListViewModel();
@@ -183,7 +187,7 @@
             return this.View(model);
         }
 
-        [Authorize(Roles = GlobalConstants.DriverRoleName)]
+        [Authorize(Roles = GlobalConstants.DriverRoleName + ", " + GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -203,7 +207,7 @@
             return this.RedirectToAction("All");
         }
 
-        [Authorize(Roles = GlobalConstants.DriverRoleName)]
+        [Authorize(Roles = GlobalConstants.DriverRoleName + ", " + GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -225,7 +229,7 @@
         }
 
         [HttpPost]
-        [Authorize(Roles = GlobalConstants.DriverRoleName)]
+        [Authorize(Roles = GlobalConstants.DriverRoleName + ", " + GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> Edit(string id, SharedTravelEditInputViewModel input)
         {
             if (!this.ModelState.IsValid)

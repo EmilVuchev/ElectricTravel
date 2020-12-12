@@ -1,0 +1,84 @@
+﻿@model IEnumerable<ElectricTravel.Web.ViewModels.Cities.CityViewModel>
+
+@{
+    this.ViewData["Title"] = "Cities";
+    this.Layout = "~/Views/Shared/_Layout.cshtml";
+    const string CityNameTitle = "Name";
+    const string RegionTitle = "Region";
+    const string IsDeletedTitle = "Is Deleted";
+    const string DeletedOnTitle = "Deleted On";
+    const string CreatedOnTitle = "Created On";
+    const string ModifiedOnTitle = "Modified On";
+}
+
+<br />
+<div class="container text-light custom-bg">
+    <br />
+    <div class="text-center">
+        <h1>@this.ViewData["Title"]</h1>
+    </div>
+    <p>
+        <a class="btn btn-secondary" asp-action="Create">Create New</a>
+    </p>
+    <table id="dtBasicExample" class="table text-light">
+        <thead>
+            <tr>
+                <th>
+                    @CityNameTitle
+                </th>
+                <th>
+                    @RegionTitle
+                </th>
+                <th>
+                    @IsDeletedTitle
+                </th>
+                <th>
+                    @DeletedOnTitle
+                </th>
+                <th>
+                    @CreatedOnTitle
+                </th>
+                <th>
+                    @ModifiedOnTitle
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @item.RegionName
+                    </td>
+                    <td>
+                        @item.IsDeleted
+                    </td>
+                    <td>
+                        @item.DeletedOn
+                    </td>
+                    <td>
+                        @item.CreatedOn
+                    </td>
+                    <td>
+                        @item.ModifiedOn
+                    </td>
+                    <td>
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="fas fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <br />
+</div>
+
+@section Scripts{
+    <link href="~/css/style.css" rel="stylesheet" />
+    <script src="~/js/tablewithpagination.js"></script>
+    <link href="~/lib/mdb/css/addons/datatables.min.css" rel="stylesheet" />
+    <script src="~/lib/mdb/js/addons/datatables.min.js"></script>
+}

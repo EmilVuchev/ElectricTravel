@@ -1,5 +1,4 @@
-﻿// ReSharper disable VirtualMemberCallInConstructor
-namespace ElectricTravel.Data.Models.Location
+﻿namespace ElectricTravel.Data.Models.Location
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;

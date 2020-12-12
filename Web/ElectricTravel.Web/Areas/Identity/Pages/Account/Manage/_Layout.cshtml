@@ -5,10 +5,11 @@
     }
     else
     {
-       this.Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+        this.Layout = "/Areas/Identity/Pages/_Layout.cshtml";
     }
 }
 
+<br />
 <div class="container custom-bg">
     <br />
     <h2>Manage your account</h2>
@@ -22,6 +23,7 @@
             </div>
             <div class="col-md-9">
                 @RenderBody()
+                <br />
             </div>
         </div>
     </div>
@@ -29,4 +31,5 @@
 
 @section Scripts {
     @RenderSection("Scripts", required: false)
+    <link href="~/css/style.css" rel="stylesheet" />
 }

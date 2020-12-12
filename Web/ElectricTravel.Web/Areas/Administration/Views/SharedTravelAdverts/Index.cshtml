@@ -1,0 +1,87 @@
+﻿@model ElectricTravel.Web.ViewModels.SharedTravels.AdvertsListAdminViewModel
+@using ElectricTravel.Web.ViewModels.SharedTravels
+@{
+    this.ViewData["Title"] = "All Adverts";
+    this.Layout = "~/Views/Shared/_Layout.cshtml";
+    var titles = new AdvertAdminViewModel();
+}
+
+<br />
+<div class="container text-light custom-bg">
+    <br />
+    <div class="text-center">
+        <h1>@this.ViewData["Title"]</h1>
+    </div>
+    <p>
+        <a class="btn btn-secondary" asp-action="Create">Create New</a>
+    </p>
+    <table id="dtBasicExample" class="table text-light">
+        <thead>
+            <tr>
+                <th>
+                    <label asp-for="@titles.StartDateAndTime"></label>
+                </th>
+                <th>
+                    <label asp-for="@titles.StartDestinationName"></label>
+                </th>
+                <th>
+                    <label asp-for="@titles.EndDestinationName"></label>
+                </th>
+                <th>
+                    <label asp-for="@titles.StatusName"></label>
+                </th>
+                <th>
+                    <label asp-for="@titles.TypeOfTravelName"></label>
+                </th>
+                <th>
+                    <label asp-for="@titles.Seats"></label>
+                </th>
+                <th>
+                    <label asp-for="@titles.CreatedByUserName"></label>
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Adverts)
+            {
+                <tr>
+                    <td>
+                        @item.StartDateAndTime
+                    </td>
+                    <td>
+                        @item.StartDestinationName
+                    </td>
+                    <td>
+                        @item.EndDestinationName
+                    </td>
+                    <td>
+                        @item.StatusName
+                    </td>
+                    <td>
+                        @item.TypeOfTravelName
+                    </td>
+                    <td>
+                        @item.Seats
+                    </td>
+                    <td>
+                        @item.CreatedByUserName
+                    </td>
+                    <td>
+                        <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@item.Id"><i class="fas fa-edit"></i></a>
+                        <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id"><i class="fas fa-info"></i></a>
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="fas fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <br />
+</div>
+
+@section Scripts{
+    <link href="~/css/style.css" rel="stylesheet" />
+    <script src="~/js/tablewithpagination.js"></script>
+    <link href="~/lib/mdb/css/addons/datatables.min.css" rel="stylesheet" />
+    <script src="~/lib/mdb/js/addons/datatables.min.js"></script>
+}

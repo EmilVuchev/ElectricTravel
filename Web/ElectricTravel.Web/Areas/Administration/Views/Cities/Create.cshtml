@@ -1,0 +1,46 @@
+﻿@model ElectricTravel.Web.InputViewModels.Cities.CreateCityInputViewModel
+@{
+    this.ViewData["Title"] = "Create City";
+    this.Layout = "~/Views/Shared/_Layout.cshtml";
+    var regions = Model.Regions.Select(x => new SelectListItem(x.Value, x.Key));
+}
+
+<br />
+<div class="container text-center text-light custom-bg">
+    <br />
+    <div>
+        <h4>@this.ViewData["Title"]</h4>
+    </div>
+    <br />
+    <div class="text-left">
+        <a class="btn btn-secondary" asp-action="Index">Back to List</a>
+    </div>
+    <form asp-action="Create">
+        <div class="row-cols-2 offset-4">
+            <div class="col">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label asp-for="RegionId" class="control-label"></label>
+                    <select asp-for="RegionId" class="form-control" asp-items="@regions"></select>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </form>
+    <br />
+</div>
+
+@section Scripts{
+    <link href="~/css/style.css" rel="stylesheet" />
+}
+

@@ -119,8 +119,6 @@
                         <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">@this.ViewData["Title"]</button>
                         <a class="d-block text-center mt-2 small" asp-area="Identity" asp-controller="Account" asp-action="Login">Log In</a>
                         <hr class="my-4">
-                        @*<button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign up with Google</button>
-                            <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign up with Facebook</button>*@
                     </form>
                     @{
                         if ((Model.ExternalLogins?.Count ?? 0) == 0)

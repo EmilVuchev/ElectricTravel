@@ -13,14 +13,12 @@
         public string Title { get; set; }
 
         [Required]
-        [MaxLength(5000)]
         public string Content { get; set; }
 
-        [Required]
         public string Path { get; set; }
 
         [ForeignKey(nameof(Source))]
-        public int SourceId { get; set; }
+        public int? SourceId { get; set; }
 
         public virtual Source Source { get; set; }
 

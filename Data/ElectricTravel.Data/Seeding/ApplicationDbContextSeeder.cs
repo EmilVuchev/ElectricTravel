@@ -38,6 +38,7 @@
                               new CarTypesSeeder(),
                               new CarMakesSeeder(),
                               new CarModelsSeeder(),
+                              new AdminsSeeder(),
                           };
 
             foreach (var seeder in seeders)
