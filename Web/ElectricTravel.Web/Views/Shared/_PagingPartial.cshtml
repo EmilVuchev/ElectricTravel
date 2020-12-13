@@ -6,6 +6,7 @@
     const string ActionBySearchControllerForUser = "SearchForUserAdvertsDestination";
     var action = ActionDefaultName;
     var controller = this.ViewContext.RouteData.Values["controller"].ToString();
+    var area = string.Empty;
 }
 
 @if (controller == "SharedTravels")
@@ -14,6 +15,11 @@
     {
         action = ActionBySameController;
     }
+}
+else if (controller == "SharedTravelAdverts")
+{
+    area = "Administration";
+    action = "Index";
 }
 else
 {
@@ -31,7 +37,7 @@ else
     <ul class="pagination justify-content-center">
         <li class="page-item @if (!Model.HasPreviousPage)
             { <text>disabled</text> }">
-            <a class="page-link" asp-controller="@controller" asp-action="@action" asp-route-id="@Model.PreviousPageNumber" asp-route-search="@this.ViewData["Getadvertsdetails"]">Previous</a>
+            <a class="page-link" asp-area="@area" asp-controller="@controller" asp-action="@action" asp-route-id="@Model.PreviousPageNumber" asp-route-search="@this.ViewData["Getadvertsdetails"]">Previous</a>
         </li>
         @for (int i = Model.PageNumber - 4; i < Model.PageNumber; i++)
         {
@@ -50,12 +56,12 @@ else
         {
             if (i <= Model.PagesCount)
             {
-                <li class="page-item"><a class="page-link" asp-controller="@controller" asp-action="@action" asp-route-search="@this.ViewData["Getadvertsdetails"]" asp-route-id="@i">@i</a></li>
+                <li class="page-item"><a class="page-link" asp-area="@area" asp-controller="@controller" asp-action="@action" asp-route-search="@this.ViewData["Getadvertsdetails"]" asp-route-id="@i">@i</a></li>
             }
         }
         <li class="page-item @if (!Model.HasNextPage)
             { <text>disabled</text> }">
-            <a class="page-link" asp-controller="@controller" asp-action="@action" asp-route-search="@this.ViewData["Getadvertsdetails"]" asp-route-id="@Model.NextPageNumber">Next</a>
+            <a class="page-link" asp-area="@area" asp-controller="@controller" asp-action="@action" asp-route-search="@this.ViewData["Getadvertsdetails"]" asp-route-id="@Model.NextPageNumber">Next</a>
         </li>
     </ul>
 </nav>

@@ -1,112 +1,82 @@
-﻿@model ElectricTravel.Data.Models.Advertisement.SharedTravelAdvert
+﻿@model ElectricTravel.Web.ViewModels.Administration.SharedTravelAdverts.SharedTravelAdvertViewModel
 
 @{
-    ViewData["Title"] = "Delete";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    this.ViewData["Title"] = "Delete";
+    this.Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Delete</h1>
+<br />
+<div class="container text-center text-danger custom-bg">
+    <br />
+    <div>
+        <h1>@this.ViewData["Title"]</h1>
+        <h3>Are you sure you want to delete this?</h3>
+    </div>
+    <div class="text-left">
+        <a class="btn btn-info text-left" asp-action="Index">Back to List</a>
+    </div>
+    <div>
+        <hr />
+        <div class="row">
+            <div class="col">
+                <label class="text-white" asp-for="StartDateAndTime"></label>
+                <span>@Model.StartDateAndTime</span>
+            </div>
+            <div class="col">
+                <label class="text-white" asp-for="Seats"></label>
+                <span>@Model.Seats</span>
+            </div>
+            <div class="col">
+                <label class="text-white" asp-for="SmokeRestrictionAsText"></label>
+                <span>@Model.SmokeRestrictionAsText</span>
+            </div>
+            <div class="col">
+                <label class="text-white" asp-for="PlaceForLuggageAsText"></label>
+                <span>@Model.PlaceForLuggageAsText</span>
+            </div>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>SharedTravelAdvert</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StartDateAndTime)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StartDateAndTime)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Seats)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Seats)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SmokeRestriction)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SmokeRestriction)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PlaceForLuggage)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PlaceForLuggage)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.WithReturnTrip)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.WithReturnTrip)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TypeOfTravel)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TypeOfTravel.Name)
-        </dd class>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StartDestination)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StartDestination.Name)
-        </dd class>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EndDestination)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EndDestination.Name)
-        </dd class>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Status.Name)
-        </dd class>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedBy)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreatedBy.Id)
-        </dd class>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsDeleted)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsDeleted)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DeletedOn)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DeletedOn)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedOn)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreatedOn)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ModifiedOn)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ModifiedOn)
-        </dd>
-    </dl>
-    
+        </div>
+        <div class="row">
+            <div class="col">
+                <label class="text-white" asp-for="ReturnTripAsText"></label>
+                <span>@Model.ReturnTripAsText</span>
+            </div>
+            <div class="col">
+                <label class="text-white" asp-for="CreatedByUserName"></label>
+                <span>@Model.CreatedByUserName</span>
+            </div>
+            <div class="col">
+                <label class="text-white" asp-for="CreatedOn"></label>
+                <span>@Model.CreatedOn</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label class="text-white" asp-for="Description"></label>
+                <span>@Model.Description</span>
+            </div>
+            <div class="col">
+                <label class="text-white" asp-for="TypeOfTravelName"></label>
+                <span>@Model.TypeOfTravelName</span>
+            </div>
+            <div class="col">
+                <label class="text-white" asp-for="StartDestinationName"></label>
+                <span>@Model.StartDestinationName</span>
+            </div>
+            <div class="col">
+                <label class="text-white" asp-for="EndDestinationName"></label>
+                <span>@Model.EndDestinationName</span>
+            </div>
+        </div>
+    </div>
+
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Delete" class="btn btn-danger" />
     </form>
+    <br />
 </div>
+</div>
+@section Scripts{
+    <link href="~/css/style.css" rel="stylesheet" />
+}

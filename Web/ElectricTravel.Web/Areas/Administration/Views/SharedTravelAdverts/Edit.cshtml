@@ -1,8 +1,10 @@
-﻿@model ElectricTravel.Data.Models.Advertisement.SharedTravelAdvert
-
+﻿@model ElectricTravel.Web.InputViewModels.SharedTravel.SharedTravelEditInputViewModel
+@using ElectricTravel.Common
 @{
     this.ViewData["Title"] = "Edit";
     this.Layout = "~/Views/Shared/_Layout.cshtml";
+    var cities = this.Model.Cities.Select(x => new SelectListItem(x.Value, x.Key));
+    var types = this.Model.TypesOfTravel.Select(x => new SelectListItem(x.Value, x.Key));
 }
 
 <br />
@@ -28,69 +30,68 @@
                     <div class="col">
                         <div class="form-group">
                             <label asp-for="StartDestinationId" class="control-label"></label>
-                            <select asp-for="StartDestinationId" class="form-control" asp-items="ViewBag.StartDestinationId"></select>
+                            <select asp-for="StartDestinationId" class="form-control" asp-items="cities"></select>
                             <span asp-validation-for="StartDestinationId" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
                             <label asp-for="EndDestinationId" class="control-label"></label>
-                            <select asp-for="EndDestinationId" class="form-control" asp-items="ViewBag.EndDestinationId"></select>
+                            <select asp-for="EndDestinationId" class="form-control" asp-items="cities"></select>
                             <span asp-validation-for="EndDestinationId" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label asp-for="StatusId" class="control-label"></label>
-                            <select asp-for="StatusId" class="form-control" asp-items="ViewBag.StatusId"></select>
-                            <span asp-validation-for="StatusId" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col">
                         <div class="form-group">
                             <label asp-for="TypeOfTravelId" class="control-label"></label>
-                            <select asp-for="TypeOfTravelId" class="form-control" asp-items="ViewBag.TypeOfTravelId"></select>
+                            <select asp-for="TypeOfTravelId" class="form-control" asp-items="types"></select>
                             <span asp-validation-for="TypeOfTravelId" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col">
                         <div class="form-group">
                             <label asp-for="Seats" class="control-label"></label>
                             <input asp-for="Seats" class="form-control" />
                             <span asp-validation-for="Seats" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col">
                         <div class="form-group">
-                            <label asp-for="CreatedById" class="control-label"></label>
-                            <select asp-for="CreatedById" class="form-control" asp-items="ViewBag.CreatedById"></select>
-                            <span asp-validation-for="CreatedById" class="text-danger"></span>
+                            <label asp-for="IsApproved" class="control-label"></label>
+                            <input asp-for="IsApproved" class="form-control" />
+                            <span asp-validation-for="IsApproved" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
                 <br />
                 <div class="row">
                     <div class="col">
-                        <div class="form-group form-check">
-                            <label class="form-check-label">
-                                <input class="form-check-input" asp-for="SmokeRestriction" /> @Html.DisplayNameFor(model => model.SmokeRestriction)
-                            </label>
+                        <div class="form-group">
+                            <label asp-for="SmokeRestriction" class="control-label"></label>
+                            <select class="form-control" asp-for="SmokeRestriction">
+                                <option>@GlobalConstants.TrueState</option>
+                                <option>@GlobalConstants.FalseState</option>
+                            </select>
                         </div>
                     </div>
                     <div class="col">
-                        <div class="form-group form-check">
-                            <label class="form-check-label">
-                                <input class="form-check-input" asp-for="PlaceForLuggage" /> @Html.DisplayNameFor(model => model.PlaceForLuggage)
-                            </label>
+                        <div class="form-group">
+                            <label asp-for="PlaceForLuggage" class="control-label"></label>
+                            <select class="form-control" asp-for="PlaceForLuggage">
+                                <option>@GlobalConstants.TrueState</option>
+                                <option>@GlobalConstants.FalseState</option>
+                            </select>
                         </div>
                     </div>
                     <div class="col">
-                        <div class="form-group form-check">
-                            <label class="form-check-label">
-                                <input class="form-check-input" asp-for="WithReturnTrip" /> @Html.DisplayNameFor(model => model.WithReturnTrip)
-                            </label>
+                        <div class="form-group">
+                            <label asp-for="WithReturnTrip" class="control-label"></label>
+                            <select class="form-control" asp-for="WithReturnTrip">
+                                <option>@GlobalConstants.TrueState</option>
+                                <option>@GlobalConstants.FalseState</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -104,40 +105,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <div class="form-group">
-                            <label asp-for="CreatedOn" class="control-label"></label>
-                            <input asp-for="CreatedOn" class="form-control" />
-                            <span asp-validation-for="CreatedOn" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label asp-for="ModifiedOn" class="control-label"></label>
-                            <input asp-for="ModifiedOn" class="form-control" />
-                            <span asp-validation-for="ModifiedOn" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label asp-for="DeletedOn" class="control-label"></label>
-                            <input asp-for="DeletedOn" class="form-control" />
-                            <span asp-validation-for="DeletedOn" class="text-danger"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-3">
-                        <div class="form-group form-check">
-                            <label class="form-check-label">
-                                <input class="form-check-input" asp-for="IsDeleted" /> @Html.DisplayNameFor(model => model.IsDeleted)
-                            </label>
-                        </div>
-                    </div>
-                </div>
                 <input type="hidden" asp-for="Id" />
-
                 <div class="form-group">
                     <input type="submit" value="Save" class="btn btn-primary" />
                 </div>

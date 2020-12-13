@@ -1,42 +1,46 @@
 ﻿namespace ElectricTravel.Web.Areas.Administration.Controllers
 {
-    using System.Linq;
     using System.Threading.Tasks;
 
     using ElectricTravel.Data;
-    using ElectricTravel.Data.Models.Advertisement;
+    using ElectricTravel.Data.Models.User;
     using ElectricTravel.Services.Data.Contracts;
+    using ElectricTravel.Web.InputViewModels.SharedTravel;
+    using ElectricTravel.Web.ViewModels.Administration.SharedTravelAdverts;
     using ElectricTravel.Web.ViewModels.SharedTravels;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.Rendering;
-    using Microsoft.EntityFrameworkCore;
 
-    [Area("Administration")]
     public class SharedTravelAdvertsController : AdministrationController
     {
         private const int ItemsPerPage = 10;
-        private readonly ElectricTravelDbContext _context;
         private readonly ISharedTravelsService sharedTravelsService;
+        private readonly ICitiesService citiesService;
+        private readonly ITypeOfTravelService typeOfTravelService;
+        private readonly UserManager<ElectricTravelUser> userManager;
 
         public SharedTravelAdvertsController(
-            ElectricTravelDbContext context,
-            ISharedTravelsService sharedTravelsService)
+            ISharedTravelsService sharedTravelsService,
+            ICitiesService citiesService,
+            ITypeOfTravelService typeOfTravelService,
+            UserManager<ElectricTravelUser> userManager)
         {
-            _context = context;
             this.sharedTravelsService = sharedTravelsService;
+            this.citiesService = citiesService;
+            this.typeOfTravelService = typeOfTravelService;
+            this.userManager = userManager;
         }
 
-        // GET: Administration/SharedTravelAdverts
         public async Task<IActionResult> Index(int id = 1)
         {
-            var adverts = await this.sharedTravelsService.GetAllAsync<AdvertAdminViewModel>(id);
+            var adverts = await this.sharedTravelsService.GetAllAsync<SharedTravelsViewModel>(id);
 
             if (adverts == null)
             {
                 return this.NoContent();
             }
 
-            var viewModel = new AdvertsListAdminViewModel
+            var viewModel = new AdvertsListViewModel
             {
                 ItemsPerPage = ItemsPerPage,
                 PageNumber = id,
@@ -47,7 +51,6 @@
             return this.View(viewModel);
         }
 
-        // GET: Administration/SharedTravelAdverts/Details/5
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
@@ -55,22 +58,16 @@
                 return this.NotFound();
             }
 
-            var sharedTravelAdvert = await _context.SharedTravelAdverts
-                .Include(s => s.CreatedBy)
-                .Include(s => s.EndDestination)
-                .Include(s => s.StartDestination)
-                .Include(s => s.Status)
-                .Include(s => s.TypeOfTravel)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (sharedTravelAdvert == null)
+            var advert = await this.sharedTravelsService.GetViewModelByIdAsync<SharedTravelAdvertViewModel>(id);
+
+            if (advert == null)
             {
                 return this.NotFound();
             }
 
-            return this.View(sharedTravelAdvert);
+            return this.View(advert);
         }
 
-        // GET: Administration/SharedTravelAdverts/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -78,62 +75,50 @@
                 return this.NotFound();
             }
 
-            var sharedTravelAdvert = await _context.SharedTravelAdverts.FindAsync(id);
+            var sharedTravelAdvert = await this.sharedTravelsService.GetViewModelByIdAsync(id);
+            sharedTravelAdvert.Id = id;
+            sharedTravelAdvert.Cities = this.citiesService.GetAllAsKeyValuePairs();
+            sharedTravelAdvert.TypesOfTravel = this.typeOfTravelService.GetAllAsKeyValuePairs();
+
             if (sharedTravelAdvert == null)
             {
                 return this.NotFound();
             }
 
-            ViewData["CreatedById"] = new SelectList(_context.Users, "Id", "Id", sharedTravelAdvert.CreatedById);
-            ViewData["EndDestinationId"] = new SelectList(_context.Cities, "Id", "Name", sharedTravelAdvert.EndDestinationId);
-            ViewData["StartDestinationId"] = new SelectList(_context.Cities, "Id", "Name", sharedTravelAdvert.StartDestinationId);
-            ViewData["StatusId"] = new SelectList(_context.SharedTravelStatus, "Id", "Name", sharedTravelAdvert.StatusId);
-            ViewData["TypeOfTravelId"] = new SelectList(_context.TypeTravels, "Id", "Name", sharedTravelAdvert.TypeOfTravelId);
             return this.View(sharedTravelAdvert);
         }
 
-        // POST: Administration/SharedTravelAdverts/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("StartDateAndTime,Seats,SmokeRestriction,PlaceForLuggage,WithReturnTrip,Description,TypeOfTravelId,StartDestinationId,EndDestinationId,StatusId,CreatedById,IsDeleted,DeletedOn,Id,CreatedOn,ModifiedOn")] SharedTravelAdvert sharedTravelAdvert)
+        public async Task<IActionResult> Edit(string id, SharedTravelEditInputViewModel input)
         {
-            if (id != sharedTravelAdvert.Id)
+            if (id != input.Id)
             {
                 return this.NotFound();
             }
 
+            var userId = this.userManager.GetUserId(this.User);
+
             if (this.ModelState.IsValid)
             {
-                try
+
+                var isEdited = await this.sharedTravelsService.UpdateAsync(id, input, userId);
+
+                if (!isEdited)
                 {
-                    _context.Update(sharedTravelAdvert);
-                    await _context.SaveChangesAsync();
+                    return this.NotFound();
                 }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!this.SharedTravelAdvertExists(sharedTravelAdvert.Id))
-                    {
-                        return this.NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+
                 return this.RedirectToAction(nameof(this.Index));
             }
 
-            ViewData["CreatedById"] = new SelectList(_context.Users, "Id", "Id", sharedTravelAdvert.CreatedById);
-            ViewData["EndDestinationId"] = new SelectList(_context.Cities, "Id", "Name", sharedTravelAdvert.EndDestinationId);
-            ViewData["StartDestinationId"] = new SelectList(_context.Cities, "Id", "Name", sharedTravelAdvert.StartDestinationId);
-            ViewData["StatusId"] = new SelectList(_context.SharedTravelStatus, "Id", "Name", sharedTravelAdvert.StatusId);
-            ViewData["TypeOfTravelId"] = new SelectList(_context.TypeTravels, "Id", "Name", sharedTravelAdvert.TypeOfTravelId);
-            return this.View(sharedTravelAdvert);
+            var advert = await this.sharedTravelsService.GetViewModelByIdAsync(id);
+            advert.Id = id;
+            advert.Cities = this.citiesService.GetAllAsKeyValuePairs();
+            advert.TypesOfTravel = this.typeOfTravelService.GetAllAsKeyValuePairs();
+
+            return this.View(advert);
         }
 
-        // GET: Administration/SharedTravelAdverts/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -141,36 +126,30 @@
                 return this.NotFound();
             }
 
-            var sharedTravelAdvert = await _context.SharedTravelAdverts
-                .Include(s => s.CreatedBy)
-                .Include(s => s.EndDestination)
-                .Include(s => s.StartDestination)
-                .Include(s => s.Status)
-                .Include(s => s.TypeOfTravel)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (sharedTravelAdvert == null)
+            var advert = await this.sharedTravelsService.GetViewModelByIdAsync<SharedTravelAdvertViewModel>(id);
+
+            if (advert == null)
             {
                 return this.NotFound();
             }
 
-            return this.View(sharedTravelAdvert);
+            return this.View(advert);
         }
 
-        // POST: Administration/SharedTravelAdverts/Delete/5
         [HttpPost]
         [ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var sharedTravelAdvert = await _context.SharedTravelAdverts.FindAsync(id);
-            _context.SharedTravelAdverts.Remove(sharedTravelAdvert);
-            await _context.SaveChangesAsync();
-            return this.RedirectToAction(nameof(this.Index));
-        }
+            var userId = this.userManager.GetUserId(this.User);
 
-        private bool SharedTravelAdvertExists(string id)
-        {
-            return _context.SharedTravelAdverts.Any(e => e.Id == id);
+            var isDeleted = await this.sharedTravelsService.DeleteAsync(id, userId);
+
+            if (!isDeleted)
+            {
+                return this.NotFound();
+            }
+
+            return this.RedirectToAction(nameof(this.Index));
         }
     }
 }

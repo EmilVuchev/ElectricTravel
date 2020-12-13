@@ -98,7 +98,6 @@
                 return false;
             }
 
-            advert.CreatedById = userId;
             advert.Description = input.Description;
             advert.EndDestinationId = input.EndDestinationId;
             advert.StartDestinationId = input.StartDestinationId;
@@ -109,17 +108,31 @@
             advert.StartDateAndTime = input.StartDateAndTime;
             advert.TypeOfTravelId = input.TypeOfTravelId;
             advert.StatusId = statusId;
+            advert.IsApproved = input.IsApproved;
 
             this.sharedTravelsRepository.Update(advert);
             await this.sharedTravelsRepository.SaveChangesAsync();
             return true;
         }
 
+        public async Task<IEnumerable<T>> GetAllApprovedAsync<T>(int page, int itemsPerPage = 10)
+        {
+            var adverts = await this.sharedTravelsRepository
+                   .AllAsNoTracking()
+                   .Where(x => x.Status.Name == ServicesConstants.AdvertDefaultStatus && x.IsApproved)
+                   .Skip(PageFormula(page, itemsPerPage))
+                   .Take(itemsPerPage)
+                   .OrderBy(x => x.StartDateAndTime)
+                   .To<T>()
+                   .ToListAsync();
+
+            return adverts;
+        }
+
         public async Task<IEnumerable<T>> GetAllAsync<T>(int page, int itemsPerPage = 10)
         {
             var adverts = await this.sharedTravelsRepository
                    .AllAsNoTracking()
-                   .Where(x => x.Status.Name == ServicesConstants.AdvertDefaultStatus)
                    .Skip(PageFormula(page, itemsPerPage))
                    .Take(itemsPerPage)
                    .OrderBy(x => x.StartDateAndTime)
@@ -148,7 +161,7 @@
 
             return await this.sharedTravelsRepository
                  .AllAsNoTracking()
-                 .Where(x => x.StartDestination.Name.ToLower() == destination || x.EndDestination.Name.ToLower() == destination)
+                 .Where(x => x.IsApproved && (x.StartDestination.Name.ToLower() == destination || x.EndDestination.Name.ToLower() == destination))
                  .Skip(PageFormula(page, itemsPerPage))
                  .Take(itemsPerPage)
                  .To<T>()
@@ -185,6 +198,14 @@
                 .CountAsync();
         }
 
+        public async Task<int> GetAllApprovedAdvertsCount()
+        {
+            return await this.sharedTravelsRepository
+                    .All()
+                    .Where(x => x.IsApproved)
+                    .CountAsync();
+        }
+
         public async Task<int> GetSearchedUserAdvertsCount(string search, string userId)
         {
             var destination = search.ToLower();
@@ -203,7 +224,7 @@
 
             return await this.sharedTravelsRepository
                     .AllAsNoTracking()
-                    .Where(x => x.StartDestination.Name.ToLower() == destination || x.EndDestination.Name.ToLower() == destination)
+                    .Where(x => x.IsApproved && (x.StartDestination.Name.ToLower() == destination || x.EndDestination.Name.ToLower() == destination))
                     .CountAsync();
         }
 
@@ -243,6 +264,7 @@
         {
             var recentlyAddedAdvert = await this.sharedTravelsRepository
                .All()
+               .Where(x => x.IsApproved)
                .OrderByDescending(x => x.CreatedOn)
                .Take(count)
                .To<SharedTravelsViewModel>()

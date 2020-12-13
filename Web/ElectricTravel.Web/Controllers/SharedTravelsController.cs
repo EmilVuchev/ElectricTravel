@@ -52,7 +52,7 @@
                 return this.NotFound();
             }
 
-            var adverts = await this.sharedTravelsService.GetAllAsync<SharedTravelsViewModel>(id, ControllersConstants.ItemsPerPage);
+            var adverts = await this.sharedTravelsService.GetAllApprovedAsync<SharedTravelsViewModel>(id, ControllersConstants.ItemsPerPage);
 
             if (adverts == null)
             {
@@ -64,7 +64,7 @@
                 IsUserAdverts = false,
                 ItemsPerPage = ControllersConstants.ItemsPerPage,
                 PageNumber = id,
-                AdvertsCount = await this.sharedTravelsService.GetAllAdvertsCount(),
+                AdvertsCount = await this.sharedTravelsService.GetAllApprovedAdvertsCount(),
                 Adverts = adverts,
             };
 
@@ -237,6 +237,8 @@
                 ////??????
                 return this.View("Error");
             }
+
+            input.IsApproved = true;
 
             var userId = this.userManager.GetUserId(this.User);
 

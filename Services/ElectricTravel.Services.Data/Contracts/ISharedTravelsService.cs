@@ -14,7 +14,7 @@
 
         Task<bool> DeleteAsync(string advertId, string userId);
 
-        Task<IEnumerable<T>> GetAllAsync<T>(int page, int itemsPerPage = 10);
+        Task<IEnumerable<T>> GetAllApprovedAsync<T>(int page, int itemsPerPage = 10);
 
         Task<IEnumerable<SharedTravelsViewModel>> GetRecentlyAddedAsync(int count = 0);
 
@@ -32,8 +32,12 @@
 
         Task<int> GetSearchedAdvertsCount(string search);
 
+        Task<IEnumerable<T>> GetAllAsync<T>(int page, int itemsPerPage = 10);
+
         Task<int> GetSearchedUserAdvertsCount(string search, string userId);
 
         Task<IEnumerable<T>> GetUserAdvertByDestination<T>(string search, string userId, int page, int itemsPerPage);
+
+        Task<int> GetAllApprovedAdvertsCount();
     }
 }

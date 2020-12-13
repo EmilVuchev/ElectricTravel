@@ -1,114 +1,12 @@
-﻿@model ElectricTravel.Data.Models.Advertisement.SharedTravelAdvert
+﻿@model ElectricTravel.Web.ViewModels.Administration.SharedTravelAdverts.SharedTravelAdvertViewModel
 
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@*<h1>Details</h1>
-
-    <div>
-        <h4>SharedTravelAdvert</h4>
-        <hr />
-        <dl class="row">
-            <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.StartDateAndTime)
-            </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.StartDateAndTime)
-            </dd>
-            <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.Seats)
-            </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.Seats)
-            </dd>
-            <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.SmokeRestriction)
-            </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.SmokeRestriction)
-            </dd>
-            <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.PlaceForLuggage)
-            </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.PlaceForLuggage)
-            </dd>
-            <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.WithReturnTrip)
-            </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.WithReturnTrip)
-            </dd>
-            <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.Description)
-            </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.Description)
-            </dd>
-            <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.TypeOfTravel)
-            </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.TypeOfTravel.Name)
-            </dd>
-            <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.StartDestination)
-            </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.StartDestination.Name)
-            </dd>
-            <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.EndDestination)
-            </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.EndDestination.Name)
-            </dd>
-            <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.Status)
-            </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.Status.Name)
-            </dd>
-            <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.CreatedBy)
-            </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.CreatedBy.Id)
-            </dd>
-            <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.IsDeleted)
-            </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.IsDeleted)
-            </dd>
-            <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.DeletedOn)
-            </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.DeletedOn)
-            </dd>
-            <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.CreatedOn)
-            </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.CreatedOn)
-            </dd>
-            <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.ModifiedOn)
-            </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.ModifiedOn)
-            </dd>
-        </dl>
-    </div>
-    <div>
-        <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-        <a asp-action="Index">Back to List</a>
-    </div>*@
 <br />
-<div class="container text-center text-light custom-bg">
+<div class="container text-center text-white custom-bg">
     <br />
     <div><h1>@this.ViewData["Title"]</h1></div>
     <div class="text-left">
@@ -120,106 +18,82 @@
             <div class="row">
                 <div class="col">
                     <div class="form-group">
-                        <label asp-for="StartDateAndTime" class="control-label"></label>
-                        <p>@Model.StartDateAndTime</p>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="form-group">
-                        <label asp-for="StartDestination.Name" class="control-label"></label>
-                        <p>@Model.StartDestination.Name</p>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="form-group">
-                        <label asp-for="EndDestination.Name" class="control-label"></label>
-                        <p>@Model.EndDestination.Name</p>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="form-group">
-                        <label asp-for="Status.Name" class="control-label"></label>
-                        <p>@Model.Status.Name</p>
-                    </div>
-                </div>
-            </div>
-            <br />
-            <div class="row">
-                <div class="col-3">
-                    <div class="form-group">
-                        <label asp-for="TypeOfTravel.Name" class="control-label"></label>
-                        <p>@Model.TypeOfTravel.Name</p>
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="form-group">
-                        <label asp-for="Seats" class="control-label"></label>
-                        <p>@Model.Seats</p>
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="form-group">
-                        <label asp-for="CreatedBy.UserName" class="control-label"></label>
-                        <p>@Model.CreatedBy.UserName</p>
-                    </div>
-                </div>
-            </div>
-            <br />
-            <div class="row">
-                <div class="col">
-                    <div class="form-group form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input" asp-for="SmokeRestriction" /> @Html.DisplayNameFor(model => model.SmokeRestriction)
-                        </label>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="form-group form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input" asp-for="PlaceForLuggage" /> @Html.DisplayNameFor(model => model.PlaceForLuggage)
-                        </label>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="form-group form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input" asp-for="WithReturnTrip" /> @Html.DisplayNameFor(model => model.WithReturnTrip)
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <br />
-            <div class="row">
-                <div class="col">
-                    <div class="form-group">
-                        <label asp-for="Description" class="control-label"></label>
-                        <p>@Model.Description</p>
-                    </div>
-                </div>
-            </div>
-            <br />
-            <div class="row">
-                <div class="col">
-                    <div class="form-group">
-                        <label asp-for="CreatedOn" class="control-label"></label>
+                        <label class="text-white-50 control-label" asp-for="CreatedOn"></label>
                         <p>@Model.CreatedOn</p>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group">
-                        <label asp-for="ModifiedOn" class="control-label"></label>
-                        <p>@Model.ModifiedOn</p>
+                        <label class="text-white-50 control-label" asp-for="CreatedByUserName"></label>
+                        <p>@Model.CreatedByUserName</p>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group">
-                        <label asp-for="DeletedOn" class="control-label"></label>
-                        <p>@Model.DeletedOn</p>
+                        <label class="text-white-50 control-label" asp-for="IsApproved"></label>
+                        <p>@Model.IsApproved</p>
                     </div>
                 </div>
             </div>
+            <hr />
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label class="text-white-50 control-label" asp-for="StartDateAndTime"></label>
+                        <p>@Model.StartDateAndTime</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label class="text-white-50 control-label" asp-for="StartDestinationName"></label>
+                        <p>@Model.StartDestinationName</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label class="text-white-50 control-label" asp-for="EndDestinationName"></label>
+                        <p>@Model.EndDestinationName</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label class="text-white-50 control-label" asp-for="TypeOfTravelName"></label>
+                        <p>@Model.TypeOfTravelName</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label class="text-white-50 control-label" asp-for="Seats"></label>
+                        <p>@Model.Seats</p>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col">
+                    <div class="form-group form-check">
+                        <label asp-for="SmokeRestrictionAsText" class="text-white-50 form-check-label">
+                        </label>
+                        <p>@Model.SmokeRestrictionAsText</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group form-check">
+                        <label asp-for="PlaceForLuggageAsText" class="text-white-50 form-check-label">
+                        </label>
+                        <p>@Model.PlaceForLuggageAsText</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group form-check">
+                        <label asp-for="ReturnTripAsText" class="form-check-label text-white-50"></label>
+                        <p>@Model.ReturnTripAsText</p>
+                    </div>
+                </div>
+            </div>
+            <br />
             <div>
-                <a class="btn btn-info"asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+                <a class="btn btn-info" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
             </div>
             <hr />
         </div>

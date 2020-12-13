@@ -15,6 +15,8 @@
             this.Id = Guid.NewGuid().ToString();
         }
 
+        public bool IsApproved { get; set; }
+
         public DateTime StartDateAndTime { get; set; }
 
         public int Seats { get; set; }

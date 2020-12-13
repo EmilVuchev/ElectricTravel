@@ -1,9 +1,9 @@
-﻿@model ElectricTravel.Web.ViewModels.SharedTravels.AdvertsListAdminViewModel
+﻿@model ElectricTravel.Web.ViewModels.SharedTravels.AdvertsListViewModel
 @using ElectricTravel.Web.ViewModels.SharedTravels
 @{
     this.ViewData["Title"] = "All Adverts";
     this.Layout = "~/Views/Shared/_Layout.cshtml";
-    var titles = new AdvertAdminViewModel();
+    var titles = new SharedTravelsViewModel();
 }
 
 <br />
@@ -12,9 +12,6 @@
     <div class="text-center">
         <h1>@this.ViewData["Title"]</h1>
     </div>
-    <p>
-        <a class="btn btn-secondary" asp-action="Create">Create New</a>
-    </p>
     <table id="dtBasicExample" class="table text-light">
         <thead>
             <tr>
@@ -39,7 +36,9 @@
                 <th>
                     <label asp-for="@titles.CreatedByUserName"></label>
                 </th>
-                <th></th>
+                <th>
+                    <label asp-for="@titles.IsApproved"></label>
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -68,6 +67,9 @@
                         @item.CreatedByUserName
                     </td>
                     <td>
+                        @item.IsApproved
+                    </td>
+                    <td>
                         <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@item.Id"><i class="fas fa-edit"></i></a>
                         <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id"><i class="fas fa-info"></i></a>
                         <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="fas fa-trash-alt"></i></a>
@@ -76,6 +78,7 @@
             }
         </tbody>
     </table>
+    <partial name="_PagingPartial" model="@Model" />
     <br />
 </div>
 
