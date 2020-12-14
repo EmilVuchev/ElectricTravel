@@ -1,0 +1,31 @@
+﻿@model ElectricTravel.Web.ViewModels.Articles.DetailArticleVIewModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div class="container text-light text-center custom-bg">
+    <br />
+    <div>
+        <h1>@Model.Title</h1>
+    </div>
+    <div class="text-left"><a class="btn btn-success" asp-action="Index">Back to List</a></div>
+
+    <div>
+        <hr />
+        <span>
+            @Model.Content
+        </span>
+        <div class="text-right">
+            <label>Created By</label>
+            @Model.CreatedByUserName
+        </div>
+    </div>
+    <br />
+</div>
+
+@section Scripts{
+    <link href="~/css/style.css" rel="stylesheet" />
+}

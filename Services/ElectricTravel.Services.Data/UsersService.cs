@@ -44,6 +44,13 @@
             return driver;
         }
 
+        public async Task<ElectricTravelUser> GetUserByUserName(string username)
+        {
+           return await this.userRepository.All()
+                .Where(x => x.UserName == username)
+                .FirstOrDefaultAsync();
+        }
+
         public async Task UpdateUser(ElectricTravelUser user)
         {
             this.userRepository.Update(user);

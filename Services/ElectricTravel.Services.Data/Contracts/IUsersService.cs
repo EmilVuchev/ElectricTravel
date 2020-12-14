@@ -11,5 +11,7 @@
         Task<T> GetDriverInfo<T>(string id);
 
         Task UpdateUser(ElectricTravelUser user);
+
+        Task<ElectricTravelUser> GetUserByUserName(string username);
     }
 }

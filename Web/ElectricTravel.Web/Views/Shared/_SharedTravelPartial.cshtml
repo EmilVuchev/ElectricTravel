@@ -6,6 +6,7 @@
     const string DayTitle = "Day";
     const string SeatsTitle = "Seats";
     const string DetailsTitle = "Details";
+    const string IsApprovedTitle = "Is Approved";
     const string DefaultController = "SharedTravels";
     const string DefaultAction = "All";
     const string ActionName = "AllByAuthor";
@@ -17,7 +18,7 @@
 {
     action = "SearchByDestinations";
 }
-else if (controller == DefaultController && action == ActionName) 
+else if (controller == DefaultController && action == ActionName)
 {
     action = "SearchForUserAdvertsDestination";
 }
@@ -38,6 +39,7 @@ else if (controller == DefaultController && action == ActionName)
             <th scope="col">@DayTitle</th>
             <th scope="col">@GlobalConstants.TravelType</th>
             <th scope="col">@SeatsTitle</th>
+            <th scope="col">@IsApprovedTitle</th>
             <th scope="col">@DetailsTitle</th>
         </tr>
     </thead>
@@ -53,8 +55,9 @@ else if (controller == DefaultController && action == ActionName)
                 <td>@advert.Day</td>
                 <td>@advert.TypeOfTravelName</td>
                 <td>@advert.Seats</td>
+                <td>@advert.IsApproved</td>
                 <td>
-                    <a class="btn btn-primary"asp-controller="SharedTravels" asp-action="TripDetails" asp-route-id="@advert.Id"><i class="far fa-eye"></i></a>
+                    <a class="btn btn-primary" asp-controller="SharedTravels" asp-action="TripDetails" asp-route-id="@advert.Id"><i class="far fa-eye"></i></a>
                 </td>
             </tr>
         }

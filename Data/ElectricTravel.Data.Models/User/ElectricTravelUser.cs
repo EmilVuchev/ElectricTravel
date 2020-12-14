@@ -1,5 +1,4 @@
-﻿// ReSharper disable VirtualMemberCallInConstructor
-namespace ElectricTravel.Data.Models.User
+﻿namespace ElectricTravel.Data.Models.User
 {
     using System;
     using System.Collections.Generic;

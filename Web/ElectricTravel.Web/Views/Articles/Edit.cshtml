@@ -1,45 +1,42 @@
-﻿@model ElectricTravel.Data.Models.Charging.ChargingStation
+﻿@model ElectricTravel.Data.Models.News.Article
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
+@*<h1>Edit</h1>
 
-<h4>ChargingStation</h4>
+<h4>Article</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="WorkTime" class="control-label"></label>
-                <input asp-for="WorkTime" class="form-control" />
-                <span asp-validation-for="WorkTime" class="text-danger"></span>
+                <label asp-for="Content" class="control-label"></label>
+                <input asp-for="Content" class="form-control" />
+                <span asp-validation-for="Content" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsFreeOfCharge" /> @Html.DisplayNameFor(model => model.IsFreeOfCharge)
-                </label>
+                <label asp-for="Path" class="control-label"></label>
+                <input asp-for="Path" class="form-control" />
+                <span asp-validation-for="Path" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AddressId" class="control-label"></label>
-                <select asp-for="AddressId" class ="form-control" asp-items="ViewBag.AddressId"></select>
+                <label asp-for="SourceId" class="control-label"></label>
+                <select asp-for="SourceId" class="form-control" asp-items="ViewBag.SourceId"></select>
+                <span asp-validation-for="SourceId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ImageId" class="control-label"></label>
-                <select asp-for="ImageId" class ="form-control" asp-items="ViewBag.ImageId"></select>
+                <label asp-for="UserId" class="control-label"></label>
+                <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
+                <span asp-validation-for="UserId" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
@@ -51,6 +48,7 @@
                 <input asp-for="DeletedOn" class="form-control" />
                 <span asp-validation-for="DeletedOn" class="text-danger"></span>
             </div>
+            <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="CreatedOn" class="control-label"></label>
                 <input asp-for="CreatedOn" class="form-control" />
@@ -62,7 +60,7 @@
                 <span asp-validation-for="ModifiedOn" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -70,5 +68,5 @@
 
 <div>
     <a asp-action="Index">Back to List</a>
-</div>
+</div>*@
 

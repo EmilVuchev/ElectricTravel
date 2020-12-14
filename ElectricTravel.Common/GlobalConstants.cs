@@ -6,6 +6,8 @@
 
         public const string AdministratorRoleName = "Administrator";
 
+        public const string ChatArea = "Chat";
+
         public const string DriverRoleName = "Driver";
 
         public const string PassengerRoleName = "Passenger";

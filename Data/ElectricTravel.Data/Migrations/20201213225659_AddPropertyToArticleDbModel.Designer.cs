@@ -4,14 +4,16 @@ using ElectricTravel.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ElectricTravel.Data.Migrations
 {
     [DbContext(typeof(ElectricTravelDbContext))]
-    partial class ElectricTravelDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201213225659_AddPropertyToArticleDbModel")]
+    partial class AddPropertyToArticleDbModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1057,10 +1059,6 @@ namespace ElectricTravel.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CreatedById")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
@@ -1089,13 +1087,17 @@ namespace ElectricTravel.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("Id");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
-                    b.HasIndex("CreatedById");
+                    b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
 
                     b.HasIndex("SourceId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Articles");
                 });
@@ -1776,19 +1778,19 @@ namespace ElectricTravel.Data.Migrations
 
             modelBuilder.Entity("ElectricTravel.Data.Models.News.Article", b =>
                 {
-                    b.HasOne("ElectricTravel.Data.Models.User.ElectricTravelUser", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("ElectricTravel.Data.Models.News.Source", "Source")
                         .WithMany()
                         .HasForeignKey("SourceId");
 
-                    b.Navigation("CreatedBy");
+                    b.HasOne("ElectricTravel.Data.Models.User.ElectricTravelUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Source");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ElectricTravel.Data.Models.User.UserAddress", b =>

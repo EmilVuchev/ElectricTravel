@@ -15,6 +15,10 @@
         [Required]
         public string Content { get; set; }
 
+        [Required]
+        [MaxLength(300)]
+        public string ShortDescription { get; set; }
+
         public string Path { get; set; }
 
         [ForeignKey(nameof(Source))]
@@ -23,9 +27,9 @@
         public virtual Source Source { get; set; }
 
         [Required]
-        [ForeignKey(nameof(User))]
-        public string UserId { get; set; }
+        [ForeignKey(nameof(CreatedBy))]
+        public string CreatedById { get; set; }
 
-        public virtual ElectricTravelUser User { get; set; }
+        public virtual ElectricTravelUser CreatedBy { get; set; }
     }
 }
