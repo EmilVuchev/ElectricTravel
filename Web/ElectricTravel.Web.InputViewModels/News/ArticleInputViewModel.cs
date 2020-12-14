@@ -9,11 +9,14 @@
         public string Title { get; set; }
 
         [Required]
+        [MaxLength(300)]
+        public string ShortDescription { get; set; }
+
+        [Required]
         public string Content { get; set; }
 
         public string Path { get; set; }
 
-        [Required]
         public string UserId { get; set; }
     }
 }
