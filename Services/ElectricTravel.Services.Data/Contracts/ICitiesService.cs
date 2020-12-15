@@ -7,11 +7,9 @@
 
     public interface ICitiesService
     {
-        IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs();
+        Task<IEnumerable<T>> GetAllRegions<T>();
 
-        Task<IEnumerable<T>> GetAllCities<T>();
-
-        IEnumerable<KeyValuePair<string, string>> GetAllRegionsAsKeyValuePairs();
+        Task<IEnumerable<T>> GetAll<T>();
 
         Task<bool> CreateAsync(CreateCityInputViewModel input);
 

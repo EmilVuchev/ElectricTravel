@@ -1,5 +1,7 @@
 ﻿namespace ElectricTravel.Web.Controllers
 {
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using ElectricTravel.Common;
@@ -8,7 +10,9 @@
     using ElectricTravel.Web.Controllers.Common;
     using ElectricTravel.Web.InputViewModels.SharedTravel;
     using ElectricTravel.Web.ViewModels.Cars;
+    using ElectricTravel.Web.ViewModels.Cities;
     using ElectricTravel.Web.ViewModels.SharedTravels;
+    using ElectricTravel.Web.ViewModels.TypeTravels;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -17,32 +21,29 @@
     public class SharedTravelsController : Controller
     {
         private readonly ISharedTravelsService sharedTravelsService;
-        private readonly ICitiesService citiesService;
-        private readonly ITypeOfTravelService typeOfTravelService;
         private readonly IRatingService ratingService;
         private readonly ICarsService carsService;
         private readonly IImagesService imagesService;
         private readonly AspNetUserManager<ElectricTravelUser> userManager;
         private readonly IUsersService usersService;
+        private readonly ICastCollectionsService castCollectionsService;
 
         public SharedTravelsController(
             ISharedTravelsService sharedTravelsService,
             IUsersService usersService,
-            ICitiesService citiesService,
-            ITypeOfTravelService typeOfTravelService,
+            ICastCollectionsService castCollectionsService,
             IRatingService ratingService,
             ICarsService carsService,
             IImagesService imagesService,
             AspNetUserManager<ElectricTravelUser> userManager)
         {
             this.sharedTravelsService = sharedTravelsService;
-            this.citiesService = citiesService;
-            this.typeOfTravelService = typeOfTravelService;
             this.ratingService = ratingService;
             this.carsService = carsService;
             this.imagesService = imagesService;
             this.userManager = userManager;
             this.usersService = usersService;
+            this.castCollectionsService = castCollectionsService;
         }
 
         public async Task<IActionResult> All(int id = 1)
@@ -101,11 +102,14 @@
         }
 
         [Authorize(Roles = GlobalConstants.DriverRoleName + ", " + GlobalConstants.AdministratorRoleName)]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            var citiesAsKVP = await this.castCollectionsService.GetCitiesAsKeyValuePairs();
+            var typesAsKVP = await this.castCollectionsService.GetTravelTypesAsKeyValuePairs();
+
             var inputModel = new SharedTravelCreateInputViewModel();
-            inputModel.Cities = this.citiesService.GetAllAsKeyValuePairs();
-            inputModel.TypesOfTravel = this.typeOfTravelService.GetAllAsKeyValuePairs();
+            inputModel.Cities = citiesAsKVP;
+            inputModel.TypesOfTravel = typesAsKVP;
 
             return this.View(inputModel);
         }
@@ -116,9 +120,12 @@
         {
             if (!this.ModelState.IsValid)
             {
+                var citiesAsKVP = await this.castCollectionsService.GetCitiesAsKeyValuePairs();
+                var typesAsKVP = await this.castCollectionsService.GetTravelTypesAsKeyValuePairs();
+
                 var inputModel = new SharedTravelCreateInputViewModel();
-                inputModel.Cities = this.citiesService.GetAllAsKeyValuePairs();
-                inputModel.TypesOfTravel = this.typeOfTravelService.GetAllAsKeyValuePairs();
+                inputModel.Cities = citiesAsKVP;
+                inputModel.TypesOfTravel = typesAsKVP;
 
                 return this.View(inputModel);
             }
@@ -215,10 +222,13 @@
                 return this.NotFound();
             }
 
+            var citiesAsKVP = await this.castCollectionsService.GetCitiesAsKeyValuePairs();
+            var typesAsKVP = await this.castCollectionsService.GetTravelTypesAsKeyValuePairs();
+
             var inputModel = await this.sharedTravelsService.GetViewModelByIdAsync(id);
             inputModel.Id = id;
-            inputModel.Cities = this.citiesService.GetAllAsKeyValuePairs();
-            inputModel.TypesOfTravel = this.typeOfTravelService.GetAllAsKeyValuePairs();
+            inputModel.Cities = citiesAsKVP;
+            inputModel.TypesOfTravel = typesAsKVP;
 
             if (inputModel == null)
             {

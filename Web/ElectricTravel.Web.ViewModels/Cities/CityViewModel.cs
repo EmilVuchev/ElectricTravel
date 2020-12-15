@@ -6,12 +6,8 @@
     using ElectricTravel.Data.Models.Location;
     using ElectricTravel.Services.Mapping;
 
-    public class CityViewModel : IMapFrom<City>
+    public class CityViewModel : CityForKeyValuePairViewModel, IMapFrom<City>
     {
-        public int Id { get; set; }
-
-        public string Name { get; set; }
-
         [Display(Name = "Is Deleted")]
         public bool IsDeleted { get; set; }
 

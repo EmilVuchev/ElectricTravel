@@ -1,5 +1,7 @@
 ﻿namespace ElectricTravel.Web.Areas.Administration.Controllers
 {
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using ElectricTravel.Data;
@@ -7,7 +9,9 @@
     using ElectricTravel.Services.Data.Contracts;
     using ElectricTravel.Web.InputViewModels.SharedTravel;
     using ElectricTravel.Web.ViewModels.Administration.SharedTravelAdverts;
+    using ElectricTravel.Web.ViewModels.Cities;
     using ElectricTravel.Web.ViewModels.SharedTravels;
+    using ElectricTravel.Web.ViewModels.TypeTravels;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
@@ -15,19 +19,16 @@
     {
         private const int ItemsPerPage = 10;
         private readonly ISharedTravelsService sharedTravelsService;
-        private readonly ICitiesService citiesService;
-        private readonly ITypeOfTravelService typeOfTravelService;
+        private readonly ICastCollectionsService castCollectionsService;
         private readonly UserManager<ElectricTravelUser> userManager;
 
         public SharedTravelAdvertsController(
             ISharedTravelsService sharedTravelsService,
-            ICitiesService citiesService,
-            ITypeOfTravelService typeOfTravelService,
+            ICastCollectionsService castCollectionsService,
             UserManager<ElectricTravelUser> userManager)
         {
             this.sharedTravelsService = sharedTravelsService;
-            this.citiesService = citiesService;
-            this.typeOfTravelService = typeOfTravelService;
+            this.castCollectionsService = castCollectionsService;
             this.userManager = userManager;
         }
 
@@ -75,10 +76,13 @@
                 return this.NotFound();
             }
 
+            var citiesAsKVP = await this.castCollectionsService.GetCitiesAsKeyValuePairs();
+            var typesAsKVP = await this.castCollectionsService.GetTravelTypesAsKeyValuePairs();
+
             var sharedTravelAdvert = await this.sharedTravelsService.GetViewModelByIdAsync(id);
             sharedTravelAdvert.Id = id;
-            sharedTravelAdvert.Cities = this.citiesService.GetAllAsKeyValuePairs();
-            sharedTravelAdvert.TypesOfTravel = this.typeOfTravelService.GetAllAsKeyValuePairs();
+            sharedTravelAdvert.Cities = citiesAsKVP;
+            sharedTravelAdvert.TypesOfTravel = typesAsKVP;
 
             if (sharedTravelAdvert == null)
             {
@@ -111,10 +115,13 @@
                 return this.RedirectToAction(nameof(this.Index));
             }
 
+            var citiesAsKVP = await this.castCollectionsService.GetCitiesAsKeyValuePairs();
+            var typesAsKVP = await this.castCollectionsService.GetTravelTypesAsKeyValuePairs();
+
             var advert = await this.sharedTravelsService.GetViewModelByIdAsync(id);
             advert.Id = id;
-            advert.Cities = this.citiesService.GetAllAsKeyValuePairs();
-            advert.TypesOfTravel = this.typeOfTravelService.GetAllAsKeyValuePairs();
+            advert.Cities = citiesAsKVP;
+            advert.TypesOfTravel = typesAsKVP;
 
             return this.View(advert);
         }

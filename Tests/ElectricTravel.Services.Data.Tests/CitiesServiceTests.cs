@@ -11,55 +11,44 @@
     using ElectricTravel.Services.Mapping;
     using ElectricTravel.Web.InputViewModels.Cities;
     using ElectricTravel.Web.ViewModels.Cities;
+    using ElectricTravel.Web.ViewModels.Regions;
     using Microsoft.EntityFrameworkCore;
     using Xunit;
 
     public class CitiesServiceTests
     {
-        ////public void GetCountShouldReturnCorrectNumber()
-        ////{
-        ////    var repository = new Mock<IDeletableEntityRepository<Setting>>();
-        ////    repository.Setup(r => r.All()).Returns(new List<Setting>
-        ////                                                {
-        ////                                                    new Setting(),
-        ////                                                    new Setting(),
-        ////                                                    new Setting(),
-        ////                                                }.AsQueryable());
-        ////    var service = new SettingsService(repository.Object);
-        ////    Assert.Equal(3, service.GetCount());
-        ////    repository.Verify(x => x.All(), Times.Once);
-        ////}
-
         private ElectricTravelDbContext dbContext;
-        private EfDeletableEntityRepository<City> repository;
+        private EfDeletableEntityRepository<City> citiesRepository;
+        private EfDeletableEntityRepository<Region> regionsRepository;
         private ICitiesService citiesService;
 
         public CitiesServiceTests()
         {
             this.InitializeMapper();
             this.dbContext = GetElectricTravelDbContext();
-            this.repository = new EfDeletableEntityRepository<City>(this.dbContext);
-            this.citiesService = new CitiesService(this.repository);
+            this.citiesRepository = new EfDeletableEntityRepository<City>(this.dbContext);
+            this.regionsRepository = new EfDeletableEntityRepository<Region>(this.dbContext);
+            this.citiesService = new CitiesService(this.citiesRepository, this.regionsRepository);
         }
 
         [Fact]
         public async Task GetAllCitiesShouldReturnCorrectCount()
         {
-            SeedInDb(this.dbContext);
+            await SeedInDb(this.dbContext);
 
-            var cities = await this.citiesService.GetAllCities<CityViewModel>();
+            var cities = await this.citiesService.GetAll<CityViewModel>();
             var citiesCount = cities.Count();
+
             Assert.Equal(1, citiesCount);
         }
 
         [Fact]
         public async Task CheckInCreateAsyncIfCityWithSameNameIsAlreadyInDbAndIsNotDeleted()
         {
-            SeedInDb(this.dbContext);
-            var model = GetExistingInDbInputModel();
+            await SeedInDb(this.dbContext);
+            var modelName = "Plovdiv";
 
-            await this.citiesService.CreateAsync(model);
-            var doesExist = this.repository.AllWithDeleted().Any(x => x.Name == model.Name && x.IsDeleted == false);
+            var doesExist = this.citiesRepository.AllWithDeleted().Any(x => x.Name == modelName && x.IsDeleted == false);
 
             Assert.True(doesExist);
         }
@@ -67,7 +56,6 @@
         [Fact]
         public async Task CheckInCreateAsyncIfCreatesCityDbModel()
         {
-            SeedInDb(this.dbContext);
             var model = GetInputViewModel();
 
             var isCreated = await this.citiesService.CreateAsync(model);
@@ -78,7 +66,7 @@
         [Fact]
         public async Task CheckIfGetCityByIdAsyncReturnsCorrectData()
         {
-            SeedInDb(this.dbContext);
+            await SeedInDb(this.dbContext);
             var id = 2;
 
             var model = await this.citiesService.GetCityByIdAsync<CityViewModel>(id);
@@ -90,10 +78,10 @@
         [Fact]
         public async Task CheckIfInDeleteCityAsyncCityWithIdExist()
         {
-            SeedInDb(this.dbContext);
+            await SeedInDb(this.dbContext);
             var id = 2;
 
-            var model = await this.repository.All()
+            var model = await this.citiesRepository.All()
                  .FirstOrDefaultAsync(x => x.Id == id);
 
             Assert.NotNull(model);
@@ -102,22 +90,31 @@
         [Fact]
         public async Task CheckIfDeleteCityAsyncDeletesModel()
         {
-            SeedInDb(this.dbContext);
+            await SeedInDb(this.dbContext);
             var id = 1;
 
             await this.citiesService.DeleteAsync(id);
-            var model = await this.repository.All()
+            var model = await this.citiesRepository.All()
                  .FirstOrDefaultAsync(x => x.Id == id);
 
             Assert.Null(model);
         }
 
-        private static CreateCityInputViewModel GetExistingInDbInputModel()
+        [Fact]
+        public async Task CheckIfGetAllRegionsAsyncReturnsCorrectCount()
         {
-            var cityName = "Plovdiv";
-            var regionId = 1;
-            var model = new CreateCityInputViewModel { Name = cityName, RegionId = regionId };
-            return model;
+            if (this.dbContext.Regions.Count() == 0)
+            {
+                await SeedInDb(this.dbContext);
+            }
+
+            var regions = await this.regionsRepository.AllAsNoTracking()
+                    .To<RegionViewModel>()
+                    .ToListAsync();
+
+            var count = regions.Count;
+            var expectedResult = 1;
+            Assert.Equal(expectedResult, count);
         }
 
         private static CreateCityInputViewModel GetInputViewModel()
@@ -136,16 +133,16 @@
             return dbContext;
         }
 
-        private static void SeedInDb(ElectricTravelDbContext dbContext)
+        private static async Task SeedInDb(ElectricTravelDbContext dbContext)
         {
             dbContext.Regions.Add(new Region
             {
                 Name = "Plovdiv Region",
             });
 
-            dbContext.SaveChanges();
+            await dbContext.SaveChangesAsync();
 
-            var region = dbContext.Regions.FirstOrDefault(x => x.Name == "Plovdiv Region");
+            var region = await dbContext.Regions.FirstOrDefaultAsync(x => x.Name == "Plovdiv Region");
 
             dbContext.Cities.Add(new City
             {
@@ -153,7 +150,12 @@
                 Region = region,
             });
 
-            dbContext.SaveChanges();
+            await dbContext.SaveChangesAsync();
+        }
+
+        private async Task DisposeDb()
+        {
+            await this.dbContext.DisposeAsync();
         }
 
         private void InitializeMapper() => AutoMapperConfig.

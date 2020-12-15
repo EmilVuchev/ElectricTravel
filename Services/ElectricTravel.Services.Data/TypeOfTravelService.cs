@@ -1,11 +1,13 @@
 ﻿namespace ElectricTravel.Services.Data
 {
     using System.Collections.Generic;
-    using System.Linq;
+    using System.Threading.Tasks;
 
     using ElectricTravel.Data.Common.Repositories;
     using ElectricTravel.Data.Models.Advertisement;
     using ElectricTravel.Services.Data.Contracts;
+    using ElectricTravel.Services.Mapping;
+    using Microsoft.EntityFrameworkCore;
 
     public class TypeOfTravelService : ITypeOfTravelService
     {
@@ -16,14 +18,11 @@
             this.typeTravelRepository = typeTravelRepository;
         }
 
-        public IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs()
+        public async Task<IEnumerable<T>> GetAll<T>()
         {
-            return this.typeTravelRepository.AllAsNoTracking()
-                .Select(x => new
-                {
-                    x.Id,
-                    x.Name,
-                }).ToList().Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Name));
+            return await this.typeTravelRepository.AllAsNoTracking()
+                .To<T>()
+                .ToListAsync();
         }
     }
 }

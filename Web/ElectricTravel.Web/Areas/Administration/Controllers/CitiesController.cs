@@ -10,24 +10,27 @@
     public class CitiesController : AdministrationController
     {
         private readonly ICitiesService citiesService;
+        private readonly ICastCollectionsService castCollectionsService;
 
         public CitiesController(
-            ICitiesService citiesService)
+            ICitiesService citiesService,
+            ICastCollectionsService castCollectionsService)
         {
             this.citiesService = citiesService;
+            this.castCollectionsService = castCollectionsService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var cities = await this.citiesService.GetAllCities<CityViewModel>();
+            var cities = await this.citiesService.GetAll<CityViewModel>();
 
             return this.View(cities);
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             var input = new CreateCityInputViewModel();
-            input.Regions = this.citiesService.GetAllRegionsAsKeyValuePairs();
+            input.Regions = await this.castCollectionsService.GetRegionsAsKeyValuePairs();
             return this.View(input);
         }
 
@@ -47,7 +50,7 @@
             }
 
             var inputModel = new CreateCityInputViewModel();
-            inputModel.Regions = this.citiesService.GetAllRegionsAsKeyValuePairs();
+            inputModel.Regions = await this.castCollectionsService.GetRegionsAsKeyValuePairs();
             return this.View(inputModel);
         }
 

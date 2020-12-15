@@ -18,7 +18,6 @@
         public ArticlesService(IDeletableEntityRepository<Article> articleRepository)
         {
             this.articleRepository = articleRepository;
-            this.articleRepository = articleRepository;
         }
 
         public async Task<bool> CreateAsync(ArticleInputViewModel input)

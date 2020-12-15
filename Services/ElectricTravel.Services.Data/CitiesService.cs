@@ -14,44 +14,28 @@
     public class CitiesService : ICitiesService
     {
         private readonly IDeletableEntityRepository<City> citiesRepository;
+        private readonly IDeletableEntityRepository<Region> regionsRepository;
 
         public CitiesService(
-            IDeletableEntityRepository<City> citiesRepository)
+            IDeletableEntityRepository<City> citiesRepository,
+            IDeletableEntityRepository<Region> regionsRepository)
         {
             this.citiesRepository = citiesRepository;
+            this.regionsRepository = regionsRepository;
         }
 
-        public IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs()
+        public async Task<IEnumerable<T>> GetAll<T>()
         {
-            return this.citiesRepository.AllAsNoTracking()
-                .Select(x => new
-                {
-                    x.Id,
-                    x.Name,
-                })
-                .OrderBy(x => x.Name)
-                .ToList().Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Name));
-        }
-
-        public IEnumerable<KeyValuePair<string, string>> GetAllRegionsAsKeyValuePairs()
-        {
-            return this.citiesRepository.AllAsNoTracking()
-                .Select(x => new
-                {
-                    x.Region.Id,
-                    x.Region.Name,
-                })
-                .OrderBy(x => x.Name)
-                .ToList().Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Name));
-        }
-
-        public async Task<IEnumerable<T>> GetAllCities<T>()
-        {
-            var cities = await this.citiesRepository.All()
+            return await this.citiesRepository.AllAsNoTracking()
                 .To<T>()
                 .ToListAsync();
+        }
 
-            return cities;
+        public async Task<IEnumerable<T>> GetAllRegions<T>()
+        {
+            return await this.regionsRepository.AllAsNoTracking()
+                .To<T>()
+                .ToListAsync();
         }
 
         public async Task<bool> CreateAsync(CreateCityInputViewModel input)
