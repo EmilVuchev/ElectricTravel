@@ -1,0 +1,71 @@
+﻿@model IEnumerable<ElectricTravel.Web.ViewModels.ChargingStations.ChargingStationViewModel>
+@using ElectricTravel.Web.ViewModels.ChargingStations
+@{
+    this.ViewData["Title"] = "All Stations";
+    this.Layout = "~/Views/Shared/_Layout.cshtml";
+    var name = "Charging Station";
+    var workingTime = "Working Time";
+    var isFree = "Is Free Of Charge";
+    var address = "Address";
+}
+
+<br />
+<div class="container text-light text-center custom-bg">
+    <br />
+    <h1>@this.ViewData["Title"]</h1>
+
+    @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+    {
+        <p>
+            <a class="btn btn-success" asp-controller="ChargingStations" asp-action="Create">Create New</a>
+        </p>
+    }
+
+    <table class="table text-light">
+        <thead>
+            <tr>
+                <th>
+                    @name
+                </th>
+                <th>
+                    @workingTime
+                </th>
+                <th>
+                    @isFree
+                </th>
+                <th>
+                    @address
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @item.WorkTime
+                    </td>
+                    <td>
+                        @item.IsFreeOfCharge
+                    </td>
+                    <td>
+                        @item.Address
+                    </td>
+                    <td>
+                        <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id"><i class="fas fa-info"></i></a>
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="fas fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <br />
+</div>
+
+@section Scripts{
+    <link href="~/css/style.css" rel="stylesheet" />
+}

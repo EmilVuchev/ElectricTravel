@@ -18,6 +18,17 @@
             this.typeTravelRepository = typeTravelRepository;
         }
 
+        public async Task CreateAsync(string name)
+        {
+            var newType = new TypeTravel
+            {
+                Name = name,
+            };
+
+            await this.typeTravelRepository.AddAsync(newType);
+            await this.typeTravelRepository.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<T>> GetAll<T>()
         {
             return await this.typeTravelRepository.AllAsNoTracking()

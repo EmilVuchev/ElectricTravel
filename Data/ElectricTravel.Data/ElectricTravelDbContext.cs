@@ -43,7 +43,7 @@
 
         public DbSet<CarAdvertStatus> CarAdvertStatus { get; set; }
 
-        public DbSet<TypeTravel> TypeTravels { get; set; }
+        public DbSet<Models.Advertisement.TypeTravel> TypeTravels { get; set; }
 
         public DbSet<StationCategory> StationCategories { get; set; }
 
@@ -91,7 +91,7 @@
 
         public DbSet<UserAddress> UserAddresses { get; set; }
 
-        public DbSet<UserRating> UserRatings { get; set; }
+        public DbSet<Models.User.TypeTravel> UserRatings { get; set; }
 
         public DbSet<Setting> Settings { get; set; }
 

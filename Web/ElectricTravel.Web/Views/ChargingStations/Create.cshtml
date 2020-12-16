@@ -1,0 +1,81 @@
+﻿@model ElectricTravel.Web.InputViewModels.ChargingStations.ChargingStationInputViewModel
+
+@{
+    this.ViewData["Title"] = "Create Charging Station";
+    this.Layout = "~/Views/Shared/_Layout.cshtml";
+    var cities = Model.Cities.Select(x => new SelectListItem(x.Value, x.Key));
+}
+
+<br />
+<div class="container text-center text-light custom-bg">
+    <br />
+    <div>
+        <h1>@this.ViewData["Title"]</h1>
+    </div>
+    <div class="text-left"> 
+        <a class="btn btn-secondary" asp-action="Index">Back to List</a>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="Name" class="control-label"></label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="WorkTime" class="control-label"></label>
+                            <input asp-for="WorkTime" class="form-control" />
+                            <span asp-validation-for="WorkTime" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="Address" class="control-label"></label>
+                            <input asp-for="Address" class="form-control" />
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="CityId" class="control-label"></label>
+                            <select asp-for="CityId" class="form-control" asp-items="@cities"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="IsFreeOfCharge" class="control-label"></label>
+                            <input asp-for="IsFreeOfCharge" class="form-control" />
+                            <span asp-validation-for="IsFreeOfCharge" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="Description" class="control-label"></label>
+                            <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <link href="~/css/style.css" rel="stylesheet" />
+}
+

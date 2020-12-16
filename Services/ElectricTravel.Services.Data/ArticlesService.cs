@@ -22,6 +22,11 @@
 
         public async Task<bool> CreateAsync(ArticleInputViewModel input)
         {
+            if (input == null)
+            {
+                return false;
+            }
+
             var article = new Article()
             {
                 ShortDescription = input.ShortDescription,
@@ -31,15 +36,8 @@
                 Path = input.Path,
             };
 
-            try
-            {
-                await this.articleRepository.AddAsync(article);
-                await this.articleRepository.SaveChangesAsync();
-            }
-            catch (System.Exception)
-            {
-                return false;
-            }
+            await this.articleRepository.AddAsync(article);
+            await this.articleRepository.SaveChangesAsync();
 
             return true;
         }

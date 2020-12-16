@@ -28,10 +28,14 @@
 
         public bool IsFreeOfCharge { get; set; }
 
-        [ForeignKey(nameof(Address))]
-        public int? AddressId { get; set; }
+        [ForeignKey(nameof(City))]
+        public int CityId { get; set; }
 
-        public virtual Address Address { get; set; }
+        public virtual City City { get; set; }
+
+        [Required]
+        [MaxLength(50)]
+        public string Address { get; set; }
 
         [ForeignKey(nameof(Image))]
         public string ImageId { get; set; }

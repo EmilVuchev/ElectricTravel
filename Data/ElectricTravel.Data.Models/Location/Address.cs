@@ -1,5 +1,4 @@
-﻿// ReSharper disable VirtualMemberCallInConstructor
-namespace ElectricTravel.Data.Models.Location
+﻿namespace ElectricTravel.Data.Models.Location
 {
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
@@ -8,6 +7,8 @@ namespace ElectricTravel.Data.Models.Location
 
     public class Address : BaseDeletableModel<int>
     {
+        [Required]
+        [MaxLength(30)]
         public string Street { get; set; }
 
         [Required]

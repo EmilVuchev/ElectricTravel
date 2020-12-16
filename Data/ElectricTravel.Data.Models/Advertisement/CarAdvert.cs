@@ -13,7 +13,7 @@
         [MaxLength(50)]
         public string Title { get; set; }
 
-        public decimal Price { get; set; }
+        public double Price { get; set; }
 
         [MaxLength(3500)]
         public string Description { get; set; }

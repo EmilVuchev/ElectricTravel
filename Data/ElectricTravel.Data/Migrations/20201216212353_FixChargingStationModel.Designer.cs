@@ -4,14 +4,16 @@ using ElectricTravel.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ElectricTravel.Data.Migrations
 {
     [DbContext(typeof(ElectricTravelDbContext))]
-    partial class ElectricTravelDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201216212353_FixChargingStationModel")]
+    partial class FixChargingStationModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -538,9 +540,6 @@ namespace ElectricTravel.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("CityId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
@@ -572,8 +571,6 @@ namespace ElectricTravel.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CityId");
 
                     b.HasIndex("ImageId");
 
@@ -1624,17 +1621,9 @@ namespace ElectricTravel.Data.Migrations
 
             modelBuilder.Entity("ElectricTravel.Data.Models.Charging.ChargingStation", b =>
                 {
-                    b.HasOne("ElectricTravel.Data.Models.Location.City", "City")
-                        .WithMany()
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("ElectricTravel.Data.Models.Multimedia.Image", "Image")
                         .WithMany()
                         .HasForeignKey("ImageId");
-
-                    b.Navigation("City");
 
                     b.Navigation("Image");
                 });

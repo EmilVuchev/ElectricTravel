@@ -5,6 +5,8 @@
 
     public interface ITypeOfTravelService
     {
+        Task CreateAsync(string name);
+
         Task<IEnumerable<T>> GetAll<T>();
     }
 }

@@ -36,7 +36,7 @@
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectionString = this.configuration.GetConnectionString("DeveloperConnection");
+            var connectionString = this.configuration.GetConnectionString("DefaultConnection");
 
             services.AddDbContext<ElectricTravelDbContext>(
                 options => options.UseSqlServer(connectionString));
@@ -101,6 +101,7 @@
             services.AddTransient<IImagesService, ImagesService>();
             services.AddTransient<IArticlesService, ArticlesService>();
             services.AddTransient<ICastCollectionsService, CastCollectionsService>();
+            services.AddTransient<IChargingStationsService, ChargingStationsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -130,8 +131,6 @@
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
-            ////app.UseImageSharp();
 
             app.UseRouting();
 

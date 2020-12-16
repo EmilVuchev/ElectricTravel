@@ -15,7 +15,6 @@
 
     public class UsersService : IUsersService
     {
-        private readonly string[] allowedExtensions = new[] { "jpg", "png", "gif", "jpeg" };
         private readonly IDeletableEntityRepository<ElectricTravelUser> userRepository;
         private readonly IDeletableEntityRepository<SharedTravelAdvert> sharedTravelRepository;
         private readonly IDeletableEntityRepository<ImageType> imageTypeRepository;

@@ -5,7 +5,7 @@
 
     using ElectricTravel.Data.Common.Models;
 
-    public class UserRating : BaseDeletableModel<int>
+    public class TypeTravel : BaseDeletableModel<int>
     {
         [Required]
         [ForeignKey(nameof(Assessor))]

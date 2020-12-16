@@ -9,9 +9,9 @@
 
     public class RatingService : IRatingService
     {
-        private readonly IDeletableEntityRepository<UserRating> userRatingRepository;
+        private readonly IDeletableEntityRepository<TypeTravel> userRatingRepository;
 
-        public RatingService(IDeletableEntityRepository<UserRating> userRatingRepository)
+        public RatingService(IDeletableEntityRepository<TypeTravel> userRatingRepository)
         {
             this.userRatingRepository = userRatingRepository;
         }
@@ -30,7 +30,7 @@
 
             if (userRate == null)
             {
-                userRate = new UserRating
+                userRate = new TypeTravel
                 {
                     AssessorId = assessorId,
                     UserId = userId,

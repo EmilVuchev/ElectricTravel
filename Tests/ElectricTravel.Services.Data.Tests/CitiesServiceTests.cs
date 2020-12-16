@@ -1,5 +1,6 @@
 ﻿namespace ElectricTravel.Services.Data.Tests
 {
+    using System;
     using System.Linq;
     using System.Reflection;
     using System.Threading.Tasks;
@@ -15,7 +16,7 @@
     using Microsoft.EntityFrameworkCore;
     using Xunit;
 
-    public class CitiesServiceTests
+    public class CitiesServiceTests : IDisposable
     {
         private ElectricTravelDbContext dbContext;
         private EfDeletableEntityRepository<City> citiesRepository;
@@ -117,6 +118,11 @@
             Assert.Equal(expectedResult, count);
         }
 
+        public void Dispose()
+        {
+            this.dbContext.DisposeAsync();
+        }
+
         private static CreateCityInputViewModel GetInputViewModel()
         {
             var cityName = "Sofia";
@@ -153,25 +159,7 @@
             await dbContext.SaveChangesAsync();
         }
 
-        private async Task DisposeDb()
-        {
-            await this.dbContext.DisposeAsync();
-        }
-
         private void InitializeMapper() => AutoMapperConfig.
             RegisterMappings(Assembly.Load("ElectricTravel.Web.ViewModels"));
     }
-
-    ///var options = new DbContextOptionsBuilder<ElectricTravelDbContext>()
-    ////    .UseInMemoryDatabase(databaseName: "SettingsTestDb").Options;
-    ////using var dbContext = new ElectricTravelDbContext(options);
-    ////    dbContext.Settings.Add(new Setting());
-    ////        dbContext.Settings.Add(new Setting());
-    ////        dbContext.Settings.Add(new Setting());
-    ////        await dbContext.SaveChangesAsync();
-
-    ////        using var repository = new EfDeletableEntityRepository<Setting>(dbContext);
-    ////        var service = new SettingsService(repository);
-    ////Assert.Equal(3, service.GetCount());
-
 }

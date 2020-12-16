@@ -1,0 +1,51 @@
+﻿@model ElectricTravel.Web.ViewModels.ChargingStations.ChargingStationDetailsViewModel
+
+@{
+    this.ViewData["Title"] = "Details";
+    this.Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div class="container text-center text-light custom-bg">
+    <br />
+    <h1>@this.ViewData["Title"]</h1>
+
+    <div>
+        <h4>Charging Station</h4>
+        <hr />
+        <div class="row">
+            <div class="col">
+                <label class="text-white-50" asp-for="Name"></label>
+                <span>@Model.Name</span>
+            </div>
+            <div class="col">
+                <label class="text-white-50" asp-for="CityName"></label>
+                <span>@Model.CityName</span>
+            </div>
+            <div class="col">
+                <label class="text-white-50" asp-for="Address"></label>
+                <span>@Model.Address</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label class="text-white-50" asp-for="WorkTime"></label>
+                <span>@Model.WorkTime</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label class="text-white-50" asp-for="Description"></label>
+                <span>@Model.Description</span>
+            </div>
+        </div>
+    </div>
+    <div>
+        <a class="btn btn-info" asp-action="Index">Back to List</a>
+    </div>
+    <br />
+</div>
+
+@section Scripts{
+    <link href="~/css/style.css" rel="stylesheet" />
+}

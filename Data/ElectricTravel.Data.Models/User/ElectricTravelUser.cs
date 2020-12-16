@@ -27,8 +27,8 @@
             this.CarAdverts = new HashSet<CarAdvert>();
             this.SharedTravelAdverts = new HashSet<SharedTravelAdvert>();
             this.FavouritesAdverts = new HashSet<CarAdvert>();
-            this.UserRatings = new HashSet<UserRating>();
-            this.EvaluatedUsers = new HashSet<UserRating>();
+            this.UserRatings = new HashSet<TypeTravel>();
+            this.EvaluatedUsers = new HashSet<TypeTravel>();
             this.Images = new HashSet<Image>();
         }
 
@@ -56,10 +56,10 @@
         public virtual ICollection<Image> Images { get; set; }
 
         [InverseProperty("User")]
-        public virtual ICollection<UserRating> UserRatings { get; set; }
+        public virtual ICollection<TypeTravel> UserRatings { get; set; }
 
         [InverseProperty("Assessor")]
-        public virtual ICollection<UserRating> EvaluatedUsers { get; set; }
+        public virtual ICollection<TypeTravel> EvaluatedUsers { get; set; }
 
         [InverseProperty("CreatedBy")]
         public virtual ICollection<CarAdvert> CarAdverts { get; set; }

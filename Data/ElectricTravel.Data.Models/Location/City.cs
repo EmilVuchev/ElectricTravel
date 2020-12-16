@@ -6,6 +6,7 @@
 
     using ElectricTravel.Data.Common.Models;
     using ElectricTravel.Data.Models.Advertisement;
+    using ElectricTravel.Data.Models.Charging;
 
     public class City : BaseDeletableModel<int>
     {
@@ -36,5 +37,7 @@
 
         [InverseProperty("EndDestination")]
         public virtual ICollection<SharedTravelAdvert> EndPointAdvert { get; set; }
+
+        public virtual ICollection<ChargingStation> Stations { get; set; }
     }
 }
