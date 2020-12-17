@@ -1,6 +1,7 @@
 ﻿namespace ElectricTravel.Web.Controllers
 {
     using System.Threading.Tasks;
+
     using ElectricTravel.Data.Models.User;
     using ElectricTravel.Services.Data.Contracts;
     using ElectricTravel.Web.ViewModels.Images;

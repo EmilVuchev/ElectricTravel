@@ -44,8 +44,6 @@
                                 <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
                             </p>
                         </div>
-                        @*<button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign up with Google</button>
-                            <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign up with Facebook</button>*@
                     </form>
                     @{
                         if ((Model.ExternalLogins?.Count ?? 0) == 0)
@@ -56,26 +54,6 @@
                                     for details on setting up this ASP.NET application to support logging in via external services.
                                 </p>
                             </div>
-                        }
-                        else
-                        {
-                            <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-signin">
-                                <div>
-                                    <p>
-                                        @foreach (var provider in Model.ExternalLogins)
-                                        {
-                                            if (provider.Name == "Facebook")
-                                            {
-                                                <button type="submit" class="btn btn-lg btn-facebook btn-block text-uppercase" name="provider" value="@provider.Name" title="Log in with @provider.DisplayName account"><i class="fab fa-facebook-f mr-2"></i> Login with @provider.DisplayName</button>
-                                            }
-                                            else if (provider.Name == "Google")
-                                            {
-                                                <button type="submit" class="btn btn-lg btn-google btn-block text-uppercase" name="provider" value="@provider.Name" title="Log in with @provider.DisplayName account"><i class="fab fa-google mr-2"></i> Login with @provider.DisplayName</button>
-                                            }
-                                        }
-                                    </p>
-                                </div>
-                            </form>
                         }
                     }
                 </div>

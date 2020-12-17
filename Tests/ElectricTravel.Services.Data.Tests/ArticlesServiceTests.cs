@@ -35,7 +35,7 @@
             this.InitializeMapper();
         }
 
-        ///var options = new DbContextOptionsBuilder<ElectricTravelDbContext>()
+        ////var options = new DbContextOptionsBuilder<ElectricTravelDbContext>()
         ////    .UseInMemoryDatabase(databaseName: "SettingsTestDb").Options;
         ////using var dbContext = new ElectricTravelDbContext(options);
         ////    dbContext.Settings.Add(new Setting());
@@ -95,21 +95,23 @@
                                          .UseInMemoryDatabase(databaseName: "ArticlesTestDb").Options;
             using var dbContext = new ElectricTravelDbContext(options);
 
-            dbContext.Articles.Add(new Article
-            {
-                ShortDescription = "asdasdasd",
-                Content = "asdasdadasd",
-                CreatedById = "stefkaasd",
-                Title = "asdasasd",
-            });
-
-            dbContext.SaveChanges();
-
             using var repo = new EfDeletableEntityRepository<Article>(dbContext);
             var service = new ArticlesService(repo);
 
-            var id = 2;
             var userId = "stefkaasd";
+
+            var articleToAdd = new Article
+            {
+                ShortDescription = "asdasdasd",
+                Content = "asdasdadasd",
+                CreatedById = userId,
+                Title = "asdasasd",
+            };
+
+            await repo.AddAsync(articleToAdd);
+            await repo.SaveChangesAsync();
+
+            var id = articleToAdd.Id;
 
             var article = await dbContext.Articles
                 .FirstOrDefaultAsync(x => x.Id == id && x.CreatedById == userId);
@@ -124,21 +126,23 @@
                                      .UseInMemoryDatabase(databaseName: "ArticlesTestDb").Options;
             using var dbContext = new ElectricTravelDbContext(options);
 
-            dbContext.Articles.Add(new Article
-            {
-                ShortDescription = "asdasd",
-                Content = "asdasdad",
-                CreatedById = "goshoasd",
-                Title = "asdas",
-            });
-
-            dbContext.SaveChanges();
-
             using var repo = new EfDeletableEntityRepository<Article>(dbContext);
             var service = new ArticlesService(repo);
 
-            var id = 1;
             var userId = "goshoasd";
+
+            var articleToAdd = new Article
+            {
+                ShortDescription = "asdasd",
+                Content = "asdasdad",
+                CreatedById = userId,
+                Title = "asdas",
+            };
+
+            await repo.AddAsync(articleToAdd);
+            await repo.SaveChangesAsync();
+
+            var id = articleToAdd.Id;
 
             await service.DeleteAsync(id, userId);
             var article = await dbContext.Articles

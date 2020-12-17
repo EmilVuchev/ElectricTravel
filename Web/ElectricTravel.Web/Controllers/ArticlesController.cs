@@ -1,6 +1,7 @@
 ﻿namespace ElectricTravel.Web.Controllers
 {
     using System.Threading.Tasks;
+
     using ElectricTravel.Data.Models.User;
     using ElectricTravel.Services.Data.Contracts;
     using ElectricTravel.Web.InputViewModels.News;
@@ -9,7 +10,6 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
-    [Authorize]
     public class ArticlesController : Controller
     {
         private readonly IArticlesService articlesService;
@@ -46,6 +46,7 @@
             return this.View(article);
         }
 
+        [Authorize]
         public IActionResult Create()
         {
             var input = new ArticleInputViewModel();
@@ -53,6 +54,7 @@
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create(ArticleInputViewModel article)
         {
             var userId = this.userManager.GetUserId(this.User);
@@ -73,6 +75,7 @@
             return this.RedirectToAction(nameof(this.Index));
         }
 
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -93,6 +96,7 @@
 
         [HttpPost]
         [ActionName("Delete")]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var userId = this.userManager.GetUserId(this.User);

@@ -53,7 +53,6 @@
         {
             var modelsList = new SelectList(this.carsService.GetModelsByMakeId(makeId), "Id", "Name");
             return this.Json(modelsList);
-
         }
 
         public IActionResult Create()

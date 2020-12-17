@@ -1625,7 +1625,7 @@ namespace ElectricTravel.Data.Migrations
             modelBuilder.Entity("ElectricTravel.Data.Models.Charging.ChargingStation", b =>
                 {
                     b.HasOne("ElectricTravel.Data.Models.Location.City", "City")
-                        .WithMany()
+                        .WithMany("Stations")
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -1956,6 +1956,8 @@ namespace ElectricTravel.Data.Migrations
                     b.Navigation("EndPointAdvert");
 
                     b.Navigation("StartPointAdvert");
+
+                    b.Navigation("Stations");
                 });
 
             modelBuilder.Entity("ElectricTravel.Data.Models.Location.Region", b =>

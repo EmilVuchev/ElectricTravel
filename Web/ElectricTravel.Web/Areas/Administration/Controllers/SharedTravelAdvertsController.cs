@@ -104,7 +104,6 @@
 
             if (this.ModelState.IsValid)
             {
-
                 var isEdited = await this.sharedTravelsService.UpdateAsync(id, input, userId);
 
                 if (!isEdited)

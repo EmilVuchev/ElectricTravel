@@ -1,5 +1,4 @@
-﻿
-namespace ElectricTravel.Web.ViewModels.SharedTravels
+﻿namespace ElectricTravel.Web.ViewModels.SharedTravels
 {
     using System.ComponentModel.DataAnnotations;
     using System.Linq;

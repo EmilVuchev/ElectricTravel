@@ -12,6 +12,7 @@
         Task<T> GetArticleById<T>(int? id);
 
         Task<bool> CreateAsync(ArticleInputViewModel article);
+
         Task DeleteAsync(int? id, string userId);
     }
 }

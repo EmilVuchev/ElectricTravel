@@ -199,8 +199,6 @@
                        LuggageCapacity = x.LuggageCapacity,
                        Range = x.Range,
                        Year = x.Year,
-                       //MakeName = x.Make.Name,
-                       //ModelName = x.Model.Name,
                    })
                    .FirstOrDefaultAsync();
 

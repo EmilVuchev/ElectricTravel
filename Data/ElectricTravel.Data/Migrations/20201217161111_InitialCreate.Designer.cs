@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ElectricTravel.Data.Migrations
 {
     [DbContext(typeof(ElectricTravelDbContext))]
-    [Migration("20201212155649_ChangeModelRequirements")]
-    partial class ChangeModelRequirements
+    [Migration("20201217161111_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,7 +19,7 @@ namespace ElectricTravel.Data.Migrations
             modelBuilder
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.0");
+                .HasAnnotation("ProductVersion", "5.0.1");
 
             modelBuilder.Entity("ElectricTravel.Data.Models.Advertisement.CarAdvert", b =>
                 {
@@ -55,8 +55,8 @@ namespace ElectricTravel.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
 
                     b.Property<int>("StatusId")
                         .HasColumnType("int");
@@ -166,6 +166,9 @@ namespace ElectricTravel.Data.Migrations
 
                     b.Property<int>("EndDestinationId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -532,7 +535,12 @@ namespace ElectricTravel.Data.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int?>("AddressId")
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("CityId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
@@ -567,7 +575,7 @@ namespace ElectricTravel.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AddressId");
+                    b.HasIndex("CityId");
 
                     b.HasIndex("ImageId");
 
@@ -780,7 +788,9 @@ namespace ElectricTravel.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Street")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.HasKey("Id");
 
@@ -1056,6 +1066,10 @@ namespace ElectricTravel.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CreatedById")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
@@ -1071,6 +1085,11 @@ namespace ElectricTravel.Data.Migrations
                     b.Property<string>("Path")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ShortDescription")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
                     b.Property<int?>("SourceId")
                         .HasColumnType("int");
 
@@ -1079,17 +1098,13 @@ namespace ElectricTravel.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedById");
 
                     b.HasIndex("IsDeleted");
 
                     b.HasIndex("SourceId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Articles");
                 });
@@ -1292,30 +1307,7 @@ namespace ElectricTravel.Data.Migrations
                     b.ToTable("AspNetRoles");
                 });
 
-            modelBuilder.Entity("ElectricTravel.Data.Models.User.UserAddress", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AddressId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.HasKey("UserId", "AddressId");
-
-                    b.HasIndex("AddressId");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.ToTable("UserAddresses");
-                });
-
-            modelBuilder.Entity("ElectricTravel.Data.Models.User.UserRating", b =>
+            modelBuilder.Entity("ElectricTravel.Data.Models.User.TypeTravel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1354,6 +1346,29 @@ namespace ElectricTravel.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserRatings");
+                });
+
+            modelBuilder.Entity("ElectricTravel.Data.Models.User.UserAddress", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AddressId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.HasKey("UserId", "AddressId");
+
+                    b.HasIndex("AddressId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("UserAddresses");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -1611,15 +1626,17 @@ namespace ElectricTravel.Data.Migrations
 
             modelBuilder.Entity("ElectricTravel.Data.Models.Charging.ChargingStation", b =>
                 {
-                    b.HasOne("ElectricTravel.Data.Models.Location.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId");
+                    b.HasOne("ElectricTravel.Data.Models.Location.City", "City")
+                        .WithMany("Stations")
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("ElectricTravel.Data.Models.Multimedia.Image", "Image")
                         .WithMany()
                         .HasForeignKey("ImageId");
 
-                    b.Navigation("Address");
+                    b.Navigation("City");
 
                     b.Navigation("Image");
                 });
@@ -1770,17 +1787,36 @@ namespace ElectricTravel.Data.Migrations
 
             modelBuilder.Entity("ElectricTravel.Data.Models.News.Article", b =>
                 {
+                    b.HasOne("ElectricTravel.Data.Models.User.ElectricTravelUser", "CreatedBy")
+                        .WithMany()
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("ElectricTravel.Data.Models.News.Source", "Source")
                         .WithMany()
                         .HasForeignKey("SourceId");
 
+                    b.Navigation("CreatedBy");
+
+                    b.Navigation("Source");
+                });
+
+            modelBuilder.Entity("ElectricTravel.Data.Models.User.TypeTravel", b =>
+                {
+                    b.HasOne("ElectricTravel.Data.Models.User.ElectricTravelUser", "Assessor")
+                        .WithMany("EvaluatedUsers")
+                        .HasForeignKey("AssessorId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("ElectricTravel.Data.Models.User.ElectricTravelUser", "User")
-                        .WithMany()
+                        .WithMany("UserRatings")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Source");
+                    b.Navigation("Assessor");
 
                     b.Navigation("User");
                 });
@@ -1800,25 +1836,6 @@ namespace ElectricTravel.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Address");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("ElectricTravel.Data.Models.User.UserRating", b =>
-                {
-                    b.HasOne("ElectricTravel.Data.Models.User.ElectricTravelUser", "Assessor")
-                        .WithMany("EvaluatedUsers")
-                        .HasForeignKey("AssessorId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("ElectricTravel.Data.Models.User.ElectricTravelUser", "User")
-                        .WithMany("UserRatings")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Assessor");
 
                     b.Navigation("User");
                 });
@@ -1941,6 +1958,8 @@ namespace ElectricTravel.Data.Migrations
                     b.Navigation("EndPointAdvert");
 
                     b.Navigation("StartPointAdvert");
+
+                    b.Navigation("Stations");
                 });
 
             modelBuilder.Entity("ElectricTravel.Data.Models.Location.Region", b =>

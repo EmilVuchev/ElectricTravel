@@ -1,4 +1,3 @@
-
 namespace ElectricTravel.Web.Controllers
 {
     using System.Threading.Tasks;
