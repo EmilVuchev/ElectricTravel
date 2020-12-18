@@ -24,8 +24,6 @@
 
         Task<ElectricCarEditInputViewModel> GetCarByIdForEdit(int? id);
 
-        IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairsById(int id);
-
         IEnumerable<VehicleMakeViewModel> GetMakes();
 
         List<VehicleModelViewModel> GetModelsByMakeId(int makeId);

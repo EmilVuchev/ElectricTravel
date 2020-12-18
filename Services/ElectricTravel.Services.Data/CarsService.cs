@@ -52,19 +52,6 @@
             return models;
         }
 
-        public IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairsById(int id)
-        {
-            return this.carMakeRepository.AllAsNoTracking()
-                .Where(x => x.CarTypes.Any(y => y.CarTypeId == id))
-                .Select(x => new
-                {
-                    x.Id,
-                    x.Name,
-                })
-                .OrderBy(x => x.Name)
-                .ToList().Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Name));
-        }
-
         public async Task<IEnumerable<T>> GetCarsByUserId<T>(string userId)
         {
             var cars = await this.carRepository.AllAsNoTracking()

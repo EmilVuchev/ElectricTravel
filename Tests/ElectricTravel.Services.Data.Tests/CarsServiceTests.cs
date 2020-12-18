@@ -326,6 +326,64 @@
             Assert.True(isDeleted);
         }
 
+        [Fact]
+        public async Task GetAllCarTypesShouldReturnCorrectResult()
+        {
+            var carType = new CarType
+            {
+                Id = 1,
+                Name = "Sedan",
+            };
+
+            await this.carTypesRepo.AddAsync(carType);
+            await this.carTypesRepo.SaveChangesAsync();
+
+            var carTypes = this.carsService.GetAllCarTypesAsKeyValuePairs();
+
+            var expectedResult = 1;
+            var actualResult = carTypes.Count();
+
+            Assert.Equal(expectedResult, actualResult);
+        }
+
+        [Fact]
+        public async Task GetAllMakesShouldReturnCorrectResult()
+        {
+            var carMake = new Make
+            {
+                Name = "Tesla",
+            };
+
+            await this.makesRepo.AddAsync(carMake);
+            await this.makesRepo.SaveChangesAsync();
+
+            var carmakes = this.carsService.GetAllCarMakesAsKeyValuePairs();
+
+            var expectedResult = 3;
+            var actualResult = carmakes.Count();
+
+            Assert.Equal(expectedResult, actualResult);
+        }
+
+        [Fact]
+        public async Task GetAllModelsShouldReturnCorrectResult()
+        {
+            var carModel = new Model
+            {
+                Name = "Model S",
+            };
+
+            await this.modelsRepo.AddAsync(carModel);
+            await this.modelsRepo.SaveChangesAsync();
+
+            var carmakes = this.carsService.GetAllCarModelsAsKeyValuePairs();
+
+            var expectedResult = 2;
+            var actualResult = carmakes.Count();
+
+            Assert.Equal(expectedResult, actualResult);
+        }
+
         private static ElectricTravelDbContext InitializeDbContext()
         {
             var options = new DbContextOptionsBuilder<ElectricTravelDbContext>()
