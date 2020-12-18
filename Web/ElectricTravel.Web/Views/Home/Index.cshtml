@@ -4,18 +4,24 @@
     this.ViewData["Title"] = "Home Page";
 }
 
-<div class="container my-4">
-    @foreach (var advert in Model.SharedTravels)
-    {
-        <span>@advert.StartDestinationName</span>
-        <span>@advert.WithReturnTripAsString</span>
-    }
-
+<br />
+<div class="container my-bg">
+    <br />
+    <div class="text-center text-white">
+        <br />
+        <h1>Hello To Electric Travel!</h1>
+        <br />
+        <h2>Here you can find some information for electric shared travel in Bulgaria, </h2>
+        <h2>news from electric world and charging stations</h2>
+        <h2>for your best electric car experience</h2>
+        <br />
+    </div>
+    <br />
 </div>
+
 
 @section Scripts{
     <link href="~/css/home.css" rel="stylesheet" />
-    <link href="~/css/site.css" rel="stylesheet" />
 }
 
 

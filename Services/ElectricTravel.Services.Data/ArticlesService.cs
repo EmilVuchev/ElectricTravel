@@ -66,5 +66,17 @@
                 .To<T>()
                 .FirstOrDefaultAsync();
         }
+
+        ////public async Task<IEnumerable<SharedTravelsViewModel>> GetRecentlyAddedAsync(int count = 0)
+        ////{
+        ////    var recentlyAdded = await this.articleRepository
+        ////       .All()
+        ////       .OrderByDescending(x => x.CreatedOn)
+        ////       .Take(count)
+        ////       .To<SharedTravelsViewModel>()
+        ////       .ToListAsync();
+
+        ////    return recentlyAdded;
+        ////}
     }
 }

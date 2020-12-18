@@ -35,25 +35,23 @@
             var image = this.imageRepository.All()
                 .FirstOrDefault(x => x.Id == imageId);
 
-            this.imageRepository.Delete(image);
-
-            var countChanges = await this.imageRepository.SaveChangesAsync();
-
-            if (countChanges == 0)
+            if (image == null)
             {
                 return false;
             }
+
+            this.imageRepository.Delete(image);
+            await this.imageRepository.SaveChangesAsync();
 
             return true;
         }
 
         public async Task<int> GetImageTypeId(string userImageType)
         {
-            return await this.imageTypeRepository
-           .AllAsNoTracking()
-           .Where(x => x.Name == userImageType)
-           .Select(x => x.Id)
-           .FirstOrDefaultAsync();
+            return await this.imageTypeRepository.AllAsNoTracking()
+                .Where(x => x.Name == userImageType)
+                .Select(x => x.Id)
+                .FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<T>> GetProfileImagesByUserId<T>(string userId)

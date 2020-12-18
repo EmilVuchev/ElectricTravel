@@ -16,7 +16,7 @@
     using Microsoft.EntityFrameworkCore;
     using Xunit;
 
-    public class CitiesServiceTests : IDisposable
+    public sealed class CitiesServiceTests : IDisposable
     {
         private ElectricTravelDbContext dbContext;
         private EfDeletableEntityRepository<City> citiesRepository;

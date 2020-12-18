@@ -20,7 +20,6 @@
         private readonly IDeletableEntityRepository<Make> carMakeRepository;
         private readonly IDeletableEntityRepository<CarType> carTypeRepository;
         private readonly IDeletableEntityRepository<Image> imageRepository;
-        private string[] allowedExtensions = new[] { "jpg", "png", "gif", "jpeg" };
 
         public CarsService(
             IDeletableEntityRepository<ElectricCar> carRepository,
@@ -38,13 +37,18 @@
 
         public IEnumerable<VehicleMakeViewModel> GetMakes()
         {
-            return this.carMakeRepository.AllAsNoTracking().To<VehicleMakeViewModel>().ToList();
+            return this.carMakeRepository.AllAsNoTracking()
+                .To<VehicleMakeViewModel>()
+                .ToList();
         }
 
         public List<VehicleModelViewModel> GetModelsByMakeId(int makeId)
         {
             var models = this.carModelRepository.AllAsNoTracking()
-                .Where(x => x.MakeId == makeId).To<VehicleModelViewModel>().ToList();
+                .Where(x => x.MakeId == makeId)
+                .To<VehicleModelViewModel>()
+                .ToList();
+
             return models;
         }
 
@@ -87,13 +91,6 @@
 
         public IEnumerable<KeyValuePair<string, string>> GetAllCarModelsAsKeyValuePairs()
         {
-            var carMode = this.carModelRepository.AllAsNoTracking()
-                .Select(x => new
-                {
-                    x.Id,
-                    x.Name,
-                }).ToList();
-
             var carModels = this.carModelRepository.AllAsNoTracking()
                 .Select(x => new
                 {
@@ -154,6 +151,11 @@
             var car = this.carRepository.All()
                 .FirstOrDefault(x => x.Id == carId);
 
+            if (car == null)
+            {
+                return false;
+            }
+
             var images = await this.imageRepository.All()
                 .Where(x => x.ElectricCarId == carId)
                 .ToListAsync();
@@ -168,12 +170,7 @@
             }
 
             this.carRepository.Delete(car);
-            var deletedCount = await this.carRepository.SaveChangesAsync();
-
-            if (deletedCount == 0)
-            {
-                return false;
-            }
+            await this.carRepository.SaveChangesAsync();
 
             return true;
         }

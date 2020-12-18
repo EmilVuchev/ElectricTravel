@@ -6,25 +6,22 @@
     using ElectricTravel.Services.Data.Contracts;
     using ElectricTravel.Web.ViewModels;
     using ElectricTravel.Web.ViewModels.Home;
-    using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Extensions.Hosting;
 
     public class HomeController : BaseController
     {
         private readonly ISharedTravelsService sharedTravelsService;
-        private readonly IWebHostEnvironment env;
 
-        public HomeController(ISharedTravelsService sharedTravelsService, IWebHostEnvironment env)
+        public HomeController(ISharedTravelsService sharedTravelsService)
         {
             this.sharedTravelsService = sharedTravelsService;
-            this.env = env;
         }
 
         public async Task<IActionResult> Index()
         {
-            var asd = this.env.EnvironmentName;
-            var adverts = await this.sharedTravelsService.GetRecentlyAddedAsync(5);
+            var count = 10;
+
+            var adverts = await this.sharedTravelsService.GetRecentlyAddedAsync(count);
 
             var model = new SharedTravelHomeListingViewModel
             {
