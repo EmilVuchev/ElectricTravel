@@ -1,17 +1,12 @@
 ﻿namespace ElectricTravel.Web.Areas.Administration.Controllers
 {
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
 
-    using ElectricTravel.Data;
     using ElectricTravel.Data.Models.User;
     using ElectricTravel.Services.Data.Contracts;
     using ElectricTravel.Web.InputViewModels.SharedTravel;
     using ElectricTravel.Web.ViewModels.Administration.SharedTravelAdverts;
-    using ElectricTravel.Web.ViewModels.Cities;
     using ElectricTravel.Web.ViewModels.SharedTravels;
-    using ElectricTravel.Web.ViewModels.TypeTravels;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
@@ -32,6 +27,7 @@
             this.userManager = userManager;
         }
 
+        [Route("/Administration/SharedTravelAdverts/{id?}")]
         public async Task<IActionResult> Index(int id = 1)
         {
             var adverts = await this.sharedTravelsService.GetAllAsync<SharedTravelsViewModel>(id);

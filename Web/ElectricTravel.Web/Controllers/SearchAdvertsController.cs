@@ -43,6 +43,8 @@ namespace ElectricTravel.Web.Controllers
 
             var viewModel = new AdvertsListViewModel
             {
+                Controller = "SearchAdverts",
+                Action = "SearchForUserAdvertsDestination",
                 IsUserAdverts = true,
                 ItemsPerPage = ControllersConstants.ItemsPerPage,
                 PageNumber = id,
@@ -72,6 +74,8 @@ namespace ElectricTravel.Web.Controllers
 
             var viewModel = new AdvertsListViewModel
             {
+                Controller = "SearchAdverts",
+                Action = "SearchByDestinations",
                 IsUserAdverts = false,
                 ItemsPerPage = ControllersConstants.ItemsPerPage,
                 PageNumber = id,

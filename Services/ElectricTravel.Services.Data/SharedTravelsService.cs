@@ -161,7 +161,7 @@
 
             return await this.sharedTravelsRepository
                  .AllAsNoTracking()
-                 .Where(x => x.IsApproved && (x.StartDestination.Name.ToLower() == destination || x.EndDestination.Name.ToLower() == destination))
+                 .Where(x => x.IsApproved && (x.StartDestination.Name.ToLower().Contains(destination) || x.EndDestination.Name.ToLower().Contains(destination)))
                  .Skip(PageFormula(page, itemsPerPage))
                  .Take(itemsPerPage)
                  .To<T>()
@@ -176,7 +176,7 @@
                 .AllAsNoTracking()
                 .Where(x =>
                     x.CreatedById == userId &&
-                    (x.StartDestination.Name.ToLower() == destination || x.EndDestination.Name.ToLower() == destination))
+                    (x.StartDestination.Name.ToLower().Contains(destination) || x.EndDestination.Name.ToLower().Contains(destination)))
                 .Skip(PageFormula(page, itemsPerPage))
                 .Take(itemsPerPage)
                 .To<T>()

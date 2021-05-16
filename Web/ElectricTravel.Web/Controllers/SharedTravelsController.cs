@@ -1,7 +1,5 @@
 ﻿namespace ElectricTravel.Web.Controllers
 {
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
 
     using ElectricTravel.Common;
@@ -10,9 +8,7 @@
     using ElectricTravel.Web.Controllers.Common;
     using ElectricTravel.Web.InputViewModels.SharedTravel;
     using ElectricTravel.Web.ViewModels.Cars;
-    using ElectricTravel.Web.ViewModels.Cities;
     using ElectricTravel.Web.ViewModels.SharedTravels;
-    using ElectricTravel.Web.ViewModels.TypeTravels;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -62,6 +58,8 @@
 
             var viewModel = new AdvertsListViewModel
             {
+                Controller = "SearchAdverts",
+                Action = "SearchByDestinations",
                 IsUserAdverts = false,
                 ItemsPerPage = ControllersConstants.ItemsPerPage,
                 PageNumber = id,
@@ -91,6 +89,8 @@
 
             var viewModel = new AdvertsListViewModel
             {
+                Controller = "SearchAdverts",
+                Action = "SearchForUserAdvertsDestination",
                 IsUserAdverts = true,
                 ItemsPerPage = itemsPerPage,
                 PageNumber = id,

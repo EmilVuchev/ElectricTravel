@@ -7,23 +7,9 @@
     const string SeatsTitle = "Seats";
     const string DetailsTitle = "Details";
     const string IsApprovedTitle = "Is Approved";
-    const string DefaultController = "SharedTravels";
-    const string DefaultAction = "All";
-    const string ActionName = "AllByAuthor";
-    var controller = this.ViewContext.RouteData.Values["controller"].ToString();
-    var action = this.ViewContext.RouteData.Values["Action"].ToString();
 }
 
-@if (controller == DefaultController && action == DefaultAction)
-{
-    action = "SearchByDestinations";
-}
-else if (controller == DefaultController && action == ActionName)
-{
-    action = "SearchForUserAdvertsDestination";
-}
-
-<form method="get" class="form-inline my-2 my-lg-0 text-right justify-content-end" asp-area="" asp-controller="SearchAdverts" asp-action="@action">
+<form method="get" class="form-inline my-2 my-lg-0 text-right justify-content-end" asp-area="" asp-controller="@Model.Controller" asp-action="@Model.Action">
     <input type="search" placeholder="Enter destination" class="form-control mr-sm-2" value="@this.ViewData["Getadvertsdetails"]" name="search" />
     <input type="submit" value="Search" class="btn btn-outline-primary page-link  my-2 my-sm-0" />
 </form>
