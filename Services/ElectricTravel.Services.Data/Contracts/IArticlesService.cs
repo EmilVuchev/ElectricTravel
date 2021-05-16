@@ -14,5 +14,7 @@
         Task<bool> CreateAsync(ArticleInputViewModel article);
 
         Task DeleteAsync(int? id, string userId);
+
+        Task<int> GetArticlesCount();
     }
 }

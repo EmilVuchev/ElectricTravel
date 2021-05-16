@@ -67,6 +67,12 @@
                 .FirstOrDefaultAsync();
         }
 
+        public async Task<int> GetArticlesCount()
+        {
+            return await this.articleRepository.All()
+                .CountAsync();
+        }
+
         ////public async Task<IEnumerable<SharedTravelsViewModel>> GetRecentlyAddedAsync(int count = 0)
         ////{
         ////    var recentlyAdded = await this.articleRepository
